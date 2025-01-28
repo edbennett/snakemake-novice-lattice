@@ -22,7 +22,7 @@ which in some cases has different priorities in the design of analysis workflows
 
 Snakemake is a superset of the Python language and as such can draw on the full power of Python, but you
 do not need to be a Python programmer to use it. This lesson **assumes no prior knowledge of Python** and
-intruduces just a few concepts as needed to construct useful workflows.
+introduces just a few concepts as needed to construct useful workflows.
 
 ## Contributing
 
