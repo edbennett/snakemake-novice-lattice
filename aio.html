@@ -243,7 +243,43 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Using Markdown</a>
+        <a href="introduction.html">1. Running commands with Snakemake</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="python.html">2. Running Python code with Snakemake</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="placeholders.html">3. Placeholders and wildcards</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="chaining.html">4. Chaining rules</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -306,9 +342,9 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="aio-introduction"><p>Content from <a href="introduction.html">Using Markdown</a></p>
+<section id="aio-introduction"><p>Content from <a href="introduction.html">Running commands with Snakemake</a></p>
 <hr>
-<p>Last updated on 2025-01-03 |
+<p>Last updated on 2025-01-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -322,8 +358,7 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How do you write a lesson using Markdown and
-<a href="https://carpentries.github.io/sandpaper/" class="external-link">sandpaper</a>?</li>
+<li>How do I run a simple command with Snakemake?</li>
 </ul>
 </div>
 </div>
@@ -333,9 +368,8 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Explain how to use markdown with The Carpentries Workbench</li>
-<li>Demonstrate how to include pieces of code, figures, and nested
-challenge blocks</li>
+<li>Create a Snakemake recipe (a Snakefile)</li>
+<li>Use Snakemake to compute the average plaquette of an ensemble</li>
 </ul>
 </div>
 </div>
@@ -345,66 +379,220 @@ challenge blocks</li>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
-<p>This is a lesson created via The Carpentries Workbench. It is written
-in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
-for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
-Markdown</a> for dynamic files that can render code into output. Please
-refer to the <a href="https://carpentries.github.io/sandpaper-docs/" class="external-link">Introduction to The
-Carpentries Workbench</a> for full documentation.</p>
-<p>What you need to know is that there are three sections required for a
-valid Carpentries lesson:</p>
+<p>Data analysis in lattice quantum field theory generally has many
+moving parts: you will likely have many ensembles, with differing
+physical and algorithmic parameters, and for each many different
+observables may be computed. These need to be combined in different
+ways, making sure that compatible statistics are used. Making sure that
+each step runs in the correct order is non-trivial, requiring careful
+bookkeeping, especially if we want to update data as ensembles are
+extended, if we want to take advantage of parallelism to get results
+faster, and if we want auditability to be able to verify later what
+steps were performed.</p>
+<p>While we could build up tools to do all of these things from scratch,
+these are not challenges exclusive to lattice, and so we can take
+advantage of others’ work rather than reinventing the wheel. This frees
+up our time to focus on the physics challenges. The category of “tools
+to help run complex arrangements of tools in the right order” is called
+“workflow management”; there are workflow managers available, most of
+which are specialised to a specific class of applications.</p>
+<p>One workflow manager developed for scientific data analysis is called
+Snakemake; this will be the target of this lesson. Snakemake is similar
+to <a href="https://www.gnu.org/software/make/" class="external-link">GNU Make</a>, in that
+you create a text file containing rules specifying how input files are
+translated to output files, and then the software will work out what
+rules to run to generate a specified output from the available input
+files. Unlike Make, Snakemake uses a syntax closely based on Python, and
+files containing rules can be extended using standard Python syntax. It
+also has many quality-of-life improvements compared to Make, and so is
+much better suited for writing data analysis workflows.</p>
+<p>At this point, you should have Snakemake already installed and
+available to you. To test this, we can open a terminal and run</p>
+<pre class="shellsession"><code>$ snakemake --version
+8.25.3</code></pre>
+<p>If you instead get a “command not found” error, go back to the <a href="index.html#setup">setup</a> and check that you have completed all the
+necessary steps.</p>
+</section><section><h2 class="section-heading" id="looking-at-the-sample-data">Looking at the sample data<a class="anchor" aria-label="anchor" href="#looking-at-the-sample-data"></a>
+</h2>
+<hr class="half-width">
+<p>You should already have the sample data files unpacked. (If not,
+refer back to the <a href="index.html#setup">lesson setup</a>.) Under the
+<code>su2pg/raw_data</code> directory, you will find a series of
+subdirectories, each containing data for a single ensemble. In each are
+files containing the log of the configuration generation, the
+computation of the quenched meson spectrum, and the computation of the
+<a href="https://doi.org/10.48550/arXiv.1006.4518" class="external-link">Wilson flow</a>.</p>
+<p>The sample data are for the SU(2) pure Yang-Mills theory, and have
+been generated using the <a href="https://github.com/claudiopica/HiRep" class="external-link">HiRep</a> code.</p>
+<p>Each log contains header lines describing the setup, information on
+the computation being computed, and results for observables computed on
+each configuration. Code to parse these logs and compute statistics is
+included with the sample data; we’ll use these in due course</p>
+</section><section><h2 class="section-heading" id="making-a-snakefile">Making a Snakefile<a class="anchor" aria-label="anchor" href="#making-a-snakefile"></a>
+</h2>
+<hr class="half-width">
+<p>To start with, let’s define a rule to count the number of lines in
+one of the raw data files.</p>
+<p>Within the <code>su2pg/workflow</code> directory, edit a new text
+file named <code>Snakefile</code>. Into it, insert the following
+content:</p>
+<pre class="snakemake"><code>rule count_trajectories:
+    input: "raw_data/beta4.0/out_pg"
+    output: "intermediary_data/beta4.0/pg.count"
+    shell:
+        "wc -l raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
+<div id="key-points-about-this-file" class="callout checklist">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check-square"></i>
+</div>
+<div id="key-points-about-this-file" class="callout-inner">
+<h3 class="callout-title">Key points about this file</h3>
+<div class="callout-content">
 <ol style="list-style-type: decimal">
-<li>
-<code>questions</code> are displayed at the beginning of the episode
-to prime the learner for the content.</li>
-<li>
-<code>objectives</code> are the learning objectives for an episode
-displayed with the questions.</li>
-<li>
-<code>keypoints</code> are displayed at the end of the episode to
-reinforce the objectives.</li>
+<li>The file is named <code>Snakefile</code> - with a capital
+<code>S</code> and no file extension.</li>
+<li>Some lines are indented. Indents must be with space characters, not
+tabs.</li>
+<li>The rule definition starts with the keyword <code>rule</code>
+followed by the rule name, then a colon.</li>
+<li>We named the rule <code>count_trajectories</code>. You may use
+letters, numbers or underscores, but the rule name must begin with a
+letter and may not be a keyword.</li>
+<li>The keywords <code>input</code>, <code>output</code>,
+<code>shell</code> are all followed by a colon.</li>
+<li>The file names and the shell command are all in
+<code>"quotes"</code>.</li>
 </ol>
-<div id="challenge-1-can-you-do-it" class="callout challenge">
+</div>
+</div>
+</div>
+<p>The first line tells Snakemake we are defining a new rule. Subsequent
+indented lines form a part of this rule; while there are none here, any
+subsequent unindented lines would not be included in the rule. The
+<code>input:</code> line tells Snakemake what files to look for to be
+able to run this rule. If this file is missing (and there is no rule to
+create it), Snakemake will not consider running this rule. The
+<code>output:</code> line tells Snakemake what files to expect the rule
+to generate. If this file is not generated, then Snakemake will abort
+the workflow with an error. Finally, the <code>shell:</code> block tells
+Snakemake what shell commands to run to get the specified output from
+the given input.</p>
+<p>Going back to the shell now, we can test this rule. From the
+<code>su2pg</code> directory, we can run the command</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta4.0/pg.count</code></pre>
+<p>If we’ve made any transcription errors in the rule (missing quotes,
+bad indentations, etc.), then it will become clear at this point, as
+we’ll receive an error that we will need to fix.</p>
+<p>For now, we will consistently run <code>snakemake</code> with the
+<code>--jobs 1 --forceall --printshellcmds</code> options. As we move
+through the lesson, we’ll explain in more detail when we need to modify
+them.</p>
+<p>Let’s check that the output was correctly generated:</p>
+<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.count
+12345 TODO</code></pre>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>You might have noticed that we are grouping files into directories
+like <code>raw_data</code> and <code>intermediary_data</code>. It is
+generally a good idea to keep raw input data separate from data
+generated by the analysis. This means that if you need to run a clean
+analysis starting from your input data, then it is much easier to know
+what to remove and what to keep. Ideally, the <code>raw_data</code>
+directory should be kept read-only, so that you don’t accidentally
+modify your input data. Similarly, it is a good idea to separate out
+“files that you want to include in a paper” from “intermediary files
+generated by the workflow but not needed in the paper”; we’ll talk more
+about that in a later section.</p>
+<p>You might also worry that your tooling will need to use
+<code>mkdir</code> to create these directories; in fact, Snakemake will
+automatically create all directories where it expects to see output from
+rules that it runs.</p>
+</div>
+</div>
+</div>
+
+<div id="running-snakemake" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?</h3>
+<div id="running-snakemake" class="callout-inner">
+<h3 class="callout-title">Running Snakemake</h3>
 <div class="callout-content">
-<p>What is the output of this command?</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">paste</span><span class="op">(</span><span class="st">"This"</span>, <span class="st">"new"</span>, <span class="st">"lesson"</span>, <span class="st">"looks"</span>, <span class="st">"good"</span><span class="op">)</span></span></code></pre>
-</div>
+<p>Run <code>snakemake --help | less</code> to see the help for all
+available options. What does the <code>--printshellcmds</code> option in
+the <code>snakemake</code> command above do?</p>
+<ol style="list-style-type: decimal">
+<li>Protects existing output files</li>
+<li>Prints the shell commands that are being run to the terminal</li>
+<li>Tells Snakemake to only run one process at a time</li>
+<li>Prompts the user for the correct input file</li>
+</ol>
+<p><em>Hint: you can search in the text by pressing <code>/</code>, and
+quit back to the shell with <code>q</code></em></p>
 </div>
 </div>
 </div>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Output </h4>
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
+<ol start="2" style="list-style-type: decimal">
+<li>Prints the shell commands that are being run to the terminal</li>
+</ol>
+<p>This is such a useful thing we don’t know why it isn’t the default!
+The <code>--jobs 1</code> option is what tells Snakemake to only run one
+process at a time, and we’ll stick with this for now as it makes things
+simpler. The <code>--forceall</code> option tells Snakemake to always
+recreate output files, and we’ll learn about protected outputs much
+later in the course. Answer 4 is a total red herring, as Snakemake never
+prompts interactively for user input.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="counting-trajectories">Counting trajectories<a class="anchor" aria-label="anchor" href="#counting-trajectories"></a>
+</h2>
+<hr class="half-width">
+<p>The count of output lines isn’t particularly useful. Potentially more
+interesting is the number of trajectories in a given file. In a HiRep
+generation log, each trajectory concludes with a line of the form</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "This new lesson looks good"</code></pre>
+<pre class="output" tabindex="0"><code>[MAIN][0]Trajectory #1: generated in [39.717707 sec]</code></pre>
 </div>
+<p>We can use <code>grep</code> to count these, as</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta4.0/out_pg</span></code></pre>
 </div>
-</div>
-</div>
-</div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout challenge">
+<div id="counting-sequences-in-snakemake" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="challenge-2-how-do-you-nest-solutions-within-challenge-blocks" class="callout-inner">
-<h3 class="callout-title">Challenge 2: how do you nest solutions within challenge blocks?</h3>
+<div id="counting-sequences-in-snakemake" class="callout-inner">
+<h3 class="callout-title">Counting sequences in Snakemake</h3>
 <div class="callout-content">
-
+<p>Modify the Snakefile to count the number of
+<strong>trajectories</strong> in <code>raw_data/beta4.0/out_pg</code>,
+rather than the number of <strong>lines</strong>.</p>
+<ul>
+<li>Rename the rule to <code>count_trajectories</code>
+</li>
+<li>Keep the output file name the same</li>
+<li>Remember that the result needs to go into the output file, not just
+be printed on the screen</li>
+<li>Test the new rule once it is done.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -415,42 +603,15 @@ reinforce the objectives.</li>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<p>You can add a line with at least three colons and a
-<code>solution</code> tag.</p>
+<pre class="snakemake"><code>rule count_trajectories:
+    input: "raw_data/beta4.0/out_pg"
+    output: "intermediary_data/beta4.0/pg.count"
+    shell:
+        "grep -c generated raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
 </div>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="figures">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
-</h2>
-<hr class="half-width">
-<p>You can use standard markdown for static figures with the following
-syntax:</p>
-<p><code>![optional caption that appears below the figure](figure url){alt='alt text for accessibility purposes'}</code></p>
-<figure><img src="https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg" alt="Blue Carpentries hex person logo with no text." class="figure mx-auto d-block"><div class="figcaption">You belong in The Carpentries!</div>
-</figure><div id="callout1" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
-<div class="callout-content">
-<p>Callout sections can highlight information.</p>
-<p>They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present “asides”: content that is
-not central to the narrative of the lesson, e.g. by providing the answer
-to a commonly-asked question.</p>
-</div>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="math">Math<a class="anchor" aria-label="anchor" href="#math"></a>
-</h2>
-<hr class="half-width">
-<p>One of our episodes contains <span class="math inline">\(\LaTeX\)</span> equations when describing how to
-create dynamic reports with {knitr}, so we now use mathjax to describe
-this:</p>
-<p><code>$\alpha = \dfrac{1}{(1 - \beta)^2}$</code> becomes: <span class="math inline">\(\alpha = \dfrac{1}{(1 - \beta)^2}\)</span></p>
-<p>Cool, right?</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -459,14 +620,781 @@ this:</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>Before running Snakemake you need to write a Snakefile</li>
+<li>A Snakefile is a text file which defines a list of rules</li>
+<li>Rules have inputs, outputs, and shell commands to be run</li>
+<li>You tell Snakemake what file to make and it will run the shell
+command defined in the appropriate rule</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-python"><p>Content from <a href="python.html">Running Python code with Snakemake</a></p>
+<hr>
+<p>Last updated on 2025-01-28 |
+
+        <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I configure an environment to run Python with Snakemake?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Create a Conda environment definition</li>
+<li>Use Snakemake to instantiate this environment and use it to run
+Python code</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="why-define-an-environment">Why define an environment<a class="anchor" aria-label="anchor" href="#why-define-an-environment"></a>
+</h2>
+<hr class="half-width">
+<p>Snakemake is written in Python, so anyone running a Snakemake
+workflow already has Python available. In principle, we could make use
+of this installation to run any Python code we need to run in our
+workflow. However, it’s more than likely we will need to make use of
+libraries that are not installed as part of the Snakemake installation.
+At that point, we would either need to install additional libraries into
+our Snakemake environment, which might be used by other analyses that
+need their own sets of libraries that could create conflicts, or to
+create a second Snakemake environment for this analysis. If different
+steps of our workflow need different, conflicting sets of libraries then
+this becomes more complicated again.</p>
+<p>We would also like those trying to reproduce our work to be able to
+run using exactly the same software environment that we used in our
+original work. In principle, we could write detailed documentation
+specifying which packages to install; however, it is both more precise
+and more convenient to define the environment as a data file, which
+Conda can use to build the same environment every time.</p>
+<p>Even better, we can tell Snakemake to use a specific Conda
+environment for each rule we define.</p>
+</section><section><h2 class="section-heading" id="a-basic-environment-definition">A basic environment definition<a class="anchor" aria-label="anchor" href="#a-basic-environment-definition"></a>
+</h2>
+<hr class="half-width">
+<p>Conda environment definitions are created in <a href="https://yaml.org" class="external-link">YAML</a>-format files. These specify what Conda
+packages are needed (including the target version of Python), as well as
+any Pip packages that are installed.</p>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>Some packages give you a choice as to whether to install using Conda
+or Pip. When working interactively with an environment, using Pip
+consistently typically reduces the chance of getting into a state where
+Conda is unable to install packages. That is less of a problem when
+constructing new environments from definition files, but even so, using
+Pip where possible will typically allow environments to resolve and
+install more quickly.</p>
+</div>
+</div>
+</div>
+<p>By convention, Conda environment definitions in Snakemake workflows
+are placed in a <code>workflow/envs/</code> directory. Let’s create
+<code>workflow/envs/analysis.yml</code> now, and place the following
+content into it</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> su2pg_analysis</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pip=24.2</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.12.6</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">pip</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> h5py==3.11.0</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> matplotlib==3.9.2</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> numpy==2.1.1</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pandas==2.2.3</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> scipy==1.14.1</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> uncertainties==3.2.2</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> corrfitter==8.2</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> -e ../../libs/su2pg_analysis</span></span></code></pre>
+</div>
+<p>This will install the specified versions of h5py, Matplotlib, Numpy,
+Pandas, Scipy, uncertainties, and corrfitter, as well as the analysis
+tools provided in the <code>libs</code> directory. The latter are
+installed in editable mode, so if you need to modify them to fix bugs or
+add functionality while working on your workflow, you don’t need to
+remember to manually reinstall them.</p>
+</section><section><h2 class="section-heading" id="using-an-environment-definition-in-a-snakefile">Using an environment definition in a Snakefile<a class="anchor" aria-label="anchor" href="#using-an-environment-definition-in-a-snakefile"></a>
+</h2>
+<hr class="half-width">
+<p>Now that we have created an environment file, we can use it in our
+Snakefile to compute the average plaquette from a configuration
+generation log. Let’s add the following rule to
+<code>envs/Snakefile</code>:</p>
+<pre class="snakemake"><code>rule avg_plaquette:
+    input: "raw_data/beta4.0/out_pg"
+    output: "intermediary_data/beta4.0/pg.plaquette.json"
+    conda: "../envs/analysis.yml"
+    shell:
+        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json"</code></pre>
+<p>The <code>conda:</code> block tells Snakemake where to find the Conda
+environment that should be used for running this rule. Let’s test this
+now:</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json</code></pre>
+<p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
+attention to the <code>conda:</code> specification.</p>
+<p>Let’s check now that the output was correctly generated:</p>
+<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.plaquette.json
+TODO</code></pre>
+<p>Some of the output will differ on your machine, since this library
+tracks provenance, such as where and when the code was run, in the
+output file.</p>
+<div id="more-plaquettes" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="more-plaquettes" class="callout-inner">
+<h3 class="callout-title">More plaquettes</h3>
+<div class="callout-content">
+<p>Add a second rule to compute the average plaquette in the file
+<code>intermediary_data/beta4.5/out_pg</code>. Add this to the same
+Snakefile you already made, under the <code>avg_plaquette</code> rule,
+and run your rules in the terminal. When running the
+<code>snakemake</code> command you’ll need to tell Snakemake to make
+both the output files.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>You can choose whatever name you like for this second rule, but it
+can’t be <code>avg_plaquette</code>, as rule names need to be unique
+within a Snakefile. So in this example answer we use
+<code>avg_plaquette2</code>.</p>
+<pre class="snakemake"><code>rule avg_plaquette2:
+    input: "raw_data/beta4.5/out_pg"
+    output: "intermediary_data/beta4.5/pg.plaquette.json"
+    conda: "../envs/analysis.yml"
+    shell:
+        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json"</code></pre>
+<p>Then in the shell:</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json intermediary_data/beta4.5/pg.plaquette.json</code></pre>
+<p>If you think writing a separate rule for each output file is silly,
+you are correct. We’ll address this next!</p>
+</div>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-placeholders"><p>Content from <a href="placeholders.html">Placeholders and wildcards</a></p>
+<hr>
+<p>Last updated on 2025-01-28 |
+
+        <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/placeholders.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I make a generic rule?</li>
+<li>How does Snakemake decide what rule to run?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Use Snakemake to compute the plaquette in any file</li>
+<li>Understand the basic steps Snakemake goes through when running a
+workflow</li>
+<li>See how Snakemake deals with some errors</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="making-rules-more-generic">Making rules more generic<a class="anchor" aria-label="anchor" href="#making-rules-more-generic"></a>
+</h2>
+<hr class="half-width">
+<p>In the previous two episodes, we wrote rules to count the number of
+generated trajectories in, and compute the average plaquette of, one
+ensemble. As a reminder, this was one such rule:</p>
+<pre class="snakemake"><code>rule count_trajectories:
+    input: "raw_data/beta4.0/out_pg"
+    output: "intermediary_data/beta4.0/pg.count"
+    shell:
+        "grep -c generated raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
+<p>When we needed to do the same for a second ensemble, we made a second
+copy of the rule, and changed the input and output filenames. This is
+obviously not scalable to large analyses: instead, we would like to
+write one rule for each type of operation we are interested in. To do
+this, we’ll need to use <strong>placeholders</strong> and
+<strong>wildcards</strong>. Such a generic rule might look as
+follows:</p>
+<pre class="snakemake"><code># Count number of generated trajectories for any ensemble
+rule count_trajectories:
+    input: "raw_data/{subdir}/out_pg"
+    output: "intermediary_data/{subdir}/pg.count"
+    shell:
+        "grep -c {input} &gt; {output}"</code></pre>
+<div id="comments-in-snakefiles" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="comments-in-snakefiles" class="callout-inner">
+<h3 class="callout-title">Comments in Snakefiles</h3>
+<div class="callout-content">
+<p>In the above code, the line beginning <code>#</code> is a comment
+line. Hopefully you are already in the habit of adding comments to your
+own software. Good comments make any code more readable, and this is
+just as true with Snakefiles.</p>
+</div>
+</div>
+</div>
+<p><code>{subdir}</code> here is an example of a
+<strong>wildcard</strong> Wildcards are used in the <code>input</code>
+and <code>output</code> lines of the rule to represent parts of
+filenames. Much like the <code>*</code> pattern in the shell, the
+wildcard can stand in for any text in order to make up the desired
+filename. As with naming your rules, you may choose any name you like
+for your wildcards; so here we used <code>subdir</code>, since it is
+describing a subdirectory. If <code>subdir</code> is set to
+<code>beta4.0</code> then the new generic rule will have the same inputs
+and outputs as the original rule. Using the same wildcards in the input
+and output is what tells Snakemake how to match input files to output
+files.</p>
+<p>If two rules use a wildcard with the same name then Snakemake will
+treat them as different entities—rules in Snakemake are self-contained
+in this way.</p>
+<p>Meanwhile, <code>{input}</code> and <code>{output}</code> are
+<strong>placeholders</strong> Placeholders are used in the
+<code>shell</code> section of a rule. Snakemake will replace them with
+appropriate values before running the command: <code>{input}</code> with
+the full name of the input file, and <code>{output}</code> with the full
+name of the output file.</p>
+<p>If we had wanted to include the value of the <code>subdir</code>
+wildcard directly in the <code>shell</code> command, we could have used
+the placeholder <code>{wildcards.subdir}</code>, but in most cases, as
+here, we just need the <code>{input}</code> and <code>{output}</code>
+placeholders.</p>
+<p>Let’s test this general rule now:</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.count</code></pre>
+<p>As previously, if you see errors at this point, there is likely a
+problem with your Snakefile; check that all the rules match the ones
+that have appeared here, and that there aren’t multiple rules with the
+same name.</p>
+<div id="general-plaquette-computation" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="general-plaquette-computation" class="callout-inner">
+<h3 class="callout-title">General plaquette computation</h3>
+<div class="callout-content">
+<p>Modify your Snakefile so that it can compute the average plaquette
+for any ensemble, not just the ones we wrote specific rules for in the
+previous episode.</p>
+<p>Test this with some of the values of <span class="math inline">\(\beta\)</span> present in the raw data.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>The replacement rule should look like:</p>
+<pre class="snakemake"><code># Compute average plaquette for any ensemble from its generation log
+rule avg_plaquette:
+    input: "raw_data/{subdir}/out_pg"
+    output: "intermediary_data/{subdir}/pg.plaquette.json"
+    conda: "../envs/analysis.yml"
+    shell:
+        "python -m su2pg_analysis.plaquette {input} --output_file {output}"</code></pre>
+<p>To test this, for example:</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta3.0/pg.count</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="choosing-the-right-wildcards" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="choosing-the-right-wildcards" class="callout-inner">
+<h3 class="callout-title">Choosing the right wildcards</h3>
+<div class="callout-content">
+<p>Our rule puts the sequence counts into output files named like
+<code>pg.count</code>. How would you have to change the
+`count_trajectories`` rule definition if you wanted:</p>
+<ol style="list-style-type: decimal">
+<li><p>the output file for <code>raw_data/beta3.0/out_hmc</code> to be
+<code>intermediary_data/beta3.0/hmc.count</code>?</p></li>
+<li><p>the output file for
+<code>raw_data/beta3.0/mass_fun-0.63/out_hmc</code> to be
+<code>intermediary_data/beta3.0/mass_fun-0.63/hmc.count</code>?</p></li>
+<li><p>the output file for
+<code>raw_data/beta3.0/mass_fun-0.63/out_hmc</code> to be
+<code>intermediary_data/hmc_b3.0_m-0.63.count</code> (for
+<code>raw_data/beta3.5/mass_fun-0.68/out_pg</code> to be
+<code>intermediary_data/hmc_b3.5_m-0.68.count</code>, etc.)?</p></li>
+<li><p>the output file for
+<code>raw_data/beta3.0/mass_fun-0.63/out_hmc</code> to be
+<code>intermediary_data/hmc_m-0.63.count</code> (for
+<code>raw_data/beta3.5/mass_fun-0.68/out_pg</code> to be
+<code>intermediary_data/hmc_m-0.68.count</code>, etc.)?</p></li>
+</ol>
+<p>(Assume that both pure-gauge and HMC logs tag generated trajectories
+the same way. Note that input files for the latter data are not included
+in the sample data, so these will not work as-is.)</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>In both cases, there is no need to change the <code>shell</code> part
+of the rule at all.</p>
+<ol style="list-style-type: decimal"><li>
+</li></ol>
+<pre class="snakemake"><code><span><span class="va">input</span><span class="op">:</span> <span class="st">"raw_data/{subdir}/out_hmc"</span></span>
+<span><span class="va">output</span><span class="op">:</span> <span class="st">"intermediary_data/{subdir}/hmc.count"</span></span></code></pre>
+<p>This can be done by changing only the static parts of the
+<code>input:</code> and <code>output:</code> lines.</p>
+<ol start="2" style="list-style-type: decimal"><li>
+</li></ol>
+<p>This in fact requires no change from the previous answer. The
+wildcard <code>{subdir}</code> can include <code>/</code>, so can
+represent multiple levels of subdirectory.</p>
+<ol start="3" style="list-style-type: decimal"><li>
+</li></ol>
+<pre class="snakemake"><code><span><span class="va">input</span><span class="op">:</span> <span class="st">"raw_data/beta{beta}/mass_fun{mass}/out_hmc"</span></span>
+<span><span class="va">output</span><span class="op">:</span> <span class="st">"intermediary_data/hmc_b{beta}_m{mass}.count"</span></span></code></pre>
+<p>In this case, it was necessary to change the wildcards, because the
+subdirectory name needs to be split to obtain the values of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(m_{\mathrm{fun}}\)</span>. The names chosen here
+are <code>{beta}</code> and <code>{mass}</code>, but you could choose
+any names, as long as they match between the <code>input</code> and
+<code>output</code> parts.</p>
+<ol start="4" style="list-style-type: decimal"><li>
+</li></ol>
+<p>This one <strong>isn’t possible</strong>, because Snakemake cannot
+determine which input file you want to count by matching wildcards on
+the file name <code>intermediary_data/hmc_m-0.63.count</code>. You could
+try a rule like this:</p>
+<pre class="snakemake"><code><span><span class="va">input</span><span class="op">:</span> <span class="st">"raw_data/beta3.0/mass_fun{mass}/out_hmc"</span></span>
+<span><span class="va">output</span><span class="op">:</span> <span class="st">"intermediary_data/hmc_m{mass}.count"</span></span></code></pre>
+<p>…but it only works because <span class="math inline">\(\beta\)</span>
+is hard-coded into the <code>input</code> line, and the rule will only
+work on this specific sample, not other cases where other values of
+<span class="math inline">\(\beta\)</span> may be wanted. In general,
+input and output filenames need to be carefully chosen so that Snakemake
+can match everything up and determine the right input from the output
+filename.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="filenames-arent-data" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="filenames-arent-data" class="callout-inner">
+<h3 class="callout-title">Filenames aren’t data</h3>
+<div class="callout-content">
+<p>Notice that in some examples we can pull out the value of <span class="math inline">\(\beta\)</span> from the name of the directory in
+which the file is located. However, ideally, we should avoid relying on
+this being correct. The name and location are useful for us to find the
+correct file, but we should try to ensure that the file contents also
+contain these data, and that we make use of those data in preference to
+the filename.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="snakemake-order-of-operations">Snakemake order of operations<a class="anchor" aria-label="anchor" href="#snakemake-order-of-operations"></a>
+</h2>
+<hr class="half-width">
+<p>We’re only just getting started with some simple rules, but it’s
+worth thinking about exactly what Snakemake is doing when you run it.
+There are three distinct phases:</p>
+<ol style="list-style-type: decimal">
+<li>Prepares to run:
+<ol style="list-style-type: decimal">
+<li>Reads in all the rule definitions from the Snakefile</li>
+</ol>
+</li>
+<li>Plans what to do:
+<ol style="list-style-type: decimal">
+<li>Sees what file(s) you are asking it to make</li>
+<li>Looks for a matching rule by looking at the <code>output</code>s of
+all the rules it knows</li>
+<li>Fills in the wildcards to work out the <code>input</code> for this
+rule</li>
+<li>Checks that this input file is actually available</li>
+</ol>
+</li>
+<li>Runs the steps:
+<ol style="list-style-type: decimal">
+<li>Creates the directory for the output file, if needed</li>
+<li>Removes the old output file if it is already there</li>
+<li>Only then, runs the shell command with the placeholders
+replaced</li>
+<li>Checks that the command ran without errors <em>and</em> made the new
+output file as expected</li>
+</ol>
+</li>
+</ol>
+<p>For example, if we now ask Snakemake to generate a file named
+<code>intermediary_data/wibble_1/pg.count</code>:</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>$ snakemake --jobs 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.count
+Building DAG of jobs...
+MissingInputException in line 1 of /home/zenmaster/data/su2pg/workflow/Snakefile:
+Missing input files for rule count_trajectories:
+raw_data/wibble_1/out_pg</code></pre>
+</div>
+<p>Snakemake sees that a file with a name like this could be produced by
+the <code>count_trajectories</code> rule. However, when it performs the
+wildcard substitution it sees that the input file would need to be named
+<code>raw_data/wibble_1/out_pg</code>, and there is no such file
+available. Therefore Snakemake stops and gives an error before any shell
+commands are run.</p>
+<div id="dry-run---dry-run-mode" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="dry-run---dry-run-mode" class="callout-inner">
+<h3 class="callout-title">Dry-run (<code>--dry-run</code>) mode</h3>
+<div class="callout-content">
+<p>It’s often useful to run just the first two phases, so that Snakemake
+will plan out the jobs to run, and print them to the screen, but never
+actually run them. This is done with the <code>--dry-run</code> flag,
+eg:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--dry-run</span> <span class="at">--forceall</span> <span class="at">--printshellcmds</span> temp33_1_1.fq.count</span></code></pre>
+</div>
+<p>We’ll make use of this later in the lesson.</p>
+</div>
+</div>
+</div>
+<p>The amount of checking may seem pedantic right now, but as the
+workflow gains more steps this will become very useful to us indeed.</p>
+<!-- maybe add an extra challenge here? -->
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>Snakemake rules are made generic with placeholders and
+wildcards</li>
+<li>Snakemake chooses the appropriate rule by replacing wildcards such
+the the output matches the target</li>
+<li>Placeholders in the shell part of the rule are replaced with values
+based on the chosen wildcards</li>
+<li>Snakemake checks for various error conditions and will stop if it
+sees a problem</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-chaining"><p>Content from <a href="chaining.html">Chaining rules</a></p>
+<hr>
+<p>Last updated on 2025-01-28 |
+
+        <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I combine rules into a workflow?</li>
+<li>How can I make a rule with multiple input files?</li>
+<li>How should I refer to multiple files with similar names?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Use Snakemake to filter and then count the sequences in a FASTQ
+file</li>
+<li>Understand how rules are linked by filename patterns</li>
+<li>Be able to use multiple input files in one rule</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="a-pipeline-of-multiple-rules">A pipeline of multiple rules<a class="anchor" aria-label="anchor" href="#a-pipeline-of-multiple-rules"></a>
+</h2>
+<hr class="half-width">
+<p>We have so far been able to count the number of generated
+trajectories, and compute the average plaquette, given an output log
+from the configuration generation. However, an individual average
+plaquette is not interesting in isolation; what is more interesting is
+how it varies between different values of the input parameters. To do
+this, we will need to take the output of the <code>avg_plaquette</code>
+rule that we defined earlier, and use it as input for another rule.</p>
+<p>Let’s define that rule now:</p>
+<pre class="snakemake"><code>rule plot_avg_plaquette:
+    input:
+        "intermediary_data/beta3.0/pg.plaquette.json",
+        "intermediary_data/beta3.5/pg.plaquette.json",
+        "intermediary_data/beta4.0/pg.plaquette.json",
+    output:
+        "assets/plots/plaquette_scan.pdf"
+    conda: "../envs/analysis.yml"
+    shell:
+        "python src/plot_plaquette.py {input} --plot_filename {output}"</code></pre>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>You can see that here we’re putting “files that want to be included
+in a paper” in an <code>assets</code> directory, similarly to the
+<code>raw_data</code> and <code>intermediary_data</code> directories we
+discussed in a previous episode. It can be useful to further distinguish
+plots, tables, and other definitions, by using subdirectories in this
+directory.</p>
+</div>
+</div>
+</div>
+<p>Rather than one input, as we have seen in rules so far, this rule
+requires three. When Snakemake substitutes these into the
+<code>{input}</code> placeholder, it will automatically add a space
+between them. Let’s test this now:</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<p>Look at the logging messages that Snakemake prints in the terminal.
+What has happened here?</p>
+<ol style="list-style-type: decimal">
+<li>Snakemake looks for a rule to make TODO FIXME
+<code>trimmed.ref1_1.fq.count</code>
+</li>
+<li>It determines that “countreads” can make this if
+<code>indir=trimmed</code> and <code>myfile=ref1_1</code>
+</li>
+<li>It sees that the input needed is therefore
+<code>trimmed/ref1_1.fq</code> <br><br>
+</li>
+<li>Snakemake looks for a rule to make
+<code>trimmed/ref1_1.fq</code>
+</li>
+<li>It determines that “trimreads” can make this if
+<code>myfile=ref1_1</code>
+</li>
+<li>It sees that the input needed is therefore
+<code>reads/ref1_1.fq</code> <br><br>
+</li>
+<li>Now Snakemake has reached an available input file, it runs both
+steps to get the final output</li>
+</ol>
+<p><strong>Here’s a visual representation of this process:</strong></p>
+<p>![][fig-chaining]</p>
+<p>This, in a nutshell, is how we build workflows in Snakemake.</p>
+<ol style="list-style-type: decimal">
+<li>Define rules for all the processing steps</li>
+<li>Choose <code>input</code> and <code>output</code> naming patterns
+that allow Snakemake to link the rules</li>
+<li>Tell Snakemake to generate the final output files</li>
+</ol>
+<p>If you are used to writing regular scripts this takes a little
+getting used to. Rather than listing steps in order of execution, you
+are always <strong>working backwards</strong> from the final desired
+result. The order of operations is determined by applying the pattern
+matching rules to the filenames, not by the order of the rules in the
+Snakefile.</p>
+<div id="choosing-file-name-patterns" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="choosing-file-name-patterns" class="callout-inner">
+<h3 class="callout-title">Choosing file name patterns</h3>
+<div class="callout-content">
+<p>Chaining rules in Snakemake is a matter of choosing filename patterns
+that connect the rules. There’s something of an art to it, and most
+times there are several options that will work, but in all cases the
+file names you choose will need to be consistent and unabiguous.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="making-file-lists-easier">Making file lists easier<a class="anchor" aria-label="anchor" href="#making-file-lists-easier"></a>
+</h2>
+<hr class="half-width">
+<p>In the rule above, we plotted the average plaquette for three values
+of <span class="math inline">\(\beta\)</span> by listing the files
+expected to contain their values. In fact, we have data for a larger
+number of <span class="math inline">\(\beta\)</span> values, but typing
+out each file by hand would be quite cumbersome. We can make use of the
+<code>expand()</code> function to do this more neatly:</p>
+<pre class="snakemake"><code>    input: expand(
+        "intermediary_data/beta{beta}/pg.plaquette.json",
+        beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+    )</code></pre>
+<p>The first argument to <code>expand()</code> here is a template for
+the filename, and subsequent keyword arguments are lists of variables to
+fill into the placeholders. The output is the cartesian product of all
+the parameter lists.</p>
+<p>We can check that this works correctly:</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<div id="tabulating-trajectory-counts" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="tabulating-trajectory-counts" class="callout-inner">
+<h3 class="callout-title">Tabulating trajectory counts</h3>
+<div class="callout-content">
+<p>The script <code>src/tabulate_counts.py</code> will take a list of
+files containing trajectory counts, and output a LaTeX table. Write a
+rule to generate this table for all values of <span class="math inline">\(\beta\)</span>, and output it to
+<code>assets/tables/counts.tex</code>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
+  Solution 1
+  </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>The replacement rule should look like:</p>
+<pre class="snakemake"><code># Output a LaTeX table of trajectory counts
+rule tabulate_counts:
+    input: expand(
+        "intermediary_data/beta{beta}/pg.count",
+        beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+    )
+    output: "assets/tables/counts.tex"
+    conda: "../envs/analysis.yml"
+    shell:
+        "python src/tabulate_counts.py {input} &gt; {output}</code></pre>
+<p>To test this, for example:</p>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="tabulating-trajectory-counts" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="tabulating-trajectory-counts" class="callout-inner">
+<h3 class="callout-title">Tabulating trajectory counts<em>
+(continued)</em>
+</h3>
+<div class="callout-content">
+<p>This setup currently requires reading the value of <span class="math inline">\(\beta\)</span> from the filename. Why is this not
+ideal? How would the workflow need to be changed to avoid this?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
+  Solution 2
+  </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>It’s easy for files to be misnamed when creating or copying them.
+Putting the wrong data into the file is harder, especially when it’s a
+raw data file generated by the same program as the rest of the data. (If
+the wrong value were given as input, this could happen, but the
+corresponding output data would also be generated at that incorrect
+value. Provided the values are treated consistently, the downstream
+analysis could in fact still be valid, just not exactly as
+intended.)</p>
+<p>Currently, <code>grep -c</code> is used to count the number of
+trajectories. This would need to be replaced or supplemented with a tool
+that read out the value of <span class="math inline">\(\beta\)</span>
+from the input log, and outputs it along with the trajectory count. The
+<code>src/tabulate_counts.py</code> script could then be updated to use
+this number, rather than the filename.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>Snakemake links up rules by iteratively looking for rules that make
+missing inputs</li>
+<li>Careful choice of filenames allows this to work</li>
+<li>Rules may have multiple named input files (and output files)</li>
+<li>Use <code>expand()</code> to generate lists of filenames from a
+template</li>
 </ul>
 </div>
 </div>

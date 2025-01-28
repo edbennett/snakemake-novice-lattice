@@ -244,7 +244,43 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Using Markdown</a>
+        <a href="introduction.html">1. Running commands with Snakemake</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="python.html">2. Running Python code with Snakemake</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="placeholders.html">3. Placeholders and wildcards</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="chaining.html">4. Chaining rules</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -316,16 +352,30 @@ any links that you are not going to use.
  -->
 
 
-      <section id="aggregate-instructor-notes"><section id="introduction"><h2 class="section-heading"><a href="introduction.html">Using Markdown</a></h2>
+      <section id="aggregate-instructor-notes"><section id="introduction"><h2 class="section-heading"><a href="introduction.html">Running commands with Snakemake</a></h2>
 <hr class="half-width">
 <h3 id="introduction-headingInstructor1">
-<a href="introduction.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor1"></a>
+<a href="introduction.html#headingInstructor1">Use of the --forceall flag</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor1"></a>
 </h3>
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
+<p>In the first few episodes we always run Snakemake with the
+<code>--forceall</code> flag, and it’s not explained what this does
+until Ep. 04. The rationale is that the default Snakemake behaviour when
+pruning the DAG leads to learners seeing different output (typically the
+message “nothing to be done”) when repeating the exact same command.
+This can seem strange to learners who are used to scripting and
+imperative programming.</p>
+<p>The internal rules used by Snakemake to determine which jobs in the
+DAG are to be run, and which skipped, are pretty complex, but the
+behaviour seen under <code>--forceall</code> is much more simple and
+consistent; Snakemake simply runs every job in the DAG every time. You
+can think of <code>--forceall</code> as disabling the lazy evaluation
+feature of Snakemake, until we are ready to properly introduce and
+understand it.</p>
 <hr>
-<br></section></section>
+<br></section><section id="python"><h2 class="section-heading"><a href="python.html">Running Python code with Snakemake</a></h2>
+<hr class="half-width"></section><section id="placeholders"><h2 class="section-heading"><a href="placeholders.html">Placeholders and wildcards</a></h2>
+<hr class="half-width"></section><section id="chaining"><h2 class="section-heading"><a href="chaining.html">Chaining rules</a></h2>
+<hr class="half-width"></section></section>
 </div>
     </main>
 </div>

@@ -67,6 +67,9 @@ contact: 'e.j.bennett@swansea.ac.uk'
 # Order of episodes in your lesson
 episodes: 
 - introduction.md
+- python.md
+- placeholders.md
+- chaining.md
 
 # Information for Learners
 learners: 

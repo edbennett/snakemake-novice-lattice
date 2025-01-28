@@ -244,7 +244,43 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Using Markdown</a>
+        <a href="introduction.html">1. Running commands with Snakemake</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="python.html">2. Running Python code with Snakemake</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="placeholders.html">3. Placeholders and wildcards</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="chaining.html">4. Chaining rules</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -308,17 +344,35 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="introduction"><h2 class="section-heading"><a href="introduction.html">Using Markdown</a></h2>
+<section id="introduction"><h2 class="section-heading"><a href="introduction.html">Running commands with Snakemake</a></h2>
 <hr class="half-width">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>Before running Snakemake you need to write a Snakefile</li>
+<li>A Snakefile is a text file which defines a list of rules</li>
+<li>Rules have inputs, outputs, and shell commands to be run</li>
+<li>You tell Snakemake what file to make and it will run the shell
+command defined in the appropriate rule</li>
+</ul></section><section id="python"><h2 class="section-heading"><a href="python.html">Running Python code with Snakemake</a></h2>
+<hr class="half-width"></section><section id="placeholders"><h2 class="section-heading"><a href="placeholders.html">Placeholders and wildcards</a></h2>
+<hr class="half-width">
+<ul>
+<li>Snakemake rules are made generic with placeholders and
+wildcards</li>
+<li>Snakemake chooses the appropriate rule by replacing wildcards such
+the the output matches the target</li>
+<li>Placeholders in the shell part of the rule are replaced with values
+based on the chosen wildcards</li>
+<li>Snakemake checks for various error conditions and will stop if it
+sees a problem</li>
+</ul></section><section id="chaining"><h2 class="section-heading"><a href="chaining.html">Chaining rules</a></h2>
+<hr class="half-width">
+<ul>
+<li>Snakemake links up rules by iteratively looking for rules that make
+missing inputs</li>
+<li>Careful choice of filenames allows this to work</li>
+<li>Rules may have multiple named input files (and output files)</li>
+<li>Use <code>expand()</code> to generate lists of filenames from a
+template</li>
 </ul></section>
 </div>
     </main>
