@@ -70,6 +70,10 @@ episodes:
 - python.md
 - placeholders.md
 - chaining.md
+- parameters.md
+- multiple.md
+- dag.md
+- optimisation.md
 
 # Information for Learners
 learners: 

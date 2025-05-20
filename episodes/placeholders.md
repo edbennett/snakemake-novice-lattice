@@ -53,7 +53,7 @@ rule count_trajectories:
     input: "raw_data/{subdir}/out_pg"
     output: "intermediary_data/{subdir}/pg.count"
     shell:
-        "grep -c {input} > {output}"
+        "grep -c generated {input} > {output}"
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -130,8 +130,8 @@ The replacement rule should look like:
 # Compute average plaquette for any ensemble from its generation log
 rule avg_plaquette:
     input: "raw_data/{subdir}/out_pg"
-    output: "intermediary_data/{subdir}/pg.plaquette.json"
-    conda: "../envs/analysis.yml"
+    output: "intermediary_data/{subdir}/pg.plaquette.json.gz"
+    conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.plaquette {input} --output_file {output}"
 ```
@@ -140,7 +140,7 @@ To test this,
 for example:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta3.0/pg.count
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta3.0/pg.plaquette.json.gz
 ```
 
 :::::::::::::::::::::::::
@@ -274,7 +274,10 @@ $ snakemake --jobs 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.c
 Building DAG of jobs...
 MissingInputException in line 1 of /home/zenmaster/data/su2pg/workflow/Snakefile:
 Missing input files for rule count_trajectories:
-raw_data/wibble_1/out_pg
+    output: intermediary_data/wibble_1/pg.count
+    wildcards: subdir=wibble_1
+    affected files:
+        raw_data/wibble_1/out_pg
 ```
 
 Snakemake sees that 

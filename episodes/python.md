@@ -109,10 +109,10 @@ Let's add the following rule to `envs/Snakefile`:
 ```snakemake
 rule avg_plaquette:
     input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.plaquette.json"
-    conda: "../envs/analysis.yml"
+    output: "intermediary_data/beta4.0/pg.plaquette.json.gz"
+    conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json"
+        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json.gz"
 ```
 
 The `conda:` block tells Snakemake where to find
@@ -120,7 +120,7 @@ the Conda environment that should be used for running this rule.
 Let's test this now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json.gz
 ```
 
 We need to specify `--use-conda`
@@ -129,9 +129,28 @@ to tell Snakemake to pay attention to the `conda:` specification.
 Let's check now that the output was correctly generated:
 
 ```shellsession
-$ cat intermediary_data/beta4.0/pg.plaquette.json
-TODO
-```
+$ cat intermediary_data/beta4.0/pg.plaquette.json.gz | gunzip | head -n 20
+{
+ "program": "pyerrors 2.11.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-02-20 14:59:00 +0000",
+ "host": "tsukasa.local, macOS-15.3.1-arm64-arm-64bit",
+ "description": {
+  "group_family": "SU",
+  "num_colors": 2,
+  "nt": 48,
+  "nx": 24,
+  "ny": 24,
+  "nz": 24,
+  "beta": 4.0,
+  "num_heatbath": 1,
+  "num_overrelaxed": 4,
+  "num_thermalization": 1000,
+  "thermalization_time": 2594.755651
+ },
+ "obsdata": [{
+ ```
 
 Some of the output will differ on your machine,
 since this library tracks provenance,
@@ -163,10 +182,10 @@ So in this example answer we use `avg_plaquette2`.
 ```snakemake
 rule avg_plaquette2:
     input: "raw_data/beta4.5/out_pg"
-    output: "intermediary_data/beta4.5/pg.plaquette.json"
-    conda: "../envs/analysis.yml"
+    output: "intermediary_data/beta4.5/pg.plaquette.json.gz"
+    conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json"
+        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json.gz"
 ```
 
 Then in the shell:

@@ -103,7 +103,7 @@ Into it,
 insert the following content:
 
 ```snakemake
-rule count_trajectories:
+rule count_lines:
     input: "raw_data/beta4.0/out_pg"
     output: "intermediary_data/beta4.0/pg.count"
     shell:
@@ -163,7 +163,7 @@ Let's check that the output was correctly generated:
 
 ```shellsession
 $ cat intermediary_data/beta4.0/pg.count
-12345 TODO
+  31064 raw_data/beta4.0/out_pg
 ```
 
 
