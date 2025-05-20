@@ -39,14 +39,14 @@ Let's define that rule now:
 ```snakemake
 rule plot_avg_plaquette:
     input:
-        "intermediary_data/beta3.0/pg.plaquette.json",
-        "intermediary_data/beta3.5/pg.plaquette.json",
-        "intermediary_data/beta4.0/pg.plaquette.json",
+        "intermediary_data/beta3.0/pg.plaquette.json.gz",
+        "intermediary_data/beta3.5/pg.plaquette.json.gz",
+        "intermediary_data/beta4.0/pg.plaquette.json.gz",
     output:
         "assets/plots/plaquette_scan.pdf"
-    conda: "../envs/analysis.yml"
+    conda: "envs/analysis.yml"
     shell:
-        "python src/plot_plaquette.py {input} --plot_filename {output}"
+        "python src/plot_plaquette.py {input} --output_filename {output}"
 ```
 
 :::::::::::::::::::::::::::::::::::::::  callout
@@ -77,15 +77,19 @@ snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquett
 
 Look at the logging messages that Snakemake prints in the terminal. What has happened here?
 
-1. Snakemake looks for a rule to make TODO FIXME `trimmed.ref1_1.fq.count`
-2. It determines that "countreads" can make this if `indir=trimmed` and `myfile=ref1_1`
-3. It sees that the input needed is therefore `trimmed/ref1_1.fq`
-  <br/><br/>
-4. Snakemake looks for a rule to make `trimmed/ref1_1.fq`
-5. It determines that "trimreads" can make this if `myfile=ref1_1`
-6. It sees that the input needed is therefore `reads/ref1_1.fq`
-  <br/><br/>
-7. Now Snakemake has reached an available input file, it runs both steps to get the final output
+1. Snakemake looks for a rule to make `assets/plots/plaquette_scan.pdf`
+2. It determines that the `plot_avg_plaquette` rule can do this,
+   if it has `intermediary_data/beta3.0/pg.plaquette.json.gz`,
+   `intermediary_data/beta3.5/pg.plaquette.json.gz`,
+   and `intermediary_data/beta4.0/pg.plaquette.json.gz`.
+3. Snakemake looks for a rule to make `intermediary_data/beta3.0/pg.plaquette.json.gz`
+4. It determines that `avg_plaquette` can make this if `subdir=beta3.0`
+5. It sees that the input needed is therefore `raw_data/beta3.0/out_pg`
+6. Now Snakemake has reached an available input file,
+   it runs the `avg_plaquette` rule.
+7. It then looks through the other two $\beta$ values in turn,
+   repeating the process until it has all of the needed inputs.
+8. Finally, it runs the `plot_avg_plaquette` rule.
 
 **Here's a visual representation of this process:**
 
@@ -127,10 +131,11 @@ but typing out each file by hand would be quite cumbersome.
 We can make use of the `expand()` function to do this more neatly:
 
 ```snakemake
-    input: expand(
-        "intermediary_data/beta{beta}/pg.plaquette.json",
-        beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-    )
+    input:
+        expand(
+            "intermediary_data/beta{beta}/pg.plaquette.json.gz",
+            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+        )
 ```
 
 The first argument to `expand()` here is a template for the filename,
@@ -149,8 +154,8 @@ snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquett
 
 ## Tabulating trajectory counts
 
-The script `src/tabulate_counts.py` will take a list of files containing trajectory counts,
-and output a LaTeX table.
+The script `src/tabulate_counts.py` will take a list of files containing plaquette data,
+and output a LaTeX table of trajectory counts.
 Write a rule to generate this table for all values of $\beta$,
 and output it to `assets/tables/counts.tex`.
 
@@ -163,14 +168,15 @@ The replacement rule should look like:
 ```snakemake
 # Output a LaTeX table of trajectory counts
 rule tabulate_counts:
-    input: expand(
-        "intermediary_data/beta{beta}/pg.count",
-        beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-    )
+    input:
+        expand(
+            "intermediary_data/beta{beta}/pg.count",
+            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+        )
     output: "assets/tables/counts.tex"
-    conda: "../envs/analysis.yml"
+    conda: "envs/analysis.yml"
     shell:
-        "python src/tabulate_counts.py {input} > {output}
+        "python src/tabulate_counts.py {input} > {output}"
 ```
 
 To test this,
@@ -208,6 +214,12 @@ with a tool that read out the value of $\beta$ from the input log,
 and outputs it along with the trajectory count.
 The `src/tabulate_counts.py` script could then be updated to use this number,
 rather than the filename.
+
+In fact,
+the `plaquette` module does just this;
+in addition to the average plaquette,
+it also records the number of trajectories generated
+as part of the metadata and provenance information it tracks.
 
 :::::::::::::::::::::::::
 
