@@ -19,6 +19,9 @@
     <loc>https://edbennett.github.io/snakemake-novice-lattice/chaining.html</loc>
   </url>
   <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/dag.html</loc>
+  </url>
+  <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/images.html</loc>
   </url>
   <url>
@@ -43,6 +46,9 @@
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html</loc>
   </url>
   <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/dag.html</loc>
+  </url>
+  <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/images.html</loc>
   </url>
   <url>
@@ -56,6 +62,15 @@
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/multiple.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/optimisation.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/parameters.html</loc>
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/placeholders.html</loc>
@@ -77,6 +92,15 @@
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/multiple.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/optimisation.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/parameters.html</loc>
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/placeholders.html</loc>

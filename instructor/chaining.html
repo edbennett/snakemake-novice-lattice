@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 47%" class="percentage">
-    47%
+<aside class="col-md-12 lesson-progress"><div style="width: 25%" class="percentage">
+    25%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 47%" aria-valuenow="47" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 25%" aria-valuenow="25" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -251,6 +251,42 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="parameters.html">5. Metadata and parameters</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="multiple.html">6. Multiple inputs and outputs</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="dag.html">7. How Snakemake plans jobs</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="optimisation.html">8. Optimising workflow performance</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -294,7 +330,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/placeholders.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/parameters.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -302,14 +338,14 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Placeholders and
         </a>
-        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="../instructor/parameters.html" rel="next">
+          Next: Metadata and...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Chaining rules</h1>
-        <p>Last updated on 2025-01-28 |
+        <p>Last updated on 2025-05-20 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -360,14 +396,14 @@ rule that we defined earlier, and use it as input for another rule.</p>
 <p>Let’s define that rule now:</p>
 <pre class="snakemake"><code>rule plot_avg_plaquette:
     input:
-        "intermediary_data/beta3.0/pg.plaquette.json",
-        "intermediary_data/beta3.5/pg.plaquette.json",
-        "intermediary_data/beta4.0/pg.plaquette.json",
+        "intermediary_data/beta3.0/pg.plaquette.json.gz",
+        "intermediary_data/beta3.5/pg.plaquette.json.gz",
+        "intermediary_data/beta4.0/pg.plaquette.json.gz",
     output:
         "assets/plots/plaquette_scan.pdf"
-    conda: "../envs/analysis.yml"
+    conda: "envs/analysis.yml"
     shell:
-        "python src/plot_plaquette.py {input} --plot_filename {output}"</code></pre>
+        "python src/plot_plaquette.py {input} --output_filename {output}"</code></pre>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -391,24 +427,28 @@ between them. Let’s test this now:</p>
 <pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <p>Look at the logging messages that Snakemake prints in the terminal.
 What has happened here?</p>
-<ol style="list-style-type: decimal"><li>Snakemake looks for a rule to make TODO FIXME
-<code>trimmed.ref1_1.fq.count</code>
+<ol style="list-style-type: decimal"><li>Snakemake looks for a rule to make
+<code>assets/plots/plaquette_scan.pdf</code>
 </li>
-<li>It determines that “countreads” can make this if
-<code>indir=trimmed</code> and <code>myfile=ref1_1</code>
-</li>
-<li>It sees that the input needed is therefore
-<code>trimmed/ref1_1.fq</code> <br><br></li>
+<li>It determines that the <code>plot_avg_plaquette</code> rule can do
+this, if it has
+<code>intermediary_data/beta3.0/pg.plaquette.json.gz</code>,
+<code>intermediary_data/beta3.5/pg.plaquette.json.gz</code>, and
+<code>intermediary_data/beta4.0/pg.plaquette.json.gz</code>.</li>
 <li>Snakemake looks for a rule to make
-<code>trimmed/ref1_1.fq</code>
+<code>intermediary_data/beta3.0/pg.plaquette.json.gz</code>
 </li>
-<li>It determines that “trimreads” can make this if
-<code>myfile=ref1_1</code>
+<li>It determines that <code>avg_plaquette</code> can make this if
+<code>subdir=beta3.0</code>
 </li>
 <li>It sees that the input needed is therefore
-<code>reads/ref1_1.fq</code> <br><br></li>
-<li>Now Snakemake has reached an available input file, it runs both
-steps to get the final output</li>
+<code>raw_data/beta3.0/out_pg</code>
+</li>
+<li>Now Snakemake has reached an available input file, it runs the
+<code>avg_plaquette</code> rule.</li>
+<li>It then looks through the other two <span class="math inline">\(\beta\)</span> values in turn, repeating the
+process until it has all of the needed inputs.</li>
+<li>Finally, it runs the <code>plot_avg_plaquette</code> rule.</li>
 </ol><p><strong>Here’s a visual representation of this process:</strong></p>
 <p>![][fig-chaining]</p>
 <p>This, in a nutshell, is how we build workflows in Snakemake.</p>
@@ -443,10 +483,11 @@ expected to contain their values. In fact, we have data for a larger
 number of <span class="math inline">\(\beta\)</span> values, but typing
 out each file by hand would be quite cumbersome. We can make use of the
 <code>expand()</code> function to do this more neatly:</p>
-<pre class="snakemake"><code>    input: expand(
-        "intermediary_data/beta{beta}/pg.plaquette.json",
-        beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-    )</code></pre>
+<pre class="snakemake"><code>    input:
+        expand(
+            "intermediary_data/beta{beta}/pg.plaquette.json.gz",
+            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+        )</code></pre>
 <p>The first argument to <code>expand()</code> here is a template for
 the filename, and subsequent keyword arguments are lists of variables to
 fill into the placeholders. The output is the cartesian product of all
@@ -461,8 +502,8 @@ the parameter lists.</p>
 <h3 class="callout-title">Tabulating trajectory counts</h3>
 <div class="callout-content">
 <p>The script <code>src/tabulate_counts.py</code> will take a list of
-files containing trajectory counts, and output a LaTeX table. Write a
-rule to generate this table for all values of <span class="math inline">\(\beta\)</span>, and output it to
+files containing plaquette data, and output a LaTeX table of trajectory
+counts. Write a rule to generate this table for all values of <span class="math inline">\(\beta\)</span>, and output it to
 <code>assets/tables/counts.tex</code>.</p>
 </div>
 </div>
@@ -474,19 +515,20 @@ rule to generate this table for all values of <span class="math inline">\(\beta\
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
 rule tabulate_counts:
-    input: expand(
-        "intermediary_data/beta{beta}/pg.count",
-        beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
-    )
+    input:
+        expand(
+            "intermediary_data/beta{beta}/pg.count",
+            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+        )
     output: "assets/tables/counts.tex"
-    conda: "../envs/analysis.yml"
+    conda: "envs/analysis.yml"
     shell:
-        "python src/tabulate_counts.py {input} &gt; {output}</code></pre>
+        "python src/tabulate_counts.py {input} &gt; {output}"</code></pre>
 <p>To test this, for example:</p>
 <pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex</code></pre>
 </div>
@@ -514,7 +556,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -530,6 +572,10 @@ that read out the value of <span class="math inline">\(\beta\)</span>
 from the input log, and outputs it along with the trajectory count. The
 <code>src/tabulate_counts.py</code> script could then be updated to use
 this number, rather than the filename.</p>
+<p>In fact, the <code>plaquette</code> module does just this; in
+addition to the average plaquette, it also records the number of
+trajectories generated as part of the metadata and provenance
+information it tracks.</p>
 </div>
 </div>
 </div>
@@ -557,7 +603,7 @@ any links that you are not going to use.
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/placeholders.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/parameters.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -565,8 +611,8 @@ any links that you are not going to use.
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Placeholders and
         </a>
-        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="../instructor/parameters.html" rel="next">
+          Next: Metadata and...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -612,7 +658,7 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-01-28",
+  "dateModified": "2025-05-20",
   "datePublished": "2025-05-20"
 }
 

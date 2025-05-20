@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 32%" class="percentage">
-    32%
+<aside class="col-md-12 lesson-progress"><div style="width: 17%" class="percentage">
+    17%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 32%" aria-valuenow="32" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 17%" aria-valuenow="17" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -251,6 +251,42 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="parameters.html">5. Metadata and parameters</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="multiple.html">6. Multiple inputs and outputs</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="dag.html">7. How Snakemake plans jobs</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="optimisation.html">8. Optimising workflow performance</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -309,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Placeholders and wildcards</h1>
-        <p>Last updated on 2025-01-28 |
+        <p>Last updated on 2025-05-20 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/placeholders.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -367,7 +403,7 @@ rule count_trajectories:
     input: "raw_data/{subdir}/out_pg"
     output: "intermediary_data/{subdir}/pg.count"
     shell:
-        "grep -c {input} &gt; {output}"</code></pre>
+        "grep -c generated {input} &gt; {output}"</code></pre>
 <div id="comments-in-snakefiles" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -439,12 +475,12 @@ previous episode.</p>
 <pre class="snakemake"><code># Compute average plaquette for any ensemble from its generation log
 rule avg_plaquette:
     input: "raw_data/{subdir}/out_pg"
-    output: "intermediary_data/{subdir}/pg.plaquette.json"
-    conda: "../envs/analysis.yml"
+    output: "intermediary_data/{subdir}/pg.plaquette.json.gz"
+    conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.plaquette {input} --output_file {output}"</code></pre>
 <p>To test this, for example:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta3.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta3.0/pg.plaquette.json.gz</code></pre>
 </div>
 </div>
 </div>
@@ -572,7 +608,10 @@ output file as expected</li>
 Building DAG of jobs...
 MissingInputException in line 1 of /home/zenmaster/data/su2pg/workflow/Snakefile:
 Missing input files for rule count_trajectories:
-raw_data/wibble_1/out_pg</code></pre>
+    output: intermediary_data/wibble_1/pg.count
+    wildcards: subdir=wibble_1
+    affected files:
+        raw_data/wibble_1/out_pg</code></pre>
 </div>
 <p>Snakemake sees that a file with a name like this could be produced by
 the <code>count_trajectories</code> rule. However, when it performs the
@@ -683,7 +722,7 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/placeholders.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/placeholders.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-01-28",
+  "dateModified": "2025-05-20",
   "datePublished": "2025-05-20"
 }
 

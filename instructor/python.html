@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 16%" class="percentage">
-    16%
+<aside class="col-md-12 lesson-progress"><div style="width: 8%" class="percentage">
+    8%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 16%" aria-valuenow="16" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 8%" aria-valuenow="8" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -252,6 +252,42 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="parameters.html">5. Metadata and parameters</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="multiple.html">6. Multiple inputs and outputs</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="dag.html">7. How Snakemake plans jobs</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="optimisation.html">8. Optimising workflow performance</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -310,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running Python code with Snakemake</h1>
-        <p>Last updated on 2025-01-28 |
+        <p>Last updated on 2025-05-20 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -424,19 +460,38 @@ generation log. Let’s add the following rule to
 <code>envs/Snakefile</code>:</p>
 <pre class="snakemake"><code>rule avg_plaquette:
     input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.plaquette.json"
-    conda: "../envs/analysis.yml"
+    output: "intermediary_data/beta4.0/pg.plaquette.json.gz"
+    conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json"</code></pre>
+        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json.gz"</code></pre>
 <p>The <code>conda:</code> block tells Snakemake where to find the Conda
 environment that should be used for running this rule. Let’s test this
 now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json.gz</code></pre>
 <p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
 attention to the <code>conda:</code> specification.</p>
 <p>Let’s check now that the output was correctly generated:</p>
-<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.plaquette.json
-TODO</code></pre>
+<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.plaquette.json.gz | gunzip | head -n 20
+{
+ "program": "pyerrors 2.11.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-02-20 14:59:00 +0000",
+ "host": "tsukasa.local, macOS-15.3.1-arm64-arm-64bit",
+ "description": {
+  "group_family": "SU",
+  "num_colors": 2,
+  "nt": 48,
+  "nx": 24,
+  "ny": 24,
+  "nz": 24,
+  "beta": 4.0,
+  "num_heatbath": 1,
+  "num_overrelaxed": 4,
+  "num_thermalization": 1000,
+  "thermalization_time": 2594.755651
+ },
+ "obsdata": [{</code></pre>
 <p>Some of the output will differ on your machine, since this library
 tracks provenance, such as where and when the code was run, in the
 output file.</p>
@@ -469,10 +524,10 @@ within a Snakefile. So in this example answer we use
 <code>avg_plaquette2</code>.</p>
 <pre class="snakemake"><code>rule avg_plaquette2:
     input: "raw_data/beta4.5/out_pg"
-    output: "intermediary_data/beta4.5/pg.plaquette.json"
-    conda: "../envs/analysis.yml"
+    output: "intermediary_data/beta4.5/pg.plaquette.json.gz"
+    conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json"</code></pre>
+        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json.gz"</code></pre>
 <p>Then in the shell:</p>
 <pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json intermediary_data/beta4.5/pg.plaquette.json</code></pre>
 <p>If you think writing a separate rule for each output file is silly,
@@ -543,7 +598,7 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-01-28",
+  "dateModified": "2025-05-20",
   "datePublished": "2025-05-20"
 }
 

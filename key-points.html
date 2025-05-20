@@ -288,6 +288,54 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="parameters.html">5. Metadata and parameters</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="multiple.html">6. Multiple inputs and outputs</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="dag.html">7. How Snakemake plans jobs</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="optimisation.html">8. Optimising workflow performance</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -371,6 +419,28 @@ missing inputs</li>
 <li>Rules may have multiple named input files (and output files)</li>
 <li>Use <code>expand()</code> to generate lists of filenames from a
 template</li>
+</ul></section><section id="parameters"><h2 class="section-heading"><a href="parameters.html">Metadata and parameters</a></h2>
+<hr class="half-width"></section><section id="multiple"><h2 class="section-heading"><a href="multiple.html">Multiple inputs and outputs</a></h2>
+<hr class="half-width"></section><section id="dag"><h2 class="section-heading"><a href="dag.html">How Snakemake plans jobs</a></h2>
+<hr class="half-width">
+<ul>
+<li>A <strong>job</strong> in Snakemake is a <strong>rule</strong> plus
+<strong>wildcard values</strong> (determined by working back from the
+requested output)</li>
+<li>Snakemake plans its work by arranging all the jobs into a
+<strong>DAG</strong> (directed acyclic graph)</li>
+<li>If output files already exist, Snakemake can skip parts of the
+DAG</li>
+<li>Snakemake compares file timestamps and a log of previous runs to
+determine what need regenerating</li>
+</ul></section><section id="optimisation"><h2 class="section-heading"><a href="optimisation.html">Optimising workflow performance</a></h2>
+<hr class="half-width">
+<ul>
+<li>To make your workflow run as fast as possible, try to match the
+number of threads to the number of cores you have</li>
+<li>You also need to consider RAM, disk, and network bottlenecks</li>
+<li>Profile your jobs to see what is taking most resources</li>
+<li>Snakemake is great for running workflows on compute clusters</li>
 </ul></section>
 </div>
     </main>
