@@ -30,10 +30,10 @@ this was one such rule:
 
 ```snakemake
 rule count_trajectories:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "grep -c generated raw_data/beta4.0/out_pg > intermediary_data/beta4.0/pg.count"
+        "grep -c generated raw_data/beta2.0/out_pg > intermediary_data/beta2.0/pg.count"
 ```
 
 
@@ -76,7 +76,7 @@ As with naming your rules,
 you may choose any name you like for your wildcards;
 so here we used `subdir`,
 since it is describing a subdirectory.
-If `subdir` is set to `beta4.0`
+If `subdir` is set to `beta2.0`
 then the new generic rule will have the same inputs and outputs as the original rule.
 Using the same wildcards in the input and output
 is what tells Snakemake how to match input files to output files.
@@ -102,7 +102,7 @@ we just need the `{input}` and `{output}` placeholders.
 Let's test this general rule now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.count
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count
 ```
 
 As previously,
@@ -140,7 +140,7 @@ To test this,
 for example:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta3.0/pg.plaquette.json.gz
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz
 ```
 
 :::::::::::::::::::::::::
@@ -153,22 +153,22 @@ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/bet
 ## Choosing the right wildcards
 
 Our rule puts the sequence counts into output files named like `pg.count`.
-How would you have to change the `count_trajectories`` rule definition if you wanted:
+How would you have to change the `count_trajectories` rule definition if you wanted:
 
-1) the output file for `raw_data/beta3.0/out_hmc`
-   to be `intermediary_data/beta3.0/hmc.count`?
+1) the output file for `raw_data/beta1.8/out_hmc`
+   to be `intermediary_data/beta1.8/hmc.count`?
 
-2) the output file for `raw_data/beta3.0/mass_fun-0.63/out_hmc`
-   to be `intermediary_data/beta3.0/mass_fun-0.63/hmc.count`?
+2) the output file for `raw_data/beta1.8/mass_fun-0.63/out_hmc`
+   to be `intermediary_data/beta1.8/mass_fun-0.63/hmc.count`?
 
-3) the output file for `raw_data/beta3.0/mass_fun-0.63/out_hmc`
+3) the output file for `raw_data/beta1.8/mass_fun-0.63/out_hmc`
    to be `intermediary_data/hmc_b3.0_m-0.63.count`
-   (for `raw_data/beta3.5/mass_fun-0.68/out_pg` to be
-   `intermediary_data/hmc_b3.5_m-0.68.count`, etc.)?
+   (for `raw_data/beta1.9/mass_fun-0.68/out_pg` to be
+   `intermediary_data/hmc_b1.9_m-0.68.count`, etc.)?
 
-3) the output file for `raw_data/beta3.0/mass_fun-0.63/out_hmc`
+4) the output file for `raw_data/beta1.8/mass_fun-0.63/out_hmc`
    to be `intermediary_data/hmc_m-0.63.count`
-   (for `raw_data/beta3.5/mass_fun-0.68/out_pg` to be
+   (for `raw_data/beta1.9/mass_fun-0.68/out_pg` to be
    `intermediary_data/hmc_m-0.68.count`, etc.)?
 
 (Assume that both pure-gauge and HMC logs tag generated trajectories the same way.
@@ -218,7 +218,7 @@ You could try a rule
 like this:
 
 ```snakemake
-input: "raw_data/beta3.0/mass_fun{mass}/out_hmc"
+input: "raw_data/beta1.8/mass_fun{mass}/out_hmc"
 output: "intermediary_data/hmc_m{mass}.count"
 ```
 

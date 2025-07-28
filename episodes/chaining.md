@@ -37,11 +37,12 @@ and use it as input for another rule.
 Let's define that rule now:
 
 ```snakemake
+# Take individual data files for average plaquette and plot combined results
 rule plot_avg_plaquette:
     input:
-        "intermediary_data/beta3.0/pg.plaquette.json.gz",
-        "intermediary_data/beta3.5/pg.plaquette.json.gz",
-        "intermediary_data/beta4.0/pg.plaquette.json.gz",
+        "intermediary_data/beta1.8/pg.plaquette.json.gz",
+        "intermediary_data/beta2.0/pg.plaquette.json.gz",
+        "intermediary_data/beta2.2/pg.plaquette.json.gz",
     output:
         "assets/plots/plaquette_scan.pdf"
     conda: "envs/analysis.yml"
@@ -79,12 +80,12 @@ Look at the logging messages that Snakemake prints in the terminal. What has hap
 
 1. Snakemake looks for a rule to make `assets/plots/plaquette_scan.pdf`
 2. It determines that the `plot_avg_plaquette` rule can do this,
-   if it has `intermediary_data/beta3.0/pg.plaquette.json.gz`,
-   `intermediary_data/beta3.5/pg.plaquette.json.gz`,
-   and `intermediary_data/beta4.0/pg.plaquette.json.gz`.
-3. Snakemake looks for a rule to make `intermediary_data/beta3.0/pg.plaquette.json.gz`
-4. It determines that `avg_plaquette` can make this if `subdir=beta3.0`
-5. It sees that the input needed is therefore `raw_data/beta3.0/out_pg`
+   if it has `intermediary_data/beta1.8/pg.plaquette.json.gz`,
+   `intermediary_data/beta2.0/pg.plaquette.json.gz`,
+   and `intermediary_data/beta2.2/pg.plaquette.json.gz`.
+3. Snakemake looks for a rule to make `intermediary_data/beta1.8/pg.plaquette.json.gz`
+4. It determines that `avg_plaquette` can make this if `subdir=beta1.8`
+5. It sees that the input needed is therefore `raw_data/beta1.8/out_pg`
 6. Now Snakemake has reached an available input file,
    it runs the `avg_plaquette` rule.
 7. It then looks through the other two $\beta$ values in turn,
@@ -134,7 +135,7 @@ We can make use of the `expand()` function to do this more neatly:
     input:
         expand(
             "intermediary_data/beta{beta}/pg.plaquette.json.gz",
-            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         )
 ```
 
@@ -171,7 +172,7 @@ rule tabulate_counts:
     input:
         expand(
             "intermediary_data/beta{beta}/pg.count",
-            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         )
     output: "assets/tables/counts.tex"
     conda: "envs/analysis.yml"
@@ -225,6 +226,20 @@ as part of the metadata and provenance information it tracks.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+[fig-chaining]: fig/chaining_rules.svg {alt='A visual representation of the above process
+showing the rule definitions,
+with arrows added to indicate the order wildcards and placeholders are substituted.
+Blue arrows start from the input of the `plot_avg_plaquette` rule,
+which are the files
+`intermediary_data/beta1.8/pg.plaquette.json.gz`,
+`intermediary_data/beta2.0/pg.plaquette.json.gz`,
+and `intermediary_data/beta2.2/pg.plaquette.json.gz`,
+then point down from components of the filename to wildcards
+in the output of the `avg_plaquette` rule.
+Orange arrows then track back up through the shell parts of both rules, where the placeholders are,
+and finally back to the target output filename at the top.'}
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

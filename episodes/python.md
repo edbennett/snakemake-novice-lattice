@@ -108,11 +108,11 @@ Let's add the following rule to `envs/Snakefile`:
 
 ```snakemake
 rule avg_plaquette:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.plaquette.json.gz"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.plaquette.json.gz"
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json.gz"
+        "python -m su2pg_analysis.plaquette raw_data/beta2.0/out_pg --output_file intermediary_data/beta2.0/pg.plaquette.json.gz"
 ```
 
 The `conda:` block tells Snakemake where to find
@@ -120,7 +120,7 @@ the Conda environment that should be used for running this rule.
 Let's test this now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json.gz
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz
 ```
 
 We need to specify `--use-conda`
@@ -129,13 +129,13 @@ to tell Snakemake to pay attention to the `conda:` specification.
 Let's check now that the output was correctly generated:
 
 ```shellsession
-$ cat intermediary_data/beta4.0/pg.plaquette.json.gz | gunzip | head -n 20
+$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 20
 {
- "program": "pyerrors 2.11.0",
+ "program": "pyerrors 2.13.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-02-20 14:59:00 +0000",
- "host": "tsukasa.local, macOS-15.3.1-arm64-arm-64bit",
+ "date": "2025-05-20 15:44:09 +0100",
+ "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
  "description": {
   "group_family": "SU",
   "num_colors": 2,
@@ -143,14 +143,14 @@ $ cat intermediary_data/beta4.0/pg.plaquette.json.gz | gunzip | head -n 20
   "nx": 24,
   "ny": 24,
   "nz": 24,
-  "beta": 4.0,
+  "beta": 2.0,
   "num_heatbath": 1,
   "num_overrelaxed": 4,
   "num_thermalization": 1000,
-  "thermalization_time": 2594.755651
+  "thermalization_time": 2453.811479,
+  "num_trajectories": 10010
  },
- "obsdata": [{
- ```
+```
 
 Some of the output will differ on your machine,
 since this library tracks provenance,
@@ -162,7 +162,7 @@ in the output file.
 ## More plaquettes
 
 Add a second rule to compute the average plaquette in the file
-`intermediary_data/beta4.5/out_pg`.
+`intermediary_data/beta2.2/out_pg`.
 Add this to the same Snakefile you already made,
 under the `avg_plaquette` rule,
 and run your rules in the terminal.
@@ -181,17 +181,17 @@ So in this example answer we use `avg_plaquette2`.
 
 ```snakemake
 rule avg_plaquette2:
-    input: "raw_data/beta4.5/out_pg"
-    output: "intermediary_data/beta4.5/pg.plaquette.json.gz"
+    input: "raw_data/beta2.2/out_pg"
+    output: "intermediary_data/beta2.2/pg.plaquette.json.gz"
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json.gz"
+        "python -m su2pg_analysis.plaquette raw_data/beta2.2/out_pg --output_file intermediary_data/beta2.2/pg.plaquette.json.gz"
 ```
 
 Then in the shell:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json intermediary_data/beta4.5/pg.plaquette.json
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json intermediary_data/beta2.2/pg.plaquette.json
 ```
 
 If you think writing a separate rule for each output file is silly, you are correct.

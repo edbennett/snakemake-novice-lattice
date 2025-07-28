@@ -104,10 +104,10 @@ insert the following content:
 
 ```snakemake
 rule count_lines:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "wc -l raw_data/beta4.0/out_pg > intermediary_data/beta4.0/pg.count"
+        "wc -l raw_data/beta2.0/out_pg > intermediary_data/beta2.0/pg.count"
 ```
 
 
@@ -146,7 +146,7 @@ From the `su2pg` directory,
 we can run the command
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta4.0/pg.count
+snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count
 ```
 
 If we've made any transcription errors in the rule
@@ -162,8 +162,8 @@ we'll explain in more detail when we need to modify them.
 Let's check that the output was correctly generated:
 
 ```shellsession
-$ cat intermediary_data/beta4.0/pg.count
-  31064 raw_data/beta4.0/out_pg
+$ cat intermediary_data/beta2.0/pg.count
+  31064 raw_data/beta2.0/out_pg
 ```
 
 
@@ -254,14 +254,14 @@ We can use `grep` to count these,
 as
 
 ```bash
-grep -c generated raw_data/beta4.0/out_pg
+grep -c generated raw_data/beta2.0/out_pg
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Counting sequences in Snakemake
 
-Modify the Snakefile to count the number of **trajectories** in `raw_data/beta4.0/out_pg`,
+Modify the Snakefile to count the number of **trajectories** in `raw_data/beta2.0/out_pg`,
 rather than the number of **lines**.
 
 - Rename the rule to `count_trajectories`
@@ -275,10 +275,10 @@ rather than the number of **lines**.
 
 ```snakemake
 rule count_trajectories:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "grep -c generated raw_data/beta4.0/out_pg > intermediary_data/beta4.0/pg.count"
+        "grep -c generated raw_data/beta2.0/out_pg > intermediary_data/beta2.0/pg.count"
 ```
 
 :::::::::::::::::::::::::
