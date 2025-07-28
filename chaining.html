@@ -345,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Chaining rules</h1>
-        <p>Last updated on 2025-05-20 |
+        <p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -392,11 +392,12 @@ how it varies between different values of the input parameters. To do
 this, we will need to take the output of the <code>avg_plaquette</code>
 rule that we defined earlier, and use it as input for another rule.</p>
 <p>Let’s define that rule now:</p>
-<pre class="snakemake"><code>rule plot_avg_plaquette:
+<pre class="snakemake"><code># Take individual data files for average plaquette and plot combined results
+rule plot_avg_plaquette:
     input:
-        "intermediary_data/beta3.0/pg.plaquette.json.gz",
-        "intermediary_data/beta3.5/pg.plaquette.json.gz",
-        "intermediary_data/beta4.0/pg.plaquette.json.gz",
+        "intermediary_data/beta1.8/pg.plaquette.json.gz",
+        "intermediary_data/beta2.0/pg.plaquette.json.gz",
+        "intermediary_data/beta2.2/pg.plaquette.json.gz",
     output:
         "assets/plots/plaquette_scan.pdf"
     conda: "envs/analysis.yml"
@@ -430,17 +431,17 @@ What has happened here?</p>
 </li>
 <li>It determines that the <code>plot_avg_plaquette</code> rule can do
 this, if it has
-<code>intermediary_data/beta3.0/pg.plaquette.json.gz</code>,
-<code>intermediary_data/beta3.5/pg.plaquette.json.gz</code>, and
-<code>intermediary_data/beta4.0/pg.plaquette.json.gz</code>.</li>
+<code>intermediary_data/beta1.8/pg.plaquette.json.gz</code>,
+<code>intermediary_data/beta2.0/pg.plaquette.json.gz</code>, and
+<code>intermediary_data/beta2.2/pg.plaquette.json.gz</code>.</li>
 <li>Snakemake looks for a rule to make
-<code>intermediary_data/beta3.0/pg.plaquette.json.gz</code>
+<code>intermediary_data/beta1.8/pg.plaquette.json.gz</code>
 </li>
 <li>It determines that <code>avg_plaquette</code> can make this if
-<code>subdir=beta3.0</code>
+<code>subdir=beta1.8</code>
 </li>
 <li>It sees that the input needed is therefore
-<code>raw_data/beta3.0/out_pg</code>
+<code>raw_data/beta1.8/out_pg</code>
 </li>
 <li>Now Snakemake has reached an available input file, it runs the
 <code>avg_plaquette</code> rule.</li>
@@ -448,8 +449,7 @@ this, if it has
 process until it has all of the needed inputs.</li>
 <li>Finally, it runs the <code>plot_avg_plaquette</code> rule.</li>
 </ol><p><strong>Here’s a visual representation of this process:</strong></p>
-<p>![][fig-chaining]</p>
-<p>This, in a nutshell, is how we build workflows in Snakemake.</p>
+<figure><img src="fig/chaining_rules.svg" alt="A visual representation of the above process showing the rule definitions, with arrows added to indicate the order wildcards and placeholders are substituted. Blue arrows start from the input of the `plot_avg_plaquette` rule, which are the files `intermediary_data/beta1.8/pg.plaquette.json.gz`, `intermediary_data/beta2.0/pg.plaquette.json.gz`, and `intermediary_data/beta2.2/pg.plaquette.json.gz`, then point down from components of the filename to wildcards in the output of the `avg_plaquette` rule. Orange arrows then track back up through the shell parts of both rules, where the placeholders are, and finally back to the target output filename at the top." class="figure mx-auto d-block"></figure><p>This, in a nutshell, is how we build workflows in Snakemake.</p>
 <ol style="list-style-type: decimal"><li>Define rules for all the processing steps</li>
 <li>Choose <code>input</code> and <code>output</code> naming patterns
 that allow Snakemake to link the rules</li>
@@ -484,7 +484,7 @@ out each file by hand would be quite cumbersome. We can make use of the
 <pre class="snakemake"><code>    input:
         expand(
             "intermediary_data/beta{beta}/pg.plaquette.json.gz",
-            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         )</code></pre>
 <p>The first argument to <code>expand()</code> here is a template for
 the filename, and subsequent keyword arguments are lists of variables to
@@ -513,7 +513,7 @@ counts. Write a rule to generate this table for all values of <span class="math 
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
@@ -521,7 +521,7 @@ rule tabulate_counts:
     input:
         expand(
             "intermediary_data/beta{beta}/pg.count",
-            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         )
     output: "assets/tables/counts.tex"
     conda: "envs/analysis.yml"
@@ -554,7 +554,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -656,8 +656,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/chaining.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/chaining.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-05-20",
-  "datePublished": "2025-07-22"
+  "dateModified": "2025-07-28",
+  "datePublished": "2025-07-28"
 }
 
   </script><script>

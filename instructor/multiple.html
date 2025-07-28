@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Multiple inputs and outputs</h1>
-        <p>Last updated on 2025-05-20 |
+        <p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/multiple.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -371,14 +371,16 @@ specify, it’s important to look at an effective mass plot to verify that
 the plateau actually matches what we assert. The rule we just wrote
 doesn’t do this—it only spits out a numerical answer. Let’s update this
 rule so that it can also generate the effective mass plot.</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
+rule ps_mass:
     input: "raw_data/beta{beta}/out_corr"
     output:
         data="intermediary_data/beta{beta}/corr.ps_mass.json.gz",
-        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.{plot_filetype}",
+        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.pdf",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles}"</code></pre>
@@ -410,7 +412,7 @@ error, but will first let you see what the output is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Snakemake will provide all of the defined output variables, as a
 space-separated list. This is similar to what happens when an output
@@ -439,7 +441,7 @@ shape of the flow may be checked.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule w0:
     input: "raw_data/{subdir}/out_wflow"
@@ -504,7 +506,7 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -534,7 +536,9 @@ file marked as a log if an error is raised by the process generating
 it.</p>
 <p>For example, for the <code>ps_mass</code> rule above, we might
 use:</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
+rule ps_mass:
     input:
         data="raw_data/beta{beta}/out_corr",
     output:
@@ -543,8 +547,8 @@ use:</p>
     log:
         messages="intermediary_data/beta{beta}/corr.ps_mass.log",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input.data} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles} |&amp; tee {log.messages}"</code></pre>
@@ -589,7 +593,7 @@ file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -624,7 +628,7 @@ data directory.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
 </div>
 <p>And re-run.</p>
-<pre class="shellsession"><code>$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/corr.ps_mass.json
+<pre class="shellsession"><code>$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
 
 ...
 TODO</code></pre>
@@ -634,18 +638,18 @@ informative. Some less so.</p>
 the program that we see on the screen.</li>
 <li>Python is reporting that there is a file missing.</li>
 <li>Snakemake complains one expected output file is missing:
-<code>intermediary_data/beta4.0/corr.ps_mass.json</code>.</li>
+<code>intermediary_data/beta2.0/corr.ps_mass.json</code>.</li>
 <li>The other expected output file
-<code>intermediary_data/beta4.0/corr.ps_eff_mass.pdf</code> was found
+<code>intermediary_data/beta2.0/corr.ps_eff_mass.pdf</code> was found
 but has now been removed by Snakemake.</li>
 <li>Snakemake suggest this might be due to “filesystem latency”.</li>
 </ol><p>This last point is a red herring. “Filesystem latency” is not an
 issue here, and never will be, since we are not using a network
 filesystem. We know what the problem is, as we deliberately caused it,
 but to diagnose an unexpected error like this we would investigate
-further by looking at the <code>intermediary_data/beta4.0</code>
+further by looking at the <code>intermediary_data/beta2.0</code>
 subdirectory.</p>
-<pre class="shellsession"><code>$ ls intermediary_data/beta4.0/
+<pre class="shellsession"><code>$ ls intermediary_data/beta2.0/
 TODO</code></pre>
 <p>Remember that Snakemake itself does not create any output files. It
 just runs the commands you put in the <code>shell</code> sections, then
@@ -739,8 +743,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/multiple.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/multiple.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-05-20",
-  "datePublished": "2025-07-22"
+  "dateModified": "2025-07-28",
+  "datePublished": "2025-07-28"
 }
 
   </script><script>

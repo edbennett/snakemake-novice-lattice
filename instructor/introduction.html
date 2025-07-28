@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running commands with Snakemake</h1>
-        <p>Last updated on 2025-05-20 |
+        <p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -438,10 +438,10 @@ one of the raw data files.</p>
 file named <code>Snakefile</code>. Into it, insert the following
 content:</p>
 <pre class="snakemake"><code>rule count_lines:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "wc -l raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
+        "wc -l raw_data/beta2.0/out_pg &gt; intermediary_data/beta2.0/pg.count"</code></pre>
 <div id="key-points-about-this-file" class="callout checklist">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
@@ -478,7 +478,7 @@ Snakemake what shell commands to run to get the specified output from
 the given input.</p>
 <p>Going back to the shell now, we can test this rule. From the
 <code>su2pg</code> directory, we can run the command</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta4.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
 <p>If we’ve made any transcription errors in the rule (missing quotes,
 bad indentations, etc.), then it will become clear at this point, as
 we’ll receive an error that we will need to fix.</p>
@@ -487,8 +487,8 @@ we’ll receive an error that we will need to fix.</p>
 through the lesson, we’ll explain in more detail when we need to modify
 them.</p>
 <p>Let’s check that the output was correctly generated:</p>
-<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.count
-  31064 raw_data/beta4.0/out_pg</code></pre>
+<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.count
+  31064 raw_data/beta2.0/out_pg</code></pre>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -519,7 +519,7 @@ rules that it runs.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Use of the --forceall flag </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>In the first few episodes we always run Snakemake with the
 <code>--forceall</code> flag, and it’s not explained what this does
@@ -563,7 +563,7 @@ quit back to the shell with <code>q</code></em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal"><li>Prints the shell commands that are being run to the terminal</li>
 </ol><p>This is such a useful thing we don’t know why it isn’t the default!
@@ -590,7 +590,7 @@ generation log, each trajectory concludes with a line of the form</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta4.0/out_pg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
 </div>
 <div id="counting-sequences-in-snakemake" class="callout challenge">
 <div class="callout-square">
@@ -600,7 +600,7 @@ generation log, each trajectory concludes with a line of the form</p>
 <h3 class="callout-title">Counting sequences in Snakemake</h3>
 <div class="callout-content">
 <p>Modify the Snakefile to count the number of
-<strong>trajectories</strong> in <code>raw_data/beta4.0/out_pg</code>,
+<strong>trajectories</strong> in <code>raw_data/beta2.0/out_pg</code>,
 rather than the number of <strong>lines</strong>.</p>
 <ul><li>Rename the rule to <code>count_trajectories</code>
 </li>
@@ -616,13 +616,13 @@ be printed on the screen</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule count_trajectories:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "grep -c generated raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
+        "grep -c generated raw_data/beta2.0/out_pg &gt; intermediary_data/beta2.0/pg.count"</code></pre>
 </div>
 </div>
 </div>
@@ -704,8 +704,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/introduction.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/introduction.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-05-20",
-  "datePublished": "2025-07-22"
+  "dateModified": "2025-07-28",
+  "datePublished": "2025-07-28"
 }
 
   </script><script>

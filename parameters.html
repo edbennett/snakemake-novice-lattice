@@ -345,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Metadata and parameters</h1>
-        <p>Last updated on 2025-05-20 |
+        <p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/parameters.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -409,10 +409,11 @@ reference value <span class="math inline">\(\mathcal{W_0} =
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <pre class="snakemake"><code>W0_reference = 0.2
 
+# Compute w0 scale for single ensemble for fixed reference scale
 rule w0:
     input: "raw_data/{subdir}/out_wflow"
     output: "intermediary_data/{subdir}/wflow.w0.json.gz"
@@ -453,7 +454,7 @@ command line, without changing the value of
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>This can achieve a similar result, but in a slightly different way.
 In the <code>--styles</code> example, the <code>{plot_styles}</code>
@@ -476,9 +477,10 @@ will talk about in a later episode.</p>
 <hr class="half-width"><p>We would frequently like our rules to depend on data that are
 specific to the specific ensembles being analysed. For example, consider
 the rule:</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude with fixed plateau
+rule ps_mass:
     input: "raw_data/{subdir}/out_corr"
-    output: "intermediary_data/{subdir}/corr.ps_mass.gz"
+    output: "intermediary_data/{subdir}/corr.ps_mass.json.gz"
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output} --plateau_start 18 --plateau_end 23"</code></pre>
@@ -502,19 +504,20 @@ metadata = pandas.read_csv("metadata/ensemble_metadata.csv")</code></pre>
 <p>The file being read here is a CSV (Comma Separated Values) file. We
 can create, view, and modify this with the spreadsheet tool of our
 choice. Let’s take a look at the file now.</p>
-<figure><img src="./images/metadata_excel.png" alt="Screenshot of a spreadsheet application showing the file metadata/ensemble_metadata.csv." class="figure mx-auto d-block"><div class="figcaption">Screenshot of a spreadsheet application showing
+<figure><img src="./images/metadata_spreadsheet.png" alt="Screenshot of a spreadsheet application showing the file metadata/ensemble_metadata.csv." class="figure mx-auto d-block"><div class="figcaption">Screenshot of a spreadsheet application showing
 the file <code>metadata/ensemble_metadata.csv</code>.</div>
 </figure><p>You can see that we have columns defining metadata to identify each
 ensemble, and columns for parameters relating to the analysis of each
 ensemble.</p>
 <p>Now, how do we tell Snakemake to pull out the correct value from
 this?</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude, read plateau from metadata
+rule ps_mass:
     input: "raw_data/beta{beta}/out_corr"
     output: "intermediary_data/beta{beta}/corr.ps_mass.json.gz"
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end}"</code></pre>
@@ -530,8 +533,8 @@ considering. Finally, we’ve used <code>{params.plateau_start}</code> and
 <code>{params.plateau_end}</code> placeholders to use these parameters
 in the shell command that gets run.</p>
 <p>Let’s test this now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/corr.ps_mass.json
-cat intermediary_data/beta4.0/corr.ps_mass.json</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
+cat intermediary_data/beta2.0/corr.ps_mass.json</code></pre>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -600,8 +603,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/parameters.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/parameters.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-05-20",
-  "datePublished": "2025-07-22"
+  "dateModified": "2025-07-28",
+  "datePublished": "2025-07-28"
 }
 
   </script><script>

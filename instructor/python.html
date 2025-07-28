@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running Python code with Snakemake</h1>
-        <p>Last updated on 2025-05-20 |
+        <p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -459,25 +459,25 @@ Snakefile to compute the average plaquette from a configuration
 generation log. Let’s add the following rule to
 <code>envs/Snakefile</code>:</p>
 <pre class="snakemake"><code>rule avg_plaquette:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.plaquette.json.gz"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.plaquette.json.gz"
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json.gz"</code></pre>
+        "python -m su2pg_analysis.plaquette raw_data/beta2.0/out_pg --output_file intermediary_data/beta2.0/pg.plaquette.json.gz"</code></pre>
 <p>The <code>conda:</code> block tells Snakemake where to find the Conda
 environment that should be used for running this rule. Let’s test this
 now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz</code></pre>
 <p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
 attention to the <code>conda:</code> specification.</p>
 <p>Let’s check now that the output was correctly generated:</p>
-<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.plaquette.json.gz | gunzip | head -n 20
+<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 20
 {
- "program": "pyerrors 2.11.0",
+ "program": "pyerrors 2.13.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-02-20 14:59:00 +0000",
- "host": "tsukasa.local, macOS-15.3.1-arm64-arm-64bit",
+ "date": "2025-05-20 15:44:09 +0100",
+ "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
  "description": {
   "group_family": "SU",
   "num_colors": 2,
@@ -485,13 +485,13 @@ attention to the <code>conda:</code> specification.</p>
   "nx": 24,
   "ny": 24,
   "nz": 24,
-  "beta": 4.0,
+  "beta": 2.0,
   "num_heatbath": 1,
   "num_overrelaxed": 4,
   "num_thermalization": 1000,
-  "thermalization_time": 2594.755651
- },
- "obsdata": [{</code></pre>
+  "thermalization_time": 2453.811479,
+  "num_trajectories": 10010
+ },</code></pre>
 <p>Some of the output will differ on your machine, since this library
 tracks provenance, such as where and when the code was run, in the
 output file.</p>
@@ -503,7 +503,7 @@ output file.</p>
 <h3 class="callout-title">More plaquettes</h3>
 <div class="callout-content">
 <p>Add a second rule to compute the average plaquette in the file
-<code>intermediary_data/beta4.5/out_pg</code>. Add this to the same
+<code>intermediary_data/beta2.2/out_pg</code>. Add this to the same
 Snakefile you already made, under the <code>avg_plaquette</code> rule,
 and run your rules in the terminal. When running the
 <code>snakemake</code> command you’ll need to tell Snakemake to make
@@ -516,20 +516,20 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
 within a Snakefile. So in this example answer we use
 <code>avg_plaquette2</code>.</p>
 <pre class="snakemake"><code>rule avg_plaquette2:
-    input: "raw_data/beta4.5/out_pg"
-    output: "intermediary_data/beta4.5/pg.plaquette.json.gz"
+    input: "raw_data/beta2.2/out_pg"
+    output: "intermediary_data/beta2.2/pg.plaquette.json.gz"
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json.gz"</code></pre>
+        "python -m su2pg_analysis.plaquette raw_data/beta2.2/out_pg --output_file intermediary_data/beta2.2/pg.plaquette.json.gz"</code></pre>
 <p>Then in the shell:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json intermediary_data/beta4.5/pg.plaquette.json</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json intermediary_data/beta2.2/pg.plaquette.json</code></pre>
 <p>If you think writing a separate rule for each output file is silly,
 you are correct. We’ll address this next!</p>
 </div>
@@ -598,8 +598,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-05-20",
-  "datePublished": "2025-07-22"
+  "dateModified": "2025-07-28",
+  "datePublished": "2025-07-28"
 }
 
   </script><script>

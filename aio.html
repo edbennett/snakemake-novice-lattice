@@ -392,7 +392,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Running commands with Snakemake</a></p>
 <hr>
-<p>Last updated on 2025-05-20 |
+<p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -485,10 +485,10 @@ one of the raw data files.</p>
 file named <code>Snakefile</code>. Into it, insert the following
 content:</p>
 <pre class="snakemake"><code>rule count_lines:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "wc -l raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
+        "wc -l raw_data/beta2.0/out_pg &gt; intermediary_data/beta2.0/pg.count"</code></pre>
 <div id="key-points-about-this-file" class="callout checklist">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
@@ -527,7 +527,7 @@ Snakemake what shell commands to run to get the specified output from
 the given input.</p>
 <p>Going back to the shell now, we can test this rule. From the
 <code>su2pg</code> directory, we can run the command</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta4.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
 <p>If we’ve made any transcription errors in the rule (missing quotes,
 bad indentations, etc.), then it will become clear at this point, as
 we’ll receive an error that we will need to fix.</p>
@@ -536,8 +536,8 @@ we’ll receive an error that we will need to fix.</p>
 through the lesson, we’ll explain in more detail when we need to modify
 them.</p>
 <p>Let’s check that the output was correctly generated:</p>
-<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.count
-  31064 raw_data/beta4.0/out_pg</code></pre>
+<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.count
+  31064 raw_data/beta2.0/out_pg</code></pre>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -590,7 +590,7 @@ quit back to the shell with <code>q</code></em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal">
 <li>Prints the shell commands that are being run to the terminal</li>
@@ -621,7 +621,7 @@ generation log, each trajectory concludes with a line of the form</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta4.0/out_pg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
 </div>
 <div id="counting-sequences-in-snakemake" class="callout challenge">
 <div class="callout-square">
@@ -631,7 +631,7 @@ generation log, each trajectory concludes with a line of the form</p>
 <h3 class="callout-title">Counting sequences in Snakemake</h3>
 <div class="callout-content">
 <p>Modify the Snakefile to count the number of
-<strong>trajectories</strong> in <code>raw_data/beta4.0/out_pg</code>,
+<strong>trajectories</strong> in <code>raw_data/beta2.0/out_pg</code>,
 rather than the number of <strong>lines</strong>.</p>
 <ul>
 <li>Rename the rule to <code>count_trajectories</code>
@@ -649,13 +649,13 @@ be printed on the screen</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule count_trajectories:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "grep -c generated raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
+        "grep -c generated raw_data/beta2.0/out_pg &gt; intermediary_data/beta2.0/pg.count"</code></pre>
 </div>
 </div>
 </div>
@@ -683,7 +683,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-python"><p>Content from <a href="python.html">Running Python code with Snakemake</a></p>
 <hr>
-<p>Last updated on 2025-05-20 |
+<p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -798,25 +798,25 @@ Snakefile to compute the average plaquette from a configuration
 generation log. Let’s add the following rule to
 <code>envs/Snakefile</code>:</p>
 <pre class="snakemake"><code>rule avg_plaquette:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.plaquette.json.gz"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.plaquette.json.gz"
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.0/out_pg --output_file intermediary_data/beta4.0/pg.plaquette.json.gz"</code></pre>
+        "python -m su2pg_analysis.plaquette raw_data/beta2.0/out_pg --output_file intermediary_data/beta2.0/pg.plaquette.json.gz"</code></pre>
 <p>The <code>conda:</code> block tells Snakemake where to find the Conda
 environment that should be used for running this rule. Let’s test this
 now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz</code></pre>
 <p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
 attention to the <code>conda:</code> specification.</p>
 <p>Let’s check now that the output was correctly generated:</p>
-<pre class="shellsession"><code>$ cat intermediary_data/beta4.0/pg.plaquette.json.gz | gunzip | head -n 20
+<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 20
 {
- "program": "pyerrors 2.11.0",
+ "program": "pyerrors 2.13.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-02-20 14:59:00 +0000",
- "host": "tsukasa.local, macOS-15.3.1-arm64-arm-64bit",
+ "date": "2025-05-20 15:44:09 +0100",
+ "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
  "description": {
   "group_family": "SU",
   "num_colors": 2,
@@ -824,13 +824,13 @@ attention to the <code>conda:</code> specification.</p>
   "nx": 24,
   "ny": 24,
   "nz": 24,
-  "beta": 4.0,
+  "beta": 2.0,
   "num_heatbath": 1,
   "num_overrelaxed": 4,
   "num_thermalization": 1000,
-  "thermalization_time": 2594.755651
- },
- "obsdata": [{</code></pre>
+  "thermalization_time": 2453.811479,
+  "num_trajectories": 10010
+ },</code></pre>
 <p>Some of the output will differ on your machine, since this library
 tracks provenance, such as where and when the code was run, in the
 output file.</p>
@@ -842,7 +842,7 @@ output file.</p>
 <h3 class="callout-title">More plaquettes</h3>
 <div class="callout-content">
 <p>Add a second rule to compute the average plaquette in the file
-<code>intermediary_data/beta4.5/out_pg</code>. Add this to the same
+<code>intermediary_data/beta2.2/out_pg</code>. Add this to the same
 Snakefile you already made, under the <code>avg_plaquette</code> rule,
 and run your rules in the terminal. When running the
 <code>snakemake</code> command you’ll need to tell Snakemake to make
@@ -855,20 +855,20 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
 within a Snakefile. So in this example answer we use
 <code>avg_plaquette2</code>.</p>
 <pre class="snakemake"><code>rule avg_plaquette2:
-    input: "raw_data/beta4.5/out_pg"
-    output: "intermediary_data/beta4.5/pg.plaquette.json.gz"
+    input: "raw_data/beta2.2/out_pg"
+    output: "intermediary_data/beta2.2/pg.plaquette.json.gz"
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.plaquette raw_data/beta4.5/out_pg --output_file intermediary_data/beta4.5/pg.plaquette.json.gz"</code></pre>
+        "python -m su2pg_analysis.plaquette raw_data/beta2.2/out_pg --output_file intermediary_data/beta2.2/pg.plaquette.json.gz"</code></pre>
 <p>Then in the shell:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.plaquette.json intermediary_data/beta4.5/pg.plaquette.json</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json intermediary_data/beta2.2/pg.plaquette.json</code></pre>
 <p>If you think writing a separate rule for each output file is silly,
 you are correct. We’ll address this next!</p>
 </div>
@@ -881,7 +881,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-placeholders"><p>Content from <a href="placeholders.html">Placeholders and wildcards</a></p>
 <hr>
-<p>Last updated on 2025-05-20 |
+<p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/placeholders.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -923,10 +923,10 @@ workflow</li>
 generated trajectories in, and compute the average plaquette of, one
 ensemble. As a reminder, this was one such rule:</p>
 <pre class="snakemake"><code>rule count_trajectories:
-    input: "raw_data/beta4.0/out_pg"
-    output: "intermediary_data/beta4.0/pg.count"
+    input: "raw_data/beta2.0/out_pg"
+    output: "intermediary_data/beta2.0/pg.count"
     shell:
-        "grep -c generated raw_data/beta4.0/out_pg &gt; intermediary_data/beta4.0/pg.count"</code></pre>
+        "grep -c generated raw_data/beta2.0/out_pg &gt; intermediary_data/beta2.0/pg.count"</code></pre>
 <p>When we needed to do the same for a second ensemble, we made a second
 copy of the rule, and changed the input and output filenames. This is
 obviously not scalable to large analyses: instead, we would like to
@@ -962,7 +962,7 @@ wildcard can stand in for any text in order to make up the desired
 filename. As with naming your rules, you may choose any name you like
 for your wildcards; so here we used <code>subdir</code>, since it is
 describing a subdirectory. If <code>subdir</code> is set to
-<code>beta4.0</code> then the new generic rule will have the same inputs
+<code>beta2.0</code> then the new generic rule will have the same inputs
 and outputs as the original rule. Using the same wildcards in the input
 and output is what tells Snakemake how to match input files to output
 files.</p>
@@ -981,7 +981,7 @@ the placeholder <code>{wildcards.subdir}</code>, but in most cases, as
 here, we just need the <code>{input}</code> and <code>{output}</code>
 placeholders.</p>
 <p>Let’s test this general rule now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count</code></pre>
 <p>As previously, if you see errors at this point, there is likely a
 problem with your Snakefile; check that all the rules match the ones
 that have appeared here, and that there aren’t multiple rules with the
@@ -1005,7 +1005,7 @@ previous episode.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Compute average plaquette for any ensemble from its generation log
@@ -1016,7 +1016,7 @@ rule avg_plaquette:
     shell:
         "python -m su2pg_analysis.plaquette {input} --output_file {output}"</code></pre>
 <p>To test this, for example:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta3.0/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz</code></pre>
 </div>
 </div>
 </div>
@@ -1030,22 +1030,22 @@ rule avg_plaquette:
 <div class="callout-content">
 <p>Our rule puts the sequence counts into output files named like
 <code>pg.count</code>. How would you have to change the
-`count_trajectories`` rule definition if you wanted:</p>
+<code>count_trajectories</code> rule definition if you wanted:</p>
 <ol style="list-style-type: decimal">
-<li><p>the output file for <code>raw_data/beta3.0/out_hmc</code> to be
-<code>intermediary_data/beta3.0/hmc.count</code>?</p></li>
+<li><p>the output file for <code>raw_data/beta1.8/out_hmc</code> to be
+<code>intermediary_data/beta1.8/hmc.count</code>?</p></li>
 <li><p>the output file for
-<code>raw_data/beta3.0/mass_fun-0.63/out_hmc</code> to be
-<code>intermediary_data/beta3.0/mass_fun-0.63/hmc.count</code>?</p></li>
+<code>raw_data/beta1.8/mass_fun-0.63/out_hmc</code> to be
+<code>intermediary_data/beta1.8/mass_fun-0.63/hmc.count</code>?</p></li>
 <li><p>the output file for
-<code>raw_data/beta3.0/mass_fun-0.63/out_hmc</code> to be
+<code>raw_data/beta1.8/mass_fun-0.63/out_hmc</code> to be
 <code>intermediary_data/hmc_b3.0_m-0.63.count</code> (for
-<code>raw_data/beta3.5/mass_fun-0.68/out_pg</code> to be
-<code>intermediary_data/hmc_b3.5_m-0.68.count</code>, etc.)?</p></li>
+<code>raw_data/beta1.9/mass_fun-0.68/out_pg</code> to be
+<code>intermediary_data/hmc_b1.9_m-0.68.count</code>, etc.)?</p></li>
 <li><p>the output file for
-<code>raw_data/beta3.0/mass_fun-0.63/out_hmc</code> to be
+<code>raw_data/beta1.8/mass_fun-0.63/out_hmc</code> to be
 <code>intermediary_data/hmc_m-0.63.count</code> (for
-<code>raw_data/beta3.5/mass_fun-0.68/out_pg</code> to be
+<code>raw_data/beta1.9/mass_fun-0.68/out_pg</code> to be
 <code>intermediary_data/hmc_m-0.68.count</code>, etc.)?</p></li>
 </ol>
 <p>(Assume that both pure-gauge and HMC logs tag generated trajectories
@@ -1059,7 +1059,7 @@ in the sample data, so these will not work as-is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In both cases, there is no need to change the <code>shell</code> part
 of the rule at all.</p>
@@ -1089,7 +1089,7 @@ any names, as long as they match between the <code>input</code> and
 determine which input file you want to count by matching wildcards on
 the file name <code>intermediary_data/hmc_m-0.63.count</code>. You could
 try a rule like this:</p>
-<pre class="snakemake"><code><span><span class="va">input</span><span class="op">:</span> <span class="st">"raw_data/beta3.0/mass_fun{mass}/out_hmc"</span></span>
+<pre class="snakemake"><code><span><span class="va">input</span><span class="op">:</span> <span class="st">"raw_data/beta1.8/mass_fun{mass}/out_hmc"</span></span>
 <span><span class="va">output</span><span class="op">:</span> <span class="st">"intermediary_data/hmc_m{mass}.count"</span></span></code></pre>
 <p>…but it only works because <span class="math inline">\(\beta\)</span>
 is hard-coded into the <code>input</code> line, and the rule will only
@@ -1220,7 +1220,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-chaining"><p>Content from <a href="chaining.html">Chaining rules</a></p>
 <hr>
-<p>Last updated on 2025-05-20 |
+<p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1267,11 +1267,12 @@ how it varies between different values of the input parameters. To do
 this, we will need to take the output of the <code>avg_plaquette</code>
 rule that we defined earlier, and use it as input for another rule.</p>
 <p>Let’s define that rule now:</p>
-<pre class="snakemake"><code>rule plot_avg_plaquette:
+<pre class="snakemake"><code># Take individual data files for average plaquette and plot combined results
+rule plot_avg_plaquette:
     input:
-        "intermediary_data/beta3.0/pg.plaquette.json.gz",
-        "intermediary_data/beta3.5/pg.plaquette.json.gz",
-        "intermediary_data/beta4.0/pg.plaquette.json.gz",
+        "intermediary_data/beta1.8/pg.plaquette.json.gz",
+        "intermediary_data/beta2.0/pg.plaquette.json.gz",
+        "intermediary_data/beta2.2/pg.plaquette.json.gz",
     output:
         "assets/plots/plaquette_scan.pdf"
     conda: "envs/analysis.yml"
@@ -1306,17 +1307,17 @@ What has happened here?</p>
 </li>
 <li>It determines that the <code>plot_avg_plaquette</code> rule can do
 this, if it has
-<code>intermediary_data/beta3.0/pg.plaquette.json.gz</code>,
-<code>intermediary_data/beta3.5/pg.plaquette.json.gz</code>, and
-<code>intermediary_data/beta4.0/pg.plaquette.json.gz</code>.</li>
+<code>intermediary_data/beta1.8/pg.plaquette.json.gz</code>,
+<code>intermediary_data/beta2.0/pg.plaquette.json.gz</code>, and
+<code>intermediary_data/beta2.2/pg.plaquette.json.gz</code>.</li>
 <li>Snakemake looks for a rule to make
-<code>intermediary_data/beta3.0/pg.plaquette.json.gz</code>
+<code>intermediary_data/beta1.8/pg.plaquette.json.gz</code>
 </li>
 <li>It determines that <code>avg_plaquette</code> can make this if
-<code>subdir=beta3.0</code>
+<code>subdir=beta1.8</code>
 </li>
 <li>It sees that the input needed is therefore
-<code>raw_data/beta3.0/out_pg</code>
+<code>raw_data/beta1.8/out_pg</code>
 </li>
 <li>Now Snakemake has reached an available input file, it runs the
 <code>avg_plaquette</code> rule.</li>
@@ -1325,8 +1326,7 @@ process until it has all of the needed inputs.</li>
 <li>Finally, it runs the <code>plot_avg_plaquette</code> rule.</li>
 </ol>
 <p><strong>Here’s a visual representation of this process:</strong></p>
-<p>![][fig-chaining]</p>
-<p>This, in a nutshell, is how we build workflows in Snakemake.</p>
+<figure><img src="fig/chaining_rules.svg" alt="A visual representation of the above process showing the rule definitions, with arrows added to indicate the order wildcards and placeholders are substituted. Blue arrows start from the input of the `plot_avg_plaquette` rule, which are the files `intermediary_data/beta1.8/pg.plaquette.json.gz`, `intermediary_data/beta2.0/pg.plaquette.json.gz`, and `intermediary_data/beta2.2/pg.plaquette.json.gz`, then point down from components of the filename to wildcards in the output of the `avg_plaquette` rule. Orange arrows then track back up through the shell parts of both rules, where the placeholders are, and finally back to the target output filename at the top." class="figure mx-auto d-block"></figure><p>This, in a nutshell, is how we build workflows in Snakemake.</p>
 <ol style="list-style-type: decimal">
 <li>Define rules for all the processing steps</li>
 <li>Choose <code>input</code> and <code>output</code> naming patterns
@@ -1365,7 +1365,7 @@ out each file by hand would be quite cumbersome. We can make use of the
 <pre class="snakemake"><code>    input:
         expand(
             "intermediary_data/beta{beta}/pg.plaquette.json.gz",
-            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         )</code></pre>
 <p>The first argument to <code>expand()</code> here is a template for
 the filename, and subsequent keyword arguments are lists of variables to
@@ -1394,7 +1394,7 @@ counts. Write a rule to generate this table for all values of <span class="math 
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
@@ -1402,7 +1402,7 @@ rule tabulate_counts:
     input:
         expand(
             "intermediary_data/beta{beta}/pg.count",
-            beta=[2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         )
     output: "assets/tables/counts.tex"
     conda: "envs/analysis.yml"
@@ -1435,7 +1435,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -1483,7 +1483,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-parameters"><p>Content from <a href="parameters.html">Metadata and parameters</a></p>
 <hr>
-<p>Last updated on 2025-05-20 |
+<p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/parameters.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1543,10 +1543,11 @@ reference value <span class="math inline">\(\mathcal{W_0} =
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <pre class="snakemake"><code>W0_reference = 0.2
 
+# Compute w0 scale for single ensemble for fixed reference scale
 rule w0:
     input: "raw_data/{subdir}/out_wflow"
     output: "intermediary_data/{subdir}/wflow.w0.json.gz"
@@ -1587,7 +1588,7 @@ command line, without changing the value of
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>This can achieve a similar result, but in a slightly different way.
 In the <code>--styles</code> example, the <code>{plot_styles}</code>
@@ -1612,9 +1613,10 @@ will talk about in a later episode.</p>
 <p>We would frequently like our rules to depend on data that are
 specific to the specific ensembles being analysed. For example, consider
 the rule:</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude with fixed plateau
+rule ps_mass:
     input: "raw_data/{subdir}/out_corr"
-    output: "intermediary_data/{subdir}/corr.ps_mass.gz"
+    output: "intermediary_data/{subdir}/corr.ps_mass.json.gz"
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output} --plateau_start 18 --plateau_end 23"</code></pre>
@@ -1638,19 +1640,20 @@ metadata = pandas.read_csv("metadata/ensemble_metadata.csv")</code></pre>
 <p>The file being read here is a CSV (Comma Separated Values) file. We
 can create, view, and modify this with the spreadsheet tool of our
 choice. Let’s take a look at the file now.</p>
-<figure><img src="./images/metadata_excel.png" alt="Screenshot of a spreadsheet application showing the file metadata/ensemble_metadata.csv." class="figure mx-auto d-block"><div class="figcaption">Screenshot of a spreadsheet application showing
+<figure><img src="./images/metadata_spreadsheet.png" alt="Screenshot of a spreadsheet application showing the file metadata/ensemble_metadata.csv." class="figure mx-auto d-block"><div class="figcaption">Screenshot of a spreadsheet application showing
 the file <code>metadata/ensemble_metadata.csv</code>.</div>
 </figure><p>You can see that we have columns defining metadata to identify each
 ensemble, and columns for parameters relating to the analysis of each
 ensemble.</p>
 <p>Now, how do we tell Snakemake to pull out the correct value from
 this?</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude, read plateau from metadata
+rule ps_mass:
     input: "raw_data/beta{beta}/out_corr"
     output: "intermediary_data/beta{beta}/corr.ps_mass.json.gz"
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end}"</code></pre>
@@ -1666,8 +1669,8 @@ considering. Finally, we’ve used <code>{params.plateau_start}</code> and
 <code>{params.plateau_end}</code> placeholders to use these parameters
 in the shell command that gets run.</p>
 <p>Let’s test this now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/corr.ps_mass.json
-cat intermediary_data/beta4.0/corr.ps_mass.json</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
+cat intermediary_data/beta2.0/corr.ps_mass.json</code></pre>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1680,7 +1683,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-multiple"><p>Content from <a href="multiple.html">Multiple inputs and outputs</a></p>
 <hr>
-<p>Last updated on 2025-05-20 |
+<p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/multiple.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1698,14 +1701,16 @@ specify, it’s important to look at an effective mass plot to verify that
 the plateau actually matches what we assert. The rule we just wrote
 doesn’t do this—it only spits out a numerical answer. Let’s update this
 rule so that it can also generate the effective mass plot.</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
+rule ps_mass:
     input: "raw_data/beta{beta}/out_corr"
     output:
         data="intermediary_data/beta{beta}/corr.ps_mass.json.gz",
-        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.{plot_filetype}",
+        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.pdf",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles}"</code></pre>
@@ -1737,7 +1742,7 @@ error, but will first let you see what the output is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Snakemake will provide all of the defined output variables, as a
 space-separated list. This is similar to what happens when an output
@@ -1766,7 +1771,7 @@ shape of the flow may be checked.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule w0:
     input: "raw_data/{subdir}/out_wflow"
@@ -1833,7 +1838,7 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -1865,7 +1870,9 @@ file marked as a log if an error is raised by the process generating
 it.</p>
 <p>For example, for the <code>ps_mass</code> rule above, we might
 use:</p>
-<pre class="snakemake"><code>rule ps_mass:
+<pre class="snakemake"><code># Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
+rule ps_mass:
     input:
         data="raw_data/beta{beta}/out_corr",
     output:
@@ -1874,8 +1881,8 @@ use:</p>
     log:
         messages="intermediary_data/beta{beta}/corr.ps_mass.log",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input.data} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles} |&amp; tee {log.messages}"</code></pre>
@@ -1920,7 +1927,7 @@ file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -1957,7 +1964,7 @@ data directory.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
 </div>
 <p>And re-run.</p>
-<pre class="shellsession"><code>$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/corr.ps_mass.json
+<pre class="shellsession"><code>$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
 
 ...
 TODO</code></pre>
@@ -1968,9 +1975,9 @@ informative. Some less so.</p>
 the program that we see on the screen.</li>
 <li>Python is reporting that there is a file missing.</li>
 <li>Snakemake complains one expected output file is missing:
-<code>intermediary_data/beta4.0/corr.ps_mass.json</code>.</li>
+<code>intermediary_data/beta2.0/corr.ps_mass.json</code>.</li>
 <li>The other expected output file
-<code>intermediary_data/beta4.0/corr.ps_eff_mass.pdf</code> was found
+<code>intermediary_data/beta2.0/corr.ps_eff_mass.pdf</code> was found
 but has now been removed by Snakemake.</li>
 <li>Snakemake suggest this might be due to “filesystem latency”.</li>
 </ol>
@@ -1978,9 +1985,9 @@ but has now been removed by Snakemake.</li>
 issue here, and never will be, since we are not using a network
 filesystem. We know what the problem is, as we deliberately caused it,
 but to diagnose an unexpected error like this we would investigate
-further by looking at the <code>intermediary_data/beta4.0</code>
+further by looking at the <code>intermediary_data/beta2.0</code>
 subdirectory.</p>
-<pre class="shellsession"><code>$ ls intermediary_data/beta4.0/
+<pre class="shellsession"><code>$ ls intermediary_data/beta2.0/
 TODO</code></pre>
 <p>Remember that Snakemake itself does not create any output files. It
 just runs the commands you put in the <code>shell</code> sections, then
@@ -2018,7 +2025,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-dag"><p>Content from <a href="dag.html">How Snakemake plans jobs</a></p>
 <hr>
-<p>Last updated on 2025-05-20 |
+<p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/dag.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2243,7 +2250,7 @@ multiple targets, and Snakemake can tell which is which.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta4.0/pg.corr.ps_decay_const.json intermediary_data/beta4.5/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json</span></code></pre>
 </div>
 <p>The reason for using the <code>--jobs</code> flag specifically is
 that you pretty much always want this option.</p>
@@ -2302,7 +2309,7 @@ files.</p>
 <h3 class="callout-title">Visualising the effect of the
 <code>--forcerun</code> and <code>--force</code> flags</h3>
 <div class="callout-content">
-<p>Run <code>one_loop_matching</code> on the <code>beta4.0</code>
+<p>Run <code>one_loop_matching</code> on the <code>beta2.0</code>
 ensemble, and then use the <code>--dag</code> option as shown above to
 check:</p>
 <ol style="list-style-type: decimal">
@@ -2330,7 +2337,7 @@ rather than <code>TODO</code>?</p></li>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> intermediary_data/beta4.0/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json</span></code></pre>
 </div>
 <ol style="list-style-type: decimal">
 <li>This command should show three boxes, but all are dotted so no jobs
@@ -2339,7 +2346,7 @@ are actually to be run.</li>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--dag</span> intermediary_data/beta4.0/pg.corr.ps_decay_const.json <span class="kw">|</span> <span class="ex">gm</span> display <span class="at">-</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--dag</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json <span class="kw">|</span> <span class="ex">gm</span> display <span class="at">-</span></span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>The <code>--force</code> flag re-runs only the job to create the
@@ -2588,7 +2595,7 @@ the execution time?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
 somewhere around TODO seconds is expected, and this should reduce to
@@ -2785,8 +2792,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/aio.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/aio.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-07-22",
-  "datePublished": "2025-07-22"
+  "dateModified": "2025-07-28",
+  "datePublished": "2025-07-28"
 }
 
   </script><script>

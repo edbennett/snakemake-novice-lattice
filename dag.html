@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>How Snakemake plans jobs</h1>
-        <p>Last updated on 2025-05-20 |
+        <p>Last updated on 2025-07-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/dag.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -560,7 +560,7 @@ multiple targets, and Snakemake can tell which is which.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta4.0/pg.corr.ps_decay_const.json intermediary_data/beta4.5/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json</span></code></pre>
 </div>
 <p>The reason for using the <code>--jobs</code> flag specifically is
 that you pretty much always want this option.</p>
@@ -617,7 +617,7 @@ files.</p>
 <h3 class="callout-title">Visualising the effect of the
 <code>--forcerun</code> and <code>--force</code> flags</h3>
 <div class="callout-content">
-<p>Run <code>one_loop_matching</code> on the <code>beta4.0</code>
+<p>Run <code>one_loop_matching</code> on the <code>beta2.0</code>
 ensemble, and then use the <code>--dag</code> option as shown above to
 check:</p>
 <ol style="list-style-type: decimal"><li><p>How many jobs will run if you ask again to create this output
@@ -643,14 +643,14 @@ rather than <code>TODO</code>?</p></li>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> intermediary_data/beta4.0/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json</span></code></pre>
 </div>
 <ol style="list-style-type: decimal"><li>This command should show three boxes, but all are dotted so no jobs
 are actually to be run.</li>
 </ol><div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--dag</span> intermediary_data/beta4.0/pg.corr.ps_decay_const.json <span class="kw">|</span> <span class="ex">gm</span> display <span class="at">-</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--dag</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json <span class="kw">|</span> <span class="ex">gm</span> display <span class="at">-</span></span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal"><li><p>The <code>--force</code> flag re-runs only the job to create the
 output file, so in this case one box is solid, and only that job will
@@ -793,8 +793,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/dag.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/dag.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-05-20",
-  "datePublished": "2025-07-22"
+  "dateModified": "2025-07-28",
+  "datePublished": "2025-07-28"
 }
 
   </script><script>
