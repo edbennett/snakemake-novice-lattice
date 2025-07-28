@@ -203,7 +203,7 @@ and also multiple targets,
 and Snakemake can tell which is which.
 
 ```bash
-snakemake --forcerun avg_plaquette ps_mass --jobs 1 --printshellcmds --use-conda intermediary_data/beta4.0/pg.corr.ps_decay_const.json intermediary_data/beta4.5/pg.corr.ps_decay_const.json
+snakemake --forcerun avg_plaquette ps_mass --jobs 1 --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json
 ```
 
 The reason for using the `--jobs` flag specifically
@@ -264,7 +264,7 @@ as the output files are already present and newer than the input files.
 
 ## Visualising the effect of the `--forcerun` and `--force` flags
 
-Run `one_loop_matching` on the `beta4.0` ensemble,
+Run `one_loop_matching` on the `beta2.0` ensemble,
 and then use the `--dag` option as shown above to check:
 
 1) How many jobs will run if you ask again to create this output
@@ -285,14 +285,14 @@ and then use the `--dag` option as shown above to check:
 This is a way to make the result in the first place:
 
 ```bash
-$ snakemake --jobs 1 --printshellcmds intermediary_data/beta4.0/pg.corr.ps_decay_const.json
+$ snakemake --jobs 1 --printshellcmds intermediary_data/beta2.0/pg.corr.ps_decay_const.json
 ```
 
 1) This command should show three boxes,
    but all are dotted so no jobs are actually to be run.
 
 ```bash
-$ snakemake --dag intermediary_data/beta4.0/pg.corr.ps_decay_const.json | gm display -
+$ snakemake --dag intermediary_data/beta2.0/pg.corr.ps_decay_const.json | gm display -
 ```
 
 2) The `--force` flag re-runs only the job to create the output file,

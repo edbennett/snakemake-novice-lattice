@@ -20,14 +20,16 @@ only spits out a numerical answer.
 Let's update this rule so that it can also generate the effective mass plot.
 
 ```snakemake
+# Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
 rule ps_mass:
     input: "raw_data/beta{beta}/out_corr"
     output:
         data="intermediary_data/beta{beta}/corr.ps_mass.json.gz",
-        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.{plot_filetype}",
+        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.pdf",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles}"
@@ -182,6 +184,8 @@ for the `ps_mass` rule above,
 we might use:
 
 ```snakemake
+# Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
 rule ps_mass:
     input: 
         data="raw_data/beta{beta}/out_corr",
@@ -191,8 +195,8 @@ rule ps_mass:
     log:
         messages="intermediary_data/beta{beta}/corr.ps_mass.log",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input.data} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles} |& tee {log.messages}"
@@ -281,7 +285,7 @@ $ rm -rvf intermediary_data
 And re-run.
 
 ```shellsession
-$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/corr.ps_mass.json
+$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
 
 ...
 TODO
@@ -295,9 +299,9 @@ Some less so.
    as evidenced by the output from the program that we see on the screen.
 2. Python is reporting that there is a file missing.
 3. Snakemake complains one expected output file is missing:
-   `intermediary_data/beta4.0/corr.ps_mass.json`.
+   `intermediary_data/beta2.0/corr.ps_mass.json`.
 4. The other expected output file
-   `intermediary_data/beta4.0/corr.ps_eff_mass.pdf`
+   `intermediary_data/beta2.0/corr.ps_eff_mass.pdf`
    was found but has now been removed by Snakemake.
 5. Snakemake suggest this might be due to "filesystem latency".
 
@@ -307,10 +311,10 @@ since we are not using a network filesystem.
 We know what the problem is,
 as we deliberately caused it,
 but to diagnose an unexpected error like this we would investigate further
-by looking at the `intermediary_data/beta4.0` subdirectory.
+by looking at the `intermediary_data/beta2.0` subdirectory.
 
 ```shellsession
-$ ls intermediary_data/beta4.0/
+$ ls intermediary_data/beta2.0/
 TODO
 ```
 

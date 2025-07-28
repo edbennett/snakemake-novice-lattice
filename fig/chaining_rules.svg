@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="1254.9448"
+   height="1202.3486"
+   viewBox="0 0 1254.9448 1202.3486"
+   sodipodi:docname="chaining_rules.svg"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Concave triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path7" />
+    </marker>
+    <linearGradient
+       id="linearGradient2"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#cfcff6;stop-opacity:1;"
+         offset="0"
+         id="stop2" />
+      <stop
+         style="stop-color:#c7c7cf;stop-opacity:1;"
+         offset="1"
+         id="stop3" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient3"
+       x1="2179.208"
+       y1="54.827183"
+       x2="2175.4102"
+       y2="51.512695"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient54"
+       gradientUnits="userSpaceOnUse"
+       x1="2179.208"
+       y1="54.827183"
+       x2="2175.4102"
+       y2="51.512695"
+       gradientTransform="translate(-665.98874,772.24024)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient56"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-665.98874,772.24024)"
+       x1="2179.208"
+       y1="54.827183"
+       x2="2175.4102"
+       y2="51.512695" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient58"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-665.98874,772.24024)"
+       x1="2179.208"
+       y1="54.827183"
+       x2="2175.4102"
+       y2="51.512695" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient68"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-665.98874,772.24024)"
+       x1="2179.208"
+       y1="54.827183"
+       x2="2175.4102"
+       y2="51.512695" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient72"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-665.98874,772.24024)"
+       x1="2179.208"
+       y1="54.827183"
+       x2="2175.4102"
+       y2="51.512695" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2"
+       id="linearGradient74"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-665.98874,772.24024)"
+       x1="2179.208"
+       y1="54.827183"
+       x2="2175.4102"
+       y2="51.512695" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.43434851"
+     inkscape:cx="-156.55631"
+     inkscape:cy="610.10915"
+     inkscape:window-width="2560"
+     inkscape:window-height="1323"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g1"
+     transform="translate(-929.33721,-5.4747796)">
+    <path
+       id="path2"
+       style="opacity:1;fill:#e6e6ff;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="M 1586.304,60.74359 V 5.9747796 h 597.4779 l 1e-4,44.9680954 -8.7233,9.800715 z"
+       sodipodi:nodetypes="cccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:25.5708px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.59818"
+       x="937.71039"
+       y="40.649269"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="937.71039"
+         y="40.649269"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.59818">$ snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</tspan></text>
+    <path
+       id="rect2"
+       style="opacity:1;fill:url(#linearGradient3);fill-opacity:1;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 2175.0587,50.942875 h 8.7233 l -8.7233,9.800715 z"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:22.3442px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.39652"
+       x="937.71039"
+       y="162.76462"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="937.71039"
+         y="162.76462"
+         style="font-style:oblique;font-variant:normal;font-weight:500;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text Medium Oblique';text-align:start;text-anchor:start;fill:#808080;stroke-width:1.39652"># Take individual data files for average plaquette and plot combined results</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="190.91539"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan4">rule plot_avg_plaquette:</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="219.06615"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan5">    input:</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="247.21692"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan6">        &quot;intermediary_data/<tspan
+   style="fill:#0000ff"
+   id="tspan50">beta3.0</tspan>/pg.plaquette.json.gz&quot;,</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="275.36768"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan7">        &quot;intermediary_data/<tspan
+   style="fill:#0000ff"
+   id="tspan51">beta3.5</tspan>/pg.plaquette.json.gz&quot;,</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="303.51846"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan8">        &quot;intermediary_data/<tspan
+   style="fill:#0000ff"
+   id="tspan52">beta4.0</tspan>/pg.plaquette.json.gz&quot;,</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="331.66922"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan9">    output:</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="359.82001"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan10">        &quot;assets/plots/plaquette_scan.pdf&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="387.97076"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan11">    conda: &quot;envs/analysis.yml&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="416.12152"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan12">    shell:</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="444.27231"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan13">        &quot;python src/plot_plaquette.py {<tspan
+   style="fill:#ff6600"
+   id="tspan47">input</tspan>} --output_filename {<tspan
+   style="fill:#ff6600"
+   id="tspan46">output</tspan>}&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="472.42307"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan14" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22.3442px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.39652"
+       x="937.71039"
+       y="778.8938"
+       id="text26"><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="778.8938"
+         style="font-style:oblique;font-variant:normal;font-weight:500;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text Medium Oblique';text-align:start;text-anchor:start;fill:#808080;stroke-width:1.39652"
+         id="tspan26"># Compute average plaquette for any ensemble from its generation log</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="807.04456"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan37">rule avg_plaquette:</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="835.19531"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan38">    input: &quot;raw_data/{<tspan
+   style="fill:#0000ff"
+   id="tspan48">subdir</tspan>}/out_pg&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="863.34613"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan39">    output: &quot;intermediary_data/{<tspan
+   style="fill:#0000ff"
+   id="tspan49">subdir</tspan>}/pg.plaquette.json.gz&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="891.49689"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan40">    conda: &quot;envs/analysis.yml&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="919.64764"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan41">    shell:</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="947.7984"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan42">        &quot;python -m su2pg_analysis.plaquette {<tspan
+   style="fill:#ff6600"
+   id="tspan45">input</tspan>} --output_file {<tspan
+   style="fill:#ff6600"
+   id="tspan44">output</tspan>}&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="937.71039"
+         y="975.94916"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.39652"
+         id="tspan43" /></text>
+    <path
+       style="fill:none;stroke:#ff6600;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+       d="M 1735.0759,414.05221 V 267.2718 h 151.162 V 90.916227"
+       id="path47"
+       sodipodi:nodetypes="cccc" />
+    <g
+       id="g59"
+       transform="translate(0,238.99118)">
+      <g
+         id="g54"
+         transform="translate(-240.09029)">
+        <path
+           id="path53"
+           style="opacity:1;fill:#e6e6ff;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1169.9275,832.98383 v -54.76881 h 347.8657 l 10e-5,44.96809 -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:25.5708px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.59818"
+           x="1188.683"
+           y="812.88953"
+           id="text53"><tspan
+             sodipodi:role="line"
+             id="tspan53"
+             x="1188.683"
+             y="812.88953"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.59818">raw_data/<tspan
+   style="fill:#0000ff"
+   id="tspan59">beta3.0</tspan>/out_pg</tspan></text>
+        <path
+           id="path54"
+           style="opacity:1;fill:url(#linearGradient54);fill-opacity:1;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1509.07,823.18311 h 8.7233 l -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccc" />
+      </g>
+      <g
+         id="g56"
+         transform="translate(-240.09029,67.674175)">
+        <path
+           id="path55"
+           style="opacity:1;fill:#e6e6ff;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1169.9275,832.98383 v -54.76881 h 347.8657 l 10e-5,44.96809 -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:25.5708px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.59818"
+           x="1188.683"
+           y="812.88953"
+           id="text55"><tspan
+             sodipodi:role="line"
+             id="tspan55"
+             x="1188.683"
+             y="812.88953"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.59818">raw_data/<tspan
+   style="fill:#0000ff"
+   id="tspan60">beta3.5</tspan>/out_pg</tspan></text>
+        <path
+           id="path56"
+           style="opacity:1;fill:url(#linearGradient56);fill-opacity:1;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1509.07,823.18311 h 8.7233 l -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccc" />
+      </g>
+      <g
+         id="g58"
+         transform="translate(-240.09029,135.34835)">
+        <path
+           id="path57"
+           style="opacity:1;fill:#e6e6ff;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1169.9275,832.98383 v -54.76881 h 347.8657 l 10e-5,44.96809 -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:25.5708px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.59818"
+           x="1188.683"
+           y="812.88953"
+           id="text57"><tspan
+             sodipodi:role="line"
+             id="tspan57"
+             x="1188.683"
+             y="812.88953"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.59818">raw_data/<tspan
+   style="fill:#0000ff"
+   id="tspan61">beta4.0</tspan>/out_pg</tspan></text>
+        <path
+           id="path58"
+           style="opacity:1;fill:url(#linearGradient58);fill-opacity:1;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1509.07,823.18311 h 8.7233 l -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccc" />
+      </g>
+    </g>
+    <g
+       id="g68"
+       transform="translate(0,-290.24313)">
+      <g
+         id="g63"
+         transform="translate(64.080297)">
+        <path
+           id="path61"
+           style="opacity:1;fill:#e6e6ff;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 866.66218,832.98383 v -54.76881 h 651.13102 l 10e-5,44.96809 -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:25.5708px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.59818"
+           x="878.17554"
+           y="812.88953"
+           id="text63"><tspan
+             sodipodi:role="line"
+             id="tspan63"
+             x="878.17554"
+             y="812.88953"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.59818">intermediary_data/<tspan
+   style="fill:#0000ff"
+   id="tspan70">beta3.0</tspan>/pg.plaquette.json.gz</tspan></text>
+        <path
+           id="path63"
+           style="opacity:1;fill:url(#linearGradient68);fill-opacity:1;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1509.07,823.18311 h 8.7233 l -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccc" />
+      </g>
+      <g
+         id="g72"
+         transform="translate(64.080297,70.381018)">
+        <path
+           id="path71"
+           style="opacity:1;fill:#e6e6ff;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 866.66218,832.98383 v -54.76881 h 651.13102 l 10e-5,44.96809 -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:25.5708px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.59818"
+           x="878.17554"
+           y="812.88953"
+           id="text72"><tspan
+             sodipodi:role="line"
+             id="tspan72"
+             x="878.17554"
+             y="812.88953"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.59818">intermediary_data/<tspan
+   style="fill:#0000ff"
+   id="tspan71">beta3.5</tspan>/pg.plaquette.json.gz</tspan></text>
+        <path
+           id="path72"
+           style="opacity:1;fill:url(#linearGradient72);fill-opacity:1;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1509.07,823.18311 h 8.7233 l -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccc" />
+      </g>
+      <g
+         id="g74"
+         transform="translate(64.080297,143.93495)">
+        <path
+           id="path73"
+           style="opacity:1;fill:#e6e6ff;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 866.66218,832.98383 v -54.76881 h 651.13102 l 10e-5,44.96809 -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           xml:space="preserve"
+           style="font-size:25.5708px;line-height:1.25;font-family:sans-serif;text-align:start;text-anchor:start;stroke-width:1.59818"
+           x="878.17554"
+           y="812.88953"
+           id="text74"><tspan
+             sodipodi:role="line"
+             id="tspan74"
+             x="878.17554"
+             y="812.88953"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Typewriter Text';-inkscape-font-specification:'CMU Typewriter Text';text-align:start;text-anchor:start;stroke-width:1.59818">intermediary_data/<tspan
+   style="fill:#0000ff"
+   id="tspan73">beta4.0</tspan>/pg.plaquette.json.gz</tspan></text>
+        <path
+           id="path74"
+           style="opacity:1;fill:url(#linearGradient74);fill-opacity:1;stroke:#d8d8ff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+           d="m 1509.07,823.18311 h 8.7233 l -8.7233,9.80072 z"
+           sodipodi:nodetypes="cccc" />
+      </g>
+    </g>
+    <path
+       style="fill:none;stroke:#0000ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+       d="m 1249.1892,692.78149 92.9078,132.93885"
+       id="path52"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0000ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+       d="m 1301.1532,314.1917 -47.4995,170.77912"
+       id="path75"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#ff6600;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+       d="M 1760.2696,918.12444 V 741.76887 H 1423.9891 V 473.30211"
+       id="path48"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#0000ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+       d="m 1225.7983,844.95643 -92.3104,166.79597"
+       id="path76"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#ff6600;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ConcaveTriangle)"
+       d="m 1487.452,980.0153 v 131.5965 h -186.145"
+       id="path77"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#ff6600;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ConcaveTriangle)"
+       d="m 1487.452,980.0153 v 58.4952 h -186.145"
+       id="path1"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#ff6600;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ConcaveTriangle)"
+       d="m 1487.452,980.0153 v 197.9876 h -186.145"
+       id="path3"
+       sodipodi:nodetypes="ccc" />
+  </g>
+</svg>

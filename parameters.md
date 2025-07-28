@@ -75,6 +75,7 @@ taking the reference value $\mathcal{W_0} = 0.2$.
 ```snakemake
 W0_reference = 0.2
 
+# Compute w0 scale for single ensemble for fixed reference scale
 rule w0:
     input: "raw_data/{subdir}/out_wflow"
     output: "intermediary_data/{subdir}/wflow.w0.json.gz"
@@ -153,9 +154,10 @@ For example,
 consider the rule:
 
 ```snakemake
+# Compute pseudoscalar mass and amplitude with fixed plateau
 rule ps_mass:
     input: "raw_data/{subdir}/out_corr"
-    output: "intermediary_data/{subdir}/corr.ps_mass.gz"
+    output: "intermediary_data/{subdir}/corr.ps_mass.json.gz"
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output} --plateau_start 18 --plateau_end 23"
@@ -196,7 +198,7 @@ file.
 We can create, view, and modify this with the spreadsheet tool of our choice.
 Let's take a look at the file now.
 
-![Screenshot of a spreadsheet application showing the file `metadata/ensemble_metadata.csv`.](./images/metadata_excel.png)
+![Screenshot of a spreadsheet application showing the file `metadata/ensemble_metadata.csv`.](./images/metadata_spreadsheet.png)
 
 You can see that we have columns defining metadata to identify each ensemble,
 and columns for parameters relating to the analysis of each ensemble.
@@ -205,12 +207,13 @@ Now,
 how do we tell Snakemake to pull out the correct value from this?
 
 ```snakemake
+# Compute pseudoscalar mass and amplitude, read plateau from metadata
 rule ps_mass:
     input: "raw_data/beta{beta}/out_corr"
     output: "intermediary_data/beta{beta}/corr.ps_mass.json.gz"
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end}"
@@ -235,8 +238,8 @@ to use these parameters in the shell command that gets run.
 Let's test this now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta4.0/corr.ps_mass.json
-cat intermediary_data/beta4.0/corr.ps_mass.json
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
+cat intermediary_data/beta2.0/corr.ps_mass.json
 ```
 
 ```output
