@@ -493,6 +493,7 @@ content:</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
+<span class="callout-header">Checklist</span>
 <div id="key-points-about-this-file" class="callout-inner">
 <h3 class="callout-title">Key points about this file</h3>
 <div class="callout-content">
@@ -542,8 +543,8 @@ them.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>You might have noticed that we are grouping files into directories
 like <code>raw_data</code> and <code>intermediary_data</code>. It is
@@ -568,6 +569,7 @@ rules that it runs.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="running-snakemake" class="callout-inner">
 <h3 class="callout-title">Running Snakemake</h3>
 <div class="callout-content">
@@ -590,7 +592,7 @@ quit back to the shell with <code>q</code></em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal">
 <li>Prints the shell commands that are being run to the terminal</li>
@@ -627,6 +629,7 @@ generation log, each trajectory concludes with a line of the form</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="counting-sequences-in-snakemake" class="callout-inner">
 <h3 class="callout-title">Counting sequences in Snakemake</h3>
 <div class="callout-content">
@@ -649,7 +652,7 @@ be printed on the screen</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule count_trajectories:
     input: "raw_data/beta2.0/out_pg"
@@ -664,8 +667,8 @@ be printed on the screen</li>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Before running Snakemake you need to write a Snakefile</li>
@@ -748,8 +751,8 @@ any Pip packages that are installed.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>Some packages give you a choice as to whether to install using Conda
 or Pip. When working interactively with an environment, using Pip
@@ -838,6 +841,7 @@ output file.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="more-plaquettes" class="callout-inner">
 <h3 class="callout-title">More plaquettes</h3>
 <div class="callout-content">
@@ -855,7 +859,7 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
@@ -944,6 +948,7 @@ rule count_trajectories:
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="comments-in-snakefiles" class="callout-inner">
 <h3 class="callout-title">Comments in Snakefiles</h3>
 <div class="callout-content">
@@ -990,6 +995,7 @@ same name.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="general-plaquette-computation" class="callout-inner">
 <h3 class="callout-title">General plaquette computation</h3>
 <div class="callout-content">
@@ -1005,7 +1011,7 @@ previous episode.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Compute average plaquette for any ensemble from its generation log
@@ -1025,6 +1031,7 @@ rule avg_plaquette:
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="choosing-the-right-wildcards" class="callout-inner">
 <h3 class="callout-title">Choosing the right wildcards</h3>
 <div class="callout-content">
@@ -1059,7 +1066,7 @@ in the sample data, so these will not work as-is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In both cases, there is no need to change the <code>shell</code> part
 of the rule at all.</p>
@@ -1106,6 +1113,7 @@ filename.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="filenames-arent-data" class="callout-inner">
 <h3 class="callout-title">Filenames aren’t data</h3>
 <div class="callout-content">
@@ -1175,6 +1183,7 @@ commands are run.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="dry-run---dry-run-mode" class="callout-inner">
 <h3 class="callout-title">Dry-run (<code>--dry-run</code>) mode</h3>
 <div class="callout-content">
@@ -1198,8 +1207,8 @@ workflow gains more steps this will become very useful to us indeed.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Snakemake rules are made generic with placeholders and
@@ -1282,8 +1291,8 @@ rule plot_avg_plaquette:
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>You can see that here we’re putting “files that want to be included
 in a paper” in an <code>assets</code> directory, similarly to the
@@ -1343,6 +1352,7 @@ Snakefile.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="choosing-file-name-patterns" class="callout-inner">
 <h3 class="callout-title">Choosing file name patterns</h3>
 <div class="callout-content">
@@ -1377,6 +1387,7 @@ the parameter lists.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="tabulating-trajectory-counts" class="callout-inner">
 <h3 class="callout-title">Tabulating trajectory counts</h3>
 <div class="callout-content">
@@ -1394,7 +1405,7 @@ counts. Write a rule to generate this table for all values of <span class="math 
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
@@ -1418,6 +1429,7 @@ rule tabulate_counts:
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="tabulating-trajectory-counts" class="callout-inner">
 <h3 class="callout-title">Tabulating trajectory counts<em>
 (continued)</em>
@@ -1435,7 +1447,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -1463,8 +1475,8 @@ information it tracks.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Snakemake links up rules by iteratively looking for rules that make
@@ -1523,6 +1535,7 @@ fonts.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="wilson-flow" class="callout-inner">
 <h3 class="callout-title">Wilson flow</h3>
 <div class="callout-content">
@@ -1562,6 +1575,7 @@ rule w0:
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="generating-different-filetypes" class="callout-inner">
 <h3 class="callout-title">Generating different filetypes</h3>
 <div class="callout-content">
@@ -1725,6 +1739,7 @@ similarly to what we do for <code>wildcards</code> and
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="non-specificity" class="callout-inner">
 <h3 class="callout-title">Non-specificity</h3>
 <div class="callout-content">
@@ -1742,7 +1757,7 @@ error, but will first let you see what the output is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Snakemake will provide all of the defined output variables, as a
 space-separated list. This is similar to what happens when an output
@@ -1756,6 +1771,7 @@ variable is a list, as we saw earlier when looking at the
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="flow-plots" class="callout-inner">
 <h3 class="callout-title">Flow plots</h3>
 <div class="callout-content">
@@ -1771,7 +1787,7 @@ shape of the flow may be checked.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule w0:
     input: "raw_data/{subdir}/out_wflow"
@@ -1808,6 +1824,7 @@ the same as we saw above for <code>output:</code>.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="naming-things" class="callout-inner">
 <h3 class="callout-title">Naming things</h3>
 <div class="callout-content">
@@ -1822,6 +1839,7 @@ we come to read the workflow later.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="spectrum-plot" class="callout-inner">
 <h3 class="callout-title">Spectrum plot</h3>
 <div class="callout-content">
@@ -1838,7 +1856,7 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -1890,6 +1908,7 @@ rule ps_mass:
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="tee" class="callout-inner">
 <h3 class="callout-title"><code>|&amp; tee</code></h3>
 <div class="callout-content">
@@ -1913,6 +1932,7 @@ screen as well, so we can monitor issues as the workflow runs.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="logged-plots" class="callout-inner">
 <h3 class="callout-title">Logged plots</h3>
 <div class="callout-content">
@@ -1927,7 +1947,7 @@ file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -2001,6 +2021,7 @@ cleaned up by Snakemake.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="errors-are-normal" class="callout-inner">
 <h3 class="callout-title">Errors are normal</h3>
 <div class="callout-content">
@@ -2080,6 +2101,7 @@ of the <span class="math inline">\(\beta = 4.0\)</span> ensemble.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
+<span class="callout-header">Checklist</span>
 <div id="note-that" class="callout-inner">
 <h3 class="callout-title">Note that:</h3>
 <div class="callout-content">
@@ -2112,6 +2134,7 @@ files</li>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="how-many-jobs" class="callout-inner">
 <h3 class="callout-title">How many jobs?</h3>
 <div class="callout-content">
@@ -2234,6 +2257,7 @@ need to be re-evaluated.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="note-on---forcerun" class="callout-inner">
 <h3 class="callout-title">Note on <code>--forcerun</code>
 </h3>
@@ -2284,6 +2308,7 @@ into a picture and show it on the screen.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="note-on-gm-display" class="callout-inner">
 <h3 class="callout-title">Note on <code>gm display</code>
 </h3>
@@ -2305,6 +2330,7 @@ files.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="visualising-the-effect-of-the---forcerun-and---force-flags" class="callout-inner">
 <h3 class="callout-title">Visualising the effect of the
 <code>--forcerun</code> and <code>--force</code> flags</h3>
@@ -2384,6 +2410,7 @@ to.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="removing-files-to-trigger-reprocessing" class="callout-inner">
 <h3 class="callout-title">Removing files to trigger reprocessing</h3>
 <div class="callout-content">
@@ -2414,8 +2441,8 @@ is solid.’}</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>A <strong>job</strong> in Snakemake is a <strong>rule</strong> plus
@@ -2573,8 +2600,10 @@ the <code>time</code> command.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="measuring-how-concurrency-affects-execution-time" class="callout-inner">
-<h3 class="callout-title">Measuring how concurrency affects execution time</h3>
+<h3 class="callout-title">Measuring how concurrency affects execution
+time</h3>
 <div class="callout-content">
 <p>What is the <em>wallclock time</em> reported by the above command?
 We’ll work out the average for everyone present, or if you are working
@@ -2659,6 +2688,7 @@ pass the number explicitly to your program, you can use the
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="fine-grained-profiling" class="callout-inner">
 <h3 class="callout-title">Fine-grained profiling</h3>
 <div class="callout-content">
@@ -2707,6 +2737,7 @@ can support PBS, SGE and other cluster schedulers.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="cluster-demo" class="callout-inner">
 <h3 class="callout-title">Cluster demo</h3>
 <div class="callout-content">
@@ -2727,8 +2758,8 @@ third racks. ’}</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>To make your workflow run as fast as possible, try to match the
@@ -2769,7 +2800,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.12" class="external-link">sandpaper (0.16.12)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.6" class="external-link">varnish (1.0.6)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.1" class="external-link">sandpaper (0.17.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.7" class="external-link">varnish (1.0.7)</a></p>
 			</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -2792,8 +2823,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/aio.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/aio.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-08-05",
-  "datePublished": "2025-08-05"
+  "dateModified": "2025-08-12",
+  "datePublished": "2025-08-12"
 }
 
   </script><script>
