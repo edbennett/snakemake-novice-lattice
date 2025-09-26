@@ -29,7 +29,7 @@ Building DAG of jobs...
 
 A DAG is a **Directed Acyclic Graph** and it can be pictured like so:
 
-![TODO][fig-dag]
+![][fig-dag]
 
 The above DAG is based on three of our existing rules,
 and shows all the jobs Snakemake would run
@@ -67,8 +67,8 @@ to compute the pseudoscalar decay constant of the $\beta = 4.0$ ensemble.
 
 ## How many jobs?
 
-If we asked Snakemake to run `one_loop_matching` on all twelve ensembles
-(`beta2.0` to `beta10.0`),
+If we asked Snakemake to run `one_loop_matching` on all eleven ensembles
+(`beta1.5` to `beta2.5`),
 how many jobs would that be in total?
 
 :::::::::::::::  solution
@@ -81,6 +81,7 @@ how many jobs would that be in total?
 - 12 $\times$ `ps_mass`
 - 12 $\times$ `avg_plaquette`
 - 0 $\times$ `count_trajectories`
+- 0 $\times$ `spectrum`
 
 :::::::::::::::::::::::::
 
@@ -114,8 +115,11 @@ Assuming that the output files are already created,
 you'll see this:
 
 ```shellsession
-$ snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
-TODO
+$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+Assuming unrestricted shared filesystem usage.
+host: azusa
+Building DAG of jobs...
+Nothing to be done (all requested files are present and up to date).
 ```
 
 In normal operation,
@@ -134,7 +138,7 @@ a ledger that Snakemake saves into the `.snakemake` directory.
 Let's demonstrate each of these in turn,
 by altering some files and re-running Snakemake without the `--forceall` option.
 
-```bash
+```shellsession
 $ rm assets/plots/spectrum.pdf
 $ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
@@ -142,7 +146,7 @@ $ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 This just re-runs `spectrum`,
 the final step.
 
-```bash
+```shellsession
 $ rm intermediary_data/beta*/corr.ps_mass.json
 $ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
@@ -152,9 +156,9 @@ Some intermediate output is missing,
 but Snakemake already has the file you are telling it to make,
 so it doesn't worry.
 
-```bash
-touch raw_data/beta*/out_pg
-snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+```shellsession
+$ touch raw_data/beta*/out_pg
+$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 The `touch` command is a standard Unix command that resets the timestamp of the file,
@@ -230,7 +234,7 @@ which runs the entire DAG every time.
 Snakemake can draw a picture of the DAG for you, if you run it like this:
 
 ```shellsession
-snakemake --force --dag assets/plots/spectrum.pdf | gm display -
+snakemake --force --dag dot assets/plots/spectrum.pdf | gm display -
 ```
 
 Using the `--dag` option implicitly activates the `--dry-run` option
@@ -238,6 +242,15 @@ so that Snakemake will not actually run any jobs,
 it will just print the DAG and stop.
 Snakemake prints the DAG in a text format,
 so we use the `gm` command to make this into a picture and show it on the screen.
+
+::::::::::::::::::::::::::::::::::: instructor
+
+## Version differences
+
+Older versions of Snakemake only support outputting the DAG in `dot` format,
+so that argument is not needed there.
+
+:::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -250,12 +263,12 @@ you can instead save it to a PNG file.
 You will need the `dot` program from the [GraphViz package](https://graphviz.org/) installed.
 
 ```shellsession
-snakemake --force --dag assets/plots/spectrum.pdf | dot -Tpng > dag.png
+snakemake --force --dag dot assets/plots/spectrum.pdf | dot -Tpng > dag.png
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-![TODO][fig-dag2]
+![][fig-dag2]
 
 The boxes drawn with dotted lines indicate steps that are not to be run,
 as the output files are already present and newer than the input files.
@@ -340,7 +353,7 @@ and if it will not be too time consuming,
 keep it simple and just use `--forceall` to run the whole workflow from scratch.
 
 For the opposite case where you want to avoid re-running particular steps,
-see the `‑‑touch` option of Snakemake mentioned [later in the lesson
+see the `--touch` option of Snakemake mentioned [later in the lesson
 ](TODO).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -348,23 +361,24 @@ see the `‑‑touch` option of Snakemake mentioned [later in the lesson
 
 
 [fig-dag]: fig/dag_1.svg {alt='
-  TODO
   Diagram showing jobs as coloured boxes joined by arrows representing
 data flow.
-  The box labelled as kallisto\_index is in green at the top,
-  with two blue boxes labelled trimreads and two yellow boxes labelled countreads.
-  The blue trimreads boxes have arrows into the respective yellow countreads boxes.
-  Finally there is a kallisto\_quant job shown as a red box,
-  with
-incoming arrows from both the trimreads box as well as the kallisto\_index box.'
+  A box labelled "avg_plaquette" is in red at the top left,
+  and one labeled "ps_mass" is in green at the top right.
+  From these,
+  arrows lead into a yellow box labeled "one_loop_matching".
+  Incoming arrows into the top two boxes indicate the filenames
+  raw_data/beta2.0/out_pg and out_hmc respectively.
+  From the bottom an arrow points to the output filename,
+  intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz'
 }
 [fig-dag2]: fig/dag_2.png {alt='
-  TODO
-  A DAG for the partial workflow with four boxes,
-  representing two trimreads jobs and a kallisto\_index job,
-  then a kallisto\_quant job receiving input from the previous three.
-  The boxes for the kallisto\_index and trimreads jobs are dotted,
-  but the kallisto\_quant box is solid.'}
+  A DAG for the partial workflow with eleven similar columns,
+  one per ensemble,
+  each having a green ps_mass, a red avg_plaquette,
+  and a yellow one_loop_matching job;
+  each green and yellow box has
+  an arrow leading to a green "spectrum" box at the bottom.'}
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

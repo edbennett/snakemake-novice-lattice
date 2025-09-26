@@ -6,7 +6,7 @@ exercises: 20
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Use Snakemake to filter and then count the sequences in a FASTQ file
+- Use Snakemake to compute and then plot the average plaquettes of multiple ensembles
 - Understand how rules are linked by filename patterns
 - Be able to use multiple input files in one rule
 
@@ -136,7 +136,7 @@ We can make use of the `expand()` function to do this more neatly:
         expand(
             "intermediary_data/beta{beta}/pg.plaquette.json.gz",
             beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
-        )
+        ),
 ```
 
 The first argument to `expand()` here is a template for the filename,
@@ -164,7 +164,7 @@ and output it to `assets/tables/counts.tex`.
 
 ## Solution 1
 
-The replacement rule should look like:
+The rule should look like:
 
 ```snakemake
 # Output a LaTeX table of trajectory counts

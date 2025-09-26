@@ -137,8 +137,9 @@ and time the whole run using the `time` command.
 
 ```bash
 $ time snakemake --jobs 1 --forceall -- assets/plots/spectrum.pdf
-...
-TODO TIME
+real	3m10.713s
+user	1m30.181s
+sys	0m8.156s
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -161,9 +162,10 @@ Now change the Snakemake concurrency option to  `--jobs 2` and then `--jobs 4`.
 ## Solution
 
 The time will vary depending on the system configuration
-but somewhere around TODO seconds is expected,
-and this should reduce to around TODO secs with `--jobs 2`
-but higher `--jobs` will produce diminishing returns.
+but somewhere around 150&ndash;200 seconds is expected,
+and this should reduce to around 75&ndash;100 secs with `--jobs 2`
+but depending on your computer,
+higher `--jobs` might produce diminishing returns.
 
 Things that may limit the effectiveness of parallel execution include:
 
@@ -197,21 +199,25 @@ These are defined by adding a `threads:` block to the rule definition.
 We could do this for the `ps_mass` rule:
 
 ```source
+# Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
 rule ps_mass:
-    input: 
-        data="raw_data/beta{beta}/out_corr",
+    input: "raw_data/beta{beta}/out_corr"
     output:
         data="intermediary_data/beta{beta}/corr.ps_mass.json.gz",
-        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.{plot_filetype}",
+        plot=multiext(
+            "intermediary_data/beta{beta}/corr.ps_eff_mass",
+            config["plot_filetype"],
+        ),
     log:
         messages="intermediary_data/beta{beta}/corr.ps_mass.log",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     threads: 4
     shell:
-        "python -m su2pg_analysis.meson_mass {input.data} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles} |& tee {log.messages}"
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
 
 You should explicitly use `threads: 4` rather than `params: threads = "4"` 

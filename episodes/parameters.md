@@ -29,11 +29,22 @@ if we had many such rules,
 and wanted to switch from generating output for a paper
 to generating it for a poster,
 then we would need to change the value in many places.
+
 Instead,
-we can define a variable at the top of the Snakefile
+we can define a configuration file for our workflow.
+Create a new file at `config/config.yaml`,
+defining the path to the style file that we want:
+
+```yaml
+plot_styles: "styles/jhep.mplstyle"
+```
+
+Now,
+we can specify in our Snakefile to read this file
+by adding the following line near the top of the file:
 
 ```snakefile
-plot_styles = "styles/jhep.mplstyle"
+configfile: "config/config.yaml"
 ```
 
 Then,
@@ -41,14 +52,27 @@ when we use a script to generate a plot,
 we can update the `shell:` block of the corresponding rule similarly to
 
 ```
-"python src/plot_plaquette.py {input} --output_filename {output} --plot_styles {plot_styles}"
+"python src/plot_plaquette.py {input} --output_filename {output} --plot_styles {config[plot_styles]}"
 ```
 
 Snakemake will 
-substitute the value of the global `plot_styles` variable
-in place of the `{plot_styles}` placeholder.
+substitute the value it reads from the configuration file
+in place of the `{config[plot_styles]}` placeholder.
+(Note that unlike standard Python syntax,
+we don't need quotes around the `plot_styles` key string.)
 
-We can test this by changing `paper` to `poster`,
+Let's double-check that our workflow still works,
+running
+
+```shellsession
+snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
+```
+
+Now that we have separated out our configuration from the workflow itself,
+we can alter the configuration.
+For example,
+we may decide to test plotting in the style of a different publication.
+We can test this by changing `jhep` to `prd`,
 and running
 
 ```shellsession
@@ -56,6 +80,9 @@ snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquett
 ```
 
 We can see that the generated file now uses a different set of fonts.
+
+Before continuing,
+let's reset the workflow back to using the `jhep` style.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -72,17 +99,29 @@ taking the reference value $\mathcal{W_0} = 0.2$.
 
 :::::::::::::::  solution
 
-```snakemake
-W0_reference = 0.2
+In `config.yaml`,
+add:
 
+```yaml
+W0_reference: 0.2
+```
+
+Then,
+add the following to the `Snakefile`:
+
+```snakemake
 # Compute w0 scale for single ensemble for fixed reference scale
 rule w0:
     input: "raw_data/{subdir}/out_wflow"
     output: "intermediary_data/{subdir}/wflow.w0.json.gz"
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.w0 {input} --W0 {W0_reference} --output_file {output}"
+        "python -m su2pg_analysis.w0 {input} --W0 {config[W0_reference]} --output_file {output}"
 ```
+
+Test this with:
+
+
 
 :::::::::::::::::::::::::
 
@@ -97,50 +136,77 @@ we may also wish to generate different filetypes.
 PDF is useful for including in LaTeX,
 but SVG may be a better format to use with some tools.
 
-If we add a global definition:
+Add a definition to your `config.yaml` file:
 
-```snakemake
-plot_filetype = "pdf"
+```yaml
+plot_filetype: ".pdf"
 ```
 
 and update the `output:` block of the rule as:
 
 ```snakemake
     output:
-        "assets/plots/plaquette_scan.{plot_filetype}"
+        multiext("assets/plots/plaquette_scan", config["plot_filetype"]),
 ```
 
-does this have the same effect as the example with `--styles` above?
+Note that unlike in the `shell` block,
+we can't substitute from `config` into an `output` string,
+so instead we need to use the `multiext` helper function to append the extension.
+(We could instead have used an `f`-string,
+`expand()`,
+or any number of other ways to make this substitution.)
 
-(Hint:
-what happens when you try to make the targets
-`assets/plots/plaquette_scan.svg`
-and `assets/plots/plaquette_scan.txt`
-by specifying them at the command line,
-without changing the value of `plot_filetype`?)
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Changing configurations
+
+Now that we have separated out
+the data controlling our workflow from the code implementing it,
+we can individual overwrite parameters, 
+or swap in an entirely different configuration file.
+
+1. We would like to test plotting for a different journal.
+   Re-run the workflow for the plaquette scan,
+   using the `prd.mplstyle` style file,
+   as
+
+   ```shellsession
+   snakemake --jobs 1 --forceall --printshellcmds --use-conda --config plot_styles=styles/prd.mplstyle -- assets/plots/plaquette_scan.pdf
+   ```
+   
+   (Note that we now need to add an extra `--`
+   to tell Snakemake that the list of `--config` options is complete.)
+
+2. We would like to create a plot to include in a poster,
+   in SVG format.
+   Create a new configuration file specifying to use the `poster.mplstyle` style file
+   and the SVG file format,
+   and re-run the workflow using the `--configfile` option to specify this new file.
 
 :::::::::::::::  solution
 
-## Solution
+You should now have a file called something like `config/poster.yaml`,
+with content
 
-This can achieve a similar result,
-but in a slightly different way.
-In the `--styles` example,
-the `{plot_styles}` string is in the `shell:` block,
-and so directly looks up the `plot_styles` variable.
-(Recall that to look up a wildcard,
-we needed to explicitly use `wildcards.`.)
+```yaml
+plot_styles: "styles/poster.mplstyle"
+plot_format: ".svg"
+W0_reference: 0.2
+```
 
-However,
-in this case the `{plot_filetype}` string is in the `output:` block,
-so defines a wildcard.
-This may take any value,
-so if we instruct `snakemake` to produce `plaquette_scan.txt`,
-it will diligently pass that filename to `plot_plaquette.py`.
+To test this,
+run
 
-The `plot_filetype = "pdf"` is in fact ignored.
-It could however be used to set a default set of targets to generate,
-which we will talk about in a later episode.
+```shellsession
+snakemake --jobs 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf
+```
+
+Similarly to the previous examples,
+we need to use the `--` option to tell Snakemake
+to stop trying to read more config filenames.
+
 
 :::::::::::::::::::::::::
 
@@ -238,18 +304,75 @@ to use these parameters in the shell command that gets run.
 Let's test this now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
-cat intermediary_data/beta2.0/corr.ps_mass.json
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+cat intermediary_data/beta2.0/corr.ps_mass.json.gz
+| gunzip | head -n 28
 ```
 
 ```output
-TODO
+{
+ "program": "pyerrors 2.13.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-05-20 15:49:12 +0100",
+ "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
+ "description": {
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "mass": "DICTOBS0",
+   "amplitude": "DICTOBS1"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "mass": 0.0,
+   "channel": "ps"
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "value": [2.1988677698535195],
 ```
 
-TODO CHALLENGE
+:::::::::::::::::::::::::::::::::::::::  challenge
 
+## Vector mass
 
+Add a rule to compute the vector meson mass and amplitude,
+using the columns beginning `v_` in the ensemble metadata file for the plateau limits.
 
+Hint:
+`su2pg_analysis.meson_mass` accepts an argument `--channel`,
+which defaults to `ps`.
+
+:::::::::::::::  solution
+
+## Solution
+
+This is very close to the rule for the PS mass.
+
+```snakemake
+# Compute vector mass and amplitude, read plateau from metadata
+rule v_mass:
+    input: "raw_data/beta{beta}/out_corr"
+    output: "intermediary_data/beta{beta}/corr.v_mass.json.gz"
+    params:
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="v_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="v_plateau_end"),
+    conda: "envs/analysis.yml"
+    shell:
+        "python -m su2pg_analysis.meson_mass {input} --channel v --output_file {output} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end}"
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 [pandas]: https://pandas.pydata.org
