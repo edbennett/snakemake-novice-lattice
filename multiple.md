@@ -26,13 +26,16 @@ rule ps_mass:
     input: "raw_data/beta{beta}/out_corr"
     output:
         data="intermediary_data/beta{beta}/corr.ps_mass.json.gz",
-        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.pdf",
+        plot=multiext(
+            "intermediary_data/beta{beta}/corr.ps_eff_mass",
+            config["plot_filetype"],
+        ),
     params:
         plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
         plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles}"
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]}"
 ```
 
 Rather than having a single string after `output:`,
@@ -43,6 +46,12 @@ To make use of these variables in our rule,
 we follow `output` by a `.`,
 and then the name of the variable we want to use,
 similarly to what we do for `wildcards` and `params`.
+
+Let's test that this works correctly:
+
+```snakemake
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_eff_mass.pdf
+```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -83,10 +92,12 @@ rule w0:
     input: "raw_data/{subdir}/out_wflow"
     output: 
         data="intermediary_data/{subdir}/wflow.w0.json.gz",
-        plot="intermediary_data/{subdir}/wflow.W_flow.{plot_filetype}",
-    conda: "envs/analysis.yml"
+        plot=multiext(
+            "intermediary_data/{subdir}/wflow.W_flow",
+            config["plot_filetype"],
+	),    conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.w0 {input} --W0 {W0_reference} --output_file {output} --plot_file {output.plot} --plot_styles {plot_styles}"
+        "python -m su2pg_analysis.w0 {input} --W0 {config[W0_reference]} --output_file {output.data} --plot_file {output.plot} --plot_styles {config[plot_styles]}"
 ```
 
 :::::::::::::::::::::::::
@@ -107,6 +118,7 @@ this can be used to give an estimate of the decay constant.
 The syntax for this is the same as we saw above for `output:`.
 
 ```snakemake
+# Estimate renormalised decay constant
 rule one_loop_matching:
     input:
         plaquette="intermediary_data/{subdir}/pg.plaquette.json.gz",
@@ -115,7 +127,7 @@ rule one_loop_matching:
         data="intermediary_data/{subdir}/pg.corr.{channel}_decay_const.json.gz",
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.one_loop_matching --plaquette {input.plaquette} --meson {input.meson} --output_file {output.data}"
+        "python -m su2pg_analysis.one_loop_matching --plaquette_data {input.plaquette} --spectral_observable_data {input.meson} --output_filename {output.data}"
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -148,18 +160,34 @@ Snakemake will correctly re-run the workflow.
 rule spectrum:
     input:
         script="src/plot_spectrum.py",
-        ps_mass="intermediary_data/{subdir}/corr.{channel}_mass.json.gz",
-        ps_decay_const="intermediary_data/{subdir}/pg.corr.{channel}_decay_const.json.gz",
+        ps_mass=expand(
+            "intermediary_data/beta{beta}/corr.ps_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
+        ),
+        v_mass=expand(
+            "intermediary_data/beta{beta}/corr.v_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
+        ),
     output:
-        plot="assets/plots/spectrum.{plot_filetype}"
+        plot=multiext("assets/plots/spectrum", config["plot_filetype"]),
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --output_file {output.plot} --plot_styles {plot_styles}"
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]}"
 ```
 
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: instructor
+
+## Definitely run through the spectrum plot
+
+This plot is referred to from subsequent lessons,
+so you definitely need to go through it.
+
+:::::::::::::::::::::::::::::::::::::::
+
 
 ## Log files
 
@@ -187,19 +215,21 @@ we might use:
 # Compute pseudoscalar mass and amplitude, read plateau from metadata,
 # and plot effective mass
 rule ps_mass:
-    input: 
-        data="raw_data/beta{beta}/out_corr",
+    input: "raw_data/beta{beta}/out_corr"
     output:
         data="intermediary_data/beta{beta}/corr.ps_mass.json.gz",
-        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.{plot_filetype}",
+        plot=multiext(
+            "intermediary_data/beta{beta}/corr.ps_eff_mass",
+            config["plot_filetype"],
+        ),
     log:
         messages="intermediary_data/beta{beta}/corr.ps_mass.log",
     params:
-        plateau_start=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end=lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input.data} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles} |& tee {log.messages}"
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -245,15 +275,21 @@ are logged to a file.
 rule spectrum:
     input:
         script="src/plot_spectrum.py",
-        ps_mass="intermediary_data/{subdir}/corr.{channel}_mass.json.gz",
-        ps_decay_const="intermediary_data/{subdir}/pg.corr.{channel}_decay_const.json.gz",
+        ps_mass=expand(
+            "intermediary_data/beta{beta}/corr.ps_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
+        ),
+        v_mass=expand(
+            "intermediary_data/beta{beta}/corr.v_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
+        ),
     output:
-        plot="assets/plots/spectrum.{plot_filetype}"
+        plot=multiext("assets/plots/spectrum", config["plot_filetype"]),
     log:
-        messages="intermediary_data/{subdir}/pg.corr.{channel}_mass.log"
+        messages="intermediary_data/spectrum_plot.log"
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --output_file {output.plot} --plot_styles {plot_styles} |& tee {log.messages}"
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
 
 :::::::::::::::::::::::::
@@ -262,7 +298,7 @@ rule spectrum:
 
 ## Dealing with errors
 
-We'll end the chapter by looking at a common problem that can arise
+We'll end the episode by looking at a common problem that can arise
 if you mistype a filename in a rule.
 It may seem silly to break the workflow when we just got it working,
 but it will be instructive,
@@ -272,7 +308,7 @@ in the `ps_mass` rule.
 ```snakemake
 ...
 shell:
-        "python -m su2pg_analysis.meson_mass {input.data} --output_file {output.data}.json_ --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles} |& tee {log.messages}"
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data}.json_ --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
 
 To keep things tidy,
@@ -285,10 +321,56 @@ $ rm -rvf intermediary_data
 And re-run.
 
 ```shellsession
-$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json
+$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+Assuming unrestricted shared filesystem usage.
+host: azusa
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job        count
+-------  -------
+ps_mass        1
+total          1
 
-...
-TODO
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Sep  2 00:29:00 2025]
+localrule ps_mass:
+    input: raw_data/beta2.0/out_corr
+    output: intermediary_data/beta2.0/corr.ps_mass.json.gz, intermediary_data/beta2.0/corr.ps_eff_mass.pdf
+    log: intermediary_data/beta2.0/corr.ps_mass.log
+    jobid: 0
+    reason: Forced execution
+    wildcards: beta=2.0
+    resources: tmpdir=/tmp
+Shell command: python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle |& tee intermediary_data/beta2.0/corr.ps_mass.log
+Activating conda environment: .snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
+Waiting at most 5 seconds for missing files:
+intermediary_data/beta2.0/corr.ps_mass.json.gz (missing locally)
+MissingOutputException in rule ps_mass in file "/home/ed/src/su2_puregauge_test/workflow/Snakefile", line 68:
+Job 0 completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+intermediary_data/beta2.0/corr.ps_mass.json.gz (missing locally, parent dir contents: corr.ps_mass.json.gz.json_.json.gz, corr.ps_mass.log, corr.ps_eff_mass.pdf)
+Removing output files of failed job ps_mass since they might be corrupted:
+intermediary_data/beta2.0/corr.ps_eff_mass.pdf
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Tue Sep  2 00:29:17 2025]
+Error in rule ps_mass:
+    message: None
+    jobid: 0
+    input: raw_data/beta2.0/out_corr
+    output: intermediary_data/beta2.0/corr.ps_mass.json.gz, intermediary_data/beta2.0/corr.ps_eff_mass.pdf
+    log: intermediary_data/beta2.0/corr.ps_mass.log (check log file(s) for error details)
+    conda-env: /home/ed/src/su2_puregauge_test/.snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
+    shell:
+        python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle |& tee intermediary_data/beta2.0/corr.ps_mass.log
+        (command exited with non-zero exit code)
+Complete log(s): /home/ed/src/su2_puregauge_test/.snakemake/log/2025-09-02T002859.356054.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
 ```
 
 There's a lot to take in here.
@@ -299,7 +381,7 @@ Some less so.
    as evidenced by the output from the program that we see on the screen.
 2. Python is reporting that there is a file missing.
 3. Snakemake complains one expected output file is missing:
-   `intermediary_data/beta2.0/corr.ps_mass.json`.
+   `intermediary_data/beta2.0/corr.ps_mass.json.gz`.
 4. The other expected output file
    `intermediary_data/beta2.0/corr.ps_eff_mass.pdf`
    was found but has now been removed by Snakemake.
@@ -315,7 +397,7 @@ by looking at the `intermediary_data/beta2.0` subdirectory.
 
 ```shellsession
 $ ls intermediary_data/beta2.0/
-TODO
+corr.ps_mass.json.gz.json_.json.gz  corr.ps_mass.log
 ```
 
 Remember that Snakemake itself does not create any output files.

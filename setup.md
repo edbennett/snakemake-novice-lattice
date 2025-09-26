@@ -95,5 +95,30 @@ in order to activate the environment to be able to use Snakemake.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## LaTeX
 
+We will be using Matplotlib to generate plots formatted with LaTeX,
+which relies on having LaTeX installed.
+
+:::::::::::::::: spoiler
+
+### Windows
+
+This lesson has not been tested with Windows.
+You may try using [MikTeX][miktex]
+
+::::::::::::::::::::::::
+
+:::::::::::::::: spoiler
+
+### macOS, Linux
+
+Follow [the instructions on TeX Live's website][texlive].
+
+::::::::::::::::::::::::
+
+
+
+[miktex]: https://miktex.org/download
 [miniforge]: https://github.com/conda-forge/miniforge
+[texlive]: https://tug.org/texlive/quickinstall.html

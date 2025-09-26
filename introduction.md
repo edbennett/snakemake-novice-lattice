@@ -42,7 +42,7 @@ is called
 there are  workflow managers available,
 most of which are specialised to a specific class of applications.
 
-One workflow manager developed for scientific data analysis is called Snakemake;
+One workflow manager developed for scientific data analysis is called [Snakemake][snakemake];
 this will be the target of this lesson.
 Snakemake is similar to [GNU Make][make],
 in that you create a text file containing
@@ -70,6 +70,29 @@ If you instead get a "command not found" error,
 go back to the [setup][setup]
 and check that you have completed all the necessary steps.
 
+::::::::::::::::::::::::::::::::::: instructor
+
+## Environment activation
+
+The most likely issue learners will encounter here is
+needing to activate their Snakemake environment when they have opened a fresh terminal.
+This is hopefully as simple as 
+
+```shellsession
+conda activate snakemake
+```
+
+If Conda isn't set up to automatically activate itself on starting a shell session,
+they may also need to run something like
+
+```shellsession
+source ~/miniconda3/bin/activate
+```
+
+where the exact path to run will depend on their specific setup.
+
+:::::::::::::::::::::::::::::::::::::::
+
 ## Looking at the sample data
 
 You should already have the sample data files unpacked.
@@ -84,13 +107,21 @@ and the computation of the [Wilson flow][wilson-flow].
 
 The sample data are for the SU(2) pure Yang-Mills theory,
 and have been generated using the [HiRep][hirep] code.
+We can look at their structure with `less`,
+for example,
+we might check the log of
+generating the $\beta=2.0$ ensemble with the heat bath algorithm:
+
+```shellsession
+less raw_data/beta2.0/out_pg
+```
 
 Each log contains header lines describing the setup,
 information on the computation being computed,
 and results for observables computed on each configuration.
 Code to parse these logs and compute statistics 
 is included with the sample data;
-we'll use these in due course
+we'll use these in due course.
 
 ## Making a Snakefile
 
@@ -110,7 +141,6 @@ rule count_lines:
         "wc -l raw_data/beta2.0/out_pg > intermediary_data/beta2.0/pg.count"
 ```
 
-
 :::::::::::::::::::::::::::::::::::::::  checklist
 
 ## Key points about this file
@@ -122,6 +152,7 @@ rule count_lines:
   must begin with a letter and may not be a keyword.
 5. The keywords `input`, `output`, `shell` are all followed by a colon.
 6. The file names and the shell command are all in `"quotes"`.
+7. The file names are specified relative to the root directory of your workflow.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -153,6 +184,51 @@ If we've made any transcription errors in the rule
 (missing quotes, bad indentations, etc.),
 then it will become clear at this point,
 as we'll receive an error that we will need to fix.
+
+:::::::::::::::::::::::::::::::::::::::  callout
+
+Snakemake interprets all inputs and ouputs as relative to the working directory.
+For this reason,
+you should always run `snakemake` from the root of your workflow repository.
+
+An option to make this easier is
+to have a terminal open to the correct directory that you don't use `cd` in,
+so it is always in the right place.
+You can edit your workflow in a separate window,
+either in another terminal with `nano` or `vim`,
+or in a separate text editing application.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: instructor
+
+## Directories
+
+Learners less experienced with the shell
+may want to `cd` into directories to edit files;
+if they do this and forget to `cd` back out again,
+they will encounter difficulties
+as Snakemake may not be able to find the Snakefile or the input files.
+
+If they try to work around this,
+they may end up with multiple Snakefiles
+or ones with inputs pointing at incorrect relative paths.
+
+Technically,
+you can specify absolute paths in Snakefiles,
+but this is not recommended,
+for portability reasons.
+For example,
+when using Snakemake to execute some rules on another machine,
+this would fail as it cannot gather the dependencies into the correct location;
+similarly if someone else were to run a workflow on their own machine,
+the home directory is unlikely to be the same,
+so the workflow would fail.
+
+New researchers frequently like to hardcode absolute paths to their data,
+so this is an important point to reinforce.
+
+:::::::::::::::::::::::::::::::::::::::
 
 For now,
 we will consistently run `snakemake` with the ` --jobs 1 --forceall --printshellcmds` options.
@@ -300,4 +376,5 @@ rule count_trajectories:
 [hirep]: https://github.com/claudiopica/HiRep
 [make]: https://www.gnu.org/software/make/
 [setup]: ../learners/setup.md
+[snakemake]: https://snakemake.github.io/
 [wilson-flow]: https://doi.org/10.48550/arXiv.1006.4518

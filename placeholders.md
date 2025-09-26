@@ -152,7 +152,7 @@ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/bet
 
 ## Choosing the right wildcards
 
-Our rule puts the sequence counts into output files named like `pg.count`.
+Our rule puts the trajectory counts into output files named like `pg.count`.
 How would you have to change the `count_trajectories` rule definition if you wanted:
 
 1) the output file for `raw_data/beta1.8/out_hmc`
@@ -299,8 +299,8 @@ but never actually run them.
 This is done with the `--dry-run`
 flag, eg:
 
-```bash
-$ snakemake --dry-run --forceall --printshellcmds temp33_1_1.fq.count
+```shellsession
+snakemake --dry-run --forceall --printshellcmds intermediary_data/beta1.7/pg.count
 ```
 
 We'll make use of this later in the lesson.

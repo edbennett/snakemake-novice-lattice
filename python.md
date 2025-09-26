@@ -104,7 +104,7 @@ you don't need to remember to manually reinstall them.
 Now that we have created an environment file,
 we can use it in our Snakefile
 to compute the average plaquette from a configuration generation log.
-Let's add the following rule to `envs/Snakefile`:
+Let's add the following rule to `workflow/Snakefile`:
 
 ```snakemake
 rule avg_plaquette:
@@ -157,6 +157,44 @@ since this library tracks provenance,
 such as where and when the code was run,
 in the output file.
 
+:::::::::::::::::::::::::::::::::::::::  callout
+
+You might notice that this output contains
+a lot of information besides the average plaquette.
+These are metadata&mdash;that is,
+data describing the data,
+which help us understand it and make better use of it.
+This includes physics parameters describing what the data refer to,
+and _provenance_ information describing how and when it was computed.
+
+If you imagine a script that outputs only the average plaquette and its uncertainty:
+
+```
+0.501206452535401 TODO
+```
+
+then seeing just this file in isolation,
+it would be much harder to understand what it means or where it comes from.
+You would need some other bookkeeping system to track the physics parameters.
+Bundling these into the files means we are less likely
+to accidentally create a situation
+where the data are presented with incorrect labels.
+
+We're using JSON format to output the results;
+if you are not using a library that automatically generates JSON,
+you might instead use CSV or any other format.
+The important part is that it can be read and written easily,
+and can hold the metadata that you need to keep.
+
+We compress each output file with GZIP (the `.gz` extension),
+because the `pyerrors` library that we are using does this automatically.
+Since we are generating one output file per computation we're performing,
+we'll end up with a lot of files;
+each has a lot of metadata within it,
+so this might take up a lot of space without compression.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## More plaquettes
@@ -191,7 +229,7 @@ rule avg_plaquette2:
 Then in the shell:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json intermediary_data/beta2.2/pg.plaquette.json
+snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz
 ```
 
 If you think writing a separate rule for each output file is silly, you are correct.
