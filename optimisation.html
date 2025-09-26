@@ -348,7 +348,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Optimising workflow performance</h1>
-        <p>Last updated on 2025-05-20 |
+        <p>Last updated on 2025-09-26 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/optimisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -469,8 +469,9 @@ the <code>time</code> command.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> time snakemake <span class="at">--jobs</span> 1 <span class="at">--forceall</span> <span class="at">--</span> assets/plots/spectrum.pdf</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">TODO</span> TIME</span></code></pre>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">real</span>	3m10.713s</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">user</span>	1m30.181s</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">sys</span>	0m8.156s</span></code></pre>
 </div>
 <div id="measuring-how-concurrency-affects-execution-time" class="callout challenge">
 <div class="callout-square">
@@ -501,9 +502,10 @@ the execution time?</li>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
-somewhere around TODO seconds is expected, and this should reduce to
-around TODO secs with <code>--jobs 2</code> but higher
-<code>--jobs</code> will produce diminishing returns.</p>
+somewhere around 150–200 seconds is expected, and this should reduce to
+around 75–100 secs with <code>--jobs 2</code> but depending on your
+computer, higher <code>--jobs</code> might produce diminishing
+returns.</p>
 <p>Things that may limit the effectiveness of parallel execution
 include:</p>
 <ul><li>The number of processors in the machine</li>
@@ -529,21 +531,25 @@ output to log files instead.</li>
 <hr class="half-width"><p>In the diagram at the top, we showed jobs with 2 and 8 threads. These
 are defined by adding a <code>threads:</code> block to the rule
 definition. We could do this for the <code>ps_mass</code> rule:</p>
-<pre class="source"><code>rule ps_mass:
-    input:
-        data="raw_data/beta{beta}/out_corr",
+<pre class="source"><code># Compute pseudoscalar mass and amplitude, read plateau from metadata,
+# and plot effective mass
+rule ps_mass:
+    input: "raw_data/beta{beta}/out_corr"
     output:
         data="intermediary_data/beta{beta}/corr.ps_mass.json.gz",
-        plot="intermediary_data/beta{beta}/corr.ps_eff_mass.{plot_filetype}",
+        plot=multiext(
+            "intermediary_data/beta{beta}/corr.ps_eff_mass",
+            config["plot_filetype"],
+        ),
     log:
         messages="intermediary_data/beta{beta}/corr.ps_mass.log",
     params:
-        plateau_start: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_start"),
-        plateau_end: lookup(within=metadata, query="beta = {beta}", cols="ps_plateau_end"),
+        plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
+        plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     threads: 4
     shell:
-        "python -m su2pg_analysis.meson_mass {input.data} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {plot_styles} |&amp; tee {log.messages}"</code></pre>
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>You should explicitly use <code>threads: 4</code> rather than
 <code>params: threads = "4"</code> because Snakemake considers the
 number of threads when scheduling jobs. Also, if the number of threads
@@ -696,8 +702,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/optimisation.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/optimisation.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-05-20",
-  "datePublished": "2025-09-23"
+  "dateModified": "2025-09-26",
+  "datePublished": "2025-09-26"
 }
 
   </script><script>

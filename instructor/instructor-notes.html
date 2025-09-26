@@ -403,7 +403,37 @@ any links that you are not going to use.
       <section id="aggregate-instructor-notes"><section id="introduction"><h2 class="section-heading"><a href="introduction.html">Running commands with Snakemake</a></h2>
 <hr class="half-width">
 <h3 id="introduction-headingInstructor1">
-<a href="introduction.html#headingInstructor1">Use of the --forceall flag</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor1"></a>
+<a href="introduction.html#headingInstructor1">Environment activation</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor1"></a>
+</h3>
+<p>The most likely issue learners will encounter here is needing to
+activate their Snakemake environment when they have opened a fresh
+terminal. This is hopefully as simple as</p>
+<pre class="shellsession"><code>conda activate snakemake</code></pre>
+<p>If Conda isn’t set up to automatically activate itself on starting a
+shell session, they may also need to run something like</p>
+<pre class="shellsession"><code>source ~/miniconda3/bin/activate</code></pre>
+<p>where the exact path to run will depend on their specific setup.</p>
+<hr>
+<br><h3 id="introduction-headingInstructor2">
+<a href="introduction.html#headingInstructor2">Directories</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor2"></a>
+</h3>
+<p>Learners less experienced with the shell may want to <code>cd</code>
+into directories to edit files; if they do this and forget to
+<code>cd</code> back out again, they will encounter difficulties as
+Snakemake may not be able to find the Snakefile or the input files.</p>
+<p>If they try to work around this, they may end up with multiple
+Snakefiles or ones with inputs pointing at incorrect relative paths.</p>
+<p>Technically, you can specify absolute paths in Snakefiles, but this
+is not recommended, for portability reasons. For example, when using
+Snakemake to execute some rules on another machine, this would fail as
+it cannot gather the dependencies into the correct location; similarly
+if someone else were to run a workflow on their own machine, the home
+directory is unlikely to be the same, so the workflow would fail.</p>
+<p>New researchers frequently like to hardcode absolute paths to their
+data, so this is an important point to reinforce.</p>
+<hr>
+<br><h3 id="introduction-headingInstructor3">
+<a href="introduction.html#headingInstructor3">Use of the --forceall flag</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor3"></a>
 </h3>
 <p>In the first few episodes we always run Snakemake with the
 <code>--forceall</code> flag, and it’s not explained what this does
@@ -425,8 +455,22 @@ understand it.</p>
 <hr class="half-width"></section><section id="chaining"><h2 class="section-heading"><a href="chaining.html">Chaining rules</a></h2>
 <hr class="half-width"></section><section id="parameters"><h2 class="section-heading"><a href="parameters.html">Metadata and parameters</a></h2>
 <hr class="half-width"></section><section id="multiple"><h2 class="section-heading"><a href="multiple.html">Multiple inputs and outputs</a></h2>
-<hr class="half-width"></section><section id="dag"><h2 class="section-heading"><a href="dag.html">How Snakemake plans jobs</a></h2>
-<hr class="half-width"></section><section id="optimisation"><h2 class="section-heading"><a href="optimisation.html">Optimising workflow performance</a></h2>
+<hr class="half-width">
+<h3 id="multiple-headingInstructor1">
+<a href="multiple.html#headingInstructor1">Definitely run through the spectrum plot</a><a class="anchor" aria-label="anchor" href="#multiple-headingInstructor1"></a>
+</h3>
+<p>This plot is referred to from subsequent lessons, so you definitely
+need to go through it.</p>
+<hr>
+<br></section><section id="dag"><h2 class="section-heading"><a href="dag.html">How Snakemake plans jobs</a></h2>
+<hr class="half-width">
+<h3 id="dag-headingInstructor1">
+<a href="dag.html#headingInstructor1">Version differences</a><a class="anchor" aria-label="anchor" href="#dag-headingInstructor1"></a>
+</h3>
+<p>Older versions of Snakemake only support outputting the DAG in
+<code>dot</code> format, so that argument is not needed there.</p>
+<hr>
+<br></section><section id="optimisation"><h2 class="section-heading"><a href="optimisation.html">Optimising workflow performance</a></h2>
 <hr class="half-width">
 <h3 id="optimisation-headingInstructor1">
 <a href="optimisation.html#headingInstructor1">Running on cluster and cloud</a><a class="anchor" aria-label="anchor" href="#optimisation-headingInstructor1"></a>
@@ -491,8 +535,8 @@ and how it went.</p>
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/instructor-notes.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/instructor-notes.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-23",
-  "datePublished": "2025-09-23"
+  "dateModified": "2025-09-26",
+  "datePublished": "2025-09-26"
 }
 
   </script><script>

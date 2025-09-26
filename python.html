@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running Python code with Snakemake</h1>
-        <p>Last updated on 2025-07-28 |
+        <p>Last updated on 2025-09-26 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -455,7 +455,7 @@ remember to manually reinstall them.</p>
 <hr class="half-width"><p>Now that we have created an environment file, we can use it in our
 Snakefile to compute the average plaquette from a configuration
 generation log. Let’s add the following rule to
-<code>envs/Snakefile</code>:</p>
+<code>workflow/Snakefile</code>:</p>
 <pre class="snakemake"><code>rule avg_plaquette:
     input: "raw_data/beta2.0/out_pg"
     output: "intermediary_data/beta2.0/pg.plaquette.json.gz"
@@ -493,6 +493,40 @@ attention to the <code>conda:</code> specification.</p>
 <p>Some of the output will differ on your machine, since this library
 tracks provenance, such as where and when the code was run, in the
 output file.</p>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>You might notice that this output contains a lot of information
+besides the average plaquette. These are metadata—that is, data
+describing the data, which help us understand it and make better use of
+it. This includes physics parameters describing what the data refer to,
+and <em>provenance</em> information describing how and when it was
+computed.</p>
+<p>If you imagine a script that outputs only the average plaquette and
+its uncertainty:</p>
+<pre><code>0.501206452535401 TODO</code></pre>
+<p>then seeing just this file in isolation, it would be much harder to
+understand what it means or where it comes from. You would need some
+other bookkeeping system to track the physics parameters. Bundling these
+into the files means we are less likely to accidentally create a
+situation where the data are presented with incorrect labels.</p>
+<p>We’re using JSON format to output the results; if you are not using a
+library that automatically generates JSON, you might instead use CSV or
+any other format. The important part is that it can be read and written
+easily, and can hold the metadata that you need to keep.</p>
+<p>We compress each output file with GZIP (the <code>.gz</code>
+extension), because the <code>pyerrors</code> library that we are using
+does this automatically. Since we are generating one output file per
+computation we’re performing, we’ll end up with a lot of files; each has
+a lot of metadata within it, so this might take up a lot of space
+without compression.</p>
+</div>
+</div>
+</div>
 <div id="more-plaquettes" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -528,7 +562,7 @@ within a Snakefile. So in this example answer we use
     shell:
         "python -m su2pg_analysis.plaquette raw_data/beta2.2/out_pg --output_file intermediary_data/beta2.2/pg.plaquette.json.gz"</code></pre>
 <p>Then in the shell:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json intermediary_data/beta2.2/pg.plaquette.json</code></pre>
+<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz</code></pre>
 <p>If you think writing a separate rule for each output file is silly,
 you are correct. We’ll address this next!</p>
 </div>
@@ -597,8 +631,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/python.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/python.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-07-28",
-  "datePublished": "2025-09-23"
+  "dateModified": "2025-09-26",
+  "datePublished": "2025-09-26"
 }
 
   </script><script>

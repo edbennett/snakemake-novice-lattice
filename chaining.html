@@ -345,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Chaining rules</h1>
-        <p>Last updated on 2025-07-28 |
+        <p>Last updated on 2025-09-26 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -374,8 +374,8 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Use Snakemake to filter and then count the sequences in a FASTQ
-file</li>
+<ul><li>Use Snakemake to compute and then plot the average plaquettes of
+multiple ensembles</li>
 <li>Understand how rules are linked by filename patterns</li>
 <li>Be able to use multiple input files in one rule</li>
 </ul></div>
@@ -486,7 +486,7 @@ out each file by hand would be quite cumbersome. We can make use of the
         expand(
             "intermediary_data/beta{beta}/pg.plaquette.json.gz",
             beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
-        )</code></pre>
+        ),</code></pre>
 <p>The first argument to <code>expand()</code> here is a template for
 the filename, and subsequent keyword arguments are lists of variables to
 fill into the placeholders. The output is the cartesian product of all
@@ -517,7 +517,7 @@ counts. Write a rule to generate this table for all values of <span class="math 
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<p>The replacement rule should look like:</p>
+<p>The rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
 rule tabulate_counts:
     input:
@@ -659,8 +659,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/chaining.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/chaining.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-07-28",
-  "datePublished": "2025-09-23"
+  "dateModified": "2025-09-26",
+  "datePublished": "2025-09-26"
 }
 
   </script><script>

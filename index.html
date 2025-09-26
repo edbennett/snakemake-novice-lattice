@@ -211,6 +211,7 @@
 <li><a href="#data-sets">Data Sets</a></li>
 <li><a href="#software-setup">Software Setup</a></li>
 <li><a href="#snakemake">Snakemake</a></li>
+<li><a href="#latex">LaTeX</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -340,8 +341,20 @@
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
 
-<p>This is a new lesson built with <a href="https://carpentries.github.io/sandpaper-docs" class="external-link">The Carpentries
-Workbench</a>.</p>
+<p>Being able to reliably run a range of tools, across multiple inputs,
+and in the right order, is a very common problem in computing, including
+in scientific data analysis. If you develop scripts for data analysis
+from scratch, you will usually end up running up against these
+challenges. Rather than reinventing the wheel, we can lean on existing
+tools to do this for us, letting us focus on the aspects unique to our
+own work. Such tools are called <em>workflow managers</em>._</p>
+<p>In this lesson, we introduce <a href="https://snakemake.github.io/" class="external-link">Snakemake</a>, a workflow manager
+originally developed for bioinformatics applications, but that maps well
+onto the needs of data analysis in lattice quantum field theory.</p>
+<p>By defining <em>rules</em>, each of which specify how to translate
+one or more input files into one or more output files, we can build up a
+workflow that takes our raw data as input, and produces plots, tables,
+and other definitions that we can include in our publications.</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -451,6 +464,40 @@ need to run</p>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="latex">LaTeX<a class="anchor" aria-label="anchor" href="#latex"></a></h2>
+<hr class="half-width"><p>We will be using Matplotlib to generate plots formatted with LaTeX,
+which relies on having LaTeX installed.</p>
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  Windows
+  </h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div class="accordion-body">
+<p>This lesson has not been tested with Windows. You may try using <a href="https://miktex.org/download" class="external-link">MikTeX</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  macOS, Linux
+  </h3>
+</button>
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
+<div class="accordion-body">
+<p>Follow <a href="https://tug.org/texlive/quickinstall.html" class="external-link">the
+instructions on TeX Live’s website</a>.</p>
+</div>
+</div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -504,8 +551,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/index.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/index.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-23",
-  "datePublished": "2025-09-23"
+  "dateModified": "2025-09-26",
+  "datePublished": "2025-09-26"
 }
 
   </script><script>
