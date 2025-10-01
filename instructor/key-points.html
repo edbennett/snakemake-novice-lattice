@@ -337,6 +337,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="awkward.html">9. Awkward corners</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -443,6 +455,18 @@ number of threads to the number of cores you have</li>
 <li>You also need to consider RAM, disk, and network bottlenecks</li>
 <li>Profile your jobs to see what is taking most resources</li>
 <li>Snakemake is great for running workflows on compute clusters</li>
+</ul></section><section id="awkward"><h2 class="section-heading"><a href="awkward.html">Awkward corners</a></h2>
+<hr class="half-width">
+<ul>
+<li>Use Python input functions that take a dict of wildcards, and return
+a list of strings, to handle complex dependency issues that can’t be
+expressed in pure Snakemake.</li>
+<li>Use <code>glob_wildcards</code> to match multiple files on disk
+matching a specific pattern. Don’t rely on this finding intermediate
+files in final production workflows, since it won’t find files not
+present at the start of the workflow run.</li>
+<li>Use <code>snakemake --touch</code> if you need to mark files as
+up-to-date, so that Snakemake won’t try to regenerate them.</li>
 </ul></section>
 </div>
     </main>
@@ -491,8 +515,8 @@ number of threads to the number of cores you have</li>
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/key-points.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/key-points.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-30",
-  "datePublished": "2025-09-30"
+  "dateModified": "2025-10-01",
+  "datePublished": "2025-10-01"
 }
 
   </script><script>

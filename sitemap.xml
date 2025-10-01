@@ -16,6 +16,9 @@
     <loc>https://edbennett.github.io/snakemake-novice-lattice/aio.html</loc>
   </url>
   <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/awkward.html</loc>
+  </url>
+  <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/chaining.html</loc>
   </url>
   <url>
@@ -41,6 +44,9 @@
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/awkward.html</loc>
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html</loc>

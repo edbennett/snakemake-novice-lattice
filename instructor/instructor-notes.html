@@ -337,6 +337,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="awkward.html">9. Awkward corners</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -487,6 +499,37 @@ said than done!</p>
 a workshop then we’d much appreciate any feedback on how you did this
 and how it went.</p>
 <hr>
+<br></section><section id="awkward"><h2 class="section-heading"><a href="awkward.html">Awkward corners</a></h2>
+<hr class="half-width">
+<h3 id="awkward-headingInstructor1">
+<a href="awkward.html#headingInstructor1">Closure alternatives</a><a class="anchor" aria-label="anchor" href="#awkward-headingInstructor1"></a>
+</h3>
+<p>Here we choose to use a <em>closure</em> (a function returned by
+another function, where the former’s behaviour depends on the arguments
+to the latter), so that the same code can be used for both the start and
+the end of the plateau. There are other ways to phrase this: you could
+define a free function <code>get_plateau(wildcards, position)</code>,
+and then in the rule definition, use
+<code>functools.partial(get_plateau, position=...)</code> to set the
+<code>position</code>, or use a lambda
+<code>lambda wildcards: get_plateau(wildcards, ...)</code>. We choose
+the closure here because defining functions should already be familiar
+to most learners, and passing functions as values needs to be learned
+anyway (since we have to pass one to Snakemake), whereas lambdas and
+<code>functools</code> may not be familiar, and aren’t needed elsewhere
+in the lesson.</p>
+<hr>
+<br><h3 id="awkward-headingInstructor2">
+<a href="awkward.html#headingInstructor2">Change of command line</a><a class="anchor" aria-label="anchor" href="#awkward-headingInstructor2"></a>
+</h3>
+<p>If learners skipped over the previous section, note that we’ve
+changed the standard <code>snakemake</code> call we were previously
+using: now, we don’t use <code>--forceall</code>, so we only regenerate
+when necessary (which makes the run quicker). <code>--jobs all</code>,
+meanwhile, tells Snakemake to use all available CPU cores. In this case
+it doesn’t make a difference, since only one job is needed by this run,
+but it’s a useful default invocation for production use.</p>
+<hr>
 <br></section></section>
 </div>
     </main>
@@ -535,8 +578,8 @@ and how it went.</p>
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/instructor-notes.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/instructor-notes.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-30",
-  "datePublished": "2025-09-30"
+  "dateModified": "2025-10-01",
+  "datePublished": "2025-10-01"
 }
 
   </script><script>
