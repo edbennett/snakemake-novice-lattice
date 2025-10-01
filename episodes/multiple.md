@@ -164,8 +164,8 @@ rule spectrum:
             "intermediary_data/beta{beta}/corr.ps_mass.json.gz",
             beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         ),
-        v_mass=expand(
-            "intermediary_data/beta{beta}/corr.v_mass.json.gz",
+        ps_decay_const=expand(
+            "intermediary_data/beta{beta}/pg.corr.ps_decay_const.json.gz",
             beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         ),
     output:
@@ -279,8 +279,8 @@ rule spectrum:
             "intermediary_data/beta{beta}/corr.ps_mass.json.gz",
             beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         ),
-        v_mass=expand(
-            "intermediary_data/beta{beta}/corr.v_mass.json.gz",
+        ps_decay_const=expand(
+            "intermediary_data/beta{beta}/pg.corr.ps_decay_const.json.gz",
             beta=[1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5],
         ),
     output:

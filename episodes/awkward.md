@@ -9,7 +9,7 @@ exercises: 20
 - Understand how Snakemake being built on Python allows us 
   to work around some shortcomings of Snakemake in some use cases.
 - Understand how to handle trickier metadata and input file lookups.
-- Understand how to handle nested Python directory structures
+- Be able to avoid Snakemake re-running a rule when this is not wanted.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -18,8 +18,7 @@ exercises: 20
 - How can I look up metadata based on wildcard values?
 - How can I select different numbers of input files
   depending on wildcard values?
-- How can I have a rule depend on a Python source file
-  that relies on importing files from subdirectories?
+- How can I tell Snakemake not to regenerate a file?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -218,7 +217,7 @@ but it's a useful default invocation for production use.
 ## Restricted spectrum
 
 Define a rule `restricted_spectrum`
-that generates a plot of the vector mass against the pseudoscalar mass
+that generates a plot of the pseudoscalar decay constant against its mass
 (both in lattice units),
 that only plots data where $\beta$ is below a specified value `beta0`,
 which is included in the filename.
@@ -228,7 +227,9 @@ Use this to test plotting the spectrum for $\beta < 2.0$.
 Hint:
 Similarly to the above,
 you may want to define a function that defines a function,
-where the former takes the channel as input,
+where the former takes the relevant fixed part of the filename
+(`corr.ps_mass` or `pg.corr.ps_decay_const`)
+as input,
 and the latter the wildcards.
 
 :::::::::::::::  solution
@@ -241,27 +242,28 @@ we can use an input function for this,
 but this time for the `input` data rather than to define `params`.
 
 ```
-def spectrum_param(channel):
+def spectrum_param(slug):
     def spectrum_inputs(wildcards):
-        return expand(
-            f"intermediary_data/beta{beta}/corr.{channel}_mass.json.gz",
-            beta = metadata[metadata["beta"] < float(wildcards["beta0"])]["beta"],
-        )
+        return [
+            f"intermediary_data/beta{beta}/{slug}.json.gz"
+            for beta in metadata[metadata["beta"] < float(wildcards["beta0"])]["beta"]
+        ]
+
     return spectrum_inputs
 
 
 rule restricted_spectrum:
     input:
         script="src/plot_spectrum.py",
-        ps_mass=spectrum_param("ps"),
-        v_mass=spectrum_param("v"),
+        ps_mass=spectrum_param("corr.ps_mass"),
+        ps_decay_const=spectrum_param("pg.corr.ps_decay_const"),
     output:
         plot=multiext("assets/plots/spectrum_beta{beta0}", config["plot_filetype"]),
     log:
         messages="intermediary_data/spectrum_plot.log"
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable v_mass --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
 
 To generate the requested plot would then be:
@@ -312,8 +314,8 @@ rule quick_spectrum:
         ps_mass=glob(
             "intermediary_data/beta*/corr.ps_mass.json.gz",
         ),
-        v_mass=expand(
-            "intermediary_data/beta*/corr.v_mass.json.gz",
+        ps_decay_const=expand(
+            "intermediary_data/beta*/pg.corr.ps_decay_const.json.gz",
         ),
     output:
         plot=multiext("intermediary_data/check_spectrum", config["plot_filetype"]),
