@@ -355,7 +355,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running Python code with Snakemake</h1>
-        <p>Last updated on 2025-09-26 |
+        <p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -476,7 +476,7 @@ generation log. Let’s add the following rule to
 <p>The <code>conda:</code> block tells Snakemake where to find the Conda
 environment that should be used for running this rule. Let’s test this
 now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz</code></pre>
 <p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
 attention to the <code>conda:</code> specification.</p>
 <p>Let’s check now that the output was correctly generated:</p>
@@ -560,7 +560,7 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
@@ -573,7 +573,7 @@ within a Snakefile. So in this example answer we use
     shell:
         "python -m su2pg_analysis.plaquette raw_data/beta2.2/out_pg --output_file intermediary_data/beta2.2/pg.plaquette.json.gz"</code></pre>
 <p>Then in the shell:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz</code></pre>
 <p>If you think writing a separate rule for each output file is silly,
 you are correct. We’ll address this next!</p>
 </div>
@@ -642,8 +642,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-26",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>

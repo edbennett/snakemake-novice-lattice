@@ -406,7 +406,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Running commands with Snakemake</a></p>
 <hr>
-<p>Last updated on 2025-09-26 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -568,7 +568,7 @@ Snakemake what shell commands to run to get the specified output from
 the given input.</p>
 <p>Going back to the shell now, we can test this rule. From the
 <code>su2pg</code> directory, we can run the command</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
 <p>If we’ve made any transcription errors in the rule (missing quotes,
 bad indentations, etc.), then it will become clear at this point, as
 we’ll receive an error that we will need to fix.</p>
@@ -616,7 +616,7 @@ data, so this is an important point to reinforce.</p>
 </div>
 </div>
 <p>For now, we will consistently run <code>snakemake</code> with the
-<code>--jobs 1 --forceall --printshellcmds</code> options. As we move
+<code>--cores 1 --forceall --printshellcmds</code> options. As we move
 through the lesson, we’ll explain in more detail when we need to modify
 them.</p>
 <p>Let’s check that the output was correctly generated:</p>
@@ -705,12 +705,12 @@ quit back to the shell with <code>q</code></em></p>
 <li>Prints the shell commands that are being run to the terminal</li>
 </ol>
 <p>This is such a useful thing we don’t know why it isn’t the default!
-The <code>--jobs 1</code> option is what tells Snakemake to only run one
-process at a time, and we’ll stick with this for now as it makes things
-simpler. The <code>--forceall</code> option tells Snakemake to always
-recreate output files, and we’ll learn about protected outputs much
-later in the course. Answer 4 is a total red herring, as Snakemake never
-prompts interactively for user input.</p>
+The <code>--cores 1</code> option is what tells Snakemake to only run
+one process at a time, and we’ll stick with this for now as it makes
+things simpler. The <code>--forceall</code> option tells Snakemake to
+always recreate output files, and we’ll learn about protected outputs
+much later in the course. Answer 4 is a total red herring, as Snakemake
+never prompts interactively for user input.</p>
 </div>
 </div>
 </div>
@@ -793,7 +793,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-python"><p>Content from <a href="python.html">Running Python code with Snakemake</a></p>
 <hr>
-<p>Last updated on 2025-09-26 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -917,7 +917,7 @@ generation log. Let’s add the following rule to
 <p>The <code>conda:</code> block tells Snakemake where to find the Conda
 environment that should be used for running this rule. Let’s test this
 now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz</code></pre>
 <p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
 attention to the <code>conda:</code> specification.</p>
 <p>Let’s check now that the output was correctly generated:</p>
@@ -1001,7 +1001,7 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
@@ -1014,7 +1014,7 @@ within a Snakefile. So in this example answer we use
     shell:
         "python -m su2pg_analysis.plaquette raw_data/beta2.2/out_pg --output_file intermediary_data/beta2.2/pg.plaquette.json.gz"</code></pre>
 <p>Then in the shell:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz</code></pre>
 <p>If you think writing a separate rule for each output file is silly,
 you are correct. We’ll address this next!</p>
 </div>
@@ -1027,7 +1027,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-placeholders"><p>Content from <a href="placeholders.html">Placeholders and wildcards</a></p>
 <hr>
-<p>Last updated on 2025-09-26 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/placeholders.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -1129,7 +1129,7 @@ the placeholder <code>{wildcards.subdir}</code>, but in most cases, as
 here, we just need the <code>{input}</code> and <code>{output}</code>
 placeholders.</p>
 <p>Let’s test this general rule now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count</code></pre>
 <p>As previously, if you see errors at this point, there is likely a
 problem with your Snakefile; check that all the rules match the ones
 that have appeared here, and that there aren’t multiple rules with the
@@ -1154,7 +1154,7 @@ previous episode.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Compute average plaquette for any ensemble from its generation log
@@ -1165,7 +1165,7 @@ rule avg_plaquette:
     shell:
         "python -m su2pg_analysis.plaquette {input} --output_file {output}"</code></pre>
 <p>To test this, for example:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz</code></pre>
 </div>
 </div>
 </div>
@@ -1209,7 +1209,7 @@ in the sample data, so these will not work as-is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In both cases, there is no need to change the <code>shell</code> part
 of the rule at all.</p>
@@ -1307,7 +1307,7 @@ output file as expected</li>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>$ snakemake --jobs 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.count
+<pre class="output" tabindex="0"><code>$ snakemake --cores 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.count
 Building DAG of jobs...
 MissingInputException in line 1 of /home/zenmaster/data/su2pg/workflow/Snakefile:
 Missing input files for rule count_trajectories:
@@ -1368,7 +1368,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-chaining"><p>Content from <a href="chaining.html">Chaining rules</a></p>
 <hr>
-<p>Last updated on 2025-09-26 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 50 minutes</p>
@@ -1447,7 +1447,7 @@ directory.</p>
 requires three. When Snakemake substitutes these into the
 <code>{input}</code> placeholder, it will automatically add a space
 between them. Let’s test this now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <p>Look at the logging messages that Snakemake prints in the terminal.
 What has happened here?</p>
 <ol style="list-style-type: decimal">
@@ -1522,7 +1522,7 @@ the filename, and subsequent keyword arguments are lists of variables to
 fill into the placeholders. The output is the cartesian product of all
 the parameter lists.</p>
 <p>We can check that this works correctly:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <div id="tabulating-trajectory-counts" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1560,7 +1560,7 @@ rule tabulate_counts:
     shell:
         "python src/tabulate_counts.py {input} &gt; {output}"</code></pre>
 <p>To test this, for example:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex</code></pre>
 </div>
 </div>
 </div>
@@ -1635,7 +1635,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-parameters"><p>Content from <a href="parameters.html">Metadata and parameters</a></p>
 <hr>
-<p>Last updated on 2025-09-26 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/parameters.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -1678,12 +1678,12 @@ file in place of the <code>{config[plot_styles]}</code> placeholder.
 (Note that unlike standard Python syntax, we don’t need quotes around
 the <code>plot_styles</code> key string.)</p>
 <p>Let’s double-check that our workflow still works, running</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <p>Now that we have separated out our configuration from the workflow
 itself, we can alter the configuration. For example, we may decide to
 test plotting in the style of a different publication. We can test this
 by changing <code>jhep</code> to <code>prd</code>, and running</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <p>We can see that the generated file now uses a different set of
 fonts.</p>
 <p>Before continuing, let’s reset the workflow back to using the
@@ -1779,7 +1779,7 @@ swap in an entirely different configuration file.</p>
 <p>We would like to test plotting for a different journal. Re-run
 the workflow for the plaquette scan, using the <code>prd.mplstyle</code>
 style file, as</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda --config plot_styles=styles/prd.mplstyle -- assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda --config plot_styles=styles/prd.mplstyle -- assets/plots/plaquette_scan.pdf</code></pre>
 <p>(Note that we now need to add an extra <code>--</code> to tell
 Snakemake that the list of <code>--config</code> options is
 complete.)</p>
@@ -1810,7 +1810,7 @@ specify this new file.</p></li>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="fu">W0_reference</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.2</span></span></code></pre>
 </div>
 <p>To test this, run</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf</code></pre>
 <p>Similarly to the previous examples, we need to use the
 <code>--</code> option to tell Snakemake to stop trying to read more
 config filenames.</p>
@@ -1880,7 +1880,7 @@ considering. Finally, we’ve used <code>{params.plateau_start}</code> and
 <code>{params.plateau_end}</code> placeholders to use these parameters
 in the shell command that gets run.</p>
 <p>Let’s test this now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
 cat intermediary_data/beta2.0/corr.ps_mass.json.gz
 | gunzip | head -n 28</code></pre>
 <div class="codewrapper">
@@ -1959,7 +1959,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-multiple"><p>Content from <a href="multiple.html">Multiple inputs and outputs</a></p>
 <hr>
-<p>Last updated on 2025-10-01 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/multiple.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -2002,7 +2002,7 @@ these variables in our rule, we follow <code>output</code> by a
 similarly to what we do for <code>wildcards</code> and
 <code>params</code>.</p>
 <p>Let’s test that this works correctly:</p>
-<pre class="snakemake"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_eff_mass.pdf</code></pre>
+<pre class="snakemake"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_eff_mass.pdf</code></pre>
 <div id="non-specificity" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -2025,7 +2025,7 @@ error, but will first let you see what the output is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Snakemake will provide all of the defined output variables, as a
 space-separated list. This is similar to what happens when an output
@@ -2055,7 +2055,7 @@ shape of the flow may be checked.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule w0:
     input: "raw_data/{subdir}/out_wflow"
@@ -2127,7 +2127,7 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -2154,7 +2154,7 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Definitely run through the spectrum plot </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>This plot is referred to from subsequent lessons, so you definitely
 need to go through it.</p>
@@ -2239,7 +2239,7 @@ file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -2282,7 +2282,7 @@ data directory.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
 </div>
 <p>And re-run.</p>
-<pre class="shellsession"><code>$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+<pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
 Assuming unrestricted shared filesystem usage.
 host: azusa
 Building DAG of jobs...
@@ -2383,14 +2383,14 @@ see in the next episode.</p>
 </div>
 <p>Finally, edit the names in the Snakefile back to the correct version
 and re-run to confirm that all is well.</p>
-<pre class="snakemake"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+<pre class="snakemake"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </section></section><section id="aio-dag"><p>Content from <a href="dag.html">How Snakemake plans jobs</a></p>
 <hr>
-<p>Last updated on 2025-09-26 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/dag.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -2493,7 +2493,7 @@ many jobs would that be in total?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>36 in total:</p>
 <ul>
@@ -2522,8 +2522,8 @@ many jobs would that be in total?</p>
 <hr class="half-width">
 <p>For the last few episodes, we’ve told you to run Snakemake like
 this:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda </code></pre>
-<p>As a reminder, the <code>--jobs 1</code> flag tells Snakemake to run
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda </code></pre>
+<p>As a reminder, the <code>--cores 1</code> flag tells Snakemake to run
 one job at a time, <code>--printshellcmds</code> is to print out the
 shell commands before running them, and <code>--use-conda</code> to
 ensure that Snakemake sets up the correct Conda environment.</p>
@@ -2531,10 +2531,10 @@ ensure that Snakemake sets up the correct Conda environment.</p>
 and in normal usage you don’t want this.</p>
 <p>At the end of the last chapter, we generated a spectrum plot by
 running:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
 <p>Now try without the <code>--forceall</code> option. Assuming that the
 output files are already created, you’ll see this:</p>
-<pre class="shellsession"><code>$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+<pre class="shellsession"><code>$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 Assuming unrestricted shared filesystem usage.
 host: azusa
 Building DAG of jobs...
@@ -2554,15 +2554,15 @@ was created.</li>
 <p>Let’s demonstrate each of these in turn, by altering some files and
 re-running Snakemake without the <code>--forceall</code> option.</p>
 <pre class="shellsession"><code>$ rm assets/plots/spectrum.pdf
-$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
 <p>This just re-runs <code>spectrum</code>, the final step.</p>
 <pre class="shellsession"><code>$ rm intermediary_data/beta*/corr.ps_mass.json
-$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
 <p>“Nothing to be done”. Some intermediate output is missing, but
 Snakemake already has the file you are telling it to make, so it doesn’t
 worry.</p>
 <pre class="shellsession"><code>$ touch raw_data/beta*/out_pg
-$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
 <p>The <code>touch</code> command is a standard Unix command that resets
 the timestamp of the file, so now the correlators look to Snakemake as
 if they were just modified.</p>
@@ -2590,7 +2590,7 @@ doesn’t see.</p>
 <p>The <code>--forcerun</code> flag allows you to explicitly tell
 Snakemake that a rule has changed and that all outputs from that rule
 need to be re-evaluated.</p>
-<pre class="shellsession"><code>snakemake  --forcerun spectrum --jobs 1--printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+<pre class="shellsession"><code>snakemake  --forcerun spectrum --cores 1--printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
 <div id="note-on---forcerun" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -2606,15 +2606,15 @@ need to make sure there are options after the
 don’t do this, Snakemake will think that the target files are instead
 items to add to the <code>--forcerun</code> list, and then when building
 the DAG it will just try to run the default rule.</p>
-<p>The easiest way is to put the <code>--jobs</code> flag before the
+<p>The easiest way is to put the <code>--cores</code> flag before the
 target outputs. Then you can list multiple rules to re-run, and also
 multiple targets, and Snakemake can tell which is which.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--cores</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json</span></code></pre>
 </div>
-<p>The reason for using the <code>--jobs</code> flag specifically is
+<p>The reason for using the <code>--cores</code> flag specifically is
 that you pretty much always want this option.</p>
 </div>
 </div>
@@ -2625,7 +2625,7 @@ explicitly re-make specific files.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--jobs</span> 1 <span class="at">--force</span> <span class="at">--printshellcmds</span> assets/plots/spectrum.pdf</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--cores</span> 1 <span class="at">--force</span> <span class="at">--printshellcmds</span> assets/plots/spectrum.pdf</span></code></pre>
 </div>
 <p>This always re-runs <code>spectrum</code>, regardless of whether the
 output file is there already. For all intermediate outputs, Snakemake
@@ -2647,7 +2647,7 @@ into a picture and show it on the screen.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Version differences </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Older versions of Snakemake only support outputting the DAG in
 <code>dot</code> format, so that argument is not needed there.</p>
@@ -2708,13 +2708,13 @@ rather than <code>TODO</code>?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>This is a way to make the result in the first place:</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--jobs</span> 1 <span class="at">--printshellcmds</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--cores</span> 1 <span class="at">--printshellcmds</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json</span></code></pre>
 </div>
 <ol style="list-style-type: decimal">
 <li>This command should show three boxes, but all are dotted so no jobs
@@ -2815,7 +2815,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-optimisation"><p>Content from <a href="optimisation.html">Optimising workflow performance</a></p>
 <hr>
-<p>Last updated on 2025-09-26 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/optimisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -2944,7 +2944,7 @@ the <code>time</code> command.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> time snakemake <span class="at">--jobs</span> 1 <span class="at">--forceall</span> <span class="at">--</span> assets/plots/spectrum.pdf</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> time snakemake <span class="at">--cores</span> 1 <span class="at">--forceall</span> <span class="at">--</span> assets/plots/spectrum.pdf</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">real</span>	3m10.713s</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">user</span>	1m30.181s</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">sys</span>	0m8.156s</span></code></pre>
@@ -2962,8 +2962,8 @@ time</h3>
 We’ll work out the average for everyone present, or if you are working
 through the material on your own, repeat the measurement three times to
 get your own average.</p>
-<p>Now change the Snakemake concurrency option to <code>--jobs 2</code>
-and then <code>--jobs 4</code>.</p>
+<p>Now change the Snakemake concurrency option to <code>--cores 2</code>
+and then <code>--cores 4</code>.</p>
 <ul>
 <li>How does the total execution time change?</li>
 <li>What factors do you think limit the power of this setting to reduce
@@ -2981,8 +2981,8 @@ the execution time?</li>
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
 somewhere around 150–200 seconds is expected, and this should reduce to
-around 75–100 secs with <code>--jobs 2</code> but depending on your
-computer, higher <code>--jobs</code> might produce diminishing
+around 75–100 secs with <code>--cores 2</code> but depending on your
+computer, higher <code>--cores</code> might produce diminishing
 returns.</p>
 <p>Things that may limit the effectiveness of parallel execution
 include:</p>
@@ -3156,7 +3156,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-awkward"><p>Content from <a href="awkward.html">Awkward corners</a></p>
 <hr>
-<p>Last updated on 2025-10-01 |
+<p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/awkward.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -3295,7 +3295,7 @@ for the end.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Closure alternatives </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Here we choose to use a <em>closure</em> (a function returned by
 another function, where the former’s behaviour depends on the arguments
@@ -3336,18 +3336,18 @@ rule meson_mass:
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>We can test this for the vector mass:</p>
-<pre class="shellsession"><code>snakemake --use-conda --jobs all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz</code></pre>
 <div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Change of command line </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>If learners skipped over the previous section, note that we’ve
 changed the standard <code>snakemake</code> call we were previously
 using: now, we don’t use <code>--forceall</code>, so we only regenerate
-when necessary (which makes the run quicker). <code>--jobs all</code>,
+when necessary (which makes the run quicker). <code>--cores all</code>,
 meanwhile, tells Snakemake to use all available CPU cores. In this case
 it doesn’t make a difference, since only one job is needed by this run,
 but it’s a useful default invocation for production use.</p>
@@ -3381,7 +3381,7 @@ wildcards.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>We can constrain the data plotted by constraining the input data.
 Similarly to for the example above, we can use an input function for
@@ -3410,7 +3410,7 @@ rule restricted_spectrum:
     shell:
         "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>To generate the requested plot would then be:</p>
-<pre class="shellsession"><code>snakemake --use-conda --jobs all --printshellcmds assets/plots/spectrum_beta2.0.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds assets/plots/spectrum_beta2.0.pdf</code></pre>
 </div>
 </div>
 </div>
@@ -3455,7 +3455,7 @@ function:</p>
     shell:
         "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>Let’s test this now</p>
-<pre class="shellsession"><code>snakemake --use-conda --jobs all --printshellcmds intermediary_data/check_spectrum.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds intermediary_data/check_spectrum.pdf</code></pre>
 <p>If you have recently purged the workflow output, then this might
 raise an error as there are no data to plot. Otherwise, opening this
 resulting file in your PDF viewer, you’ll most likely see a plot with a
@@ -3586,8 +3586,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/aio.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/aio.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-01",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>

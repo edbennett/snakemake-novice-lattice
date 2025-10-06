@@ -354,7 +354,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Metadata and parameters</h1>
-        <p>Last updated on 2025-09-26 |
+        <p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/parameters.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -400,12 +400,12 @@ file in place of the <code>{config[plot_styles]}</code> placeholder.
 (Note that unlike standard Python syntax, we don’t need quotes around
 the <code>plot_styles</code> key string.)</p>
 <p>Let’s double-check that our workflow still works, running</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <p>Now that we have separated out our configuration from the workflow
 itself, we can alter the configuration. For example, we may decide to
 test plotting in the style of a different publication. We can test this
 by changing <code>jhep</code> to <code>prd</code>, and running</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <p>We can see that the generated file now uses a different set of
 fonts.</p>
 <p>Before continuing, let’s reset the workflow back to using the
@@ -500,7 +500,7 @@ swap in an entirely different configuration file.</p>
 <p>We would like to test plotting for a different journal. Re-run
 the workflow for the plaquette scan, using the <code>prd.mplstyle</code>
 style file, as</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda --config plot_styles=styles/prd.mplstyle -- assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda --config plot_styles=styles/prd.mplstyle -- assets/plots/plaquette_scan.pdf</code></pre>
 <p>(Note that we now need to add an extra <code>--</code> to tell
 Snakemake that the list of <code>--config</code> options is
 complete.)</p>
@@ -530,7 +530,7 @@ specify this new file.</p></li>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="fu">W0_reference</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.2</span></span></code></pre>
 </div>
 <p>To test this, run</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf</code></pre>
 <p>Similarly to the previous examples, we need to use the
 <code>--</code> option to tell Snakemake to stop trying to read more
 config filenames.</p>
@@ -598,7 +598,7 @@ considering. Finally, we’ve used <code>{params.plateau_start}</code> and
 <code>{params.plateau_end}</code> placeholders to use these parameters
 in the shell command that gets run.</p>
 <p>Let’s test this now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
 cat intermediary_data/beta2.0/corr.ps_mass.json.gz
 | gunzip | head -n 28</code></pre>
 <div class="codewrapper">
@@ -733,8 +733,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/parameters.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/parameters.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-26",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>

@@ -354,7 +354,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Chaining rules</h1>
-        <p>Last updated on 2025-09-26 |
+        <p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -434,7 +434,7 @@ directory.</p>
 requires three. When Snakemake substitutes these into the
 <code>{input}</code> placeholder, it will automatically add a space
 between them. Let’s test this now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <p>Look at the logging messages that Snakemake prints in the terminal.
 What has happened here?</p>
 <ol style="list-style-type: decimal"><li>Snakemake looks for a rule to make
@@ -503,7 +503,7 @@ the filename, and subsequent keyword arguments are lists of variables to
 fill into the placeholders. The output is the cartesian product of all
 the parameter lists.</p>
 <p>We can check that this works correctly:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
 <div id="tabulating-trajectory-counts" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -541,7 +541,7 @@ rule tabulate_counts:
     shell:
         "python src/tabulate_counts.py {input} &gt; {output}"</code></pre>
 <p>To test this, for example:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex</code></pre>
 </div>
 </div>
 </div>
@@ -670,8 +670,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-26",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>

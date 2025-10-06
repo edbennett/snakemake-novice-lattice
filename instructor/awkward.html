@@ -355,7 +355,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Awkward corners</h1>
-        <p>Last updated on 2025-10-01 |
+        <p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/awkward.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -495,7 +495,7 @@ for the end.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Closure alternatives </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Here we choose to use a <em>closure</em> (a function returned by
 another function, where the former’s behaviour depends on the arguments
@@ -536,18 +536,18 @@ rule meson_mass:
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>We can test this for the vector mass:</p>
-<pre class="shellsession"><code>snakemake --use-conda --jobs all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz</code></pre>
 <div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Change of command line </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>If learners skipped over the previous section, note that we’ve
 changed the standard <code>snakemake</code> call we were previously
 using: now, we don’t use <code>--forceall</code>, so we only regenerate
-when necessary (which makes the run quicker). <code>--jobs all</code>,
+when necessary (which makes the run quicker). <code>--cores all</code>,
 meanwhile, tells Snakemake to use all available CPU cores. In this case
 it doesn’t make a difference, since only one job is needed by this run,
 but it’s a useful default invocation for production use.</p>
@@ -581,7 +581,7 @@ wildcards.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>We can constrain the data plotted by constraining the input data.
 Similarly to for the example above, we can use an input function for
@@ -610,7 +610,7 @@ rule restricted_spectrum:
     shell:
         "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>To generate the requested plot would then be:</p>
-<pre class="shellsession"><code>snakemake --use-conda --jobs all --printshellcmds assets/plots/spectrum_beta2.0.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds assets/plots/spectrum_beta2.0.pdf</code></pre>
 </div>
 </div>
 </div>
@@ -653,7 +653,7 @@ function:</p>
     shell:
         "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>Let’s test this now</p>
-<pre class="shellsession"><code>snakemake --use-conda --jobs all --printshellcmds intermediary_data/check_spectrum.pdf</code></pre>
+<pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds intermediary_data/check_spectrum.pdf</code></pre>
 <p>If you have recently purged the workflow output, then this might
 raise an error as there are no data to plot. Otherwise, opening this
 resulting file in your PDF viewer, you’ll most likely see a plot with a
@@ -790,8 +790,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/awkward.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/awkward.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-01",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>

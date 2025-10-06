@@ -356,7 +356,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running commands with Snakemake</h1>
-        <p>Last updated on 2025-09-26 |
+        <p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -513,7 +513,7 @@ Snakemake what shell commands to run to get the specified output from
 the given input.</p>
 <p>Going back to the shell now, we can test this rule. From the
 <code>su2pg</code> directory, we can run the command</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
 <p>If we’ve made any transcription errors in the rule (missing quotes,
 bad indentations, etc.), then it will become clear at this point, as
 we’ll receive an error that we will need to fix.</p>
@@ -561,7 +561,7 @@ data, so this is an important point to reinforce.</p>
 </div>
 </div>
 <p>For now, we will consistently run <code>snakemake</code> with the
-<code>--jobs 1 --forceall --printshellcmds</code> options. As we move
+<code>--cores 1 --forceall --printshellcmds</code> options. As we move
 through the lesson, we’ll explain in more detail when we need to modify
 them.</p>
 <p>Let’s check that the output was correctly generated:</p>
@@ -646,12 +646,12 @@ quit back to the shell with <code>q</code></em></p>
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal"><li>Prints the shell commands that are being run to the terminal</li>
 </ol><p>This is such a useful thing we don’t know why it isn’t the default!
-The <code>--jobs 1</code> option is what tells Snakemake to only run one
-process at a time, and we’ll stick with this for now as it makes things
-simpler. The <code>--forceall</code> option tells Snakemake to always
-recreate output files, and we’ll learn about protected outputs much
-later in the course. Answer 4 is a total red herring, as Snakemake never
-prompts interactively for user input.</p>
+The <code>--cores 1</code> option is what tells Snakemake to only run
+one process at a time, and we’ll stick with this for now as it makes
+things simpler. The <code>--forceall</code> option tells Snakemake to
+always recreate output files, and we’ll learn about protected outputs
+much later in the course. Answer 4 is a total red herring, as Snakemake
+never prompts interactively for user input.</p>
 </div>
 </div>
 </div>
@@ -784,8 +784,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/introduction.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/introduction.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-26",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>

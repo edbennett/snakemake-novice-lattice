@@ -357,7 +357,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Optimising workflow performance</h1>
-        <p>Last updated on 2025-09-26 |
+        <p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/optimisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -479,7 +479,7 @@ the <code>time</code> command.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> time snakemake <span class="at">--jobs</span> 1 <span class="at">--forceall</span> <span class="at">--</span> assets/plots/spectrum.pdf</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> time snakemake <span class="at">--cores</span> 1 <span class="at">--forceall</span> <span class="at">--</span> assets/plots/spectrum.pdf</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">real</span>	3m10.713s</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">user</span>	1m30.181s</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">sys</span>	0m8.156s</span></code></pre>
@@ -497,8 +497,8 @@ time</h3>
 We’ll work out the average for everyone present, or if you are working
 through the material on your own, repeat the measurement three times to
 get your own average.</p>
-<p>Now change the Snakemake concurrency option to <code>--jobs 2</code>
-and then <code>--jobs 4</code>.</p>
+<p>Now change the Snakemake concurrency option to <code>--cores 2</code>
+and then <code>--cores 4</code>.</p>
 <ul><li>How does the total execution time change?</li>
 <li>What factors do you think limit the power of this setting to reduce
 the execution time?</li>
@@ -514,8 +514,8 @@ the execution time?</li>
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
 somewhere around 150–200 seconds is expected, and this should reduce to
-around 75–100 secs with <code>--jobs 2</code> but depending on your
-computer, higher <code>--jobs</code> might produce diminishing
+around 75–100 secs with <code>--cores 2</code> but depending on your
+computer, higher <code>--cores</code> might produce diminishing
 returns.</p>
 <p>Things that may limit the effectiveness of parallel execution
 include:</p>
@@ -734,8 +734,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/optimisation.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/optimisation.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-26",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>

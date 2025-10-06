@@ -354,7 +354,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Placeholders and wildcards</h1>
-        <p>Last updated on 2025-09-26 |
+        <p>Last updated on 2025-10-06 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/placeholders.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -457,7 +457,7 @@ the placeholder <code>{wildcards.subdir}</code>, but in most cases, as
 here, we just need the <code>{input}</code> and <code>{output}</code>
 placeholders.</p>
 <p>Let’s test this general rule now:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count</code></pre>
 <p>As previously, if you see errors at this point, there is likely a
 problem with your Snakefile; check that all the rules match the ones
 that have appeared here, and that there aren’t multiple rules with the
@@ -482,7 +482,7 @@ previous episode.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The replacement rule should look like:</p>
 <pre class="snakemake"><code># Compute average plaquette for any ensemble from its generation log
@@ -493,7 +493,7 @@ rule avg_plaquette:
     shell:
         "python -m su2pg_analysis.plaquette {input} --output_file {output}"</code></pre>
 <p>To test this, for example:</p>
-<pre class="shellsession"><code>snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz</code></pre>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz</code></pre>
 </div>
 </div>
 </div>
@@ -535,7 +535,7 @@ in the sample data, so these will not work as-is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In both cases, there is no need to change the <code>shell</code> part
 of the rule at all.</p>
@@ -619,7 +619,7 @@ output file as expected</li>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>$ snakemake --jobs 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.count
+<pre class="output" tabindex="0"><code>$ snakemake --cores 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.count
 Building DAG of jobs...
 MissingInputException in line 1 of /home/zenmaster/data/su2pg/workflow/Snakefile:
 Missing input files for rule count_trajectories:
@@ -734,8 +734,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/placeholders.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/placeholders.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-09-26",
-  "datePublished": "2025-10-01"
+  "dateModified": "2025-10-06",
+  "datePublished": "2025-10-06"
 }
 
   </script><script>
