@@ -65,7 +65,7 @@ Let's double-check that our workflow still works,
 running
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
 ```
 
 Now that we have separated out our configuration from the workflow itself,
@@ -76,7 +76,7 @@ We can test this by changing `jhep` to `prd`,
 and running
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
 ```
 
 We can see that the generated file now uses a different set of fonts.
@@ -173,7 +173,7 @@ or swap in an entirely different configuration file.
    as
 
    ```shellsession
-   snakemake --jobs 1 --forceall --printshellcmds --use-conda --config plot_styles=styles/prd.mplstyle -- assets/plots/plaquette_scan.pdf
+   snakemake --cores 1 --forceall --printshellcmds --use-conda --config plot_styles=styles/prd.mplstyle -- assets/plots/plaquette_scan.pdf
    ```
    
    (Note that we now need to add an extra `--`
@@ -200,7 +200,7 @@ To test this,
 run
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf
 ```
 
 Similarly to the previous examples,
@@ -304,7 +304,7 @@ to use these parameters in the shell command that gets run.
 Let's test this now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
 cat intermediary_data/beta2.0/corr.ps_mass.json.gz
 | gunzip | head -n 28
 ```

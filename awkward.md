@@ -190,7 +190,7 @@ rule meson_mass:
 We can test this for the vector mass:
 
 ```shellsession
-snakemake --use-conda --jobs all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz
+snakemake --use-conda --cores all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  instructor
@@ -203,7 +203,7 @@ now,
 we don't use `--forceall`,
 so we only regenerate when necessary
 (which makes the run quicker).
-`--jobs all`,
+`--cores all`,
 meanwhile,
 tells Snakemake to use all available CPU cores.
 In this case it doesn't make a difference,
@@ -269,7 +269,7 @@ rule restricted_spectrum:
 To generate the requested plot would then be:
 
 ```shellsession
-snakemake --use-conda --jobs all --printshellcmds assets/plots/spectrum_beta2.0.pdf
+snakemake --use-conda --cores all --printshellcmds assets/plots/spectrum_beta2.0.pdf
 ```
 
 :::::::::::::::::::::::::
@@ -329,7 +329,7 @@ rule quick_spectrum:
 Let's test this now
 
 ```shellsession
-snakemake --use-conda --jobs all --printshellcmds intermediary_data/check_spectrum.pdf
+snakemake --use-conda --cores all --printshellcmds intermediary_data/check_spectrum.pdf
 ```
 
 If you have recently purged the workflow output,

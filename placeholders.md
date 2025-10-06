@@ -102,7 +102,7 @@ we just need the `{input}` and `{output}` placeholders.
 Let's test this general rule now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.count
 ```
 
 As previously,
@@ -140,7 +140,7 @@ To test this,
 for example:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta1.8/pg.plaquette.json.gz
 ```
 
 :::::::::::::::::::::::::
@@ -270,7 +270,7 @@ Snakemake is doing when you run it. There are three distinct phases:
 For example, if we now ask Snakemake to generate a file named `intermediary_data/wibble_1/pg.count`:
 
 ```output
-$ snakemake --jobs 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.count
+$ snakemake --cores 1 --forceall --printshellcmds intermediary_data/wibble_1/pg.count
 Building DAG of jobs...
 MissingInputException in line 1 of /home/zenmaster/data/su2pg/workflow/Snakefile:
 Missing input files for rule count_trajectories:

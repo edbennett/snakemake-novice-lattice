@@ -92,11 +92,11 @@ how many jobs would that be in total?
 For the last few episodes, we've told you to run Snakemake like this:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda 
+snakemake --cores 1 --forceall --printshellcmds --use-conda 
 ```
 
 As a reminder,
-the `--jobs 1` flag tells Snakemake to run one job at a time,
+the `--cores 1` flag tells Snakemake to run one job at a time,
 `--printshellcmds` is to print out the shell commands before running them,
 and `--use-conda` to ensure that Snakemake sets up the correct Conda environment.
 
@@ -107,7 +107,7 @@ At the end of the last chapter,
 we generated a spectrum plot by running:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 Now try without the `--forceall` option.
@@ -115,7 +115,7 @@ Assuming that the output files are already created,
 you'll see this:
 
 ```shellsession
-$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 Assuming unrestricted shared filesystem usage.
 host: azusa
 Building DAG of jobs...
@@ -140,7 +140,7 @@ by altering some files and re-running Snakemake without the `--forceall` option.
 
 ```shellsession
 $ rm assets/plots/spectrum.pdf
-$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 This just re-runs `spectrum`,
@@ -148,7 +148,7 @@ the final step.
 
 ```shellsession
 $ rm intermediary_data/beta*/corr.ps_mass.json
-$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 "Nothing to be done".
@@ -158,7 +158,7 @@ so it doesn't worry.
 
 ```shellsession
 $ touch raw_data/beta*/out_pg
-$ snakemake --jobs 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 The `touch` command is a standard Unix command that resets the timestamp of the file,
@@ -187,7 +187,7 @@ The `--forcerun` flag allows you to explicitly tell Snakemake that a rule has ch
 and that all outputs from that rule need to be re-evaluated.
 
 ```shellsession
-snakemake  --forcerun spectrum --jobs 1--printshellcmds --use-conda assets/plots/spectrum.pdf
+snakemake  --forcerun spectrum --cores 1--printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -201,16 +201,16 @@ If you don't do this,
 Snakemake will think that the target files are instead items to add to the `--forcerun` list,
 and then when building the DAG it will just try to run the default rule.
 
-The easiest way is to put the `--jobs` flag before the target outputs.
+The easiest way is to put the `--cores` flag before the target outputs.
 Then you can list multiple rules to re-run,
 and also multiple targets,
 and Snakemake can tell which is which.
 
 ```bash
-snakemake --forcerun avg_plaquette ps_mass --jobs 1 --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json
+snakemake --forcerun avg_plaquette ps_mass --cores 1 --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json
 ```
 
-The reason for using the `--jobs` flag specifically
+The reason for using the `--cores` flag specifically
 is that you pretty much always want this option.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -219,7 +219,7 @@ The `--force` flag specifies that
 the target outputs named on the command line should always be regenerated, so you can use this to explicitly re-make specific files.
 
 ```bash
-$ snakemake --jobs 1 --force --printshellcmds assets/plots/spectrum.pdf
+$ snakemake --cores 1 --force --printshellcmds assets/plots/spectrum.pdf
 ```
 
 This always re-runs `spectrum`,
@@ -298,7 +298,7 @@ and then use the `--dag` option as shown above to check:
 This is a way to make the result in the first place:
 
 ```bash
-$ snakemake --jobs 1 --printshellcmds intermediary_data/beta2.0/pg.corr.ps_decay_const.json
+$ snakemake --cores 1 --printshellcmds intermediary_data/beta2.0/pg.corr.ps_decay_const.json
 ```
 
 1) This command should show three boxes,

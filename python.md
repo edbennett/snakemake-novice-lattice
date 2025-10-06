@@ -120,7 +120,7 @@ the Conda environment that should be used for running this rule.
 Let's test this now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz
 ```
 
 We need to specify `--use-conda`
@@ -229,7 +229,7 @@ rule avg_plaquette2:
 Then in the shell:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.plaquette.json.gz intermediary_data/beta2.2/pg.plaquette.json.gz
 ```
 
 If you think writing a separate rule for each output file is silly, you are correct.
