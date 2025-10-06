@@ -50,7 +50,7 @@ similarly to what we do for `wildcards` and `params`.
 Let's test that this works correctly:
 
 ```snakemake
-snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_eff_mass.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_eff_mass.pdf
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -321,7 +321,7 @@ $ rm -rvf intermediary_data
 And re-run.
 
 ```shellsession
-$ snakemake --jobs 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
 Assuming unrestricted shared filesystem usage.
 host: azusa
 Building DAG of jobs...
@@ -434,5 +434,5 @@ Finally, edit the names in the Snakefile back to the correct version
 and re-run to confirm that all is well.
 
 ```snakemake
-snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```

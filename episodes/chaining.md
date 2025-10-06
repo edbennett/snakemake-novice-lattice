@@ -73,7 +73,7 @@ it will automatically add a space between them.
 Let's test this now:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
 ```
 
 Look at the logging messages that Snakemake prints in the terminal. What has happened here?
@@ -147,7 +147,7 @@ The output is the cartesian product of all the parameter lists.
 We can check that this works correctly:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf
 ```
 
 
@@ -184,7 +184,7 @@ To test this,
 for example:
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/tables/counts.tex
 ```
 
 :::::::::::::::::::::::::

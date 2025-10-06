@@ -177,7 +177,7 @@ From the `su2pg` directory,
 we can run the command
 
 ```shellsession
-snakemake --jobs 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count
+snakemake --cores 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count
 ```
 
 If we've made any transcription errors in the rule
@@ -231,7 +231,7 @@ so this is an important point to reinforce.
 :::::::::::::::::::::::::::::::::::::::
 
 For now,
-we will consistently run `snakemake` with the ` --jobs 1 --forceall --printshellcmds` options.
+we will consistently run `snakemake` with the ` --cores 1 --forceall --printshellcmds` options.
 As we move through the lesson,
 we'll explain in more detail when we need to modify them.
 
@@ -306,7 +306,7 @@ What does the `--printshellcmds` option in the `snakemake` command above do?
 
 (2) Prints the shell commands that are being run to the terminal
 
-This is such a useful thing we don't know why it isn't the default! The `--jobs 1` option is what
+This is such a useful thing we don't know why it isn't the default! The `--cores 1` option is what
 tells Snakemake to only run one process at a time, and we'll stick with this for now as it
 makes things simpler. The `--forceall` option tells Snakemake to always recreate output files, and
 we'll learn about protected outputs much later in the course. Answer 4 is a total red herring,

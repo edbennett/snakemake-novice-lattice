@@ -136,7 +136,7 @@ by using the `--forceall` flag to Snakemake
 and time the whole run using the `time` command.
 
 ```bash
-$ time snakemake --jobs 1 --forceall -- assets/plots/spectrum.pdf
+$ time snakemake --cores 1 --forceall -- assets/plots/spectrum.pdf
 real	3m10.713s
 user	1m30.181s
 sys	0m8.156s
@@ -151,7 +151,7 @@ We'll work out the average for everyone present,
 or if you are working through the material on your own,
 repeat the measurement three times to get your own average.
 
-Now change the Snakemake concurrency option to  `--jobs 2` and then `--jobs 4`.
+Now change the Snakemake concurrency option to  `--cores 2` and then `--cores 4`.
 
 - How does the total execution time change?
 - What factors do you think limit
@@ -163,9 +163,9 @@ Now change the Snakemake concurrency option to  `--jobs 2` and then `--jobs 4`.
 
 The time will vary depending on the system configuration
 but somewhere around 150&ndash;200 seconds is expected,
-and this should reduce to around 75&ndash;100 secs with `--jobs 2`
+and this should reduce to around 75&ndash;100 secs with `--cores 2`
 but depending on your computer,
-higher `--jobs` might produce diminishing returns.
+higher `--cores` might produce diminishing returns.
 
 Things that may limit the effectiveness of parallel execution include:
 
