@@ -378,26 +378,25 @@ see the `--touch` option of Snakemake mentioned [later in the lesson
 
 
 
-[fig-dag]: ./fig/dag_1.svg {alt='
-  Diagram showing jobs as coloured boxes joined by arrows representing
+[fig-dag]: fig/dag_1.svg {alt='Diagram showing jobs as coloured boxes joined by arrows representing
 data flow.
-  A box labelled "avg_plaquette" is in red at the top left,
-  and one labeled "ps_mass" is in green at the top right.
+  A box labelled `avg_plaquette` is in red at the top left,
+  and one labeled `ps_mass` is in green at the top right.
   From these,
-  arrows lead into a yellow box labeled "one_loop_matching".
+  arrows lead into a yellow box labeled `one_loop_matching`.
   Incoming arrows into the top two boxes indicate the filenames
-  raw_data/beta2.0/out_pg and out_hmc respectively.
+  `raw_data/beta2.0/out_pg` and `out_hmc` respectively.
   From the bottom an arrow points to the output filename,
-  intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz'
-}
+  `intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz`
+'}
 
-![fig-dag2]: ./fig/dag_2.png {alt='
-  A DAG for the partial workflow with eleven similar columns,
+[fig-dag2]: fig/dag_2.png {alt='A DAG for the partial workflow with eleven similar columns,
   one per ensemble,
-  each having a green ps_mass, a red avg_plaquette,
-  and a yellow one_loop_matching job;
+  each having a green `ps_mass`, a red `avg_plaquette`,
+  and a yellow `one_loop_matching` job;
   each green and yellow box has
-  an arrow leading to a green "spectrum" box at the bottom.'}
+  an arrow leading to a green "spectrum" box at the bottom.
+'}
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

@@ -306,7 +306,7 @@ file.
 We can create, view, and modify this with the spreadsheet tool of our choice.
 Let's take a look at the file now.
 
-![Screenshot of a spreadsheet application showing the file `metadata/ensemble_metadata.csv`.](./fig/metadata_spreadsheet.png)
+![][fig-spreadsheet]
 
 You can see that we have columns defining metadata to identify each ensemble,
 and columns for parameters relating to the analysis of each ensemble.
@@ -453,6 +453,10 @@ and one that we will deal with in the episode on Awkward Corners.
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+[fig-spreadsheet]: fig/metadata_spreadsheet.png {alt='Screenshot
+    of a spreadsheet application showing the file `metadata/ensemble_metadata.csv`.
+'}
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
