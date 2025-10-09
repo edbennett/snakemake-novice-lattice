@@ -418,8 +418,7 @@ Thiis will be the same regardless of whether `input_file` is even present,
 or when it was last updated.
 
 
-![fig-asymmetric]: fig/asymmetric-workflow.svg {alt='
-  Diagram showing three boxes in a row,
+[fig-asymmetric]: fig/asymmetric-workflow.svg {alt='Diagram showing three boxes in a row,
   connected from left to right by arrows.
   The boxes are labeled
   "`input_file`",
