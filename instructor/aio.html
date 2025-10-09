@@ -504,7 +504,7 @@ necessary steps.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Environment activation </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>The most likely issue learners will encounter here is needing to
 activate their Snakemake environment when they have opened a fresh
@@ -623,7 +623,7 @@ or in a separate text editing application.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Directories </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>Learners less experienced with the shell may want to <code>cd</code>
 into directories to edit files; if they do this and forget to
@@ -680,7 +680,7 @@ rules that it runs.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
   <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Use of the --forceall flag </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
 <div class="accordion-body">
 <p>In the first few episodes we always run Snakemake with the
 <code>--forceall</code> flag, and it’s not explained what this does
@@ -717,8 +717,8 @@ the <code>snakemake</code> command above do?</p>
 <li>Tells Snakemake to only run one process at a time</li>
 <li>Prompts the user for the correct input file</li>
 </ol>
-<p><em>Hint: you can search in the text by pressing <code>/</code>, and
-quit back to the shell with <code>q</code></em></p>
+<p><em>Hint: you can search in the text by pressing <kbd>/</kbd>, and
+quit back to the shell with <kbd>q</kbd></em></p>
 </div>
 </div>
 </div>
@@ -727,7 +727,7 @@ quit back to the shell with <code>q</code></em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal">
 <li>Prints the shell commands that are being run to the terminal</li>
@@ -787,7 +787,7 @@ be printed on the screen</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule count_trajectories:
     input: "raw_data/beta2.0/out_pg"
@@ -1041,7 +1041,7 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
@@ -1584,7 +1584,7 @@ Write a rule to generate this table for all values of <span class="math inline">
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
@@ -1626,7 +1626,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -1752,7 +1752,7 @@ reference value <span class="math inline">\(\mathcal{W_0} =
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In <code>config.yaml</code>, add:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -1866,7 +1866,7 @@ specify this new file.</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>You should now have a file called something like
 <code>config/poster.yaml</code>, with content</p>
@@ -1917,7 +1917,7 @@ which we can use to read in a CSV files.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>CSVs aren’t the only way to do this; for more complex data, YAML or
 even JSON may be a better choice. But CSV is good for most purposes, and
@@ -1934,9 +1934,7 @@ metadata = pandas.read_csv("metadata/ensemble_metadata.csv")</code></pre>
 <p>The file being read here is a CSV (Comma Separated Values) file. We
 can create, view, and modify this with the spreadsheet tool of our
 choice. Let’s take a look at the file now.</p>
-<figure><img src=".././fig/metadata_spreadsheet.png" alt="Screenshot of a spreadsheet application showing the file metadata/ensemble_metadata.csv." class="figure mx-auto d-block"><div class="figcaption">Screenshot of a spreadsheet application showing
-the file <code>metadata/ensemble_metadata.csv</code>.</div>
-</figure><p>You can see that we have columns defining metadata to identify each
+<figure><img src="../fig/metadata_spreadsheet.png" alt="Screenshot     of a spreadsheet application showing the file `metadata/ensemble_metadata.csv`. " class="figure mx-auto d-block"></figure><p>You can see that we have columns defining metadata to identify each
 ensemble, and columns for parameters relating to the analysis of each
 ensemble.</p>
 <p>Now, how do we tell Snakemake to pull out the correct value from
@@ -2015,7 +2013,7 @@ plateau limits.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>This is very close to the rule for the PS mass.</p>
 <pre class="snakemake"><code># Compute vector mass and amplitude, read plateau from metadata
@@ -2163,7 +2161,7 @@ error, but will first let you see what the output is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Snakemake will provide all of the defined output variables, as a
 space-separated list. This is similar to what happens when an output
@@ -2193,7 +2191,7 @@ shape of the flow may be checked.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule w0:
     input: "raw_data/{subdir}/out_wflow"
@@ -2310,7 +2308,7 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -2339,7 +2337,7 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Definitely run through the spectrum plot </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>This plot is referred to from subsequent lessons, so you definitely
 need to go through it.</p>
@@ -2429,7 +2427,7 @@ file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -2643,7 +2641,7 @@ is:</p>
 </div>
 <p>A DAG is a <strong>Directed Acyclic Graph</strong> and it can be
 pictured like so:</p>
-<figure><img src=".././fig/dag_1.svg%20%7Balt='" class="figure mx-auto d-block"></figure><p>The above DAG is based on three of our existing rules, and shows all
+<figure><img src="../fig/dag_1.svg" alt="Diagram showing jobs as coloured boxes joined by arrows representing data flow.   A box labelled `avg_plaquette` is in red at the top left,   and one labeled `ps_mass` is in green at the top right.   From these,   arrows lead into a yellow box labeled `one_loop_matching`.   Incoming arrows into the top two boxes indicate the filenames   `raw_data/beta2.0/out_pg` and `out_hmc` respectively.   From the bottom an arrow points to the output filename,   `intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz` " class="figure mx-auto d-block"></figure><p>The above DAG is based on three of our existing rules, and shows all
 the jobs Snakemake would run to compute the pseudoscalar decay constant
 of the <span class="math inline">\(\beta = 4.0\)</span> ensemble.</p>
 <div id="note-that" class="callout checklist">
@@ -2698,7 +2696,7 @@ many jobs would that be in total?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>36 in total:</p>
 <ul>
@@ -2870,7 +2868,7 @@ into a picture and show it on the screen.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Version differences </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Older versions of Snakemake only support outputting the DAG in
 <code>dot</code> format, so that argument is not needed there.</p>
@@ -2896,8 +2894,7 @@ installed.</p>
 </div>
 </div>
 </div>
-<p>![][fig-dag2]</p>
-<p>The boxes drawn with dotted lines indicate steps that are not to be
+<figure><img src="../fig/dag_2.png" alt='A DAG for the partial workflow with eleven similar columns,   one per ensemble,   each having a green `ps_mass`, a red `avg_plaquette`,   and a yellow `one_loop_matching` job;   each green and yellow box has   an arrow leading to a green "spectrum" box at the bottom. ' class="figure mx-auto d-block"></figure><p>The boxes drawn with dotted lines indicate steps that are not to be
 run, as the output files are already present and newer than the input
 files.</p>
 <div id="visualising-the-effect-of-the---forcerun-and---force-flags" class="callout challenge">
@@ -2931,7 +2928,7 @@ rather than <code>TODO</code>?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>This is a way to make the result in the first place:</p>
 <div class="codewrapper sourceCode" id="cb13">
@@ -2999,19 +2996,6 @@ steps, see the <code>--touch</code> option of Snakemake mentioned <a href="awkwa
 </div>
 </div>
 </div>
-<p>Diagram showing jobs as coloured boxes joined by arrows representing
-data flow. A box labelled “avg_plaquette” is in red at the top left, and
-one labeled “ps_mass” is in green at the top right. From these, arrows
-lead into a yellow box labeled “one_loop_matching”. Incoming arrows into
-the top two boxes indicate the filenames raw_data/beta2.0/out_pg and
-out_hmc respectively. From the bottom an arrow points to the output
-filename, intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz’
-}</p>
-<p>![fig-dag2]: ./fig/dag_2.png {alt=’ A DAG for the partial workflow
-with eleven similar columns, one per ensemble, each having a green
-ps_mass, a red avg_plaquette, and a yellow one_loop_matching job; each
-green and yellow box has an arrow leading to a green “spectrum” box at
-the bottom.’}</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -3105,8 +3089,7 @@ have to “timeslice” on a core which is generally suboptimal</li>
 many cores you have available, it will start jobs in parallel to use all
 your cores. In the diagram below, five jobs are ready to run and there
 are four system cores.</p>
-<p>![][fig-threads]</p>
-</section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a>
+<figure><img src="../fig/snake_threads.svg" alt="Representation of a computer with four microchip icons indicating four available cores. To the right are five small green boxes representing Snakemake jobs and labelled as wanting 1, 1, 1, 2 and 8 threads respectively. " class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a>
 </h2>
 <hr class="half-width">
 <p>So, to know how many threads to make available to Snakemake, we need
@@ -3315,8 +3298,7 @@ in the <a href="https://snakemake.github.io/snakemake-plugin-catalog/" class="ex
 plugin catalog</a>, along with the <code>drmaa</code>,
 <code>cluster-generic</code> and <code>cluster-sync</code> plugins which
 can support PBS, SGE and other cluster schedulers.</p>
-<p>![][fig-cluster]</p>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<figure><img src="../fig/cluster.jpg" alt="A photo of some high performance computer hardware racked in five cabinets in a server room. Each cabinet is about 2.2 metres high and 0.8m wide. The doors of the cabinets are open to show the systems inside. Orange and yellow cabling is prominent, connecting ports within the second and third racks. " class="figure mx-auto d-block"></figure><div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Running on cluster and cloud </h3>
@@ -3350,15 +3332,6 @@ and how it went.</p>
 </div>
 </div>
 </div>
-<p>![fig-threads]: fig/snake_threads.svg {alt=’ Representation of a
-computer with four microchip icons indicating four available cores. To
-the right are five small green boxes representing Snakemake jobs and
-labelled as wanting 1, 1, 1, 2 and 8 threads respectively. ’}</p>
-<p>![fig-cluster]: fig/cluster.jpg {alt=’ A photo of some high
-performance computer hardware racked in five cabinets in a server room.
-Each cabinet is about 2.2 metres high and 0.8m wide. The doors of the
-cabinets are open to show the systems inside. Orange and yellow cabling
-is prominent, connecting ports within the second and third racks. ’}</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -4044,7 +4017,7 @@ to run the workflow.`</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>Yes, this tool is clearly part of the workflow, so should be
@@ -4289,7 +4262,7 @@ Instead, we must do this preparation by hand.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>In principle, another archive like <code>tar.gz</code> could also be
 used. However, Zenodo can preview the contents of ZIP files, and not of

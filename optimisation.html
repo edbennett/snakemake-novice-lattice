@@ -436,8 +436,7 @@ have to “timeslice” on a core which is generally suboptimal</li>
 many cores you have available, it will start jobs in parallel to use all
 your cores. In the diagram below, five jobs are ready to run and there
 are four system cores.</p>
-<p>![][fig-threads]</p>
-</section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a></h2>
+<figure><img src="fig/snake_threads.svg" alt="Representation of a computer with four microchip icons indicating four available cores. To the right are five small green boxes representing Snakemake jobs and labelled as wanting 1, 1, 1, 2 and 8 threads respectively. " class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a></h2>
 <hr class="half-width"><p>So, to know how many threads to make available to Snakemake, we need
 to know how many CPU cores we have on our machine. On Linux, we can find
 out how many cores you have on a machine with the <code>lscpu</code>
@@ -631,9 +630,7 @@ in the <a href="https://snakemake.github.io/snakemake-plugin-catalog/" class="ex
 plugin catalog</a>, along with the <code>drmaa</code>,
 <code>cluster-generic</code> and <code>cluster-sync</code> plugins which
 can support PBS, SGE and other cluster schedulers.</p>
-<p>![][fig-cluster]</p>
-
-<div id="cluster-demo" class="callout">
+<figure><img src="fig/cluster.jpg" alt="A photo of some high performance computer hardware racked in five cabinets in a server room. Each cabinet is about 2.2 metres high and 0.8m wide. The doors of the cabinets are open to show the systems inside. Orange and yellow cabling is prominent, connecting ports within the second and third racks. " class="figure mx-auto d-block"></figure><div id="cluster-demo" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -645,15 +642,6 @@ can support PBS, SGE and other cluster schedulers.</p>
 </div>
 </div>
 </div>
-<p>![fig-threads]: fig/snake_threads.svg {alt=’ Representation of a
-computer with four microchip icons indicating four available cores. To
-the right are five small green boxes representing Snakemake jobs and
-labelled as wanting 1, 1, 1, 2 and 8 threads respectively. ’}</p>
-<p>![fig-cluster]: fig/cluster.jpg {alt=’ A photo of some high
-performance computer hardware racked in five cabinets in a server room.
-Each cabinet is about 2.2 metres high and 0.8m wide. The doors of the
-cabinets are open to show the systems inside. Orange and yellow cabling
-is prominent, connecting ports within the second and third racks. ’}</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
