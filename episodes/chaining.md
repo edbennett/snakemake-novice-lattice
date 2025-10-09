@@ -155,8 +155,8 @@ snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquet
 
 ## Tabulating trajectory counts
 
-The script `src/tabulate_counts.py` will take a list of files containing plaquette data,
-and output a LaTeX table of trajectory counts.
+The script `src/tabulate_counts.py` will take a list of files containing trajectory counts,
+and output them in a LaTeX table.
 Write a rule to generate this table for all values of $\beta$,
 and output it to `assets/tables/counts.tex`.
 

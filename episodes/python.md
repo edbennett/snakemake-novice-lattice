@@ -82,6 +82,7 @@ dependencies:
   - python=3.12.6
   - pip:
       - h5py==3.11.0
+      - jinja2==3.1.6
       - matplotlib==3.9.2
       - numpy==2.1.1
       - pandas==2.2.3
@@ -129,27 +130,38 @@ to tell Snakemake to pay attention to the `conda:` specification.
 Let's check now that the output was correctly generated:
 
 ```shellsession
-$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 20
+$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 31
 {
- "program": "pyerrors 2.13.0",
+ "program": "pyerrors 2.14.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-05-20 15:44:09 +0100",
- "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
+ "date": "2025-10-08 19:51:58 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
  "description": {
-  "group_family": "SU",
-  "num_colors": 2,
-  "nt": 48,
-  "nx": 24,
-  "ny": 24,
-  "nz": 24,
-  "beta": 2.0,
-  "num_heatbath": 1,
-  "num_overrelaxed": 4,
-  "num_thermalization": 1000,
-  "thermalization_time": 2453.811479,
-  "num_trajectories": 10010
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "plaquette": "DICTOBS0"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "num_heatbath": 1,
+   "num_overrelaxed": 4,
+   "num_thermalization": 1000,
+   "thermalization_time": 2453.811479,
+   "num_trajectories": 10010
+  }
  },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "tag": ["plaquette"],
+   "value": [0.5012064525235401],
 ```
 
 Some of the output will differ on your machine,
@@ -170,7 +182,7 @@ and _provenance_ information describing how and when it was computed.
 If you imagine a script that outputs only the average plaquette and its uncertainty:
 
 ```
-0.501206452535401 TODO
+0.501206452535401 5.027076650629463e-06
 ```
 
 then seeing just this file in isolation,

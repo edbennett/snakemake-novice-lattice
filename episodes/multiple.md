@@ -95,12 +95,20 @@ rule w0:
         plot=multiext(
             "intermediary_data/{subdir}/wflow.W_flow",
             config["plot_filetype"],
-	),    conda: "envs/analysis.yml"
+	),
+    conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.w0 {input} --W0 {config[W0_reference]} --output_file {output.data} --plot_file {output.plot} --plot_styles {config[plot_styles]}"
 ```
 
 :::::::::::::::::::::::::
+
+Again,
+we can test this with
+
+```shellsession
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/wflow.W_flow.pdf
+```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -129,6 +137,40 @@ rule one_loop_matching:
     shell:
         "python -m su2pg_analysis.one_loop_matching --plaquette_data {input.plaquette} --spectral_observable_data {input.meson} --output_filename {output.data}"
 ```
+
+To test this:
+
+```shellsession
+$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz cat intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz | gunzip | head -n 28
+{
+ "program": "pyerrors 2.14.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-10-08 20:56:18 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
+ "description": {
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "decay_const": "DICTOBS0"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "representation": "fun",
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "mass": 0.0,
+   "channel": "ps"
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "value": [0.06760436978217312],
+   ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -173,6 +215,12 @@ rule spectrum:
     conda: "envs/analysis.yml"
     shell:
         "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]}"
+```
+
+Test this using
+
+```shellsession
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 :::::::::::::::::::::::::
@@ -231,6 +279,16 @@ rule ps_mass:
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
+
+We can again verify this using
+
+```shellsession
+snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+cat intermediary_data/beta{beta}/corr.ps_mass.log
+```
+
+Since this fit didn't emit any output on this occasion,
+the resulting log is empty.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -293,6 +351,14 @@ rule spectrum:
 ```
 
 :::::::::::::::::::::::::
+
+
+We can again verify this using
+
+```shellsession
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
+cat intermediary_data/spectrum_plot.log
+```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -385,7 +451,7 @@ Some less so.
 4. The other expected output file
    `intermediary_data/beta2.0/corr.ps_eff_mass.pdf`
    was found but has now been removed by Snakemake.
-5. Snakemake suggest this might be due to "filesystem latency".
+5. Snakemake suggests this might be due to "filesystem latency".
 
 This last point is a red herring.
 "Filesystem latency" is not an issue here, and never will be,
@@ -436,3 +502,6 @@ and re-run to confirm that all is well.
 ```snakemake
 snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
+
+
+[shell-novice]: https://swcarpentry.github.io/shell-novice

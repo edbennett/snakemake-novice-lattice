@@ -123,6 +123,8 @@ Code to parse these logs and compute statistics
 is included with the sample data;
 we'll use these in due course.
 
+To exit `less`, press <kbd>q</kbd>.
+
 ## Making a Snakefile
 
 To start with,
@@ -173,8 +175,16 @@ to get the specified output from the given input.
 
 Going back to the shell now,
 we can test this rule.
-From the `su2pg` directory,
-we can run the command
+First up,
+we need to enter the directory containing the workflow
+
+``` shellsession
+cd su2pg
+```
+
+We'll spend the rest of the lesson in this directory.
+From the here,
+we can now run the command
 
 ```shellsession
 snakemake --cores 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count

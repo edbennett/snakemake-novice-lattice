@@ -44,7 +44,6 @@ rule ps_mass:
         plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
         plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
-    threads: 4
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
@@ -56,6 +55,7 @@ we could make a copy of this rule,
 and change `ps` to,
 for example
 `v` or `av`.
+(We did this in an earlier challenge for the vector channel.)
 However,
 just like adding more ensembles,
 this rapidly makes our Snakefiles unwieldy and difficult to maintain.
@@ -182,7 +182,6 @@ rule meson_mass:
         plateau_start=plateau_param("start"),
         plateau_end=plateau_param("end"),
     conda: "envs/analysis.yml"
-    threads: 4
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
@@ -259,11 +258,9 @@ rule restricted_spectrum:
         ps_decay_const=spectrum_param("pg.corr.ps_decay_const"),
     output:
         plot=multiext("assets/plots/spectrum_beta{beta0}", config["plot_filetype"]),
-    log:
-        messages="intermediary_data/spectrum_plot.log"
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]}"
 ```
 
 To generate the requested plot would then be:
@@ -305,7 +302,16 @@ For example,
 let's say that we would like to be able to plot
 only the data that we have already computed,
 without regenerating anything.
-We can perform a wildcard _glob_ using the `glob_wildcards` function:
+We can perform a wildcard _glob_ using Python's `glob` function.
+
+At the top of the file,
+add:
+
+```
+from glob import glob
+```
+
+Then we can add a rule:
 
 ```
 rule quick_spectrum:
@@ -319,11 +325,9 @@ rule quick_spectrum:
         ),
     output:
         plot=multiext("intermediary_data/check_spectrum", config["plot_filetype"]),
-    log:
-        messages="intermediary_data/check_spectrum_plot.log"
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]}"
 ```
 
 Let's test this now
@@ -342,7 +346,7 @@ then all the points will be present.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
-## Don't use this in production!
+## Use with care in production!
 
 This rule will only include
 data already present at the start of the workflow run
@@ -355,8 +359,8 @@ then some points will
 (non-deterministically)
 be omitted from your plots.
 
-For final plots,
-always specify the source data in full!
+For final plots based on intermediary data,
+always specify the `input` explicitly.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -414,7 +418,7 @@ Thiis will be the same regardless of whether `input_file` is even present,
 or when it was last updated.
 
 
-[fig-asymmetric]: fig/asymmetric-workflow.svg {alt='
+![fig-asymmetric]: fig/asymmetric-workflow.svg {alt='
   Diagram showing three boxes in a row,
   connected from left to right by arrows.
   The boxes are labeled
@@ -434,7 +438,7 @@ or when it was last updated.
 - Use Python input functions that take a dict of wildcards,
   and return a list of strings,
   to handle complex dependency issues that can't be expressed in pure Snakemake.
-- Use `glob_wildcards` to match multiple files on disk matching a specific pattern.
+- Import `glob.glob` to match multiple files on disk matching a specific pattern.
   Don't rely on this finding intermediate files in final production workflows,
   since it won't find files not present at the start of the workflow run.
 - Use `snakemake --touch` if you need to mark files as up-to-date,
