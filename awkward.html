@@ -656,7 +656,7 @@ automatically work out which files need updating based on changes to
 their inputs, and re-run any rules needed to update them. Occasionally,
 however, this isn’t what we want to do.</p>
 <p>Consider the following example:</p>
-<figure><img src="fig/asymmetric-workflow.svg%20%7Balt='Diagram%20showing%20three%20boxes%20in%20a%20row," class="figure mx-auto d-block"></figure><p>We have two steps to this workflow: taking the input data and from it
+<figure><img src="fig/asymmetric-workflow.svg" alt='Diagram showing three boxes in a row,   connected from left to right by arrows.   The boxes are labeled   "`input_file`",   "`data_file`",   and "`output_file`".   The arrows are labelled   "`generate`" (24 hours),   and "`plot`" (15 seconds). ' class="figure mx-auto d-block"></figure><p>We have two steps to this workflow: taking the input data and from it
 generating some intermediary data, requiring 24 hours. Then we take the
 resulting data and plot results from it, taking 15 seconds. If we make a
 trivial change to the input file, such as reformatting white space, we’d
@@ -678,11 +678,6 @@ snakemake --cores all --use-conda --printshellcmds plot_file</code></pre>
 <p>This will run only the second rule, not the first. Thiis will be the
 same regardless of whether <code>input_file</code> is even present, or
 when it was last updated.</p>
-<p>connected from left to right by arrows. The boxes are labeled
-“<code>input_file</code>”, “<code>data_file</code>”, and
-“<code>output_file</code>”. The arrows are labelled
-“<code>generate</code>” (24 hours), and “<code>plot</code>” (15
-seconds). }</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
