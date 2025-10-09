@@ -141,14 +141,23 @@ by altering some files and re-running Snakemake without the `--forceall` option.
 ```shellsession
 $ rm assets/plots/spectrum.pdf
 $ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+...
+Job stats:
+job         count
+--------  -------
+spectrum        1
+total           1
+...
 ```
 
 This just re-runs `spectrum`,
 the final step.
 
 ```shellsession
-$ rm intermediary_data/beta*/corr.ps_mass.json
+$ rm intermediary_data/beta*/corr.ps_mass.json.gz
 $ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+...
+Nothing to be done (all requested files are present and up to date).
 ```
 
 "Nothing to be done".
@@ -159,6 +168,15 @@ so it doesn't worry.
 ```shellsession
 $ touch raw_data/beta*/out_pg
 $ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+...
+job                  count
+-----------------  -------
+avg_plaquette           11
+one_loop_matching       11
+ps_mass                 11
+spectrum                 1
+...
+total                   34
 ```
 
 The `touch` command is a standard Unix command that resets the timestamp of the file,
@@ -207,7 +225,7 @@ and also multiple targets,
 and Snakemake can tell which is which.
 
 ```bash
-snakemake --forcerun avg_plaquette ps_mass --cores 1 --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json
+snakemake --forcerun avg_plaquette ps_mass --cores 1 --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz intermediary_data/beta2.5/pg.corr.ps_decay_const.json.gz
 ```
 
 The reason for using the `--cores` flag specifically
@@ -298,14 +316,14 @@ and then use the `--dag` option as shown above to check:
 This is a way to make the result in the first place:
 
 ```bash
-$ snakemake --cores 1 --printshellcmds intermediary_data/beta2.0/pg.corr.ps_decay_const.json
+$ snakemake --cores 1 --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz
 ```
 
 1) This command should show three boxes,
    but all are dotted so no jobs are actually to be run.
 
 ```bash
-$ snakemake --dag intermediary_data/beta2.0/pg.corr.ps_decay_const.json | gm display -
+$ snakemake --dag dot intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz | gm display -
 ```
 
 2) The `--force` flag re-runs only the job to create the output file,
@@ -354,13 +372,13 @@ keep it simple and just use `--forceall` to run the whole workflow from scratch.
 
 For the opposite case where you want to avoid re-running particular steps,
 see the `--touch` option of Snakemake mentioned [later in the lesson
-](TODO).
+](awkward.html).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
-[fig-dag]: fig/dag_1.svg {alt='
+[fig-dag]: ./fig/dag_1.svg {alt='
   Diagram showing jobs as coloured boxes joined by arrows representing
 data flow.
   A box labelled "avg_plaquette" is in red at the top left,
@@ -372,7 +390,8 @@ data flow.
   From the bottom an arrow points to the output filename,
   intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz'
 }
-[fig-dag2]: fig/dag_2.png {alt='
+
+![fig-dag2]: ./fig/dag_2.png {alt='
   A DAG for the partial workflow with eleven similar columns,
   one per ensemble,
   each having a green ps_mass, a red avg_plaquette,

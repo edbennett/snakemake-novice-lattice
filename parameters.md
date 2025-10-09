@@ -121,7 +121,36 @@ rule w0:
 
 Test this with:
 
-
+```shellsession
+$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/wflow.w0.json.gz
+$ cat intermediary_data/beta2.0/wflow.w0.json.gz | gunzip | head -n 26
+{
+ "program": "pyerrors 2.14.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-10-08 20:28:56 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
+ "description": {
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "plaquette_w0": "DICTOBS0",
+   "clover_w0": "DICTOBS1"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "value": [2.2332066807096895],
+```
 
 :::::::::::::::::::::::::
 
@@ -142,7 +171,7 @@ Add a definition to your `config.yaml` file:
 plot_filetype: ".pdf"
 ```
 
-and update the `output:` block of the rule as:
+and update the `output:` block of the `plot_avg_plaquette` rule as:
 
 ```snakemake
     output:
@@ -250,6 +279,19 @@ we can exploit the fact that Snakemake is an extension of Python.
 In particular,
 Snakemake makes use of the [Pandas][pandas] library for tabular data,
 which we can use to read in a CSV files.
+
+::::::::::::::::::::::::::::::::::: instructor
+
+CSVs aren't the only way to do this;
+for more complex data,
+YAML or even JSON may be a better choice.
+But CSV is good for most purposes,
+and easier to get started with.
+It's also more readable for non-specialists investigating the workflow,
+which is valuable in and of itself.
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
 Let's add the following to the top of the file:
 
 ```snakemake
@@ -264,7 +306,7 @@ file.
 We can create, view, and modify this with the spreadsheet tool of our choice.
 Let's take a look at the file now.
 
-![Screenshot of a spreadsheet application showing the file `metadata/ensemble_metadata.csv`.](./images/metadata_spreadsheet.png)
+![Screenshot of a spreadsheet application showing the file `metadata/ensemble_metadata.csv`.](./fig/metadata_spreadsheet.png)
 
 You can see that we have columns defining metadata to identify each ensemble,
 and columns for parameters relating to the analysis of each ensemble.
@@ -304,18 +346,14 @@ to use these parameters in the shell command that gets run.
 Let's test this now:
 
 ```shellsession
-snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
-cat intermediary_data/beta2.0/corr.ps_mass.json.gz
-| gunzip | head -n 28
-```
-
-```output
+$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+$ cat intermediary_data/beta2.0/corr.ps_mass.json.gz | gunzip | head -n 29
 {
- "program": "pyerrors 2.13.0",
+ "program": "pyerrors 2.14.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-05-20 15:49:12 +0100",
- "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
+ "date": "2025-10-08 20:41:12 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
  "description": {
   "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
   "OBSDICT": {
@@ -325,6 +363,7 @@ cat intermediary_data/beta2.0/corr.ps_mass.json.gz
   "description": {
    "group_family": "SU",
    "num_colors": 2,
+   "representation": "fun",
    "nt": 48,
    "nx": 24,
    "ny": 24,
@@ -370,9 +409,61 @@ rule v_mass:
         "python -m su2pg_analysis.meson_mass {input} --channel v --output_file {output} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end}"
 ```
 
+We can again verify this using
+
+```shellsession
+$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+$ cat intermediary_data/beta2.0/corr.ps_mass.json.gz | gunzip | head -n 29
+{
+ "program": "pyerrors 2.14.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-10-08 20:43:06 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
+ "description": {
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "mass": "DICTOBS0",
+   "amplitude": "DICTOBS1"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "representation": "fun",
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "mass": 0.0,
+   "channel": "v"
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "value": [2.213089845075537],
+```
+
+If it seems awkward
+to need to define multiple rules that differ only in which channel they look at,
+this is a good point,
+and one that we will deal with in the episode on Awkward Corners.
+
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Use a YAML file to define parameters to the workflow,
+  and attach it using `configfile:` near the top of the file.
+- Override individual options at run-time with the `--config` option.
+- Load additional parameter files at run-time using the `--configfile` option.
+- Use a CSV file loaded into a Pandas dataframe to load ensemble-specific metadata.
+- Use `lookup()` to get information out of the dataframe in a rule.
+- Use `params:` to define job-specific parameters that do not describe filenames.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 [pandas]: https://pandas.pydata.org

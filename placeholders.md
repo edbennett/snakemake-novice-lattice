@@ -86,7 +86,7 @@ then Snakemake will treat them as different
 entities&mdash;rules in Snakemake are self-contained in this way.
 
 Meanwhile,
-`{input}` and `{output}` are **placeholders**
+`{input}` and `{output}` are **placeholders**.
 Placeholders are used in the `shell` section of a rule.
 Snakemake will replace them with appropriate values before running the command:
 `{input}` with the full name of the input file,
@@ -95,7 +95,7 @@ and `{output}` with the full name of the output file.
 If we had wanted to include
 the value of the `subdir` wildcard directly in the `shell` command,
 we could have used the placeholder `{wildcards.subdir}`,
-but in most cases,
+but in many cases,
 as here,
 we just need the `{input}` and `{output}` placeholders.
 
@@ -302,8 +302,6 @@ flag, eg:
 ```shellsession
 snakemake --dry-run --forceall --printshellcmds intermediary_data/beta1.7/pg.count
 ```
-
-We'll make use of this later in the lesson.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

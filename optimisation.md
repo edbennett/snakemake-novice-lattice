@@ -99,14 +99,14 @@ In this case,
 the machine has 3.7GiB of total RAM.
 
 On macOS,
-the command is sysctl `hw.memsize`:
+the command is `sysctl -h hw.memsize`:
 
 ```shellsession
-$ sysctl hw.memsize
-hw.memsize: 34359738368
+$ sysctl -h hw.memsize
+hw.memsize: 34,359,738,368
 ```
 
-This machine has 34,359,738,368 bytes of RAM in total.
+This machine has around 34GB of RAM in total.
 Dividing by the number of bytes in 1GiB
 ($1024^3$ bytes),
 that becomes 32GiB RAM.
@@ -152,6 +152,9 @@ or if you are working through the material on your own,
 repeat the measurement three times to get your own average.
 
 Now change the Snakemake concurrency option to  `--cores 2` and then `--cores 4`.
+Finally,
+try using every available core on your machine,
+using `--cores all`.
 
 - How does the total execution time change?
 - What factors do you think limit
@@ -322,12 +325,13 @@ CC-BY-SA-4.0
 
 
 
-[fig-threads]: fig/snake_threads.svg {alt='
+![fig-threads]: fig/snake_threads.svg {alt='
 Representation of a computer with four microchip icons indicating four available cores.
 To the right are five small green boxes representing Snakemake jobs
 and labelled as wanting 1, 1, 1, 2 and 8 threads respectively.
 '}
-[fig-cluster]: fig/cluster.jpg {alt='
+
+![fig-cluster]: fig/cluster.jpg {alt='
 A photo of some high performance computer hardware
 racked in five cabinets in a server room.
 Each cabinet is about 2.2 metres high and 0.8m wide.
@@ -343,6 +347,7 @@ connecting ports within the second and third racks.
   try to match the number of threads to the number of cores you have
 - You also need to consider RAM, disk, and network bottlenecks
 - Profile your jobs to see what is taking most resources
+- Use `--cores all` to enable using all CPU cores
 - Snakemake is great for running workflows on compute clusters
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
