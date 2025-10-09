@@ -236,6 +236,60 @@ so you definitely need to go through it.
 
 :::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Scaled spectrum plot
+
+Write a rule that plots both
+the pseudoscalar channel's decay constant and the vector mass
+against the pseudoscalar mass,
+all scaled by the $w_0$ scale,
+for each ensemble studied having $\beta \le 1.8$.
+The tool `src/plot_spectrum.py` will help with this.
+
+Hint:
+compared to the unscaled spectrum plot,
+you will additionally need data files for the vector mass and $w_0$,
+and will need to pass the `--rescale_w0` option to `plot_spectrum.py`.
+
+:::::::::::::::  solution
+
+```snakemake
+rule spectrum_scaled:
+    input:
+        script="src/plot_spectrum.py",
+        ps_mass=expand(
+            "intermediary_data/beta{beta}/corr.ps_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+        ),
+        v_mass=expand(
+            "intermediary_data/beta{beta}/corr.v_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+        ),
+        ps_decay_const=expand(
+            "intermediary_data/beta{beta}/pg.corr.ps_decay_const.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+        ),
+        w0=expand(
+        "intermediary_data/beta{beta}/wflow.w0.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+    ),
+    output:
+        plot=multiext("assets/plots/spectrum_scaled", config["plot_filetype"]),
+    conda: "../envs/analysis.yml"
+    shell:
+        "python {input.script} {input.ps_mass} {input.v_mass} {input.ps_decay_const} {input.w0} --y_observable f_ps --y_observable m_v --zero_y_axis --rescale_w0 --output_file {output.plot} --plot_styles {config[plot_styles]}"
+```
+
+Test this using
+
+```shellsession
+snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum_scaled.pdf
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Log files
 
@@ -416,7 +470,7 @@ Shell command: python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --o
 Activating conda environment: .snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
 Waiting at most 5 seconds for missing files:
 intermediary_data/beta2.0/corr.ps_mass.json.gz (missing locally)
-MissingOutputException in rule ps_mass in file "/home/ed/src/su2_puregauge_test/workflow/Snakefile", line 68:
+MissingOutputException in rule ps_mass in file "/home/ed/src/su2pg/workflow/Snakefile", line 68:
 Job 0 completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
 intermediary_data/beta2.0/corr.ps_mass.json.gz (missing locally, parent dir contents: corr.ps_mass.json.gz.json_.json.gz, corr.ps_mass.log, corr.ps_eff_mass.pdf)
 Removing output files of failed job ps_mass since they might be corrupted:
@@ -430,11 +484,11 @@ Error in rule ps_mass:
     input: raw_data/beta2.0/out_corr
     output: intermediary_data/beta2.0/corr.ps_mass.json.gz, intermediary_data/beta2.0/corr.ps_eff_mass.pdf
     log: intermediary_data/beta2.0/corr.ps_mass.log (check log file(s) for error details)
-    conda-env: /home/ed/src/su2_puregauge_test/.snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
+    conda-env: /home/ed/src/su2pg/.snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
     shell:
         python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle |& tee intermediary_data/beta2.0/corr.ps_mass.log
         (command exited with non-zero exit code)
-Complete log(s): /home/ed/src/su2_puregauge_test/.snakemake/log/2025-09-02T002859.356054.snakemake.log
+Complete log(s): /home/ed/src/su2pg/.snakemake/log/2025-09-02T002859.356054.snakemake.log
 WorkflowError:
 At least one job did not complete successfully.
 ```

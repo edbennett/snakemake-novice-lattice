@@ -182,7 +182,7 @@ we need to enter the directory containing the workflow
 cd su2pg
 ```
 
-We'll spend the rest of the lesson in this directory.
+We'll spend most of the rest of the lesson in this directory.
 From the here,
 we can now run the command
 
@@ -278,6 +278,28 @@ where it expects to see output from rules that it runs.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+::::::::::::::::::::::::::::::::::: instructor
+
+## Read-only data
+
+The example data for this lesson uses read-only raw data throughout,
+including the containing directories.
+If learners end up with multiple copies of the data and need to delete one,
+they should use the commands:
+
+```shellsession
+chmod -R u+w raw_data
+rm -r raw_data
+```
+
+Having the containing directories read-only means
+that extra output files can't be added by accident.
+It's a relatively strict measure&mdash;while assembling data,
+one would only want the files read-only,
+so you could keep adding more files as they were ready.
+
+:::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::: instructor
 

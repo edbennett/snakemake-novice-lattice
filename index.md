@@ -27,4 +27,18 @@ we can build up a workflow that takes our raw data as input,
 and produces plots, tables, and other definitions
 that we can include in our publications.
 
+### Acknowledgments
+
+The development of this lesson was supported by
+the STFC Research Software Engineer Fellowship
+EP/V052489/1.
+The data presented were generated using
+the [Supercomputing Wales][scw] SUNBIRD system.
+Supercomputing Wales is supported by
+the [European Regional Development Fund][erdf]
+via [Welsh Government][welshgov]
+
+[erdf]: https://commission.europa.eu/funding-tenders/find-funding/eu-funding-programmes/european-regional-development-fund-erdf_en
+[scw]: https://www.supercomputing.wales
 [snakemake]: https://snakemake.github.io/
+[welshgov]: https://www.gov.wales

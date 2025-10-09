@@ -183,7 +183,7 @@ rule meson_mass:
         plateau_end=plateau_param("end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
+        "python -m su2pg_analysis.meson_mass {input} --channel {wildcards.channel} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
 ```
 
 We can test this for the vector mass:
