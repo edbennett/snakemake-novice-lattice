@@ -427,7 +427,7 @@ or when it was last updated.
   The arrows are labelled
   "`generate`" (24 hours),
   and "`plot`" (15 seconds).
-}
+'}
 
 [f-strings]: https://docs.python.org/3/reference/lexical_analysis.html#f-strings
 
