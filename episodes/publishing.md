@@ -81,8 +81,8 @@ Let's use Git to make a fresh copy of the workflow:
 
 ```shellsession
 cd ../
-git clone --recurse-submodules su2_puregauge su2_puregauge_test
-cd su2_puregauge_test
+git clone --recurse-submodules su2pg su2pg_test
+cd su2pg_test
 ```
 
 Now,
@@ -95,8 +95,8 @@ for now,
 we can copy this across:
 
 ```shellsession
-cp -r ../su2_puregauge/raw_data .
-cp ../su2_puregauge/metadata/* metadata/
+cp -r ../su2pg/raw_data .
+cp ../su2pg/metadata/* metadata/
 ```
 
 Now we can re-run Snakemake:
@@ -117,7 +117,7 @@ For text files,
 we can also check the differences explicitly:
 
 ```shellsession
-diff -r ../su2_puregauge/assets/tables assets/tables
+diff -r ../su2pg/assets/tables assets/tables
 ```
 
 We expect to see differences in provenance,
@@ -174,8 +174,8 @@ ensuring that we have all submodules present
 
 ```shellsession
 cd ..
-git clone --recurse-submodules su2_puregauge su2_puregauge_release
-zip -9 --exclude "**/.git/*" --exclude "**/.git" -r su2_puregauge.zip su2_puregauge_release
+git clone --recurse-submodules su2pg su2pg_release
+zip -9 --exclude "**/.git/*" --exclude "**/.git" -r su2pg.zip su2pg_release
 ```
 
 Note that we use `--exclude` to avoid

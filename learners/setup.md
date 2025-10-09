@@ -78,9 +78,8 @@ but for your work in Snakemake going forward.
 ### Details
 
 ```bash
-conda create -n snakemake -c conda-forge -c bioconda snakemake
+conda create -n snakemake -c conda-forge -c bioconda snakemake bash
 conda activate snakemake
-conda install -c conda-forge 'mamba<2.0.0'
 ```
 
 After starting a new terminal,
