@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 20%" class="percentage">
-    20%
+<aside class="col-md-12 lesson-progress"><div style="width: 15%" class="percentage">
+    15%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 20%" aria-valuenow="20" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 15%" aria-valuenow="15" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -296,6 +296,24 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -354,7 +372,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Chaining rules</h1>
-        <p>Last updated on 2025-10-06 |
+        <p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -511,8 +529,8 @@ the parameter lists.</p>
 <h3 class="callout-title">Tabulating trajectory counts</h3>
 <div class="callout-content">
 <p>The script <code>src/tabulate_counts.py</code> will take a list of
-files containing plaquette data, and output a LaTeX table of trajectory
-counts. Write a rule to generate this table for all values of <span class="math inline">\(\beta\)</span>, and output it to
+files containing trajectory counts, and output them in a LaTeX table.
+Write a rule to generate this table for all values of <span class="math inline">\(\beta\)</span>, and output it to
 <code>assets/tables/counts.tex</code>.</p>
 </div>
 </div>
@@ -524,7 +542,7 @@ counts. Write a rule to generate this table for all values of <span class="math 
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
@@ -566,7 +584,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -668,8 +686,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/chaining.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/chaining.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-06",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>

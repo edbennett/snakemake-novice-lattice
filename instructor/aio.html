@@ -349,6 +349,30 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -406,7 +430,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Running commands with Snakemake</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -480,7 +504,7 @@ necessary steps.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Environment activation </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>The most likely issue learners will encounter here is needing to
 activate their Snakemake environment when they have opened a fresh
@@ -514,6 +538,7 @@ ensemble with the heat bath algorithm:</p>
 the computation being computed, and results for observables computed on
 each configuration. Code to parse these logs and compute statistics is
 included with the sample data; we’ll use these in due course.</p>
+<p>To exit <code>less</code>, press <kbd>q</kbd>.</p>
 </section><section><h2 class="section-heading" id="making-a-snakefile">Making a Snakefile<a class="anchor" aria-label="anchor" href="#making-a-snakefile"></a>
 </h2>
 <hr class="half-width">
@@ -566,8 +591,11 @@ to generate. If this file is not generated, then Snakemake will abort
 the workflow with an error. Finally, the <code>shell:</code> block tells
 Snakemake what shell commands to run to get the specified output from
 the given input.</p>
-<p>Going back to the shell now, we can test this rule. From the
-<code>su2pg</code> directory, we can run the command</p>
+<p>Going back to the shell now, we can test this rule. First up, we need
+to enter the directory containing the workflow</p>
+<pre class="shellsession"><code>cd su2pg</code></pre>
+<p>We’ll spend the rest of the lesson in this directory. From the here,
+we can now run the command</p>
 <pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
 <p>If we’ve made any transcription errors in the rule (missing quotes,
 bad indentations, etc.), then it will become clear at this point, as
@@ -595,7 +623,7 @@ or in a separate text editing application.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Directories </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>Learners less experienced with the shell may want to <code>cd</code>
 into directories to edit files; if they do this and forget to
@@ -652,7 +680,7 @@ rules that it runs.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
   <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Use of the --forceall flag </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
 <div class="accordion-body">
 <p>In the first few episodes we always run Snakemake with the
 <code>--forceall</code> flag, and it’s not explained what this does
@@ -699,7 +727,7 @@ quit back to the shell with <code>q</code></em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal">
 <li>Prints the shell commands that are being run to the terminal</li>
@@ -727,10 +755,10 @@ generation log, each trajectory concludes with a line of the form</p>
 <pre class="output" tabindex="0"><code>[MAIN][0]Trajectory #1: generated in [39.717707 sec]</code></pre>
 </div>
 <p>We can use <code>grep</code> to count these, as</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
 </div>
 <div id="counting-sequences-in-snakemake" class="callout challenge">
 <div class="callout-square">
@@ -759,7 +787,7 @@ be printed on the screen</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule count_trajectories:
     input: "raw_data/beta2.0/out_pg"
@@ -793,7 +821,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-python"><p>Content from <a href="python.html">Running Python code with Snakemake</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -887,13 +915,14 @@ content into it</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.12.6</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">pip</span><span class="kw">:</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> h5py==3.11.0</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> matplotlib==3.9.2</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> numpy==2.1.1</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pandas==2.2.3</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> scipy==1.14.1</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> uncertainties==3.2.2</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> corrfitter==8.2</span></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> -e ../../libs/su2pg_analysis</span></span></code></pre>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> jinja2==3.1.6</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> matplotlib==3.9.2</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> numpy==2.1.1</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pandas==2.2.3</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> scipy==1.14.1</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> uncertainties==3.2.2</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> corrfitter==8.2</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> -e ../../libs/su2pg_analysis</span></span></code></pre>
 </div>
 <p>This will install the specified versions of h5py, Matplotlib, Numpy,
 Pandas, Scipy, uncertainties, and corrfitter, as well as the analysis
@@ -921,27 +950,38 @@ now:</p>
 <p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
 attention to the <code>conda:</code> specification.</p>
 <p>Let’s check now that the output was correctly generated:</p>
-<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 20
+<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 31
 {
- "program": "pyerrors 2.13.0",
+ "program": "pyerrors 2.14.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-05-20 15:44:09 +0100",
- "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
+ "date": "2025-10-08 19:51:58 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
  "description": {
-  "group_family": "SU",
-  "num_colors": 2,
-  "nt": 48,
-  "nx": 24,
-  "ny": 24,
-  "nz": 24,
-  "beta": 2.0,
-  "num_heatbath": 1,
-  "num_overrelaxed": 4,
-  "num_thermalization": 1000,
-  "thermalization_time": 2453.811479,
-  "num_trajectories": 10010
- },</code></pre>
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "plaquette": "DICTOBS0"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "num_heatbath": 1,
+   "num_overrelaxed": 4,
+   "num_thermalization": 1000,
+   "thermalization_time": 2453.811479,
+   "num_trajectories": 10010
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "tag": ["plaquette"],
+   "value": [0.5012064525235401],</code></pre>
 <p>Some of the output will differ on your machine, since this library
 tracks provenance, such as where and when the code was run, in the
 output file.</p>
@@ -960,7 +1000,7 @@ and <em>provenance</em> information describing how and when it was
 computed.</p>
 <p>If you imagine a script that outputs only the average plaquette and
 its uncertainty:</p>
-<pre><code>0.501206452535401 TODO</code></pre>
+<pre><code>0.501206452535401 5.027076650629463e-06</code></pre>
 <p>then seeing just this file in isolation, it would be much harder to
 understand what it means or where it comes from. You would need some
 other bookkeeping system to track the physics parameters. Bundling these
@@ -1001,7 +1041,7 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
@@ -1027,7 +1067,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-placeholders"><p>Content from <a href="placeholders.html">Placeholders and wildcards</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/placeholders.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -1118,14 +1158,14 @@ files.</p>
 treat them as different entities—rules in Snakemake are self-contained
 in this way.</p>
 <p>Meanwhile, <code>{input}</code> and <code>{output}</code> are
-<strong>placeholders</strong> Placeholders are used in the
+<strong>placeholders</strong>. Placeholders are used in the
 <code>shell</code> section of a rule. Snakemake will replace them with
 appropriate values before running the command: <code>{input}</code> with
 the full name of the input file, and <code>{output}</code> with the full
 name of the output file.</p>
 <p>If we had wanted to include the value of the <code>subdir</code>
 wildcard directly in the <code>shell</code> command, we could have used
-the placeholder <code>{wildcards.subdir}</code>, but in most cases, as
+the placeholder <code>{wildcards.subdir}</code>, but in many cases, as
 here, we just need the <code>{input}</code> and <code>{output}</code>
 placeholders.</p>
 <p>Let’s test this general rule now:</p>
@@ -1335,7 +1375,6 @@ will plan out the jobs to run, and print them to the screen, but never
 actually run them. This is done with the <code>--dry-run</code> flag,
 eg:</p>
 <pre class="shellsession"><code>snakemake --dry-run --forceall --printshellcmds intermediary_data/beta1.7/pg.count</code></pre>
-<p>We’ll make use of this later in the lesson.</p>
 </div>
 </div>
 </div>
@@ -1368,7 +1407,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-chaining"><p>Content from <a href="chaining.html">Chaining rules</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 50 minutes</p>
@@ -1532,8 +1571,8 @@ the parameter lists.</p>
 <h3 class="callout-title">Tabulating trajectory counts</h3>
 <div class="callout-content">
 <p>The script <code>src/tabulate_counts.py</code> will take a list of
-files containing plaquette data, and output a LaTeX table of trajectory
-counts. Write a rule to generate this table for all values of <span class="math inline">\(\beta\)</span>, and output it to
+files containing trajectory counts, and output them in a LaTeX table.
+Write a rule to generate this table for all values of <span class="math inline">\(\beta\)</span>, and output it to
 <code>assets/tables/counts.tex</code>.</p>
 </div>
 </div>
@@ -1545,7 +1584,7 @@ counts. Write a rule to generate this table for all values of <span class="math 
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
@@ -1587,7 +1626,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -1635,7 +1674,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-parameters"><p>Content from <a href="parameters.html">Metadata and parameters</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/parameters.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -1730,6 +1769,34 @@ rule w0:
     shell:
         "python -m su2pg_analysis.w0 {input} --W0 {config[W0_reference]} --output_file {output}"</code></pre>
 <p>Test this with:</p>
+<pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/wflow.w0.json.gz
+$ cat intermediary_data/beta2.0/wflow.w0.json.gz | gunzip | head -n 26
+{
+ "program": "pyerrors 2.14.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-10-08 20:28:56 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
+ "description": {
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "plaquette_w0": "DICTOBS0",
+   "clover_w0": "DICTOBS1"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "value": [2.2332066807096895],</code></pre>
 </div>
 </div>
 </div>
@@ -1746,12 +1813,13 @@ rule w0:
 different filetypes. PDF is useful for including in LaTeX, but SVG may
 be a better format to use with some tools.</p>
 <p>Add a definition to your <code>config.yaml</code> file:</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">plot_filetype</span><span class="kw">:</span><span class="at"> </span><span class="st">".pdf"</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">plot_filetype</span><span class="kw">:</span><span class="at"> </span><span class="st">".pdf"</span></span></code></pre>
 </div>
-<p>and update the <code>output:</code> block of the rule as:</p>
+<p>and update the <code>output:</code> block of the
+<code>plot_avg_plaquette</code> rule as:</p>
 <pre class="snakemake"><code>    output:
         multiext("assets/plots/plaquette_scan", config["plot_filetype"]),</code></pre>
 <p>Note that unlike in the <code>shell</code> block, we can’t substitute
@@ -1802,12 +1870,12 @@ specify this new file.</p></li>
 <div class="accordion-body">
 <p>You should now have a file called something like
 <code>config/poster.yaml</code>, with content</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">plot_styles</span><span class="kw">:</span><span class="at"> </span><span class="st">"styles/poster.mplstyle"</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">plot_format</span><span class="kw">:</span><span class="at"> </span><span class="st">".svg"</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="fu">W0_reference</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.2</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">plot_styles</span><span class="kw">:</span><span class="at"> </span><span class="st">"styles/poster.mplstyle"</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">plot_format</span><span class="kw">:</span><span class="at"> </span><span class="st">".svg"</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="fu">W0_reference</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.2</span></span></code></pre>
 </div>
 <p>To test this, run</p>
 <pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda --configfile config/poster.yaml -- assets/plots/plaquette_scan.pdf</code></pre>
@@ -1843,15 +1911,30 @@ to have a dedicated file containing these parameters, and to be able to
 have Snakemake read it and pick out the correct values.</p>
 <p>To do this, we can exploit the fact that Snakemake is an extension of
 Python. In particular, Snakemake makes use of the <a href="https://pandas.pydata.org" class="external-link">Pandas</a> library for tabular data,
-which we can use to read in a CSV files. Let’s add the following to the
-top of the file:</p>
+which we can use to read in a CSV files.</p>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div class="accordion-body">
+<p>CSVs aren’t the only way to do this; for more complex data, YAML or
+even JSON may be a better choice. But CSV is good for most purposes, and
+easier to get started with. It’s also more readable for non-specialists
+investigating the workflow, which is valuable in and of itself.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Let’s add the following to the top of the file:</p>
 <pre class="snakemake"><code>import pandas
 
 metadata = pandas.read_csv("metadata/ensemble_metadata.csv")</code></pre>
 <p>The file being read here is a CSV (Comma Separated Values) file. We
 can create, view, and modify this with the spreadsheet tool of our
 choice. Let’s take a look at the file now.</p>
-<figure><img src=".././images/metadata_spreadsheet.png" alt="Screenshot of a spreadsheet application showing the file metadata/ensemble_metadata.csv." class="figure mx-auto d-block"><div class="figcaption">Screenshot of a spreadsheet application showing
+<figure><img src=".././fig/metadata_spreadsheet.png" alt="Screenshot of a spreadsheet application showing the file metadata/ensemble_metadata.csv." class="figure mx-auto d-block"><div class="figcaption">Screenshot of a spreadsheet application showing
 the file <code>metadata/ensemble_metadata.csv</code>.</div>
 </figure><p>You can see that we have columns defining metadata to identify each
 ensemble, and columns for parameters relating to the analysis of each
@@ -1880,18 +1963,14 @@ considering. Finally, we’ve used <code>{params.plateau_start}</code> and
 <code>{params.plateau_end}</code> placeholders to use these parameters
 in the shell command that gets run.</p>
 <p>Let’s test this now:</p>
-<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
-cat intermediary_data/beta2.0/corr.ps_mass.json.gz
-| gunzip | head -n 28</code></pre>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>{
- "program": "pyerrors 2.13.0",
+<pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+$ cat intermediary_data/beta2.0/corr.ps_mass.json.gz | gunzip | head -n 29
+{
+ "program": "pyerrors 2.14.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-05-20 15:49:12 +0100",
- "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
+ "date": "2025-10-08 20:41:12 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
  "description": {
   "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
   "OBSDICT": {
@@ -1901,6 +1980,7 @@ cat intermediary_data/beta2.0/corr.ps_mass.json.gz
   "description": {
    "group_family": "SU",
    "num_colors": 2,
+   "representation": "fun",
    "nt": 48,
    "nx": 24,
    "ny": 24,
@@ -1914,7 +1994,6 @@ cat intermediary_data/beta2.0/corr.ps_mass.json.gz
    "type": "Obs",
    "layout": "1",
    "value": [2.1988677698535195],</code></pre>
-</div>
 <div id="vector-mass" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1949,7 +2028,66 @@ rule v_mass:
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --channel v --output_file {output} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end}"</code></pre>
+<p>We can again verify this using</p>
+<pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+$ cat intermediary_data/beta2.0/corr.ps_mass.json.gz | gunzip | head -n 29
+{
+ "program": "pyerrors 2.14.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-10-08 20:43:06 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
+ "description": {
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "mass": "DICTOBS0",
+   "amplitude": "DICTOBS1"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "representation": "fun",
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "mass": 0.0,
+   "channel": "v"
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "value": [2.213089845075537],</code></pre>
+<p>If it seems awkward to need to define multiple rules that differ only
+in which channel they look at, this is a good point, and one that we
+will deal with in the episode on Awkward Corners.</p>
 </div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>Use a YAML file to define parameters to the workflow, and attach it
+using <code>configfile:</code> near the top of the file.</li>
+<li>Override individual options at run-time with the
+<code>--config</code> option.</li>
+<li>Load additional parameter files at run-time using the
+<code>--configfile</code> option.</li>
+<li>Use a CSV file loaded into a Pandas dataframe to load
+ensemble-specific metadata.</li>
+<li>Use <code>lookup()</code> to get information out of the dataframe in
+a rule.</li>
+<li>Use <code>params:</code> to define job-specific parameters that do
+not describe filenames.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1959,7 +2097,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-multiple"><p>Content from <a href="multiple.html">Multiple inputs and outputs</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/multiple.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -2064,10 +2202,25 @@ shape of the flow may be checked.</p>
         plot=multiext(
             "intermediary_data/{subdir}/wflow.W_flow",
             config["plot_filetype"],
-	),    conda: "envs/analysis.yml"
+	),
+    conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.w0 {input} --W0 {config[W0_reference]} --output_file {output.data} --plot_file {output.plot} --plot_styles {config[plot_styles]}"</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div id="flow-plots" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="flow-plots" class="callout-inner">
+<h3 class="callout-title">Flow plots<em> (continued)</em>
+</h3>
+<div class="callout-content">
+<p>Again, we can test this with</p>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/wflow.W_flow.pdf</code></pre>
 </div>
 </div>
 </div>
@@ -2091,6 +2244,36 @@ rule one_loop_matching:
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.one_loop_matching --plaquette_data {input.plaquette} --spectral_observable_data {input.meson} --output_filename {output.data}"</code></pre>
+<p>To test this:</p>
+<pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz cat intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz | gunzip | head -n 28
+{
+ "program": "pyerrors 2.14.0",
+ "version": "1.1",
+ "who": "ed",
+ "date": "2025-10-08 20:56:18 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
+ "description": {
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "decay_const": "DICTOBS0"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "representation": "fun",
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "mass": 0.0,
+   "channel": "ps"
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "value": [0.06760436978217312],</code></pre>
 <div id="naming-things" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -2145,6 +2328,8 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
     conda: "envs/analysis.yml"
     shell:
         "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]}"</code></pre>
+<p>Test this using</p>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
 </div>
 </div>
 </div>
@@ -2196,6 +2381,11 @@ rule ps_mass:
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+<p>We can again verify this using</p>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
+cat intermediary_data/beta{beta}/corr.ps_mass.log</code></pre>
+<p>Since this fit didn’t emit any output on this occasion, the resulting
+log is empty.</p>
 <div id="tee" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -2207,8 +2397,8 @@ rule ps_mass:
 <p>You may recall that <code>|</code> is the pipe operator in the Unix
 shell, taking standard output from one program and passing it to
 standard input of the next. (If this is unfamiliar, you may wish to look
-through the Software Carpentry introduction to [the Unix
-shell][shell-novice] when you have a moment.)</p>
+through the Software Carpentry introduction to <a href="https://swcarpentry.github.io/shell-novice" class="external-link">the Unix shell</a>
+when you have a moment.)</p>
 <p>Adding the <code>&amp;</code> symbol means that both the standard
 output and standard error streams are piped, rather than only standard
 output. This is useful for a log file, since we will typically want to
@@ -2263,6 +2453,21 @@ file.</p>
 </div>
 </div>
 </div>
+<div id="logged-plots" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="logged-plots" class="callout-inner">
+<h3 class="callout-title">Logged plots<em> (continued)</em>
+</h3>
+<div class="callout-content">
+<p>We can again verify this using</p>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf
+cat intermediary_data/spectrum_plot.log</code></pre>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="dealing-with-errors">Dealing with errors<a class="anchor" aria-label="anchor" href="#dealing-with-errors"></a>
 </h2>
 <hr class="half-width">
@@ -2276,10 +2481,10 @@ filename in the <code>ps_mass</code> rule.</p>
 <span>        <span class="st">"python -m su2pg_analysis.meson_mass {input} --output_file {output.data}.json_ --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</span></span></code></pre>
 <p>To keep things tidy, this time we’ll manually remove the intermediary
 data directory.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
 </div>
 <p>And re-run.</p>
 <pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
@@ -2343,7 +2548,7 @@ the program that we see on the screen.</li>
 <li>The other expected output file
 <code>intermediary_data/beta2.0/corr.ps_eff_mass.pdf</code> was found
 but has now been removed by Snakemake.</li>
-<li>Snakemake suggest this might be due to “filesystem latency”.</li>
+<li>Snakemake suggests this might be due to “filesystem latency”.</li>
 </ol>
 <p>This last point is a red herring. “Filesystem latency” is not an
 issue here, and never will be, since we are not using a network
@@ -2390,7 +2595,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-dag"><p>Content from <a href="dag.html">How Snakemake plans jobs</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/dag.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -2438,7 +2643,7 @@ is:</p>
 </div>
 <p>A DAG is a <strong>Directed Acyclic Graph</strong> and it can be
 pictured like so:</p>
-<figure><img src="../fig/dag_1.svg%20%7Balt='" class="figure mx-auto d-block"></figure><p>The above DAG is based on three of our existing rules, and shows all
+<figure><img src=".././fig/dag_1.svg%20%7Balt='" class="figure mx-auto d-block"></figure><p>The above DAG is based on three of our existing rules, and shows all
 the jobs Snakemake would run to compute the pseudoscalar decay constant
 of the <span class="math inline">\(\beta = 4.0\)</span> ensemble.</p>
 <div id="note-that" class="callout checklist">
@@ -2554,15 +2759,33 @@ was created.</li>
 <p>Let’s demonstrate each of these in turn, by altering some files and
 re-running Snakemake without the <code>--forceall</code> option.</p>
 <pre class="shellsession"><code>$ rm assets/plots/spectrum.pdf
-$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+...
+Job stats:
+job         count
+--------  -------
+spectrum        1
+total           1
+...</code></pre>
 <p>This just re-runs <code>spectrum</code>, the final step.</p>
-<pre class="shellsession"><code>$ rm intermediary_data/beta*/corr.ps_mass.json
-$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+<pre class="shellsession"><code>$ rm intermediary_data/beta*/corr.ps_mass.json.gz
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+...
+Nothing to be done (all requested files are present and up to date).</code></pre>
 <p>“Nothing to be done”. Some intermediate output is missing, but
 Snakemake already has the file you are telling it to make, so it doesn’t
 worry.</p>
 <pre class="shellsession"><code>$ touch raw_data/beta*/out_pg
-$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+$ snakemake --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
+...
+job                  count
+-----------------  -------
+avg_plaquette           11
+one_loop_matching       11
+ps_mass                 11
+spectrum                 1
+...
+total                   34</code></pre>
 <p>The <code>touch</code> command is a standard Unix command that resets
 the timestamp of the file, so now the correlators look to Snakemake as
 if they were just modified.</p>
@@ -2612,7 +2835,7 @@ multiple targets, and Snakemake can tell which is which.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--cores</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json intermediary_data/beta2.5/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--forcerun</span> avg_plaquette ps_mass <span class="at">--cores</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz intermediary_data/beta2.5/pg.corr.ps_decay_const.json.gz</span></code></pre>
 </div>
 <p>The reason for using the <code>--cores</code> flag specifically is
 that you pretty much always want this option.</p>
@@ -2714,7 +2937,7 @@ rather than <code>TODO</code>?</p></li>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--cores</span> 1 <span class="at">--printshellcmds</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--cores</span> 1 <span class="at">--printshellcmds</span> <span class="at">--use-conda</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz</span></code></pre>
 </div>
 <ol style="list-style-type: decimal">
 <li>This command should show three boxes, but all are dotted so no jobs
@@ -2723,7 +2946,7 @@ are actually to be run.</li>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--dag</span> intermediary_data/beta2.0/pg.corr.ps_decay_const.json <span class="kw">|</span> <span class="ex">gm</span> display <span class="at">-</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> snakemake <span class="at">--dag</span> dot intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz <span class="kw">|</span> <span class="ex">gm</span> display <span class="at">-</span></span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>The <code>--force</code> flag re-runs only the job to create the
@@ -2772,7 +2995,7 @@ actually contain stale results and need to be updated. Using the
 and if it will not be too time consuming, keep it simple and just use
 <code>--forceall</code> to run the whole workflow from scratch.</p>
 <p>For the opposite case where you want to avoid re-running particular
-steps, see the <code>--touch</code> option of Snakemake mentioned <a href="TODO">later in the lesson</a>.</p>
+steps, see the <code>--touch</code> option of Snakemake mentioned <a href="awkward.html">later in the lesson</a>.</p>
 </div>
 </div>
 </div>
@@ -2782,12 +3005,13 @@ one labeled “ps_mass” is in green at the top right. From these, arrows
 lead into a yellow box labeled “one_loop_matching”. Incoming arrows into
 the top two boxes indicate the filenames raw_data/beta2.0/out_pg and
 out_hmc respectively. From the bottom an arrow points to the output
-filename, intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz’ }
-[fig-dag2]: fig/dag_2.png {alt=’ A DAG for the partial workflow with
-eleven similar columns, one per ensemble, each having a green ps_mass, a
-red avg_plaquette, and a yellow one_loop_matching job; each green and
-yellow box has an arrow leading to a green “spectrum” box at the
-bottom.’}</p>
+filename, intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz’
+}</p>
+<p>![fig-dag2]: ./fig/dag_2.png {alt=’ A DAG for the partial workflow
+with eleven similar columns, one per ensemble, each having a green
+ps_mass, a red avg_plaquette, and a yellow one_loop_matching job; each
+green and yellow box has an arrow leading to a green “spectrum” box at
+the bottom.’}</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2815,7 +3039,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-optimisation"><p>Content from <a href="optimisation.html">Optimising workflow performance</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/optimisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -2881,7 +3105,8 @@ have to “timeslice” on a core which is generally suboptimal</li>
 many cores you have available, it will start jobs in parallel to use all
 your cores. In the diagram below, five jobs are ready to run and there
 are four system cores.</p>
-<figure><img src="../fig/snake_threads.svg%20%7Balt='" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a>
+<p>![][fig-threads]</p>
+</section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a>
 </h2>
 <hr class="half-width">
 <p>So, to know how many threads to make available to Snakemake, we need
@@ -2915,12 +3140,12 @@ hw.ncpu: 8</code></pre>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="ex">Swap:</span>          199Mi       199Mi        60Ki</span></code></pre>
 </div>
 <p>In this case, the machine has 3.7GiB of total RAM.</p>
-<p>On macOS, the command is sysctl <code>hw.memsize</code>:</p>
-<pre class="shellsession"><code>$ sysctl hw.memsize
-hw.memsize: 34359738368</code></pre>
-<p>This machine has 34,359,738,368 bytes of RAM in total. Dividing by
-the number of bytes in 1GiB (<span class="math inline">\(1024^3\)</span>
-bytes), that becomes 32GiB RAM.</p>
+<p>On macOS, the command is <code>sysctl -h hw.memsize</code>:</p>
+<pre class="shellsession"><code>$ sysctl -h hw.memsize
+hw.memsize: 34,359,738,368</code></pre>
+<p>This machine has around 34GB of RAM in total. Dividing by the number
+of bytes in 1GiB (<span class="math inline">\(1024^3\)</span> bytes),
+that becomes 32GiB RAM.</p>
 <p>We don’t want to use all of this RAM, but if we don’t mind other
 applications being unresponsive while our workflow runs, we can use the
 majority of it.</p>
@@ -2963,7 +3188,8 @@ We’ll work out the average for everyone present, or if you are working
 through the material on your own, repeat the measurement three times to
 get your own average.</p>
 <p>Now change the Snakemake concurrency option to <code>--cores 2</code>
-and then <code>--cores 4</code>.</p>
+and then <code>--cores 4</code>. Finally, try using every available core
+on your machine, using <code>--cores all</code>.</p>
 <ul>
 <li>How does the total execution time change?</li>
 <li>What factors do you think limit the power of this setting to reduce
@@ -2977,7 +3203,7 @@ the execution time?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
 somewhere around 150–200 seconds is expected, and this should reduce to
@@ -3095,7 +3321,7 @@ can support PBS, SGE and other cluster schedulers.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Running on cluster and cloud </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Running workflows on HPC or Cloud systems could be a whole course in
 itself. The topic is too important not to be mentioned here, but also
@@ -3124,15 +3350,15 @@ and how it went.</p>
 </div>
 </div>
 </div>
-<p>Representation of a computer with four microchip icons indicating
-four available cores. To the right are five small green boxes
-representing Snakemake jobs and labelled as wanting 1, 1, 1, 2 and 8
-threads respectively. ‘} [fig-cluster]: fig/cluster.jpg {alt=’ A photo
-of some high performance computer hardware racked in five cabinets in a
-server room. Each cabinet is about 2.2 metres high and 0.8m wide. The
-doors of the cabinets are open to show the systems inside. Orange and
-yellow cabling is prominent, connecting ports within the second and
-third racks. ’}</p>
+<p>![fig-threads]: fig/snake_threads.svg {alt=’ Representation of a
+computer with four microchip icons indicating four available cores. To
+the right are five small green boxes representing Snakemake jobs and
+labelled as wanting 1, 1, 1, 2 and 8 threads respectively. ’}</p>
+<p>![fig-cluster]: fig/cluster.jpg {alt=’ A photo of some high
+performance computer hardware racked in five cabinets in a server room.
+Each cabinet is about 2.2 metres high and 0.8m wide. The doors of the
+cabinets are open to show the systems inside. Orange and yellow cabling
+is prominent, connecting ports within the second and third racks. ’}</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -3145,6 +3371,7 @@ third racks. ’}</p>
 number of threads to the number of cores you have</li>
 <li>You also need to consider RAM, disk, and network bottlenecks</li>
 <li>Profile your jobs to see what is taking most resources</li>
+<li>Use <code>--cores all</code> to enable using all CPU cores</li>
 <li>Snakemake is great for running workflows on compute clusters</li>
 </ul>
 </div>
@@ -3156,7 +3383,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-awkward"><p>Content from <a href="awkward.html">Awkward corners</a></p>
 <hr>
-<p>Last updated on 2025-10-06 |
+<p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/awkward.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -3217,15 +3444,15 @@ rule ps_mass:
         plateau_start=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_start"),
         plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
-    threads: 4
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>Now, we are frequently interested in more symmetry channels than just
 the pseudoscalar. In principle, we could make a copy of this rule, and
 change <code>ps</code> to, for example <code>v</code> or
-<code>av</code>. However, just like adding more ensembles, this rapidly
-makes our Snakefiles unwieldy and difficult to maintain. How can we
-adjust this rule so that it works for any channel?</p>
+<code>av</code>. (We did this in an earlier challenge for the vector
+channel.) However, just like adding more ensembles, this rapidly makes
+our Snakefiles unwieldy and difficult to maintain. How can we adjust
+this rule so that it works for any channel?</p>
 <p>The first step is to replace <code>ps</code> with a wildcard. The
 <code>output</code> should then use
 <code>corr.{channel}_mass.json</code> rather than
@@ -3332,7 +3559,6 @@ rule meson_mass:
         plateau_start=plateau_param("start"),
         plateau_end=plateau_param("end"),
     conda: "envs/analysis.yml"
-    threads: 4
     shell:
         "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>We can test this for the vector mass:</p>
@@ -3404,11 +3630,9 @@ rule restricted_spectrum:
         ps_decay_const=spectrum_param("pg.corr.ps_decay_const"),
     output:
         plot=multiext("assets/plots/spectrum_beta{beta0}", config["plot_filetype"]),
-    log:
-        messages="intermediary_data/spectrum_plot.log"
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]}"</code></pre>
 <p>To generate the requested plot would then be:</p>
 <pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds assets/plots/spectrum_beta2.0.pdf</code></pre>
 </div>
@@ -3436,8 +3660,11 @@ errors.)</p>
 shell-style wildcard matches, also known as <em>globbing</em>. For
 example, let’s say that we would like to be able to plot only the data
 that we have already computed, without regenerating anything. We can
-perform a wildcard <em>glob</em> using the <code>glob_wildcards</code>
-function:</p>
+perform a wildcard <em>glob</em> using Python’s <code>glob</code>
+function.</p>
+<p>At the top of the file, add:</p>
+<pre><code>from glob import glob</code></pre>
+<p>Then we can add a rule:</p>
 <pre><code>rule quick_spectrum:
     input:
         script="src/plot_spectrum.py",
@@ -3449,11 +3676,9 @@ function:</p>
         ),
     output:
         plot=multiext("intermediary_data/check_spectrum", config["plot_filetype"]),
-    log:
-        messages="intermediary_data/check_spectrum_plot.log"
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]}"</code></pre>
 <p>Let’s test this now</p>
 <pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds intermediary_data/check_spectrum.pdf</code></pre>
 <p>If you have recently purged the workflow output, then this might
@@ -3461,20 +3686,21 @@ raise an error as there are no data to plot. Otherwise, opening this
 resulting file in your PDF viewer, you’ll most likely see a plot with a
 reduced number of points compared to previous plots. If you’re lucky,
 then all the points will be present.</p>
-<div id="dont-use-this-in-production" class="callout">
+<div id="use-with-care-in-production" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <span class="callout-header">Callout</span>
-<div id="dont-use-this-in-production" class="callout-inner">
-<h3 class="callout-title">Don’t use this in production!</h3>
+<div id="use-with-care-in-production" class="callout-inner">
+<h3 class="callout-title">Use with care in production!</h3>
 <div class="callout-content">
 <p>This rule will only include data already present at the start of the
 workflow run in your plots. This means if you start from clean, as
 people looking to reproduce your work will, then it will fail, and even
 if you start from a partial run, then some points will
 (non-deterministically) be omitted from your plots.</p>
-<p>For final plots, always specify the source data in full!</p>
+<p>For final plots based on intermediary data, always specify the
+<code>input</code> explicitly.</p>
 </div>
 </div>
 </div>
@@ -3486,7 +3712,8 @@ automatically work out which files need updating based on changes to
 their inputs, and re-run any rules needed to update them. Occasionally,
 however, this isn’t what we want to do.</p>
 <p>Consider the following example:</p>
-<figure><img src="../fig/asymmetric-workflow.svg%20%7Balt='" class="figure mx-auto d-block"></figure><p>We have two steps to this workflow: taking the input data and from it
+<p>![][fig-asymmetric]</p>
+<p>We have two steps to this workflow: taking the input data and from it
 generating some intermediary data, requiring 24 hours. Then we take the
 resulting data and plot results from it, taking 15 seconds. If we make a
 trivial change to the input file, such as reformatting white space, we’d
@@ -3508,10 +3735,11 @@ snakemake --cores all --use-conda --printshellcmds plot_file</code></pre>
 <p>This will run only the second rule, not the first. Thiis will be the
 same regardless of whether <code>input_file</code> is even present, or
 when it was last updated.</p>
-<p>Diagram showing three boxes in a row, connected from left to right by
-arrows. The boxes are labeled “<code>input_file</code>”,
-“<code>data_file</code>”, and “<code>output_file</code>”. The arrows are
-labelled “<code>generate</code>” (24 hours), and “<code>plot</code>” (15
+<p>![fig-asymmetric]: fig/asymmetric-workflow.svg {alt=’ Diagram showing
+three boxes in a row, connected from left to right by arrows. The boxes
+are labeled “<code>input_file</code>”, “<code>data_file</code>”, and
+“<code>output_file</code>”. The arrows are labelled
+“<code>generate</code>” (24 hours), and “<code>plot</code>” (15
 seconds). }</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -3524,12 +3752,590 @@ seconds). }</p>
 <li>Use Python input functions that take a dict of wildcards, and return
 a list of strings, to handle complex dependency issues that can’t be
 expressed in pure Snakemake.</li>
-<li>Use <code>glob_wildcards</code> to match multiple files on disk
+<li>Import <code>glob.glob</code> to match multiple files on disk
 matching a specific pattern. Don’t rely on this finding intermediate
 files in final production workflows, since it won’t find files not
 present at the start of the workflow run.</li>
 <li>Use <code>snakemake --touch</code> if you need to mark files as
 up-to-date, so that Snakemake won’t try to regenerate them.</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-cleanup"><p>Content from <a href="cleanup.html">Tidying up</a></p>
+<hr>
+<p>Last updated on 2025-10-09 |
+
+        <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/cleanup.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I split a Snakefile into manageable pieces?</li>
+<li>How do I avoid needing to list every file to generate in my
+<code>snakemake</code> call?</li>
+<li>What should I bear in mind when using Git for my Snakemake
+workflow?</li>
+<li>What should I include in the README for my workflow?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Be able to avoid having long monolithic Snakefiles</li>
+<li>Be able to have Snakemake generate a set of targets without
+explicitly specifying them</li>
+<li>Understand how to effectively use Git to version control Snakemake
+worfklows</li>
+<li>Be able to write an effective README on how to use a workflow</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="breaking-up-the-snakefile">Breaking up the Snakefile<a class="anchor" aria-label="anchor" href="#breaking-up-the-snakefile"></a>
+</h2>
+<hr class="half-width">
+<p>So far, we have written all of our rules into a single long file
+called <code>Snakefile</code>. As we continue to add more rules, this
+can start to get unwieldy, and we might want to break it up into smaller
+pieces.</p>
+<p>Let’s do this now. We can take the rules relating only to the
+<code>pg</code> output files, and place them into a new file
+<code>workflow/rules/pg.smk</code>. In their place, in the
+<code>Snakefile</code>, we add the line</p>
+<pre class="snakemake"><code><span><span class="va">include</span><span class="op">:</span> <span class="st">"rules/pg.smk"</span></span></code></pre>
+<p>This tells Snakemake to take the contents of the new file we created,
+and place it at that point in the file. Unlike Python, where the
+<code>import</code> statement creates a new <em>scope</em>, in
+Snakemake, anything defined above the <code>include</code> line is
+available to the included code. So we are safe to use the configuration
+parameters and metadata that we load at the top of the file.</p>
+<div id="clean-out-the-snakefile" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="clean-out-the-snakefile" class="callout-inner">
+<h3 class="callout-title">Clean out the <code>Snakefile</code>
+</h3>
+<div class="callout-content">
+<p>Sort the remaining rules in the <code>Snakefile</code> into
+additional <code>.smk</code> files. Place these in the
+<code>rules</code> subdirectory with <code>pg.smk</code>.</p>
+<p>One possible breakdown to use would be</p>
+<ul>
+<li>Rules relating to correlation function fits</li>
+<li>Rules relating to the Wilson flow</li>
+<li>Rules combining output of more than one ensemble</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="tidy-up-the-plot_styles" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="tidy-up-the-plot_styles" class="callout-inner">
+<h3 class="callout-title">Tidy up the <code>plot_styles</code>
+</h3>
+<div class="callout-content">
+<p>You might have noticed that we’re using the <code>plot_styles</code>
+configuration option as an argument to the plotting rules, but without
+including it in the <code>input</code> blocks. Since the argument is a
+filename, it is a good idea to let Snakemake know about this, so that if
+we adjust the style file, Snakemake knows to re-run the plotting
+rules.</p>
+<p>Make that change now for all rules depending on
+<code>plot_styles</code>.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="a-default-target">A default target<a class="anchor" aria-label="anchor" href="#a-default-target"></a>
+</h2>
+<hr class="half-width">
+<p>When we come to run the full workflow to generate all of the assets
+for our publication, it is frustrating to need to list every single file
+we would like. It is much better if we can do this as part of the
+workflow, and ask Snakemake to generate a default set of targets.</p>
+<p>We can do this by adding the following rule above all others in our
+<code>Snakefile</code>:</p>
+<pre class="snakemake"><code>tables = expand("assets/tables/{table}.tex", table=["counts"])
+plots = expand(
+    f"assets/plots/{{plot}}{config['plot_filetype']}",
+    plot=["plaquette_scan", "spectrum"],
+)
+
+
+rule all:
+    input:
+        plots=plots,
+        tables=tables,
+    default_target: True</code></pre>
+<p>Unlike the rules we looked at in the previous section, this one
+should stay in the main Snakefile. Note that the rule only has
+<em>inputs</em>: Snakemake sees that those files must be present for the
+rule to complete, so runs the rules necessary to generate them. When we
+call Snakemake with no targets, as</p>
+<pre class="shellsession"><code>snakemake --cores all --use-conda</code></pre>
+<p>then Snakemake will look to the <code>all</code> rule, and make
+<code>assets/tables/counts.tex</code>,
+<code>assets/plots/plaquette_scan.pdf</code>, and
+<code>assets/plots/spectrum.pdf</code>, along with any intermediary
+files they depend on.</p>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>It can also be a good idea to add a provenance stamp at this point,
+where you create an additional data file listing all outputs the
+workflow generated, along with hashes of their contents, to make it more
+obvious if any files left over from previous workflow runs sneak into
+the output.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="using-snakemake-with-git">Using Snakemake with Git<a class="anchor" aria-label="anchor" href="#using-snakemake-with-git"></a>
+</h2>
+<hr class="half-width">
+<p>Using a version control system such as <a href="https://git-scm.org" class="external-link">Git</a> is good practice when developing
+software of any kind, including analysis workflows. There are some steps
+that we can take to make our workflows fit more nicely into Git.</p>
+<p>Firstly, we’d like to avoid committing files to the repository that
+aren’t part of the workflow definition. We make use of the file
+<code>.gitignore</code> in the repository root for this. In general, our
+Git repository should only contain things that should not change from
+run to run, such as the workflow definition and any workflow-specific
+code. Some examples of things that probably shouldn’t be committed
+include:</p>
+<ul>
+<li>Input data and metadata. These should live and be shared separately
+from the workflow, as they are inputs to the analysis rather than a
+dedicated part of the analysis workflow. This means that someone wanting
+to read the code doesn’t need to download gigabytes of unwanted
+data.</li>
+<li>Intermediary and output files. You may wish to share these with
+readers, and the output plots and tables should be included in your
+papers. But if a reader wants these from the workflow, they should
+download the input data and workflow, and run the latter. Mixing
+generated files with the repository will confuse matters, and make it so
+that any workflow re-runs create unwanted “uncommitted changes” that Git
+will notify you about.</li>
+<li>
+<code>.snakemake</code> directory. Similarly to the intermediary and
+output files, this will change from machine to machine and should not be
+committed. (In particular, it will get quite large with Conda
+environments, which are only useful on the computer they were created
+on.)</li>
+</ul>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>If you quote data from another paper, and have had to transcribe this
+into a machine-readable format like CSV yourself, then this may be
+included in the repository, since it is not a data asset that you can
+reasonably publish in a data repository under your own name. In this
+case, the data’s provenance and attribution should be clearly
+stated.</p>
+</div>
+</div>
+</div>
+<p>Let’s add these to the <code>.gitignore</code> for our workflow
+now.</p>
+<pre class="shellsession"><code>nano .gitignore</code></pre>
+<p>To this file, we’ll add the lines</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>.snakemake/
+raw_data/
+metadata/
+intermediary_data/
+assets/
+data_assets/</code></pre>
+</div>
+<p>Someone downloading your workflow will need to place the input data
+and metadata in the correct locations. You might wish to prepare an
+empty directory for the reader to place the necessary files into Since
+Git does not track empty directories, only files, we create an empty
+file in it, and update the <code>.gitignore</code> rules to un-ignore
+only that file.</p>
+<pre class="shellsession"><code>touch metadata/.git_keep
+nano .gitignore</code></pre>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>!*/.git_keep</code></pre>
+</div>
+<p>Let’s commit these changes now</p>
+<pre class="shellsession"><code>git add .gitignore
+git commit -m "Ignore workflow inputs, and outputs, and temporary files"
+git add metadata/.git_keep
+git commit -m "Prepare empty directory for metadata"</code></pre>
+<p>Where you use libraries that you have written, that are not on the <a href="https://pypi.org" class="external-link">Python Package Index</a>, it is a good idea to
+incorporate these as Git submodules in your workflow. While
+<code>pip</code> can install packages from GitHub repositories, this is
+not robust against you moving or closing your GitHub account later, or
+GitHub stopping offering free services. Instead, you can make available
+a ZIP file containing the workflow and its primary dependencies, which
+will continue to be installable significantly further into the
+future.</p>
+<p>Currently we have a directory <code>libs/su2pg_analysis</code>,
+containing the library we have used for most of this analysis. This
+library is hosted on GitHub at
+<code>https://github.com/edbennett/su2pg_analysis</code>. To track this
+as a Git submodule, we use the command</p>
+<pre class="shellsession"><code>git submodule add https://github.com/edbennett/su2pg_analysis libs/su2pg_analysis
+git commit -m "Add su2pg_analysis as submodule"</code></pre>
+<div id="what-to-include" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="what-to-include" class="callout-inner">
+<h3 class="callout-title">What to include?</h3>
+<div class="callout-content">
+<p>Which of the following files should be included in a hypothetical
+workflow repository?</p>
+<ol style="list-style-type: decimal">
+<li>
+<code>sort.py</code>, a tool for putting results in the correct
+order to show in a paper.</li>
+<li>
+<code>out_corr</code>, a correlation function output file.</li>
+<li>
+<code>Snakefile</code>, the workflow definition.</li>
+<li>
+<code>.snakemake/</code>, the Snakemake cache directory.</li>
+<li>
+<code>spectrum.pdf</code>, a plot created by the workflow.</li>
+<li>
+<code>prd.mplstyle</code>, a Matplotlib style file used by the
+workflow.</li>
+<li>
+<code>README.md</code>, guidelines on how to use the workflow.</li>
+<li>
+<code>id_rsa</code>, the SSH private key used to connect to clusters
+to run the workflow.`</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: decimal">
+<li>Yes, this tool is clearly part of the workflow, so should be
+included in the repository, unless it’s being used from an external
+library.</li>
+<li>No, this is input data, so is not part of the software. This should
+be part of a data release, as otherwise a reader won’t be able to run
+the workflow, but should be separate to the Git repository.</li>
+<li>Yes, our workflow release wouldn’t be complete without the workflow
+definition.</li>
+<li>No, this directory contains files that are specific to your
+computer, so aren’t useful to anyone else.</li>
+<li>No, this will change from run to run, and is not part of the
+software. A reader can regenerate it from your code and data, by using
+the workflow.</li>
+<li>Yes, while this is input to the workflow, it does not change based
+on the input data, and isn’t generated from the physics, so forms part
+of the workflow itself.</li>
+<li>Yes, this is essential for a reader to be able to understand how to
+use the workflow, so should be part of the repository.</li>
+<li>No, this is private information that may allow others to take over
+or abuse your supercomputing accounts. Be very careful not to put
+private information in public Git repositories!</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="readme">
+<code>README</code><a class="anchor" aria-label="anchor" href="#readme"></a>
+</h2>
+<hr class="half-width">
+<p>In general, we would like others to be able to reproduce our
+work—this is a key aspect of the scientific method. To this end, it’s
+important to let them know how to use our workflow, to minimise the
+amount of effort that must be spent getting it running. By convention,
+this is done in a file called <code>README</code>, (with an appropriate
+file extension).</p>
+<p>In this context, it’s good to remember that “other people” includes
+“your collaborators” and “yourself in six months’ time”, so writing a
+good README isn’t just good citizenship to help others, it’s also
+directly beneficial to you and those you work with.</p>
+<p>One good format to write a README in is <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" class="external-link">Markdown</a>.
+This is rendered to formatted text automatically by most Git hosting
+services, including GitHub. When using this, the file is conventionally
+called <code>README.md</code>.</p>
+<p>Things you should include in your README include:</p>
+<ul>
+<li>A brief statement of what the workflow does, including a link to the
+paper it was written for.</li>
+<li>A listing of what software is required, including links for
+installation instructions or downloads. (Snakemake is one such piece of
+software.)</li>
+<li>Instructions on downloading the repository and necessary data,
+including a link to where the data can be found.</li>
+<li>Instructions on how to run the workflow, including the suggested
+<code>snakemake</code> invocation.</li>
+<li>An indication of the time required to run the workflow, and the
+hardware that that estimate applies to.</li>
+<li>Details of where output from the workflow is placed.</li>
+<li>An indication of how reusable the workflow is: is it intended to
+work with any set of input data, and has it been tested for this, or is
+it designed for the specific dataset being analysed?</li>
+</ul>
+<p>Rather than writing from fresh, you may wish to work from a template
+for this. One suitable README template can be found in <a href="https://github.com/telos-collaboration/workflow_template/blob/main/README.md" class="external-link">the
+TELOS Collaboration’s workflow template</a></p>
+<div id="write-a-readme" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="write-a-readme" class="callout-inner">
+<h3 class="callout-title">Write a README</h3>
+<div class="callout-content">
+<p>Use the <a href="https://github.com/telos-collaboration/workflow_template/blob/main/README.md" class="external-link">TELOS
+Collaboration template</a> to draft a file <code>README.md</code> for
+the workflow we have developed.</p>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>Use <code>.smk</code> files in <code>workflow/rules</code> to
+compartmentalise the <code>Snakefile</code>, and use <code>input:</code>
+lines in the main <code>Snakefile</code> to link them into the
+workflow.</li>
+<li>Add a rule at the top of the <code>Snakefile</code> with
+<code>default_target: True</code> to specify the default output of a
+workflow.</li>
+<li>Use <code>.gitignore</code> to avoid committing input or output data
+or the Snakemake cache.</li>
+<li>Use <code>.git_keep</code> files to preserve empty directories.</li>
+<li>Use Git submodules to link to libraries you have written that aren’t
+on PyPI.</li>
+<li>Include a <code>README.md</code> in your repository explaining how
+to run the workflow.</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-publishing"><p>Content from <a href="publishing.html">Publishing your workflow</a></p>
+<hr>
+<p>Last updated on 2025-10-09 |
+
+        <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/publishing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I verify that my workflow is ready to upload?</li>
+<li>How do I prepare a single archive of my workflow and its
+dependencies?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Understand the need to test a workflow</li>
+<li>Be able to package a workflow for upload</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>So far, we’ve talked about how to develop a workflow reliably and
+consistently reproduces the same results. But at some point we would
+like to publish those results. The scientific method demands that we
+enable others to reproduce our work. While in principle, they might be
+able to do this just from the equations and references we write in our
+paper, in practice we can never provide enough detail to encode every
+decision our code makes, and so we must publish our workflow to enable
+reproducibility by others.</p>
+<p>In the previous episode, we discussed keeping the workflow in Git.
+While Git repositories can be made accessible to others through services
+like GitHub, this is only really suitable for code that is under active
+development; for long term, static retention, it is better to use a
+service dedicated to providing that.</p>
+<p>In particular, you want references to the workflow in publications to
+be accessible arbitrarily far in the future. If I see a citation in a
+paper to a paper from 1955, I can go to the library and read it, or find
+it on the journal’s website. Most services designed for active use can’t
+provide guarantees of longevity; even if the resources remain available,
+their address might change. For ongoing work, this is a minor
+inconvenience, but for a published paper, we can’t reasonably go back
+and edit every citation to every workflow years later.</p>
+<p>For that reason, data, software, and workflows should be published in
+an appropriate data or repository. In some fields there are specific
+repositories focusing on the needs of that community; in lattice,
+currently there is none. However, for sharing most workflows and modest
+data (up to 50GB, or 200GB on specific request), a suitable
+general-purpose repository is <a href="https://zenodo.org" class="external-link">Zenodo</a>.
+This is run by CERN, and is committed to remain available for the life
+of the CERN datacentre. It provides a DOI for each uploaded dataset,
+which can be cited in papers in the same way as the DOI for a journal
+article.</p>
+<section><h2 class="section-heading" id="testing-the-workflow">Testing the workflow<a class="anchor" aria-label="anchor" href="#testing-the-workflow"></a>
+</h2>
+<hr class="half-width">
+<p>Before releasing the workflow to the world, it’s important to verify
+that it does correctly reproduce the expected outputs. Since you will
+have been using it for this in development, this would hopefully be
+automatic, but you can find situations where existing files left over
+from earlier in development allow the workflow to complete in your
+working directory, but not in a freshly-cloned version.</p>
+<p>Let’s use Git to make a fresh copy of the workflow:</p>
+<pre class="shellsession"><code>cd ../
+git clone --recurse-submodules su2_puregauge su2_puregauge_test
+cd su2_puregauge_test</code></pre>
+<p>Now, we follow the steps in the README directly. We obtain the data
+and metadata, and place them into the correct locations. In practice we
+would want to have the data already in the ZIP format that we will use
+to upload to Zenodo; for now, we can copy this across:</p>
+<pre class="shellsession"><code>cp -r ../su2_puregauge/raw_data .
+cp ../su2_puregauge/metadata/* metadata/</code></pre>
+<p>Now we can re-run Snakemake:</p>
+<pre class="shellsession"><code>snakemake --cores all --use-conda</code></pre>
+<p>Since this is a clean copy, Snakemake will once again need to install
+the Conda environment used by some of the workflow steps.</p>
+<p>If Snakemake exits without errors, we can do a quick sense check that
+the outputs we get match the ones we expect; for example, looking at
+plots side-by-side. For text files, we can also check the differences
+explicitly:</p>
+<pre class="shellsession"><code>diff -r ../su2_puregauge/assets/tables assets/tables</code></pre>
+<p>We expect to see differences in provenance, but not in numbers, when
+we run on the same computer.</p>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>If you can, it’s a good idea to test a different architecture to the
+one you developed on, and to get a collaborator unfamiliar with the
+workflow to test the instructions. For example, if you developed the
+workflow on Linux, then get a collaborator with a Mac to follow the
+README without your direct guidance.</p>
+<p>This will likely raise some issues. In some cases the Conda
+environment will need to be adjusted to be cross-platform compatible.
+Note that numerical outputs are <em>not</em> expected to be identical to
+machine precision when switching between different platforms, due to
+differences in numerics between different CPUs. However, there should be
+no visible differences in plots, and tables should be consistent to the
+last printed significant figure.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="preparing-a-zip-file">Preparing a ZIP file<a class="anchor" aria-label="anchor" href="#preparing-a-zip-file"></a>
+</h2>
+<hr class="half-width">
+<p>Since we cannot upload directories to Zenodo, we must prepare a ZIP
+archive of the full set of code. While GitHub does provide a ZIP version
+of repositories, it excludes the contents of submodules, instead leaving
+an empty directory, which is not very useful to potential readers.
+Instead, we must do this preparation by hand.</p>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div class="accordion-body">
+<p>In principle, another archive like <code>tar.gz</code> could also be
+used. However, Zenodo can preview the contents of ZIP files, and not of
+other archives, so ZIP is strongly recommended here.</p>
+</div>
+</div>
+</div>
+</div>
+<p>We again start from a clean clone, ensuring that we have all
+submodules present (since they may not be available from GitHub
+later).</p>
+<pre class="shellsession"><code>cd ..
+git clone --recurse-submodules su2_puregauge su2_puregauge_release
+zip -9 --exclude "**/.git/*" --exclude "**/.git" -r su2_puregauge.zip su2_puregauge_release</code></pre>
+<p>Note that we use <code>--exclude</code> to avoid committing the
+<code>.git</code> directory of the repository or its submodules. We
+don’t get the <code>.git</code> directory in a GitHub ZIP file either,
+and the reader doesn’t need it: they only require the final version used
+to generate the work in the paper, not the full history.</p>
+<p>At this point, you should be ready to upload to Zenodo. Completing
+the upload form is beyond the scope of this lesson, but more detail can
+be found in the <a href="https://github.com/telos-collaboration/strategy" class="external-link">TELOS
+Collaboration reproducibility and open science guide</a>, or in the
+lesson <a href="https://edbennett.github.io/publishing-analysis/08-pushing/index.html" class="external-link">Publishing
+your Data Analysis Code</a>.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>Test the workflow by making a fresh clone and following the README
+instructions</li>
+<li>Use
+<code>zip -9 --exclude "**/.git/*" --exclude "**/.git" filename.zip dirname</code>
+to prepare a ZIP file of a freshly-cloned repository, with
+submodules.</li>
 </ul>
 </div>
 </div>
@@ -3586,8 +4392,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/aio.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/aio.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-07",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>

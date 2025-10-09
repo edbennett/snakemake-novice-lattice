@@ -298,6 +298,24 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -356,7 +374,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running commands with Snakemake</h1>
-        <p>Last updated on 2025-10-06 |
+        <p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -443,6 +461,7 @@ ensemble with the heat bath algorithm:</p>
 the computation being computed, and results for observables computed on
 each configuration. Code to parse these logs and compute statistics is
 included with the sample data; we’ll use these in due course.</p>
+<p>To exit <code>less</code>, press <kbd>q</kbd>.</p>
 </section><section><h2 class="section-heading" id="making-a-snakefile">Making a Snakefile<a class="anchor" aria-label="anchor" href="#making-a-snakefile"></a></h2>
 <hr class="half-width"><p>To start with, let’s define a rule to count the number of lines in
 one of the raw data files.</p>
@@ -491,8 +510,11 @@ to generate. If this file is not generated, then Snakemake will abort
 the workflow with an error. Finally, the <code>shell:</code> block tells
 Snakemake what shell commands to run to get the specified output from
 the given input.</p>
-<p>Going back to the shell now, we can test this rule. From the
-<code>su2pg</code> directory, we can run the command</p>
+<p>Going back to the shell now, we can test this rule. First up, we need
+to enter the directory containing the workflow</p>
+<pre class="shellsession"><code>cd su2pg</code></pre>
+<p>We’ll spend the rest of the lesson in this directory. From the here,
+we can now run the command</p>
 <pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
 <p>If we’ve made any transcription errors in the rule (missing quotes,
 bad indentations, etc.), then it will become clear at this point, as
@@ -574,7 +596,7 @@ quit back to the shell with <code>q</code></em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal"><li>Prints the shell commands that are being run to the terminal</li>
 </ol><p>This is such a useful thing we don’t know why it isn’t the default!
@@ -598,10 +620,10 @@ generation log, each trajectory concludes with a line of the form</p>
 <pre class="output" tabindex="0"><code>[MAIN][0]Trajectory #1: generated in [39.717707 sec]</code></pre>
 </div>
 <p>We can use <code>grep</code> to count these, as</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
 </div>
 <div id="counting-sequences-in-snakemake" class="callout challenge">
 <div class="callout-square">
@@ -628,7 +650,7 @@ be printed on the screen</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule count_trajectories:
     input: "raw_data/beta2.0/out_pg"
@@ -716,8 +738,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/introduction.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/introduction.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-06",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>

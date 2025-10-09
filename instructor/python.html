@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 7%" class="percentage">
-    7%
+<aside class="col-md-12 lesson-progress"><div style="width: 5%" class="percentage">
+    5%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 7%" aria-valuenow="7" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 5%" aria-valuenow="5" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -297,6 +297,24 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -355,7 +373,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running Python code with Snakemake</h1>
-        <p>Last updated on 2025-10-06 |
+        <p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -448,13 +466,14 @@ content into it</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.12.6</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">pip</span><span class="kw">:</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> h5py==3.11.0</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> matplotlib==3.9.2</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> numpy==2.1.1</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pandas==2.2.3</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> scipy==1.14.1</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> uncertainties==3.2.2</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> corrfitter==8.2</span></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> -e ../../libs/su2pg_analysis</span></span></code></pre>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> jinja2==3.1.6</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> matplotlib==3.9.2</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> numpy==2.1.1</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pandas==2.2.3</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> scipy==1.14.1</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> uncertainties==3.2.2</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> corrfitter==8.2</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> -e ../../libs/su2pg_analysis</span></span></code></pre>
 </div>
 <p>This will install the specified versions of h5py, Matplotlib, Numpy,
 Pandas, Scipy, uncertainties, and corrfitter, as well as the analysis
@@ -480,27 +499,38 @@ now:</p>
 <p>We need to specify <code>--use-conda</code> to tell Snakemake to pay
 attention to the <code>conda:</code> specification.</p>
 <p>Let’s check now that the output was correctly generated:</p>
-<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 20
+<pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 31
 {
- "program": "pyerrors 2.13.0",
+ "program": "pyerrors 2.14.0",
  "version": "1.1",
  "who": "ed",
- "date": "2025-05-20 15:44:09 +0100",
- "host": "tsukasa.lan, macOS-15.4-arm64-arm-64bit",
+ "date": "2025-10-08 19:51:58 +0100",
+ "host": "azusa, Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
  "description": {
-  "group_family": "SU",
-  "num_colors": 2,
-  "nt": 48,
-  "nx": 24,
-  "ny": 24,
-  "nz": 24,
-  "beta": 2.0,
-  "num_heatbath": 1,
-  "num_overrelaxed": 4,
-  "num_thermalization": 1000,
-  "thermalization_time": 2453.811479,
-  "num_trajectories": 10010
- },</code></pre>
+  "INFO": "This JSON file contains a python dictionary that has been parsed to a list of structures. OBSDICT contains the dictionary, where Obs or other structures have been replaced by DICTOBS[0-9]+. The field description contains the additional description of this JSON file. This file may be parsed to a dict with the pyerrors routine load_json_dict.",
+  "OBSDICT": {
+   "plaquette": "DICTOBS0"
+  },
+  "description": {
+   "group_family": "SU",
+   "num_colors": 2,
+   "nt": 48,
+   "nx": 24,
+   "ny": 24,
+   "nz": 24,
+   "beta": 2.0,
+   "num_heatbath": 1,
+   "num_overrelaxed": 4,
+   "num_thermalization": 1000,
+   "thermalization_time": 2453.811479,
+   "num_trajectories": 10010
+  }
+ },
+ "obsdata": [{
+   "type": "Obs",
+   "layout": "1",
+   "tag": ["plaquette"],
+   "value": [0.5012064525235401],</code></pre>
 <p>Some of the output will differ on your machine, since this library
 tracks provenance, such as where and when the code was run, in the
 output file.</p>
@@ -519,7 +549,7 @@ and <em>provenance</em> information describing how and when it was
 computed.</p>
 <p>If you imagine a script that outputs only the average plaquette and
 its uncertainty:</p>
-<pre><code>0.501206452535401 TODO</code></pre>
+<pre><code>0.501206452535401 5.027076650629463e-06</code></pre>
 <p>then seeing just this file in isolation, it would be much harder to
 understand what it means or where it comes from. You would need some
 other bookkeeping system to track the physics parameters. Bundling these
@@ -560,7 +590,7 @@ both the output files.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>You can choose whatever name you like for this second rule, but it
 can’t be <code>avg_plaquette</code>, as rule names need to be unique
@@ -642,8 +672,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/python.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-06",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>

@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 64%" class="percentage">
-    64%
+<aside class="col-md-12 lesson-progress"><div style="width: 47%" class="percentage">
+    47%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 64%" aria-valuenow="64" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 47%" aria-valuenow="47" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -299,6 +299,24 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -357,7 +375,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Optimising workflow performance</h1>
-        <p>Last updated on 2025-10-06 |
+        <p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/optimisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -420,7 +438,8 @@ have to “timeslice” on a core which is generally suboptimal</li>
 many cores you have available, it will start jobs in parallel to use all
 your cores. In the diagram below, five jobs are ready to run and there
 are four system cores.</p>
-<figure><img src="../fig/snake_threads.svg%20%7Balt='" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a></h2>
+<p>![][fig-threads]</p>
+</section><section><h2 class="section-heading" id="listing-the-resources-of-your-machine">Listing the resources of your machine<a class="anchor" aria-label="anchor" href="#listing-the-resources-of-your-machine"></a></h2>
 <hr class="half-width"><p>So, to know how many threads to make available to Snakemake, we need
 to know how many CPU cores we have on our machine. On Linux, we can find
 out how many cores you have on a machine with the <code>lscpu</code>
@@ -452,12 +471,12 @@ hw.ncpu: 8</code></pre>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="ex">Swap:</span>          199Mi       199Mi        60Ki</span></code></pre>
 </div>
 <p>In this case, the machine has 3.7GiB of total RAM.</p>
-<p>On macOS, the command is sysctl <code>hw.memsize</code>:</p>
-<pre class="shellsession"><code>$ sysctl hw.memsize
-hw.memsize: 34359738368</code></pre>
-<p>This machine has 34,359,738,368 bytes of RAM in total. Dividing by
-the number of bytes in 1GiB (<span class="math inline">\(1024^3\)</span>
-bytes), that becomes 32GiB RAM.</p>
+<p>On macOS, the command is <code>sysctl -h hw.memsize</code>:</p>
+<pre class="shellsession"><code>$ sysctl -h hw.memsize
+hw.memsize: 34,359,738,368</code></pre>
+<p>This machine has around 34GB of RAM in total. Dividing by the number
+of bytes in 1GiB (<span class="math inline">\(1024^3\)</span> bytes),
+that becomes 32GiB RAM.</p>
 <p>We don’t want to use all of this RAM, but if we don’t mind other
 applications being unresponsive while our workflow runs, we can use the
 majority of it.</p>
@@ -498,7 +517,8 @@ We’ll work out the average for everyone present, or if you are working
 through the material on your own, repeat the measurement three times to
 get your own average.</p>
 <p>Now change the Snakemake concurrency option to <code>--cores 2</code>
-and then <code>--cores 4</code>.</p>
+and then <code>--cores 4</code>. Finally, try using every available core
+on your machine, using <code>--cores all</code>.</p>
 <ul><li>How does the total execution time change?</li>
 <li>What factors do you think limit the power of this setting to reduce
 the execution time?</li>
@@ -510,7 +530,7 @@ the execution time?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
 somewhere around 150–200 seconds is expected, and this should reduce to
@@ -619,7 +639,7 @@ can support PBS, SGE and other cluster schedulers.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Running on cluster and cloud </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Running workflows on HPC or Cloud systems could be a whole course in
 itself. The topic is too important not to be mentioned here, but also
@@ -648,15 +668,15 @@ and how it went.</p>
 </div>
 </div>
 </div>
-<p>Representation of a computer with four microchip icons indicating
-four available cores. To the right are five small green boxes
-representing Snakemake jobs and labelled as wanting 1, 1, 1, 2 and 8
-threads respectively. ‘} [fig-cluster]: fig/cluster.jpg {alt=’ A photo
-of some high performance computer hardware racked in five cabinets in a
-server room. Each cabinet is about 2.2 metres high and 0.8m wide. The
-doors of the cabinets are open to show the systems inside. Orange and
-yellow cabling is prominent, connecting ports within the second and
-third racks. ’}</p>
+<p>![fig-threads]: fig/snake_threads.svg {alt=’ Representation of a
+computer with four microchip icons indicating four available cores. To
+the right are five small green boxes representing Snakemake jobs and
+labelled as wanting 1, 1, 1, 2 and 8 threads respectively. ’}</p>
+<p>![fig-cluster]: fig/cluster.jpg {alt=’ A photo of some high
+performance computer hardware racked in five cabinets in a server room.
+Each cabinet is about 2.2 metres high and 0.8m wide. The doors of the
+cabinets are open to show the systems inside. Orange and yellow cabling
+is prominent, connecting ports within the second and third racks. ’}</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -668,6 +688,7 @@ third racks. ’}</p>
 number of threads to the number of cores you have</li>
 <li>You also need to consider RAM, disk, and network bottlenecks</li>
 <li>Profile your jobs to see what is taking most resources</li>
+<li>Use <code>--cores all</code> to enable using all CPU cores</li>
 <li>Snakemake is great for running workflows on compute clusters</li>
 </ul></div>
 </div>
@@ -734,8 +755,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/optimisation.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/optimisation.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-06",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>

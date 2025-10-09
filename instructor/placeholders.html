@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 14%" class="percentage">
-    14%
+<aside class="col-md-12 lesson-progress"><div style="width: 10%" class="percentage">
+    10%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 14%" aria-valuenow="14" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 10%" aria-valuenow="10" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -296,6 +296,24 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -354,7 +372,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Placeholders and wildcards</h1>
-        <p>Last updated on 2025-10-06 |
+        <p>Last updated on 2025-10-09 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/placeholders.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -446,14 +464,14 @@ files.</p>
 treat them as different entities—rules in Snakemake are self-contained
 in this way.</p>
 <p>Meanwhile, <code>{input}</code> and <code>{output}</code> are
-<strong>placeholders</strong> Placeholders are used in the
+<strong>placeholders</strong>. Placeholders are used in the
 <code>shell</code> section of a rule. Snakemake will replace them with
 appropriate values before running the command: <code>{input}</code> with
 the full name of the input file, and <code>{output}</code> with the full
 name of the output file.</p>
 <p>If we had wanted to include the value of the <code>subdir</code>
 wildcard directly in the <code>shell</code> command, we could have used
-the placeholder <code>{wildcards.subdir}</code>, but in most cases, as
+the placeholder <code>{wildcards.subdir}</code>, but in many cases, as
 here, we just need the <code>{input}</code> and <code>{output}</code>
 placeholders.</p>
 <p>Let’s test this general rule now:</p>
@@ -647,7 +665,6 @@ will plan out the jobs to run, and print them to the screen, but never
 actually run them. This is done with the <code>--dry-run</code> flag,
 eg:</p>
 <pre class="shellsession"><code>snakemake --dry-run --forceall --printshellcmds intermediary_data/beta1.7/pg.count</code></pre>
-<p>We’ll make use of this later in the lesson.</p>
 </div>
 </div>
 </div>
@@ -734,8 +751,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/placeholders.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/placeholders.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-06",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>

@@ -349,6 +349,30 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -466,7 +490,16 @@ understand it.</p>
 <hr class="half-width"></section><section id="placeholders"><h2 class="section-heading"><a href="placeholders.html">Placeholders and wildcards</a></h2>
 <hr class="half-width"></section><section id="chaining"><h2 class="section-heading"><a href="chaining.html">Chaining rules</a></h2>
 <hr class="half-width"></section><section id="parameters"><h2 class="section-heading"><a href="parameters.html">Metadata and parameters</a></h2>
-<hr class="half-width"></section><section id="multiple"><h2 class="section-heading"><a href="multiple.html">Multiple inputs and outputs</a></h2>
+<hr class="half-width">
+<h3 id="parameters-headingInstructor1">
+<a href="parameters.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#parameters-headingInstructor1"></a>
+</h3>
+<p>CSVs aren’t the only way to do this; for more complex data, YAML or
+even JSON may be a better choice. But CSV is good for most purposes, and
+easier to get started with. It’s also more readable for non-specialists
+investigating the workflow, which is valuable in and of itself.</p>
+<hr>
+<br></section><section id="multiple"><h2 class="section-heading"><a href="multiple.html">Multiple inputs and outputs</a></h2>
 <hr class="half-width">
 <h3 id="multiple-headingInstructor1">
 <a href="multiple.html#headingInstructor1">Definitely run through the spectrum plot</a><a class="anchor" aria-label="anchor" href="#multiple-headingInstructor1"></a>
@@ -530,6 +563,16 @@ meanwhile, tells Snakemake to use all available CPU cores. In this case
 it doesn’t make a difference, since only one job is needed by this run,
 but it’s a useful default invocation for production use.</p>
 <hr>
+<br></section><section id="cleanup"><h2 class="section-heading"><a href="cleanup.html">Tidying up</a></h2>
+<hr class="half-width"></section><section id="publishing"><h2 class="section-heading"><a href="publishing.html">Publishing your workflow</a></h2>
+<hr class="half-width">
+<h3 id="publishing-headingInstructor1">
+<a href="publishing.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#publishing-headingInstructor1"></a>
+</h3>
+<p>In principle, another archive like <code>tar.gz</code> could also be
+used. However, Zenodo can preview the contents of ZIP files, and not of
+other archives, so ZIP is strongly recommended here.</p>
+<hr>
 <br></section></section>
 </div>
     </main>
@@ -578,8 +621,8 @@ but it’s a useful default invocation for production use.</p>
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/instructor-notes.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/instructor-notes.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-07",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>

@@ -349,6 +349,30 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="cleanup.html">10. Tidying up</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush12">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading12">
+        <a href="publishing.html">11. Publishing your workflow</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -434,7 +458,21 @@ missing inputs</li>
 <li>Use <code>expand()</code> to generate lists of filenames from a
 template</li>
 </ul></section><section id="parameters"><h2 class="section-heading"><a href="parameters.html">Metadata and parameters</a></h2>
-<hr class="half-width"></section><section id="multiple"><h2 class="section-heading"><a href="multiple.html">Multiple inputs and outputs</a></h2>
+<hr class="half-width">
+<ul>
+<li>Use a YAML file to define parameters to the workflow, and attach it
+using <code>configfile:</code> near the top of the file.</li>
+<li>Override individual options at run-time with the
+<code>--config</code> option.</li>
+<li>Load additional parameter files at run-time using the
+<code>--configfile</code> option.</li>
+<li>Use a CSV file loaded into a Pandas dataframe to load
+ensemble-specific metadata.</li>
+<li>Use <code>lookup()</code> to get information out of the dataframe in
+a rule.</li>
+<li>Use <code>params:</code> to define job-specific parameters that do
+not describe filenames.</li>
+</ul></section><section id="multiple"><h2 class="section-heading"><a href="multiple.html">Multiple inputs and outputs</a></h2>
 <hr class="half-width"></section><section id="dag"><h2 class="section-heading"><a href="dag.html">How Snakemake plans jobs</a></h2>
 <hr class="half-width">
 <ul>
@@ -454,6 +492,7 @@ determine what need regenerating</li>
 number of threads to the number of cores you have</li>
 <li>You also need to consider RAM, disk, and network bottlenecks</li>
 <li>Profile your jobs to see what is taking most resources</li>
+<li>Use <code>--cores all</code> to enable using all CPU cores</li>
 <li>Snakemake is great for running workflows on compute clusters</li>
 </ul></section><section id="awkward"><h2 class="section-heading"><a href="awkward.html">Awkward corners</a></h2>
 <hr class="half-width">
@@ -461,12 +500,38 @@ number of threads to the number of cores you have</li>
 <li>Use Python input functions that take a dict of wildcards, and return
 a list of strings, to handle complex dependency issues that can’t be
 expressed in pure Snakemake.</li>
-<li>Use <code>glob_wildcards</code> to match multiple files on disk
+<li>Import <code>glob.glob</code> to match multiple files on disk
 matching a specific pattern. Don’t rely on this finding intermediate
 files in final production workflows, since it won’t find files not
 present at the start of the workflow run.</li>
 <li>Use <code>snakemake --touch</code> if you need to mark files as
 up-to-date, so that Snakemake won’t try to regenerate them.</li>
+</ul></section><section id="cleanup"><h2 class="section-heading"><a href="cleanup.html">Tidying up</a></h2>
+<hr class="half-width">
+<ul>
+<li>Use <code>.smk</code> files in <code>workflow/rules</code> to
+compartmentalise the <code>Snakefile</code>, and use <code>input:</code>
+lines in the main <code>Snakefile</code> to link them into the
+workflow.</li>
+<li>Add a rule at the top of the <code>Snakefile</code> with
+<code>default_target: True</code> to specify the default output of a
+workflow.</li>
+<li>Use <code>.gitignore</code> to avoid committing input or output data
+or the Snakemake cache.</li>
+<li>Use <code>.git_keep</code> files to preserve empty directories.</li>
+<li>Use Git submodules to link to libraries you have written that aren’t
+on PyPI.</li>
+<li>Include a <code>README.md</code> in your repository explaining how
+to run the workflow.</li>
+</ul></section><section id="publishing"><h2 class="section-heading"><a href="publishing.html">Publishing your workflow</a></h2>
+<hr class="half-width">
+<ul>
+<li>Test the workflow by making a fresh clone and following the README
+instructions</li>
+<li>Use
+<code>zip -9 --exclude "**/.git/*" --exclude "**/.git" filename.zip dirname</code>
+to prepare a ZIP file of a freshly-cloned repository, with
+submodules.</li>
 </ul></section>
 </div>
     </main>
@@ -515,8 +580,8 @@ up-to-date, so that Snakemake won’t try to regenerate them.</li>
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/key-points.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/key-points.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-07",
-  "datePublished": "2025-10-07"
+  "dateModified": "2025-10-09",
+  "datePublished": "2025-10-09"
 }
 
   </script><script>
