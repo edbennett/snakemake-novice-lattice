@@ -82,6 +82,12 @@ conda create -n snakemake -c conda-forge -c bioconda snakemake bash
 conda activate snakemake
 ```
 
+(Note that we're installing `bash` here in addition to Snakemake.
+Some of the syntax we'll use in this lesson relies on
+a version of `bash` newer than that that comes with macOS.
+On Linux,
+this is not required and you can just install `snakemake`.)
+
 After starting a new terminal,
 or rebooting your computer,
 you will need to run
