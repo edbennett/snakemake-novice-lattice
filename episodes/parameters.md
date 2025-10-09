@@ -376,7 +376,8 @@ $ cat intermediary_data/beta2.0/corr.ps_mass.json.gz | gunzip | head -n 29
  "obsdata": [{
    "type": "Obs",
    "layout": "1",
-   "value": [2.1988677698535195],```
+   "value": [2.1988677698535195],
+```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -449,6 +450,10 @@ to need to define multiple rules that differ only in which channel they look at,
 this is a good point,
 and one that we will deal with in the episode on Awkward Corners.
 
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Use a YAML file to define parameters to the workflow,
@@ -460,10 +465,5 @@ and one that we will deal with in the episode on Awkward Corners.
 - Use `params:` to define job-specific parameters that do not describe filenames.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 [pandas]: https://pandas.pydata.org
