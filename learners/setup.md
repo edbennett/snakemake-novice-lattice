@@ -20,7 +20,7 @@ FIXME: place any data you want learners to use in `episodes/data` and then use
        a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
        link to it, replacing the example.com link.
 -->
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
+Download the [data zip file][data-zip] and unzip it to your Desktop
 
 ## Software Setup
 
@@ -123,7 +123,7 @@ Follow [the instructions on TeX Live's website][texlive].
 ::::::::::::::::::::::::
 
 
-
+[data-zip]: https://zenodo.org/records/17308707/files/su2pg_starter.zip?download=1
 [miktex]: https://miktex.org/download
 [miniforge]: https://github.com/conda-forge/miniforge
 [texlive]: https://tug.org/texlive/quickinstall.html
