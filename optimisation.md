@@ -325,14 +325,12 @@ CC-BY-SA-4.0
 
 
 
-![fig-threads]: fig/snake_threads.svg {alt='
-Representation of a computer with four microchip icons indicating four available cores.
+[fig-threads]: fig/snake_threads.svg {alt='Representation of a computer with four microchip icons indicating four available cores.
 To the right are five small green boxes representing Snakemake jobs
 and labelled as wanting 1, 1, 1, 2 and 8 threads respectively.
 '}
 
-![fig-cluster]: fig/cluster.jpg {alt='
-A photo of some high performance computer hardware
+[fig-cluster]: fig/cluster.jpg {alt='A photo of some high performance computer hardware
 racked in five cabinets in a server room.
 Each cabinet is about 2.2 metres high and 0.8m wide.
 The doors of the cabinets are open to show the systems inside.
