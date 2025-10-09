@@ -308,7 +308,7 @@ What does the `--printshellcmds` option in the `snakemake` command above do?
 3. Tells Snakemake to only run one process at a time
 4. Prompts the user for the correct input file
 
-*Hint: you can search in the text by pressing `/`, and quit back to the shell with `q`*
+*Hint: you can search in the text by pressing <kbd>/</kbd>, and quit back to the shell with <kbd>q</kbd>*
 
 :::::::::::::::  solution
 
