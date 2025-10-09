@@ -390,7 +390,7 @@ data flow.
   `intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz`
 '}
 
-[fig-dag2]: fig/dag_2.png {alt='A DAG for the partial workflow with eleven similar columns,
+[fig-dag2]: fig/dag_2.svg {alt='A DAG for the partial workflow with eleven similar columns,
   one per ensemble,
   each having a green `ps_mass`, a red `avg_plaquette`,
   and a yellow `one_loop_matching` job;
