@@ -433,11 +433,11 @@ and place it at that point in the file. Unlike Python, where the
 Snakemake, anything defined above the <code>include</code> line is
 available to the included code. So we are safe to use the configuration
 parameters and metadata that we load at the top of the file.</p>
-<div id="clean-out-the-snakefile" class="callout discussion">
+<div id="clean-out-the-snakefile" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div id="clean-out-the-snakefile" class="callout-inner">
 <h3 class="callout-title">Clean out the <code>Snakefile</code>
 </h3>
@@ -449,14 +449,47 @@ additional <code>.smk</code> files. Place these in the
 <ul><li>Rules relating to correlation function fits</li>
 <li>Rules relating to the Wilson flow</li>
 <li>Rules combining output of more than one ensemble</li>
-</ul></div>
+</ul><p>Hint: <code>conda:</code> environments are defined relative to the
+source file, so they will need to be adjusted with a
+<code>../</code>.</p>
 </div>
 </div>
-<div id="tidy-up-the-plot_styles" class="callout discussion">
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>One option is to have four files in <code>workflow/rules</code>:</p>
+<ul><li>
+<code>pg.smk</code>, containing the rules
+<code>count_trajectories</code> and <code>avg_plaquette</code>
+</li>
+<li>
+<code>corr_fits.smk</code>, containing the rules
+<code>meson_mass</code> and <code>one_loop_matching</code>
+</li>
+<li>
+<code>wflow.smk</code>, containing the rule <code>w0</code>
+</li>
+<li>
+<code>output.smk</code>, containing the rules
+<code>plot_avg_plaquette</code>, <code>tabulate_counts</code>,
+<code>restricted_spectrum</code>, <code>spectrum</code>, and
+<code>quick_spectrum</code>.</li>
+</ul><p>In each one, any <code>conda:</code> directives should point to
+<code>../envs/analysis.yml</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="tidy-up-the-plot_styles" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div id="tidy-up-the-plot_styles" class="callout-inner">
 <h3 class="callout-title">Tidy up the <code>plot_styles</code>
 </h3>
@@ -469,6 +502,57 @@ we adjust the style file, Snakemake knows to re-run the plotting
 rules.</p>
 <p>Make that change now for all rules depending on
 <code>plot_styles</code>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>The <code>input:</code> block should contain a new line similar
+to:</p>
+<pre class="snakemake"><code>        plot_styles=config["plot_styles"],</code></pre>
+<p>The <code>shell:</code> block should then replace references to
+<code>{config[plot_styles]}</code> with
+<code>{input.plot_styles}</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="use-the-metadata" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="use-the-metadata" class="callout-inner">
+<h3 class="callout-title">Use the <code>metadata</code>
+</h3>
+<div class="callout-content">
+<p>Currently a lot of our rules list a lot of values of
+<code>beta</code>. Can you tidy this up so that it uses the values from
+the metadata file instead?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>Each instance of <code>beta=</code> inside an expand may be replaced
+with:</p>
+<pre class="snakemake"><code><span><span class="va">beta</span><span class="op">=</span><span class="fu">sorted</span><span class="op">(</span><span class="fu">set</span><span class="op">(</span><span class="va">metadata</span><span class="op">[</span><span class="st">"beta"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<p>Alternatively, you may define this as a variable at the top of the
+file, and use it by name, rather than repeating it every time.</p>
+<p>For the <code>spectrum_scaled</code> rule, you will additionally need
+to filter the metadata, for example via</p>
+<pre class="snakemake"><code><span><span class="va">beta</span><span class="op">=</span><span class="fu">sorted</span><span class="op">(</span><span class="fu">set</span><span class="op">(</span><span class="va">metadata</span><span class="op">[</span><span class="va">metadata</span><span class="op">[</span><span class="st">"beta"</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">1.9</span><span class="op">]</span><span class="op">[</span><span class="st">"beta"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -562,20 +646,38 @@ stated.</p>
 </div>
 </div>
 </div>
-<p>Let’s add these to the <code>.gitignore</code> for our workflow
-now.</p>
-<pre class="shellsession"><code>nano .gitignore</code></pre>
-<p>To this file, we’ll add the lines</p>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>.snakemake/
-raw_data/
-metadata/
-intermediary_data/
+<p>Let’s check the <code>.gitignore</code> for our workflow now.</p>
+<pre class="shellsession"><code>$ cat .gitignore
+# Common temporary files
+thumbs.db
+.DS_Store
+
+# Python compiled objects
+*.pyc
+__pycache__/
+.mypy_cache/
+
+# Snakemake cache
+.snakemake/
+
+# Workflow outputs
 assets/
-data_assets/</code></pre>
-</div>
+data_assets/
+intermediary_data/
+
+# Workflow inputs that should not be held together with code
+raw_data/*
+metadata/*
+
+# Common editor temporary files
+*~
+.#*#</code></pre>
+<p>You can see that all of the above are being ignored, as are some
+common files to sneak into Git repositories—temporary files generated by
+text editors and cache files from operating systems, for example. This
+forms a good basic template for your own <code>.gitignore</code> files
+for Snakemake workflows; you may want to expand yours based on <a href="https://github.com/github/gitignore" class="external-link">GitHub’s templates</a>, for
+example.</p>
 <p>Someone downloading your workflow will need to place the input data
 and metadata in the correct locations. You might wish to prepare an
 empty directory for the reader to place the necessary files into Since
@@ -587,11 +689,11 @@ nano .gitignore</code></pre>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>!*/.git_keep</code></pre>
+<pre class="output" tabindex="0"><code># Don't ignore placeholder files for would-be empty directories
+!*/.git_keep</code></pre>
 </div>
 <p>Let’s commit these changes now</p>
 <pre class="shellsession"><code>git add .gitignore
-git commit -m "Ignore workflow inputs, and outputs, and temporary files"
 git add metadata/.git_keep
 git commit -m "Prepare empty directory for metadata"</code></pre>
 <p>Where you use libraries that you have written, that are not on the <a href="https://pypi.org" class="external-link">Python Package Index</a>, it is a good idea to
@@ -607,8 +709,20 @@ containing the library we have used for most of this analysis. This
 library is hosted on GitHub at
 <code>https://github.com/edbennett/su2pg_analysis</code>. To track this
 as a Git submodule, we use the command</p>
-<pre class="shellsession"><code>git submodule add https://github.com/edbennett/su2pg_analysis libs/su2pg_analysis
-git commit -m "Add su2pg_analysis as submodule"</code></pre>
+<pre class="shellsession"><code>$ git submodule add https://github.com/edbennett/su2pg_analysis libs/su2pg_analysis
+Adding existing repo at 'libs/su2pg_analysis' to the index
+$ git commit -m "Add su2pg_analysis as submodule"
+[main 89c3d3d] Add su2pg_analysis as submodule
+ 2 files changed, 4 insertions(+)
+ create mode 160000 libs/su2pg_analysis</code></pre>
+<p>We also need to commit the work we’ve done on the workflow itself.
+(We’ve put this off while we’ve been learning, but in general it’s a
+good idea to do this regularly during development, not only when you’ve
+“finished”.)</p>
+<pre class="shellsession"><code>git add workflow/ config/
+git status</code></pre>
+<p>If we’re happy with what is to be committed, we can then run</p>
+<pre class="shellsession"><code>git commit -m "first draft of complete workflow"</code></pre>
 <div id="what-to-include" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -641,12 +755,12 @@ to run the workflow.`</li>
 </ol></div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>Yes, this tool is clearly part of the workflow, so should be
 included in the repository, unless it’s being used from an external

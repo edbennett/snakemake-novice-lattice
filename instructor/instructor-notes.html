@@ -469,7 +469,21 @@ directory is unlikely to be the same, so the workflow would fail.</p>
 data, so this is an important point to reinforce.</p>
 <hr>
 <br><h3 id="introduction-headingInstructor3">
-<a href="introduction.html#headingInstructor3">Use of the --forceall flag</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor3"></a>
+<a href="introduction.html#headingInstructor3">Read-only data</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor3"></a>
+</h3>
+<p>The example data for this lesson uses read-only raw data throughout,
+including the containing directories. If learners end up with multiple
+copies of the data and need to delete one, they should use the
+commands:</p>
+<pre class="shellsession"><code>chmod -R u+w raw_data
+rm -r raw_data</code></pre>
+<p>Having the containing directories read-only means that extra output
+files can’t be added by accident. It’s a relatively strict measure—while
+assembling data, one would only want the files read-only, so you could
+keep adding more files as they were ready.</p>
+<hr>
+<br><h3 id="introduction-headingInstructor4">
+<a href="introduction.html#headingInstructor4">Use of the --forceall flag</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor4"></a>
 </h3>
 <p>In the first few episodes we always run Snakemake with the
 <code>--forceall</code> flag, and it’s not explained what this does

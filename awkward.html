@@ -525,7 +525,7 @@ rule meson_mass:
         plateau_end=plateau_param("end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python -m su2pg_analysis.meson_mass {input} --channel {wildcards.channel} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
 <p>We can test this for the vector mass:</p>
 <pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz</code></pre>
 

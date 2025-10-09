@@ -450,14 +450,14 @@ from earlier in development allow the workflow to complete in your
 working directory, but not in a freshly-cloned version.</p>
 <p>Let’s use Git to make a fresh copy of the workflow:</p>
 <pre class="shellsession"><code>cd ../
-git clone --recurse-submodules su2_puregauge su2_puregauge_test
-cd su2_puregauge_test</code></pre>
+git clone --recurse-submodules su2pg su2pg_test
+cd su2pg_test</code></pre>
 <p>Now, we follow the steps in the README directly. We obtain the data
 and metadata, and place them into the correct locations. In practice we
 would want to have the data already in the ZIP format that we will use
 to upload to Zenodo; for now, we can copy this across:</p>
-<pre class="shellsession"><code>cp -r ../su2_puregauge/raw_data .
-cp ../su2_puregauge/metadata/* metadata/</code></pre>
+<pre class="shellsession"><code>cp -r ../su2pg/raw_data .
+cp ../su2pg/metadata/* metadata/</code></pre>
 <p>Now we can re-run Snakemake:</p>
 <pre class="shellsession"><code>snakemake --cores all --use-conda</code></pre>
 <p>Since this is a clean copy, Snakemake will once again need to install
@@ -466,7 +466,7 @@ the Conda environment used by some of the workflow steps.</p>
 the outputs we get match the ones we expect; for example, looking at
 plots side-by-side. For text files, we can also check the differences
 explicitly:</p>
-<pre class="shellsession"><code>diff -r ../su2_puregauge/assets/tables assets/tables</code></pre>
+<pre class="shellsession"><code>diff -r ../su2pg/assets/tables assets/tables</code></pre>
 <p>We expect to see differences in provenance, but not in numbers, when
 we run on the same computer.</p>
 <div id="callout1" class="callout">
@@ -515,8 +515,8 @@ other archives, so ZIP is strongly recommended here.</p>
 submodules present (since they may not be available from GitHub
 later).</p>
 <pre class="shellsession"><code>cd ..
-git clone --recurse-submodules su2_puregauge su2_puregauge_release
-zip -9 --exclude "**/.git/*" --exclude "**/.git" -r su2_puregauge.zip su2_puregauge_release</code></pre>
+git clone --recurse-submodules su2pg su2pg_release
+zip -9 --exclude "**/.git/*" --exclude "**/.git" -r su2pg.zip su2pg_release</code></pre>
 <p>Note that we use <code>--exclude</code> to avoid committing the
 <code>.git</code> directory of the repository or its submodules. We
 don’t get the <code>.git</code> directory in a GitHub ZIP file either,

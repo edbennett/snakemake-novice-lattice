@@ -613,6 +613,62 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 </div>
 </div>
 
+<div id="scaled-spectrum-plot" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="scaled-spectrum-plot" class="callout-inner">
+<h3 class="callout-title">Scaled spectrum plot</h3>
+<div class="callout-content">
+<p>Write a rule that plots both the pseudoscalar channel’s decay
+constant and the vector mass against the pseudoscalar mass, all scaled
+by the <span class="math inline">\(w_0\)</span> scale, for each ensemble
+studied having <span class="math inline">\(\beta \le 1.8\)</span>. The
+tool <code>src/plot_spectrum.py</code> will help with this.</p>
+<p>Hint: compared to the unscaled spectrum plot, you will additionally
+need data files for the vector mass and <span class="math inline">\(w_0\)</span>, and will need to pass the
+<code>--rescale_w0</code> option to <code>plot_spectrum.py</code>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+<pre class="snakemake"><code>rule spectrum_scaled:
+    input:
+        script="src/plot_spectrum.py",
+        ps_mass=expand(
+            "intermediary_data/beta{beta}/corr.ps_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+        ),
+        v_mass=expand(
+            "intermediary_data/beta{beta}/corr.v_mass.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+        ),
+        ps_decay_const=expand(
+            "intermediary_data/beta{beta}/pg.corr.ps_decay_const.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+        ),
+        w0=expand(
+        "intermediary_data/beta{beta}/wflow.w0.json.gz",
+            beta=[1.5, 1.6, 1.7, 1.8],
+    ),
+    output:
+        plot=multiext("assets/plots/spectrum_scaled", config["plot_filetype"]),
+    conda: "../envs/analysis.yml"
+    shell:
+        "python {input.script} {input.ps_mass} {input.v_mass} {input.ps_decay_const} {input.w0} --y_observable f_ps --y_observable m_v --zero_y_axis --rescale_w0 --output_file {output.plot} --plot_styles {config[plot_styles]}"</code></pre>
+<p>Test this using</p>
+<pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum_scaled.pdf</code></pre>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="log-files">Log files<a class="anchor" aria-label="anchor" href="#log-files"></a></h2>
 <hr class="half-width"><p>When a process run by Snakemake exits with an error code, Snakemake
 removes all the expected output files. Usually this is what we want: we
@@ -688,12 +744,12 @@ file.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -743,10 +799,10 @@ filename in the <code>ps_mass</code> rule.</p>
 <span>        <span class="st">"python -m su2pg_analysis.meson_mass {input} --output_file {output.data}.json_ --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</span></span></code></pre>
 <p>To keep things tidy, this time we’ll manually remove the intermediary
 data directory.</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
 </div>
 <p>And re-run.</p>
 <pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
@@ -778,7 +834,7 @@ Shell command: python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --o
 Activating conda environment: .snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
 Waiting at most 5 seconds for missing files:
 intermediary_data/beta2.0/corr.ps_mass.json.gz (missing locally)
-MissingOutputException in rule ps_mass in file "/home/ed/src/su2_puregauge_test/workflow/Snakefile", line 68:
+MissingOutputException in rule ps_mass in file "/home/ed/src/su2pg/workflow/Snakefile", line 68:
 Job 0 completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
 intermediary_data/beta2.0/corr.ps_mass.json.gz (missing locally, parent dir contents: corr.ps_mass.json.gz.json_.json.gz, corr.ps_mass.log, corr.ps_eff_mass.pdf)
 Removing output files of failed job ps_mass since they might be corrupted:
@@ -792,11 +848,11 @@ Error in rule ps_mass:
     input: raw_data/beta2.0/out_corr
     output: intermediary_data/beta2.0/corr.ps_mass.json.gz, intermediary_data/beta2.0/corr.ps_eff_mass.pdf
     log: intermediary_data/beta2.0/corr.ps_mass.log (check log file(s) for error details)
-    conda-env: /home/ed/src/su2_puregauge_test/.snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
+    conda-env: /home/ed/src/su2pg/.snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
     shell:
         python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle |&amp; tee intermediary_data/beta2.0/corr.ps_mass.log
         (command exited with non-zero exit code)
-Complete log(s): /home/ed/src/su2_puregauge_test/.snakemake/log/2025-09-02T002859.356054.snakemake.log
+Complete log(s): /home/ed/src/su2pg/.snakemake/log/2025-09-02T002859.356054.snakemake.log
 WorkflowError:
 At least one job did not complete successfully.</code></pre>
 <p>There’s a lot to take in here. Some of the messages are very
