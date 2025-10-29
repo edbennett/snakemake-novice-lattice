@@ -1,6 +1,6 @@
 ---
 title: Tidying up
-teaching: 20
+teaching: 15
 exercises: 20
 ---
 
@@ -33,7 +33,11 @@ and we might want to break it up into smaller pieces.
 Let's do this now.
 We can take the rules relating only to the `pg` output files,
 and place them into a new file `workflow/rules/pg.smk`.
-In their place,
+Since `conda:` directives are defined relative to the current file,
+we need to replace `envs/analysis.yml`
+with `../envs/analysis.yml` when we do this.
+
+In place of the rules we just moved,
 in the `Snakefile`,
 we add the line
 
@@ -385,7 +389,7 @@ should be included in a hypothetical workflow repository?
 5. `spectrum.pdf`, a plot created by the workflow.
 6. `prd.mplstyle`, a Matplotlib style file used by the workflow.
 7. `README.md`, guidelines on how to use the workflow.
-8. `id_rsa`, the SSH private key used to connect to clusters to run the workflow.`
+8. `id_rsa`, the SSH private key used to connect to clusters to run the workflow.
 
 :::::::::::::::  solution
 
@@ -445,7 +449,7 @@ it's good to remember that "other people"
 includes "your collaborators"
 and "yourself in six months' time",
 so writing a good README isn't just good citizenship to help others,
-it's also directly  beneficial to you and those you work with.
+it's also directly beneficial to you and those you work with.
 
 One good format to write a README in is [Markdown][markdown].
 This is rendered to formatted text automatically by most Git hosting services,

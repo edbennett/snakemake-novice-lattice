@@ -1,7 +1,7 @@
 ---
 title: Optimising workflow performance
 teaching: 20
-exercises: 20
+exercises: 10
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -136,7 +136,7 @@ by using the `--forceall` flag to Snakemake
 and time the whole run using the `time` command.
 
 ```bash
-$ time snakemake --cores 1 --forceall -- assets/plots/spectrum.pdf
+$ time snakemake --cores 1 --use-conda --forceall -- assets/plots/spectrum.pdf
 real	3m10.713s
 user	1m30.181s
 sys	0m8.156s
@@ -220,7 +220,7 @@ rule ps_mass:
     conda: "envs/analysis.yml"
     threads: 4
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2>&1 | tee {log.messages}"
 ```
 
 You should explicitly use `threads: 4` rather than `params: threads = "4"` 

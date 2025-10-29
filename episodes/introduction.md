@@ -1,6 +1,6 @@
 ---
 title: "Running commands with Snakemake"
-teaching: 10
+teaching: 20
 exercises: 5
 ---
 
@@ -149,9 +149,12 @@ rule count_lines:
 
 1. The file is named `Snakefile` - with a capital `S` and no file extension.
 2. Some lines are indented. Indents must be with space characters, not tabs.
-3. The rule definition starts with the keyword `rule` followed by the rule name, then a colon.
-4. We named the rule `count_trajectories`. You may use letters, numbers or underscores, but the rule name
-  must begin with a letter and may not be a keyword.
+3. The rule definition starts with the keyword `rule` followed by the rule name,
+   then a colon.
+4. We named the rule `count_lines`.
+   You may use letters, numbers or underscores,
+   but the rule name
+   must begin with a letter and may not be a keyword.
 5. The keywords `input`, `output`, `shell` are all followed by a colon.
 6. The file names and the shell command are all in `"quotes"`.
 7. The file names are specified relative to the root directory of your workflow.
@@ -183,7 +186,24 @@ cd su2pg
 ```
 
 We'll spend most of the rest of the lesson in this directory.
-From the here,
+
+:::::::::::::::::::::::::::::::::::::::  callout
+
+## Activate your environment
+
+To call `snakemake`,
+we need to have active the environment that we created in the [setup](/setup).
+Current versions of Conda by default prepend this environment name to your prompt,
+so if you don't see `(snakemake)` in your prompt,
+you will need to activate this
+
+```shellsession
+conda activate snakemake
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+From here,
 we can now run the command
 
 ```shellsession

@@ -1,6 +1,6 @@
 ---
 title: "Running Python code with Snakemake"
-teaching: 10
+teaching: 20
 exercises: 5
 ---
 
@@ -130,7 +130,10 @@ to tell Snakemake to pay attention to the `conda:` specification.
 Let's check now that the output was correctly generated:
 
 ```shellsession
-$ cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 31
+cat intermediary_data/beta2.0/pg.plaquette.json.gz | gunzip | head -n 31
+```
+
+```output
 {
  "program": "pyerrors 2.14.0",
  "version": "1.1",
@@ -251,5 +254,15 @@ We'll address this next!
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Snakemake will manage Conda environments for you,
+  to help ensure that workflows always use a consistent set of packages
+- Use the `--use-conda` option to `snakemake` to enable this behaviour
+- Use `conda:` to specify a Conda environment definition (`.yml`) file.
+  The path of this is relative to the file in which it is specified.
+- Conda environment files are conventionally put in the `workflow/envs` directory
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 [yaml]: https://yaml.org

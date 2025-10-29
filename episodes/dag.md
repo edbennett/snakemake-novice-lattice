@@ -1,6 +1,6 @@
 ---
 title: "How Snakemake plans jobs"
-teaching: 10
+teaching: 15
 exercises: 5
 ---
 
@@ -33,7 +33,7 @@ A DAG is a **Directed Acyclic Graph** and it can be pictured like so:
 
 The above DAG is based on three of our existing rules,
 and shows all the jobs Snakemake would run
-to compute the pseudoscalar decay constant of the $\beta = 4.0$ ensemble.
+to compute the pseudoscalar decay constant of the $\beta = 2.0$ ensemble.
 
 :::::::::::::::::::::::::::::::::::::::  checklist
 
@@ -75,11 +75,11 @@ how many jobs would that be in total?
 
 ## Solution
 
-36 in total:
+33 in total:
 
-- 12 $\times$ `one_loop_matching` 
-- 12 $\times$ `ps_mass`
-- 12 $\times$ `avg_plaquette`
+- 11 $\times$ `one_loop_matching` 
+- 11 $\times$ `ps_mass`
+- 11 $\times$ `avg_plaquette`
 - 0 $\times$ `count_trajectories`
 - 0 $\times$ `spectrum`
 
@@ -205,7 +205,7 @@ The `--forcerun` flag allows you to explicitly tell Snakemake that a rule has ch
 and that all outputs from that rule need to be re-evaluated.
 
 ```shellsession
-snakemake  --forcerun spectrum --cores 1--printshellcmds --use-conda assets/plots/spectrum.pdf
+snakemake  --forcerun spectrum --cores 1 --printshellcmds --use-conda assets/plots/spectrum.pdf
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -306,8 +306,8 @@ and then use the `--dag` option as shown above to check:
 3) How many if you use the `--forcerun ps_mass` option?
 
 4) How many if you edit the metadata file
-   so that the `ps_plateau_start` for the $\beta=4.0$ ensemble is `TODO`,
-   rather than `TODO`?
+   so that the `ps_plateau_start` for the $\beta=2.0$ ensemble is `13`,
+   rather than `11`?
 
 :::::::::::::::::::: solution
 
