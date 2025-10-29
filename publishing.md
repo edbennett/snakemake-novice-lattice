@@ -1,7 +1,7 @@
 ---
 title: Publishing your workflow
-teaching: 20
-exercises: 20
+teaching: 15
+exercises: 0
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives

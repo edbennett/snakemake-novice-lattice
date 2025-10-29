@@ -1,7 +1,7 @@
 ---
 title: "Placeholders and wildcards"
-teaching: 10
-exercises: 5
+teaching: 25
+exercises: 10
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -153,7 +153,8 @@ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/be
 ## Choosing the right wildcards
 
 Our rule puts the trajectory counts into output files named like `pg.count`.
-How would you have to change the `count_trajectories` rule definition if you wanted:
+How would you have to change the `count_trajectories` rule definition
+if you instead wanted:
 
 1) the output file for `raw_data/beta1.8/out_hmc`
    to be `intermediary_data/beta1.8/hmc.count`?
@@ -162,13 +163,13 @@ How would you have to change the `count_trajectories` rule definition if you wan
    to be `intermediary_data/beta1.8/mass_fun-0.63/hmc.count`?
 
 3) the output file for `raw_data/beta1.8/mass_fun-0.63/out_hmc`
-   to be `intermediary_data/hmc_b3.0_m-0.63.count`
-   (for `raw_data/beta1.9/mass_fun-0.68/out_pg` to be
+   to be `intermediary_data/hmc_b1.8_m-0.63.count`
+   (for `raw_data/beta1.9/mass_fun-0.68/out_hmc` to be
    `intermediary_data/hmc_b1.9_m-0.68.count`, etc.)?
 
 4) the output file for `raw_data/beta1.8/mass_fun-0.63/out_hmc`
    to be `intermediary_data/hmc_m-0.63.count`
-   (for `raw_data/beta1.9/mass_fun-0.68/out_pg` to be
+   (for `raw_data/beta1.9/mass_fun-0.68/out_hmc` to be
    `intermediary_data/hmc_m-0.68.count`, etc.)?
 
 (Assume that both pure-gauge and HMC logs tag generated trajectories the same way.
@@ -304,6 +305,16 @@ snakemake --dry-run --forceall --printshellcmds intermediary_data/beta1.7/pg.cou
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: instructor
+
+If the learner copies down a previous command here,
+then they might include a `--use-conda`.
+In that case,
+Snakemake _will_ build the Conda environments,
+even though it will not need to use them.
+
+::::::::::::::::::::::::::::::::::::::::::::::
 
 The amount of checking may seem pedantic right now,
 but as the workflow gains more steps this will become very useful to us indeed.

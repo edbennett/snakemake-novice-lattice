@@ -1,7 +1,7 @@
 ---
 title: Awkward corners
-teaching: 20
-exercises: 20
+teaching: 25
+exercises: 30
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -45,7 +45,7 @@ rule ps_mass:
         plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2>&1 | tee {log.messages}"
 ```
 
 Now,
@@ -183,7 +183,7 @@ rule meson_mass:
         plateau_end=plateau_param("end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --channel {wildcards.channel} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |& tee {log.messages}"
+        "python -m su2pg_analysis.meson_mass {input} --channel {wildcards.channel} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2>&1 | tee {log.messages}"
 ```
 
 We can test this for the vector mass:
@@ -320,7 +320,7 @@ rule quick_spectrum:
         ps_mass=glob(
             "intermediary_data/beta*/corr.ps_mass.json.gz",
         ),
-        ps_decay_const=expand(
+        ps_decay_const=glob(
             "intermediary_data/beta*/pg.corr.ps_decay_const.json.gz",
         ),
     output:

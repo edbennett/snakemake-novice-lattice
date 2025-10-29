@@ -36,7 +36,14 @@ The data presented were generated using
 the [Supercomputing Wales][scw] SUNBIRD system.
 Supercomputing Wales is supported by
 the [European Regional Development Fund][erdf]
-via [Welsh Government][welshgov]
+via [Welsh Government][welshgov].
+
+The author is grateful to
+Alexis Provatas,
+Gaurav Ray,
+and
+Gianmarco Simonetti,
+for testing and giving feedback on early versions of this lesson.
 
 [erdf]: https://commission.europa.eu/funding-tenders/find-funding/eu-funding-programmes/european-regional-development-fund-erdf_en
 [scw]: https://www.supercomputing.wales

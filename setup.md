@@ -45,7 +45,7 @@ and execute it at the terminal.
 
 ### Windows
 
-This lesson has not been tested with Windows.
+This lesson has not been designed to run on Windows.
 We would recommend using the Windows Subsystem for Linux,
 and following the instructions for Linux.
 
@@ -66,6 +66,28 @@ pick the option for Conda to set up your environment with `conda init`.
 
 ::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::: callout
+
+## Update Conda
+
+If you already have Conda installed
+(for example,
+as part of Anaconda),
+you're recommended to update to the latest version,
+since Snakemake relies on some features introduced in recent versions.
+
+To do this,
+run
+
+```shellsession
+conda update --name base --upgrade conda
+```
+
+If you're not able to update the base environment,
+you may need to create a fresh Conda installation using the instructions above.
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Snakemake
 
 With Conda available,
@@ -78,15 +100,9 @@ but for your work in Snakemake going forward.
 ### Details
 
 ```bash
-conda create -n snakemake -c conda-forge -c bioconda snakemake bash
+conda create -n snakemake -c conda-forge -c bioconda snakemake
 conda activate snakemake
 ```
-
-(Note that we're installing `bash` here in addition to Snakemake.
-Some of the syntax we'll use in this lesson relies on
-a version of `bash` newer than that that comes with macOS.
-On Linux,
-this is not required and you can just install `snakemake`.)
 
 After starting a new terminal,
 or rebooting your computer,
@@ -123,7 +139,7 @@ Follow [the instructions on TeX Live's website][texlive].
 ::::::::::::::::::::::::
 
 
-[data-zip]: https://zenodo.org/records/17308707/files/su2pg_starter.zip?download=1
+[data-zip]: https://zenodo.org/records/17476887/files/su2pg_starter.zip?download=1
 [miktex]: https://miktex.org/download
 [miniforge]: https://github.com/conda-forge/miniforge
 [texlive]: https://tug.org/texlive/quickinstall.html

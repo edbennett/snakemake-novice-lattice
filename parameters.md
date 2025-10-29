@@ -1,8 +1,26 @@
 ---
 title: "Metadata and parameters"
-teaching: 10
-exercises: 5
+teaching: 30
+exercises: 15
 ---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How do I specify and configure parameters my whole workflow relies on?
+- How do I set up parameters for individual jobs?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Be able to use the `config` object to accept external configuration
+- Be able to adjust the `config` object by using YAML files,
+  and override individual options
+- Know how to format a metadata CSV file
+- Be able to read a metadata CSV file and make use of it in a workflow
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Global parameters
 
