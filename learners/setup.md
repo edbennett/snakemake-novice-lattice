@@ -139,7 +139,7 @@ Follow [the instructions on TeX Live's website][texlive].
 ::::::::::::::::::::::::
 
 
-[data-zip]: https://zenodo.org/records/17308707/files/su2pg_starter.zip?download=1
+[data-zip]: https://zenodo.org/records/17476887/files/su2pg_starter.zip?download=1
 [miktex]: https://miktex.org/download
 [miniforge]: https://github.com/conda-forge/miniforge
 [texlive]: https://tug.org/texlive/quickinstall.html
