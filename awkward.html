@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 60%" class="percentage">
-    60%
+<aside class="col-md-12 lesson-progress"><div style="width: 72%" class="percentage">
+    72%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 60%" aria-valuenow="60" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 72%" aria-valuenow="72" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -373,7 +373,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Awkward corners</h1>
-        <p>Last updated on 2025-10-09 |
+        <p>Last updated on 2025-10-29 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/awkward.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -434,7 +434,7 @@ rule ps_mass:
         plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2&gt;&amp;1 | tee {log.messages}"</code></pre>
 <p>Now, we are frequently interested in more symmetry channels than just
 the pseudoscalar. In principle, we could make a copy of this rule, and
 change <code>ps</code> to, for example <code>v</code> or
@@ -525,7 +525,7 @@ rule meson_mass:
         plateau_end=plateau_param("end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --channel {wildcards.channel} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python -m su2pg_analysis.meson_mass {input} --channel {wildcards.channel} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2&gt;&amp;1 | tee {log.messages}"</code></pre>
 <p>We can test this for the vector mass:</p>
 <pre class="shellsession"><code>snakemake --use-conda --cores all --printshellcmds intermediary_data/beta2.0/corr.v_mass.json.gz</code></pre>
 
@@ -617,7 +617,7 @@ function.</p>
         ps_mass=glob(
             "intermediary_data/beta*/corr.ps_mass.json.gz",
         ),
-        ps_decay_const=expand(
+        ps_decay_const=glob(
             "intermediary_data/beta*/pg.corr.ps_decay_const.json.gz",
         ),
     output:
@@ -759,8 +759,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/awkward.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/awkward.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-09",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-10-29",
+  "datePublished": "2025-10-29"
 }
 
   </script><script>

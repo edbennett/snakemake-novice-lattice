@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 37%" class="percentage">
-    37%
+<aside class="col-md-12 lesson-progress"><div style="width: 49%" class="percentage">
+    49%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 37%" aria-valuenow="37" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 49%" aria-valuenow="49" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -374,7 +374,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Multiple inputs and outputs</h1>
-        <p>Last updated on 2025-10-09 |
+        <p>Last updated on 2025-10-29 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/multiple.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -386,6 +386,34 @@
 
         
 
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>How do I write rules that require or use more than one file, or
+class of file?</li>
+<li>How do I tell Snakemake to not delete log files when jobs fail?</li>
+<li>What do Snakemake errors look like, and how do I read them?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>Be able to write rules with multiple named inputs and outputs</li>
+<li>Know how and when to specify <code>log:</code> within a rule</li>
+<li>Be aware that Snakemake errors are common</li>
+<li>Understand how to approach reading Snakemake errors when they
+occur</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
 <section><h2 class="section-heading" id="multiple-outputs">Multiple outputs<a class="anchor" aria-label="anchor" href="#multiple-outputs"></a></h2>
 <hr class="half-width"><p>Quite frequently, we will want a rule to be able to generate more
 than one file. It’s important we let Snakemake know about this, both so
@@ -486,21 +514,9 @@ shape of the flow may be checked.</p>
     conda: "envs/analysis.yml"
     shell:
         "python -m su2pg_analysis.w0 {input} --W0 {config[W0_reference]} --output_file {output.data} --plot_file {output.plot} --plot_styles {config[plot_styles]}"</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="flow-plots" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<span class="callout-header">Discussion</span>
-<div id="flow-plots" class="callout-inner">
-<h3 class="callout-title">Flow plots<em> (continued)</em>
-</h3>
-<div class="callout-content">
 <p>Again, we can test this with</p>
 <pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/wflow.W_flow.pdf</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -523,8 +539,12 @@ rule one_loop_matching:
     shell:
         "python -m su2pg_analysis.one_loop_matching --plaquette_data {input.plaquette} --spectral_observable_data {input.meson} --output_filename {output.data}"</code></pre>
 <p>To test this:</p>
-<pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz cat intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz | gunzip | head -n 28
-{
+<pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz
+$ cat intermediary_data/beta2.0/pg.corr.ps_decay_const.json.gz | gunzip | head -n 28</code></pre>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>{
  "program": "pyerrors 2.14.0",
  "version": "1.1",
  "who": "ed",
@@ -552,6 +572,7 @@ rule one_loop_matching:
    "type": "Obs",
    "layout": "1",
    "value": [0.06760436978217312],</code></pre>
+</div>
 <div id="naming-things" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -580,6 +601,12 @@ against its mass, for each ensemble studied. The tool
 <code>src/plot_spectrum.py</code> will help with this.</p>
 <p>Try making the filename of the tool a parameter too, so that if the
 script is changed, Snakemake will correctly re-run the workflow.</p>
+<p>Hint: first, write a temporary rule to check the output of</p>
+<pre class="shellsession"><code>python src/plot_spectrum.py --help</code></pre>
+<p>(Or otherwise, create a Conda environment based on
+<code>envs/analysis.yml</code>, and temporarily activate it to run the
+command. Remember to deactivate once you’re finished, since otherwise
+you will no longer have access to <code>snakemake</code>.)</p>
 </div>
 </div>
 </div>
@@ -590,6 +617,33 @@ script is changed, Snakemake will correctly re-run the workflow.</p>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
+<p>The help output for <code>plot_spectrum.py</code> is:</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>usage: plot_spectrum.py [-h] [--output_filename OUTPUT_FILENAME] [--plot_styles PLOT_STYLES] [--x_observable X_OBSERVABLE]
+                        [--y_observable Y_OBSERVABLE] [--zero_x_axis] [--zero_y_axis]
+                        datafile [datafile ...]
+
+Plot one state against another for each ensemble
+
+positional arguments:
+  datafile              Data files to read and plot
+
+options:
+  -h, --help            show this help message and exit
+  --output_filename OUTPUT_FILENAME
+                        Where to put the plot
+  --plot_styles PLOT_STYLES
+                        Plot style file to use
+  --x_observable X_OBSERVABLE
+                        Observables to put on the horizontal axis
+  --y_observable Y_OBSERVABLE
+                        Observables to put on the vertical axis
+  --zero_x_axis         Ensure that zero is present on the vertical axis
+  --zero_y_axis         Ensure that zero is present on the vertical axis</code></pre>
+</div>
+<p>Based on this, a possible rule is:</p>
 <pre class="snakemake"><code>rule spectrum:
     input:
         script="src/plot_spectrum.py",
@@ -700,7 +754,7 @@ rule ps_mass:
         plateau_end=lookup(within=metadata, query="beta == {beta}", cols="ps_plateau_end"),
     conda: "envs/analysis.yml"
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2&gt;&amp;1 | tee {log.messages}"</code></pre>
 <p>We can again verify this using</p>
 <pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
 cat intermediary_data/beta{beta}/corr.ps_mass.log</code></pre>
@@ -712,17 +766,17 @@ log is empty.</p>
 </div>
 <span class="callout-header">Callout</span>
 <div id="tee" class="callout-inner">
-<h3 class="callout-title"><code>|&amp; tee</code></h3>
+<h3 class="callout-title"><code>2&gt;&amp;1 | tee</code></h3>
 <div class="callout-content">
 <p>You may recall that <code>|</code> is the pipe operator in the Unix
 shell, taking standard output from one program and passing it to
 standard input of the next. (If this is unfamiliar, you may wish to look
 through the Software Carpentry introduction to <a href="https://swcarpentry.github.io/shell-novice" class="external-link">the Unix shell</a>
 when you have a moment.)</p>
-<p>Adding the <code>&amp;</code> symbol means that both the standard
-output and standard error streams are piped, rather than only standard
-output. This is useful for a log file, since we will typically want to
-see errors there.</p>
+<p>Adding <code>2&gt;&amp;1</code> means that both the standard output
+and standard error streams are piped, rather than only standard output.
+This is useful for a log file, since we will typically want to see
+errors there.</p>
 <p>The <code>tee</code> command “splits a pipe”; that is, it takes
 standard input and outputs it both to standard output and to the
 specified filename. This way, we get the log on disk, but also output to
@@ -768,7 +822,7 @@ file.</p>
         messages="intermediary_data/spectrum_plot.log"
     conda: "envs/analysis.yml"
     shell:
-        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python {input.script} {input.ps_mass} {input.ps_decay_const} --y_observable f_ps --zero_y_axis --zero_x_axis --output_file {output.plot} --plot_styles {config[plot_styles]} 2&gt;&amp;1 | tee {log.messages}"</code></pre>
 </div>
 </div>
 </div>
@@ -796,13 +850,13 @@ let’s modify the Snakefile and deliberately specify an incorrect output
 filename in the <code>ps_mass</code> rule.</p>
 <pre class="snakemake"><code><span><span class="va">...</span></span>
 <span><span class="va">shell</span><span class="op">:</span></span>
-<span>        <span class="st">"python -m su2pg_analysis.meson_mass {input} --output_file {output.data}.json_ --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</span></span></code></pre>
+<span>        <span class="st">"python -m su2pg_analysis.meson_mass {input} --output_file {output.data}.json_ --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2&gt;&amp;1 | tee {log.messages}"</span></span></code></pre>
 <p>To keep things tidy, this time we’ll manually remove the intermediary
 data directory.</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-rvf</span> intermediary_data</span></code></pre>
 </div>
 <p>And re-run.</p>
 <pre class="shellsession"><code>$ snakemake --cores 1 --forceall --printshellcmds --use-conda intermediary_data/beta2.0/corr.ps_mass.json.gz
@@ -830,7 +884,7 @@ localrule ps_mass:
     reason: Forced execution
     wildcards: beta=2.0
     resources: tmpdir=/tmp
-Shell command: python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle |&amp; tee intermediary_data/beta2.0/corr.ps_mass.log
+Shell command: python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle 2&gt;&amp;1 | tee intermediary_data/beta2.0/corr.ps_mass.log
 Activating conda environment: .snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
 Waiting at most 5 seconds for missing files:
 intermediary_data/beta2.0/corr.ps_mass.json.gz (missing locally)
@@ -850,7 +904,7 @@ Error in rule ps_mass:
     log: intermediary_data/beta2.0/corr.ps_mass.log (check log file(s) for error details)
     conda-env: /home/ed/src/su2pg/.snakemake/conda/7974a14bb2d9244fc9da6963ef6ee6d6_
     shell:
-        python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle |&amp; tee intermediary_data/beta2.0/corr.ps_mass.log
+        python -m su2pg_analysis.meson_mass raw_data/beta2.0/out_corr --output_file intermediary_data/beta2.0/corr.ps_mass.json.gz.json_ --plateau_start 11 --plateau_end 21 --plot_file intermediary_data/beta2.0/corr.ps_eff_mass.pdf --plot_styles styles/prd.mplstyle 2&gt;&amp;1 | tee intermediary_data/beta2.0/corr.ps_mass.log
         (command exited with non-zero exit code)
 Complete log(s): /home/ed/src/su2pg/.snakemake/log/2025-09-02T002859.356054.snakemake.log
 WorkflowError:
@@ -905,6 +959,27 @@ see in the next episode.</p>
 <p>Finally, edit the names in the Snakefile back to the correct version
 and re-run to confirm that all is well.</p>
 <pre class="snakemake"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/spectrum.pdf</code></pre>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul><li>Rules can have multiple inputs and outputs, separated by commas</li>
+<li>Use <code>name=value</code> to give names to inputs/outputs</li>
+<li>Inputs themselves can be lists</li>
+<li>Use placeholders like <code>{input.name}</code> to refer to single
+named inputs</li>
+<li>Where there are multiple inputs, <code>{input}</code> will insert
+them all, separated by spaces</li>
+<li>Use <code>log:</code> to list log outputs, which will not be removed
+when jobs fail</li>
+<li>Errors are an expected part developing Snakemake workflows, and
+usually give enough information to track down what is causing them</li>
+</ul></div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -967,8 +1042,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/multiple.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/multiple.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-09",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-10-29",
+  "datePublished": "2025-10-29"
 }
 
   </script><script>

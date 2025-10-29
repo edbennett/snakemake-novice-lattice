@@ -378,7 +378,10 @@ Software Engineer Fellowship EP/V052489/1. The data presented were
 generated using the <a href="https://www.supercomputing.wales" class="external-link">Supercomputing Wales</a> SUNBIRD
 system. Supercomputing Wales is supported by the <a href="https://commission.europa.eu/funding-tenders/find-funding/eu-funding-programmes/european-regional-development-fund-erdf_en" class="external-link">European
 Regional Development Fund</a> via <a href="https://www.gov.wales" class="external-link">Welsh
-Government</a></p>
+Government</a>.</p>
+<p>The author is grateful to Alexis Provatas, Gaurav Ray, and Gianmarco
+Simonetti, for testing and giving feedback on early versions of this
+lesson.</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -397,7 +400,7 @@ any links that you are not going to use.
 How do I run a simple command with Snakemake?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 15m
+<span class="visually-hidden">Duration: </span>00h 25m
 </td>
 <td>
  2. <a href="python.html">Running Python code with Snakemake</a>
@@ -406,7 +409,7 @@ How do I run a simple command with Snakemake?
 How do I configure an environment to run Python with Snakemake?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 30m
+<span class="visually-hidden">Duration: </span>00h 50m
 </td>
 <td>
  3. <a href="placeholders.html">Placeholders and wildcards</a>
@@ -416,7 +419,7 @@ How do I make a generic rule?<br>How does Snakemake decide what rule to
 run?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 45m
+<span class="visually-hidden">Duration: </span>01h 25m
 </td>
 <td>
  4. <a href="chaining.html">Chaining rules</a>
@@ -427,23 +430,28 @@ multiple input files?<br>How should I refer to multiple files with
 similar names?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 35m
+<span class="visually-hidden">Duration: </span>02h 15m
 </td>
 <td>
  5. <a href="parameters.html">Metadata and parameters</a>
 </td>
 <td>
+How do I specify and configure parameters my whole workflow relies
+on?<br>How do I set up parameters for individual jobs?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 50m
+<span class="visually-hidden">Duration: </span>03h 00m
 </td>
 <td>
  6. <a href="multiple.html">Multiple inputs and outputs</a>
 </td>
 <td>
+How do I write rules that require or use more than one file, or class of
+file?<br>How do I tell Snakemake to not delete log files when jobs
+fail?<br>What do Snakemake errors look like, and how do I read them?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>02h 05m
+<span class="visually-hidden">Duration: </span>03h 35m
 </td>
 <td>
  7. <a href="dag.html">How Snakemake plans jobs</a>
@@ -453,7 +461,7 @@ How do I visualise a Snakemake workflow?<br>How does Snakemake avoid
 unecessary work?<br>How do I control what steps will be run?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>02h 20m
+<span class="visually-hidden">Duration: </span>03h 55m
 </td>
 <td>
  8. <a href="optimisation.html">Optimising workflow performance</a>
@@ -465,7 +473,7 @@ resources being used by a workflow?<br>How do I run my workflow steps
 in parallel?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>03h 00m
+<span class="visually-hidden">Duration: </span>04h 25m
 </td>
 <td>
  9. <a href="awkward.html">Awkward corners</a>
@@ -476,7 +484,7 @@ select different numbers of input files<br>depending on wildcard
 values?<br>How can I tell Snakemake not to regenerate a file?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>03h 40m
+<span class="visually-hidden">Duration: </span>05h 20m
 </td>
 <td>
 10. <a href="cleanup.html">Tidying up</a>
@@ -488,7 +496,7 @@ call?<br>What should I bear in mind when using Git for my Snakemake
 workflow?<br>What should I include in the README for my workflow?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>04h 20m
+<span class="visually-hidden">Duration: </span>05h 55m
 </td>
 <td>
 11. <a href="publishing.html">Publishing your workflow</a>
@@ -498,7 +506,7 @@ How do I verify that my workflow is ready to upload?<br>How do I
 prepare a single archive of my workflow and its dependencies?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>05h 00m
+<span class="visually-hidden">Duration: </span>06h 10m
 </td>
 <td>
 Finish
@@ -523,7 +531,7 @@ system</li>
 FIXME: place any data you want learners to use in `episodes/data` and then use
        a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
        link to it, replacing the example.com link.
---><p>Download the <a href="https://zenodo.org/records/17308707/files/su2pg_starter.zip?download=1" class="external-link">data
+--><p>Download the <a href="https://zenodo.org/records/17476887/files/su2pg_starter.zip?download=1" class="external-link">data
 zip file</a> and unzip it to your Desktop</p>
 </section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
 <hr class="half-width"><div class="section level3">
@@ -554,9 +562,9 @@ repository</a>, and execute it at the terminal.</p>
 </button>
 <div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
-<p>This lesson has not been tested with Windows. We would recommend
-using the Windows Subsystem for Linux, and following the instructions
-for Linux.</p>
+<p>This lesson has not been designed to run on Windows. We would
+recommend using the Windows Subsystem for Linux, and following the
+instructions for Linux.</p>
 </div>
 </div>
 </div>
@@ -583,6 +591,24 @@ Conda to set up your environment with <code>conda init</code>.</p>
 </div>
 </div>
 </div>
+<div id="update-conda" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="update-conda" class="callout-inner">
+<h3 class="callout-title">Update Conda</h3>
+<div class="callout-content">
+<p>If you already have Conda installed (for example, as part of
+Anaconda), you’re recommended to update to the latest version, since
+Snakemake relies on some features introduced in recent versions.</p>
+<p>To do this, run</p>
+<pre class="shellsession"><code>conda update --name base --upgrade conda</code></pre>
+<p>If you’re not able to update the base environment, you may need to
+create a fresh Conda installation using the instructions above.</p>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="snakemake">Snakemake<a class="anchor" aria-label="anchor" href="#snakemake"></a></h2>
 <hr class="half-width"><p>With Conda available, we can create an environment containing
@@ -596,23 +622,18 @@ lesson, but for your work in Snakemake going forward.</p>
 <div id="details-1" class="callout-inner">
 <h3 class="callout-title">Details</h3>
 <div class="callout-content">
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> snakemake <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda snakemake bash</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
-</div>
-<p>(Note that we’re installing <code>bash</code> here in addition to
-Snakemake. Some of the syntax we’ll use in this lesson relies on a
-version of <code>bash</code> newer than that that comes with macOS. On
-Linux, this is not required and you can just install
-<code>snakemake</code>.)</p>
-<p>After starting a new terminal, or rebooting your computer, you will
-need to run</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> snakemake <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda snakemake</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
+</div>
+<p>After starting a new terminal, or rebooting your computer, you will
+need to run</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
 </div>
 <p>in order to activate the environment to be able to use Snakemake.</p>
 </div>
@@ -705,8 +726,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/index.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/index.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-28",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-10-29",
+  "datePublished": "2025-10-29"
 }
 
   </script><script>

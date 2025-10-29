@@ -118,11 +118,11 @@
   Snakemake for Lattice Quantum Field Theory
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 47%" class="percentage">
-    47%
+<aside class="col-md-12 lesson-progress"><div style="width: 64%" class="percentage">
+    64%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 47%" aria-valuenow="47" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 64%" aria-valuenow="64" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -375,7 +375,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Optimising workflow performance</h1>
-        <p>Last updated on 2025-10-09 |
+        <p>Last updated on 2025-10-29 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/optimisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -495,7 +495,7 @@ the <code>time</code> command.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> time snakemake <span class="at">--cores</span> 1 <span class="at">--forceall</span> <span class="at">--</span> assets/plots/spectrum.pdf</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> time snakemake <span class="at">--cores</span> 1 <span class="at">--use-conda</span> <span class="at">--forceall</span> <span class="at">--</span> assets/plots/spectrum.pdf</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">real</span>	3m10.713s</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">user</span>	1m30.181s</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">sys</span>	0m8.156s</span></code></pre>
@@ -527,7 +527,7 @@ the execution time?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
 somewhere around 150–200 seconds is expected, and this should reduce to
@@ -577,7 +577,7 @@ rule ps_mass:
     conda: "envs/analysis.yml"
     threads: 4
     shell:
-        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} |&amp; tee {log.messages}"</code></pre>
+        "python -m su2pg_analysis.meson_mass {input} --output_file {output.data} --plateau_start {params.plateau_start} --plateau_end {params.plateau_end} --plot_file {output.plot} --plot_styles {config[plot_styles]} 2&gt;&amp;1 | tee {log.messages}"</code></pre>
 <p>You should explicitly use <code>threads: 4</code> rather than
 <code>params: threads = "4"</code> because Snakemake considers the
 number of threads when scheduling jobs. Also, if the number of threads
@@ -720,8 +720,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/optimisation.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/optimisation.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-09",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-10-29",
+  "datePublished": "2025-10-29"
 }
 
   </script><script>

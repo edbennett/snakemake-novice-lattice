@@ -389,7 +389,10 @@ Software Engineer Fellowship EP/V052489/1. The data presented were
 generated using the <a href="https://www.supercomputing.wales" class="external-link">Supercomputing Wales</a> SUNBIRD
 system. Supercomputing Wales is supported by the <a href="https://commission.europa.eu/funding-tenders/find-funding/eu-funding-programmes/european-regional-development-fund-erdf_en" class="external-link">European
 Regional Development Fund</a> via <a href="https://www.gov.wales" class="external-link">Welsh
-Government</a></p>
+Government</a>.</p>
+<p>The author is grateful to Alexis Provatas, Gaurav Ray, and Gianmarco
+Simonetti, for testing and giving feedback on early versions of this
+lesson.</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -409,7 +412,7 @@ system</li>
 FIXME: place any data you want learners to use in `episodes/data` and then use
        a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
        link to it, replacing the example.com link.
---><p>Download the <a href="https://zenodo.org/records/17308707/files/su2pg_starter.zip?download=1" class="external-link">data
+--><p>Download the <a href="https://zenodo.org/records/17476887/files/su2pg_starter.zip?download=1" class="external-link">data
 zip file</a> and unzip it to your Desktop</p>
 </section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
 <hr class="half-width"><div class="section level3">
@@ -440,9 +443,9 @@ repository</a>, and execute it at the terminal.</p>
 </button>
 <div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
-<p>This lesson has not been tested with Windows. We would recommend
-using the Windows Subsystem for Linux, and following the instructions
-for Linux.</p>
+<p>This lesson has not been designed to run on Windows. We would
+recommend using the Windows Subsystem for Linux, and following the
+instructions for Linux.</p>
 </div>
 </div>
 </div>
@@ -469,6 +472,24 @@ Conda to set up your environment with <code>conda init</code>.</p>
 </div>
 </div>
 </div>
+<div id="update-conda" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="update-conda" class="callout-inner">
+<h3 class="callout-title">Update Conda</h3>
+<div class="callout-content">
+<p>If you already have Conda installed (for example, as part of
+Anaconda), you’re recommended to update to the latest version, since
+Snakemake relies on some features introduced in recent versions.</p>
+<p>To do this, run</p>
+<pre class="shellsession"><code>conda update --name base --upgrade conda</code></pre>
+<p>If you’re not able to update the base environment, you may need to
+create a fresh Conda installation using the instructions above.</p>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="snakemake">Snakemake<a class="anchor" aria-label="anchor" href="#snakemake"></a></h2>
 <hr class="half-width"><p>With Conda available, we can create an environment containing
@@ -482,23 +503,18 @@ lesson, but for your work in Snakemake going forward.</p>
 <div id="details-1" class="callout-inner">
 <h3 class="callout-title">Details</h3>
 <div class="callout-content">
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> snakemake <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda snakemake bash</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
-</div>
-<p>(Note that we’re installing <code>bash</code> here in addition to
-Snakemake. Some of the syntax we’ll use in this lesson relies on a
-version of <code>bash</code> newer than that that comes with macOS. On
-Linux, this is not required and you can just install
-<code>snakemake</code>.)</p>
-<p>After starting a new terminal, or rebooting your computer, you will
-need to run</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> snakemake <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda snakemake</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
+</div>
+<p>After starting a new terminal, or rebooting your computer, you will
+need to run</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">conda</span> activate snakemake</span></code></pre>
 </div>
 <p>in order to activate the environment to be able to use Snakemake.</p>
 </div>
@@ -591,8 +607,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/index.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/index.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-28",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-10-29",
+  "datePublished": "2025-10-29"
 }
 
   </script><script>

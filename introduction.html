@@ -374,7 +374,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running commands with Snakemake</h1>
-        <p>Last updated on 2025-10-09 |
+        <p>Last updated on 2025-10-29 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -487,9 +487,9 @@ content:</p>
 tabs.</li>
 <li>The rule definition starts with the keyword <code>rule</code>
 followed by the rule name, then a colon.</li>
-<li>We named the rule <code>count_trajectories</code>. You may use
-letters, numbers or underscores, but the rule name must begin with a
-letter and may not be a keyword.</li>
+<li>We named the rule <code>count_lines</code>. You may use letters,
+numbers or underscores, but the rule name must begin with a letter and
+may not be a keyword.</li>
 <li>The keywords <code>input</code>, <code>output</code>,
 <code>shell</code> are all followed by a colon.</li>
 <li>The file names and the shell command are all in
@@ -513,13 +513,30 @@ the given input.</p>
 <p>Going back to the shell now, we can test this rule. First up, we need
 to enter the directory containing the workflow</p>
 <pre class="shellsession"><code>cd su2pg</code></pre>
-<p>We’ll spend most of the rest of the lesson in this directory. From
-the here, we can now run the command</p>
+<p>We’ll spend most of the rest of the lesson in this directory.</p>
+<div id="activate-your-environment" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="activate-your-environment" class="callout-inner">
+<h3 class="callout-title">Activate your environment</h3>
+<div class="callout-content">
+<p>To call <code>snakemake</code>, we need to have active the
+environment that we created in the <a href="/setup">setup</a>. Current
+versions of Conda by default prepend this environment name to your
+prompt, so if you don’t see <code>(snakemake)</code> in your prompt, you
+will need to activate this</p>
+<pre class="shellsession"><code>conda activate snakemake</code></pre>
+</div>
+</div>
+</div>
+<p>From here, we can now run the command</p>
 <pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds intermediary_data/beta2.0/pg.count</code></pre>
 <p>If we’ve made any transcription errors in the rule (missing quotes,
 bad indentations, etc.), then it will become clear at this point, as
 we’ll receive an error that we will need to fix.</p>
-<div id="callout1" class="callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -545,7 +562,7 @@ them.</p>
 <p>Let’s check that the output was correctly generated:</p>
 <pre class="shellsession"><code>$ cat intermediary_data/beta2.0/pg.count
   31064 raw_data/beta2.0/out_pg</code></pre>
-<div id="callout2" class="callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -597,7 +614,7 @@ quit back to the shell with <kbd>q</kbd></em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol start="2" style="list-style-type: decimal"><li>Prints the shell commands that are being run to the terminal</li>
 </ol><p>This is such a useful thing we don’t know why it isn’t the default!
@@ -621,10 +638,10 @@ generation log, each trajectory concludes with a line of the form</p>
 <pre class="output" tabindex="0"><code>[MAIN][0]Trajectory #1: generated in [39.717707 sec]</code></pre>
 </div>
 <p>We can use <code>grep</code> to count these, as</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> generated raw_data/beta2.0/out_pg</span></code></pre>
 </div>
 <div id="counting-sequences-in-snakemake" class="callout challenge">
 <div class="callout-square">
@@ -651,7 +668,7 @@ be printed on the screen</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule count_trajectories:
     input: "raw_data/beta2.0/out_pg"
@@ -739,8 +756,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/introduction.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/introduction.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-09",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-10-29",
+  "datePublished": "2025-10-29"
 }
 
   </script><script>

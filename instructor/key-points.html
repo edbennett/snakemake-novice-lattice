@@ -437,7 +437,18 @@
 <li>You tell Snakemake what file to make and it will run the shell
 command defined in the appropriate rule</li>
 </ul></section><section id="python"><h2 class="section-heading"><a href="python.html">Running Python code with Snakemake</a></h2>
-<hr class="half-width"></section><section id="placeholders"><h2 class="section-heading"><a href="placeholders.html">Placeholders and wildcards</a></h2>
+<hr class="half-width">
+<ul>
+<li>Snakemake will manage Conda environments for you, to help ensure
+that workflows always use a consistent set of packages</li>
+<li>Use the <code>--use-conda</code> option to <code>snakemake</code> to
+enable this behaviour</li>
+<li>Use <code>conda:</code> to specify a Conda environment definition
+(<code>.yml</code>) file. The path of this is relative to the file in
+which it is specified.</li>
+<li>Conda environment files are conventionally put in the
+<code>workflow/envs</code> directory</li>
+</ul></section><section id="placeholders"><h2 class="section-heading"><a href="placeholders.html">Placeholders and wildcards</a></h2>
 <hr class="half-width">
 <ul>
 <li>Snakemake rules are made generic with placeholders and
@@ -473,7 +484,20 @@ a rule.</li>
 <li>Use <code>params:</code> to define job-specific parameters that do
 not describe filenames.</li>
 </ul></section><section id="multiple"><h2 class="section-heading"><a href="multiple.html">Multiple inputs and outputs</a></h2>
-<hr class="half-width"></section><section id="dag"><h2 class="section-heading"><a href="dag.html">How Snakemake plans jobs</a></h2>
+<hr class="half-width">
+<ul>
+<li>Rules can have multiple inputs and outputs, separated by commas</li>
+<li>Use <code>name=value</code> to give names to inputs/outputs</li>
+<li>Inputs themselves can be lists</li>
+<li>Use placeholders like <code>{input.name}</code> to refer to single
+named inputs</li>
+<li>Where there are multiple inputs, <code>{input}</code> will insert
+them all, separated by spaces</li>
+<li>Use <code>log:</code> to list log outputs, which will not be removed
+when jobs fail</li>
+<li>Errors are an expected part developing Snakemake workflows, and
+usually give enough information to track down what is causing them</li>
+</ul></section><section id="dag"><h2 class="section-heading"><a href="dag.html">How Snakemake plans jobs</a></h2>
 <hr class="half-width">
 <ul>
 <li>A <strong>job</strong> in Snakemake is a <strong>rule</strong> plus
@@ -580,8 +604,8 @@ submodules.</li>
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/key-points.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/key-points.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-28",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-10-29",
+  "datePublished": "2025-10-29"
 }
 
   </script><script>
