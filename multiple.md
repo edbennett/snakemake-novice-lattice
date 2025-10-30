@@ -340,7 +340,7 @@ rule spectrum_scaled:
     ),
     output:
         plot=multiext("assets/plots/spectrum_scaled", config["plot_filetype"]),
-    conda: "../envs/analysis.yml"
+    conda: "envs/analysis.yml"
     shell:
         "python {input.script} {input.ps_mass} {input.v_mass} {input.ps_decay_const} {input.w0} --y_observable f_ps --y_observable m_v --zero_y_axis --rescale_w0 --output_file {output.plot} --plot_styles {config[plot_styles]}"
 ```
