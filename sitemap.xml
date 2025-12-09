@@ -22,6 +22,9 @@
     <loc>https://edbennett.github.io/snakemake-novice-lattice/chaining.html</loc>
   </url>
   <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/citation.html</loc>
+  </url>
+  <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/cleanup.html</loc>
   </url>
   <url>
@@ -53,6 +56,9 @@
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/citation.html</loc>
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/cleanup.html</loc>
