@@ -118,7 +118,7 @@
     <a id="search-button" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 64%" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">64%</div>
+    <div class="progress-bar incubator" role="progressbar" style="width: 59%" aria-valuenow="59" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">59%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -276,7 +276,6 @@
 <li><a href="#listing-the-resources-of-your-machine">Listing the resources of your machine</a></li>
 <li><a href="#parallel-jobs-in-snakemake">Parallel jobs in Snakemake</a></li>
 <li><a href="#multi-thread-rules-in-snakemake">Multi-thread rules in Snakemake</a></li>
-<li><a href="#running-jobs-on-a-cluster">Running jobs on a cluster</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -286,7 +285,7 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="awkward.html">9. Awkward corners</a>
+        <a href="cluster.html">9. Running jobs on a cluster</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -295,7 +294,7 @@
 <div class="accordion accordion-flush" id="accordionFlush11">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading11">
-        <a href="cleanup.html">10. Tidying up</a>
+        <a href="awkward.html">10. Awkward corners</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -304,7 +303,16 @@
 <div class="accordion accordion-flush" id="accordionFlush12">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading12">
-        <a href="publishing.html">11. Publishing your workflow</a>
+        <a href="cleanup.html">11. Tidying up</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush13">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading13">
+        <a href="publishing.html">12. Publishing your workflow</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -353,7 +361,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter Top"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/dag.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/awkward.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/cluster.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -361,20 +369,20 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: How Snakemake plans
         </a>
-        <a class="chapter-link float-end" href="../instructor/awkward.html" rel="next">
-          Next: Awkward corners...
+        <a class="chapter-link float-end" href="../instructor/cluster.html" rel="next">
+          Next: Running jobs on a...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Optimising workflow performance</h1>
-        <p>Last updated on 2025-10-29 |
+        <p>Last updated on 2026-06-18 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/optimisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
 
 
-        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
+        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
 
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -522,7 +530,7 @@ the execution time?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The time will vary depending on the system configuration but
 somewhere around 150–200 seconds is expected, and this should reduce to
@@ -604,61 +612,6 @@ for all jobs.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="running-jobs-on-a-cluster">Running jobs on a cluster<a class="anchor" aria-label="anchor" href="#running-jobs-on-a-cluster"></a></h2>
-<hr class="half-width"><p>Learning about clusters is beyond the scope of this course, but can
-be essential for more complex workflows working with large amounts of
-data.</p>
-<p>When working with Snakemake, there are two options to getting the
-workflow running on a cluster:</p>
-<ol style="list-style-type: decimal"><li><p>Similarly to most tools, we may install Snakemake on the cluster,
-write a job script, and execute Snakemake on our workflow inside a
-job.</p></li>
-<li><p>We can teach Snakemake how to run jobs on the cluster, and run
-our workflow from our own computer, having Snakemake do the work of
-submitting and monitoring the jobs for us.</p></li>
-</ol><p>To run Snakemake in the second way, someone will need to determine
-the right parameters for your particular cluster and save them as a
-profile. Once this is working, you can share the profile with other
-users on the cluster, so discuss this with your cluster sysadmin.</p>
-<p>Instructions for configuring the Slurm executor plugin can be found
-in the <a href="https://snakemake.github.io/snakemake-plugin-catalog/" class="external-link">Snakemake
-plugin catalog</a>, along with the <code>drmaa</code>,
-<code>cluster-generic</code> and <code>cluster-sync</code> plugins which
-can support PBS, SGE and other cluster schedulers.</p>
-<figure><img src="../fig/cluster.jpg" alt="A photo of some high performance computer hardware racked in five cabinets in a server room. Each cabinet is about 2.2 metres high and 0.8m wide. The doors of the cabinets are open to show the systems inside. Orange and yellow cabling is prominent, connecting ports within the second and third racks. " class="figure mx-auto d-block"></figure><div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Running on cluster and cloud </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
-<div class="accordion-body">
-<p>Running workflows on HPC or Cloud systems could be a whole course in
-itself. The topic is too important not to be mentioned here, but also
-complex to teach because you need a cluster to work on.</p>
-<p>If you are teaching this lesson and have institutional HPC then
-ideally you should liaise with the administrators of the system to make
-a suitable installation of a recent Snakemake version and a profile to
-run jobs on the cluster job scheduler. In practise this may be easier
-said than done!</p>
-<p>If you are able to demonstrate Snakemake running on cloud as part of
-a workshop then we’d much appreciate any feedback on how you did this
-and how it went.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="cluster-demo" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="cluster-demo" class="callout-inner">
-<h3 class="callout-title">Cluster demo</h3>
-<div class="callout-content">
-<p>A this point in the course there may be a cluster demo…</p>
-</div>
-</div>
-</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -671,7 +624,6 @@ number of threads to the number of cores you have</li>
 <li>You also need to consider RAM, disk, and network bottlenecks</li>
 <li>Profile your jobs to see what is taking most resources</li>
 <li>Use <code>--cores all</code> to enable using all CPU cores</li>
-<li>Snakemake is great for running workflows on compute clusters</li>
 </ul></div>
 </div>
 </div>
@@ -682,7 +634,7 @@ any links that you are not going to use.
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/dag.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/awkward.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/cluster.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -690,8 +642,8 @@ any links that you are not going to use.
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: How Snakemake plans
         </a>
-        <a class="chapter-link float-end" href="../instructor/awkward.html" rel="next">
-          Next: Awkward corners...
+        <a class="chapter-link float-end" href="../instructor/cluster.html" rel="next">
+          Next: Running jobs on a...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -739,8 +691,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/optimisation.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/optimisation.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-29",
-  "datePublished": "2026-06-16"
+  "dateModified": "2026-06-18",
+  "datePublished": "2026-06-18"
 }
 
   </script><script>

@@ -28,6 +28,9 @@
     <loc>https://edbennett.github.io/snakemake-novice-lattice/cleanup.html</loc>
   </url>
   <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/cluster.html</loc>
+  </url>
+  <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/dag.html</loc>
   </url>
   <url>
@@ -62,6 +65,9 @@
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/cleanup.html</loc>
+  </url>
+  <url>
+    <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/cluster.html</loc>
   </url>
   <url>
     <loc>https://edbennett.github.io/snakemake-novice-lattice/instructor/dag.html</loc>
