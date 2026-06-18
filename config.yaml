@@ -74,6 +74,7 @@ episodes:
 - multiple.md
 - dag.md
 - optimisation.md
+- cluster.md
 - awkward.md
 - cleanup.md
 - publishing.md
