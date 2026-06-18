@@ -1,6 +1,6 @@
 ---
 title: Optimising workflow performance
-teaching: 20
+teaching: 15
 exercises: 10
 ---
 
@@ -258,86 +258,10 @@ time, memory usage and IO load for all jobs.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Running jobs on a cluster
-
-Learning about clusters is beyond the scope of this course,
-but can be essential for more complex workflows working with large amounts of data.
-
-When working with Snakemake,
-there are two options to getting the workflow running on a cluster:
-
-1. Similarly to most tools,
-   we may install Snakemake on the cluster,
-   write a job script,
-   and execute Snakemake on our workflow inside a job.
-
-2. We can teach Snakemake how to run jobs on the cluster,
-   and run our workflow from our own computer,
-   having Snakemake do the work of submitting and monitoring the jobs for us.
-
-To run Snakemake in the second way,
-someone will need to determine the right parameters for your particular cluster
-and save them as a profile.
-Once this is working,
-you can share the profile with other users on the cluster,
-so discuss this with your cluster sysadmin.
-
-Instructions for configuring the Slurm executor plugin can be found in
-the [Snakemake plugin catalog](https://snakemake.github.io/snakemake-plugin-catalog/),
-along with the `drmaa`,
-`cluster-generic` and `cluster-sync` plugins
-which can support PBS, SGE and other cluster schedulers.
-
-![][fig-cluster]
-
-::::::::::::::::::::::::::::::: instructor
-
-## Running on cluster and cloud
-
-Running workflows on HPC or Cloud systems could be a whole course in itself.
-The topic is too important not to be mentioned here,
-but also complex to teach because you need a cluster to work on.
-
-If you are teaching this lesson and have institutional HPC
-then ideally you should liaise with the administrators of the system
-to make a suitable installation of a recent Snakemake version
-and a profile to run jobs on the cluster job scheduler.
-In practise this may be easier said than done!
-
-If you are able to demonstrate Snakemake running on cloud as part of a workshop
-then we'd much appreciate any feedback on how you did this and how it went.
-
-::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Cluster demo
-
-A this point in the course there may be a cluster demo...
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-[comment]: # (
-Photo credit: Cskiran
-Sourced from Wikimedia Commons
-CC-BY-SA-4.0
-)
-
-
-
 [fig-threads]: fig/snake_threads.svg {alt='Representation of a computer with four microchip icons indicating four available cores.
 To the right are five small green boxes representing Snakemake jobs
 and labelled as wanting 1, 1, 1, 2 and 8 threads respectively.
 '}
-
-[fig-cluster]: fig/cluster.jpg {alt='A photo of some high performance computer hardware
-racked in five cabinets in a server room.
-Each cabinet is about 2.2 metres high and 0.8m wide.
-The doors of the cabinets are open to show the systems inside.
-Orange and yellow cabling is prominent,
-connecting ports within the second and third racks.
-'}
-
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
@@ -346,6 +270,5 @@ connecting ports within the second and third racks.
 - You also need to consider RAM, disk, and network bottlenecks
 - Profile your jobs to see what is taking most resources
 - Use `--cores all` to enable using all CPU cores
-- Snakemake is great for running workflows on compute clusters
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
