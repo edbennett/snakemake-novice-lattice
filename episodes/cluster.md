@@ -141,11 +141,12 @@ Back in the terminal running on our local machine,
 we can then run
 
 ```shellsession
-scp -r workflow/ metadata/ my-cluster:/scratch/my.username/su2pg/
+scp -r workflow/ metadata/ config/ my-cluster:/scratch/my.username/su2pg/
 ```
 
 Replace `my-cluster` and `/scratch/my.username` 
 with the cluster and directory you've used above.
+This updates the workflow with all the changes we've made so far in this lesson.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
