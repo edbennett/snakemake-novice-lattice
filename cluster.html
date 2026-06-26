@@ -375,7 +375,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running jobs on a cluster</h1>
-        <p>Last updated on 2026-06-18 |
+        <p>Last updated on 2026-06-26 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/cluster.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -486,9 +486,10 @@ curl -o su2pg_starter.zip https://zenodo.org/records/17476887/files/su2pg_starte
 unzip su2pg_starter.zip</code></pre>
 <p>Back in the terminal running on our local machine, we can then
 run</p>
-<pre class="shellsession"><code>scp -r workflow/ metadata/ my-cluster:/scratch/my.username/su2pg/</code></pre>
+<pre class="shellsession"><code>scp -r workflow/ metadata/ config/ my-cluster:/scratch/my.username/su2pg/</code></pre>
 <p>Replace <code>my-cluster</code> and <code>/scratch/my.username</code>
-with the cluster and directory you’ve used above.</p>
+with the cluster and directory you’ve used above. This updates the
+workflow with all the changes we’ve made so far in this lesson.</p>
 <div id="network-connections" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -728,8 +729,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/cluster.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/cluster.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2026-06-18",
-  "datePublished": "2026-06-23"
+  "dateModified": "2026-06-26",
+  "datePublished": "2026-06-26"
 }
 
   </script><script>
