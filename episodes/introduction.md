@@ -217,7 +217,7 @@ as we'll receive an error that we will need to fix.
 
 :::::::::::::::::::::::::::::::::::::::  callout
 
-Snakemake interprets all inputs and ouputs as relative to the working directory.
+Snakemake interprets all inputs and outputs as relative to the working directory.
 For this reason,
 you should always run `snakemake` from the root of your workflow repository.
 

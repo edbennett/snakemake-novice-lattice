@@ -117,7 +117,7 @@ not by the order of the rules in the Snakefile.
 
 Chaining rules in Snakemake is a matter of choosing filename patterns that connect the rules.
 There's something of an art to it, and most times there are several options that will work, but
-in all cases the file names you choose will need to be consistent and unabiguous.
+in all cases the file names you choose will need to be consistent and unambiguous.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -142,7 +142,7 @@ We can make use of the `expand()` function to do this more neatly:
 The first argument to `expand()` here is a template for the filename,
 and subsequent keyword arguments are
 lists of variables to fill into the placeholders.
-The output is the cartesian product of all the parameter lists.
+The output is the Cartesian product of all the parameter lists.
 
 We can check that this works correctly:
 
