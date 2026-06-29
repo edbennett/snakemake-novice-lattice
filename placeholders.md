@@ -298,7 +298,7 @@ so that Snakemake will plan out the jobs to run,
 and print them to the screen,
 but never actually run them.
 This is done with the `--dry-run`
-flag, eg:
+flag, e.g.:
 
 ```shellsession
 snakemake --dry-run --forceall --printshellcmds intermediary_data/beta1.7/pg.count
