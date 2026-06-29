@@ -215,7 +215,7 @@ so this might take up a lot of space without compression.
 ## More plaquettes
 
 Add a second rule to compute the average plaquette in the file
-`intermediary_data/beta2.2/out_pg`.
+`raw_data/beta2.2/out_pg`.
 Add this to the same Snakefile you already made,
 under the `avg_plaquette` rule,
 and run your rules in the terminal.
