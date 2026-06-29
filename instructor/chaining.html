@@ -374,7 +374,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Chaining rules</h1>
-        <p>Last updated on 2025-10-09 |
+        <p>Last updated on 2026-06-29 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/chaining.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -502,7 +502,7 @@ Snakefile.</p>
 <p>Chaining rules in Snakemake is a matter of choosing filename patterns
 that connect the rules. There’s something of an art to it, and most
 times there are several options that will work, but in all cases the
-file names you choose will need to be consistent and unabiguous.</p>
+file names you choose will need to be consistent and unambiguous.</p>
 </div>
 </div>
 </div>
@@ -520,7 +520,7 @@ out each file by hand would be quite cumbersome. We can make use of the
         ),</code></pre>
 <p>The first argument to <code>expand()</code> here is a template for
 the filename, and subsequent keyword arguments are lists of variables to
-fill into the placeholders. The output is the cartesian product of all
+fill into the placeholders. The output is the Cartesian product of all
 the parameter lists.</p>
 <p>We can check that this works correctly:</p>
 <pre class="shellsession"><code>snakemake --cores 1 --forceall --printshellcmds --use-conda assets/plots/plaquette_scan.pdf</code></pre>
@@ -546,7 +546,7 @@ Write a rule to generate this table for all values of <span class="math inline">
   Solution 1
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The rule should look like:</p>
 <pre class="snakemake"><code># Output a LaTeX table of trajectory counts
@@ -588,7 +588,7 @@ ideal? How would the workflow need to be changed to avoid this?</p>
   Solution 2
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It’s easy for files to be misnamed when creating or copying them.
 Putting the wrong data into the file is harder, especially when it’s a
@@ -692,7 +692,7 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/chaining.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2025-10-09",
+  "dateModified": "2026-06-29",
   "datePublished": "2026-06-29"
 }
 
