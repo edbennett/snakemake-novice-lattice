@@ -112,7 +112,7 @@ To do this,
 the reference scale $\mathcal{W}_0$ needs to be passed to the `--W0` parameter.
 Use this,
 and the logs stored in the files `out_wflow` for each ensemble's raw data directory,
-to output the $w_0$ scale in a file `wflow.w0.json` for each ensemble,
+to output the $w_0$ scale in a file `wflow.w0.json.gz` for each ensemble,
 taking the reference value $\mathcal{W_0} = 0.2$.
 
 :::::::::::::::  solution
