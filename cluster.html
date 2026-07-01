@@ -375,7 +375,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Running jobs on a cluster</h1>
-        <p>Last updated on 2026-06-26 |
+        <p>Last updated on 2026-07-01 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/cluster.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -528,8 +528,9 @@ we can put into a file <code>submit.sh</code>:</p>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1" aria-label="code-block-7-8"></a><span class="ex">module</span> load conda</span>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1" aria-label="code-block-7-9"></a><span class="ex">conda</span> activate snakemake</span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1" aria-label="code-block-7-10"></a></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1" aria-label="code-block-7-11"></a><span class="ex">snakemake</span> <span class="at">--cores</span> all <span class="at">--use-conda</span></span></code></pre>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1" aria-label="code-block-7-11"></a><span class="ex">snakemake</span> <span class="at">--cores</span> all <span class="at">--use-conda</span> assets/plots/spectrum.pdf assets/plots/plaquette_scan.pdf</span></code></pre>
 </div>
+
 <p>Here, we use <code>--nodes 1</code> and <code>--exclusive</code> to
 request an entire compute node, which Snakemake can then use as much of
 as it needs. If you know that your workflow has a small number of very
@@ -586,16 +587,16 @@ file rather than needing to specify every time.</p>
 <p>Let’s create such a file now:</p>
 <pre class="shellsession"><code>mkdir -p ~/.config/snakemake/my-cluster
 nano ~/.config/snakemake/my-cluster/profile.yaml</code></pre>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="fu">executor</span><span class="kw">:</span><span class="at"> slurm</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a><span class="fu">cores</span><span class="kw">:</span><span class="at"> </span><span class="dv">1080</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1" aria-label="code-block-13-4"></a><span class="fu">software-deployment-method</span><span class="kw">:</span><span class="at"> conda</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1" aria-label="code-block-13-5"></a><span class="fu">default-resources</span><span class="kw">:</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1" aria-label="code-block-13-6"></a><span class="at">  </span><span class="fu">mem_mb</span><span class="kw">:</span><span class="at"> </span><span class="dv">4096</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1" aria-label="code-block-13-7"></a><span class="at">  </span><span class="fu">slurm_account</span><span class="kw">:</span><span class="at"> my-project</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="fu">executor</span><span class="kw">:</span><span class="at"> slurm</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a><span class="fu">cores</span><span class="kw">:</span><span class="at"> </span><span class="dv">1080</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1" aria-label="code-block-14-4"></a><span class="fu">software-deployment-method</span><span class="kw">:</span><span class="at"> conda</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1" aria-label="code-block-14-5"></a><span class="fu">default-resources</span><span class="kw">:</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1" aria-label="code-block-14-6"></a><span class="at">  </span><span class="fu">mem_mb</span><span class="kw">:</span><span class="at"> </span><span class="dv">4096</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1" aria-label="code-block-14-7"></a><span class="at">  </span><span class="fu">slurm_account</span><span class="kw">:</span><span class="at"> my-project</span></span></code></pre>
 </div>
 <p>Looking through these in turn:</p>
 <ul><li>
@@ -729,8 +730,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/cluster.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/cluster.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2026-06-26",
-  "datePublished": "2026-06-30"
+  "dateModified": "2026-07-01",
+  "datePublished": "2026-07-01"
 }
 
   </script><script>
