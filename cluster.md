@@ -187,8 +187,19 @@ which we can put into a file `submit.sh`:
 module load conda
 conda activate snakemake
 
+snakemake --cores all --use-conda assets/plots/spectrum.pdf assets/plots/plaquette_scan.pdf
+```
+
+::::::::::::::::::::::::::::::::::: instructor
+
+Once we define an `all:` rule later in the lesson,
+we'll be able to simplify the last line to:
+
+```bash
 snakemake --cores all --use-conda
 ```
+
+::::::::::::::::::::::::::::::::::::::::::::::
 
 Here, we use `--nodes 1` and `--exclusive` to request an entire compute node,
 which Snakemake can then use as much of as it needs.
