@@ -239,7 +239,7 @@ with content
 
 ```yaml
 plot_styles: "styles/poster.mplstyle"
-plot_format: ".svg"
+plot_filetype: ".svg"
 W0_reference: 0.2
 ```
 
