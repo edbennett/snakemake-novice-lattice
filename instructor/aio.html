@@ -1759,7 +1759,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-parameters"><p>Content from <a href="parameters.html">Metadata and parameters</a></p>
 <hr>
-<p>Last updated on 2026-06-30 |
+<p>Last updated on 2026-08-28 |
 
         <a href="https://github.com/edbennett/snakemake-novice-lattice/edit/main/episodes/parameters.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 45 minutes</p>
@@ -1919,11 +1919,11 @@ $ cat intermediary_data/beta2.0/wflow.w0.json.gz | gunzip | head -n 26
 </div>
 </div>
 </div>
-<div id="generating-different-filetypes" class="callout discussion">
+<div id="generating-different-filetypes" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div id="generating-different-filetypes" class="callout-inner">
 <h3 class="callout-title">Generating different filetypes</h3>
 <div class="callout-content">
@@ -1992,7 +1992,7 @@ specify this new file.</p></li>
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="fu">plot_styles</span><span class="kw">:</span><span class="at"> </span><span class="st">"styles/poster.mplstyle"</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a><span class="fu">plot_format</span><span class="kw">:</span><span class="at"> </span><span class="st">".svg"</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a><span class="fu">plot_filetype</span><span class="kw">:</span><span class="at"> </span><span class="st">".svg"</span></span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1" aria-label="code-block-12-3"></a><span class="fu">W0_reference</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.2</span></span></code></pre>
 </div>
 <p>To test this, run</p>
@@ -2311,7 +2311,7 @@ error, but will first let you see what the output is.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Snakemake will provide all of the defined output variables, as a
 space-separated list. This is similar to what happens when an output
@@ -2341,7 +2341,7 @@ shape of the flow may be checked.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule w0:
     input: "raw_data/{subdir}/out_wflow"
@@ -2457,7 +2457,7 @@ you will no longer have access to <code>snakemake</code>.)</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>The help output for <code>plot_spectrum.py</code> is:</p>
 <div class="codewrapper">
@@ -2513,7 +2513,7 @@ options:
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Definitely run through the spectrum plot </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>This plot is referred to from subsequent lessons, so you definitely
 need to go through it.</p>
@@ -2545,7 +2545,7 @@ need data files for the vector mass and <span class="math inline">\(w_0\)</span>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum_scaled:
     input:
@@ -2659,7 +2659,7 @@ file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <pre class="snakemake"><code>rule spectrum:
     input:
@@ -3657,7 +3657,7 @@ some systems this may be called <code>/scratch</code> or
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Download the data to a shared directory </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Getting everyone to download and extract the data is time-consuming;
 it may be better to provide the download in a shared directory
@@ -3725,7 +3725,7 @@ we can put into a file <code>submit.sh</code>:</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p>Once we define an <code>all:</code> rule later in the lesson, we’ll
 be able to simplify the last line to:</p>
@@ -3885,7 +3885,7 @@ other users of the machine.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
   <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Running on cluster and cloud </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
 <div class="accordion-body">
 <p>Running workflows on HPC or Cloud systems could be a whole course in
 itself. The topic is too important not to be mentioned here, but also
@@ -4047,7 +4047,7 @@ for the end.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Closure alternatives </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Here we choose to use a <em>closure</em> (a function returned by
 another function, where the former’s behaviour depends on the arguments
@@ -4093,7 +4093,7 @@ rule meson_mass:
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Change of command line </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>If learners skipped over the previous section, note that we’ve
 changed the standard <code>snakemake</code> call we were previously
@@ -4132,7 +4132,7 @@ wildcards.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>We can constrain the data plotted by constraining the input data.
 Similarly to for the example above, we can use an input function for
@@ -4757,11 +4757,11 @@ it designed for the specific dataset being analysed?</li>
 <p>Rather than writing from fresh, you may wish to work from a template
 for this. One suitable README template can be found in <a href="https://github.com/telos-collaboration/workflow_template/blob/main/README.md" class="external-link">the
 TELOS Collaboration’s workflow template</a></p>
-<div id="write-a-readme" class="callout discussion">
+<div id="write-a-readme" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div id="write-a-readme" class="callout-inner">
 <h3 class="callout-title">Write a README</h3>
 <div class="callout-content">
@@ -5009,7 +5009,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.20.2" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.1" class="external-link">varnish (1.1.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.21.0" class="external-link">sandpaper (0.21.0)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.2" class="external-link">varnish (1.1.2)</a></p>
 		</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -5032,8 +5032,8 @@ any links that you are not going to use.
   "url": "https://edbennett.github.io/snakemake-novice-lattice/instructor/aio.html",
   "identifier": "https://edbennett.github.io/snakemake-novice-lattice/instructor/aio.html",
   "dateCreated": "2025-01-03",
-  "dateModified": "2026-08-25",
-  "datePublished": "2026-08-25"
+  "dateModified": "2026-08-28",
+  "datePublished": "2026-08-28"
 }
 
   </script><script>
